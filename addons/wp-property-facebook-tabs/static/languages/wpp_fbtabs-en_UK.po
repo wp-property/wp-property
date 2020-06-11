@@ -1,0 +1,424 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-26 18:33+0200\n"
+"PO-Revision-Date: 2014-09-26 18:33+0200\n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: \n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-facebook-tabs.php:135 lib/class-wpp-facebook-tabs.php:199
+#: lib/class-wpp-facebook-tabs.php:1273
+msgid "Facebook Tabs"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:200
+msgid ""
+"Feature allows you to create Facebook Canvases for Tabs or Applications."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:201
+msgid ""
+"Note that SSL support for your page tab app has been mandatory since October "
+"1, 2011."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:203
+msgid "<b>Name</b><br />"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:204
+msgid "General name of your Canvas."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:205
+msgid "Name is used for canvas links generation. See Facebook App Setup tab."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:206
+msgid ""
+"Links use sanitized name of your Canvas' name. So they will be recreated "
+"every time you change the name."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:207
+msgid "Make sure you do not have Canvases with the same slugs."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:209
+msgid "<b>Page Settings</b><br/>"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:210
+msgid ""
+"<b>Type</b><br />The list of available post types. Available pages depend on "
+"the selected type."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:211
+msgid ""
+"<b>Page</b><br />The page of your site which has the content which you need "
+"to display in your Facebook Tab or Application."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:212
+msgid ""
+"<b>Hide the selected page from Regular WordPress</b><br />Hidden pages will "
+"not be accessible in Regular Wordpress and in other Premium Features too. "
+"The current option is only related to pages."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:214
+msgid "<b>Template Settings</b><br/>"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:215
+msgid ""
+"<b>Template</b><br />Specify one of existing templates for displaying Page "
+"content. Default are <code>static/views/fb-tab-page.php</code> and "
+"<code>static/views/fb-tab-property.php</code>.<br/>"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:216
+msgid ""
+"You can add your own templates named like <code>fb-tab-{your name}.php</"
+"code> in your theme folder and with the comment inside like:"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:217
+msgid ""
+"<pre><code>/**<br/>&nbsp;* Template Name: {your name}<br/>&nbsp;* Type: "
+"{page|property}<br/>&nbsp*/</code></pre>Use Default template as a base for "
+"your own."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:218
+msgid ""
+"<b>Enable theme's template parts</b><br />Canvas uses default WP-Property "
+"template parts by default ( e.g. <code>templates/property_overview.php</"
+"code> , <code>templates/property_search.php</code> ).<br/>If enabled "
+"(checked), application will load template parts from your theme's folder if "
+"they exist. <b>But, remember, custom template parts can be incompatible with "
+"default CSS styles.</b>"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:219
+msgid ""
+"<b>Open links in new window</b><br />Check this option if you need to open "
+"EACH link of your WP-Property Facebook Tab in new window."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:220
+msgid ""
+"<b>Open forms in new window</b><br />The same as <b>Open links in new "
+"window</b> but for forms. Every form will be submitted in new window."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:221
+msgid ""
+"<b>Disable default CSS</b><br/>Canvases use default specific CSS styles "
+"which can be disabled if this option is checked."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:222
+msgid ""
+"<b>Allow inline CSS</b><br/>Enables to add specific CSS styles to the "
+"current canvas. Toggles <b>Inline CSS</b> textarea for adding CSS styles."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:223
+msgid ""
+"<b>Custom CSS and Javascript files</b><br/>You can create custom CSS and "
+"Javascript files which will be loaded on all your canvases.<br/>"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:224
+msgid ""
+"To add custom CSS or JS file, you need to create css or js file in your "
+"theme folder like <code>fb-tab-{specific_name}.{css|js}</code>."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:227
+msgid "<b>Facebook Application Setup</b><br/>"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:228
+msgid ""
+"<a href=\"https://developers.facebook.com/docs/guides/canvas/\" target="
+"\"_blank\">How to create Facebook Application</a>"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:229
+msgid ""
+"<b>App ID</b><br />App ID is your application's App ID/API Key which you can "
+"get from Application Settings page."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:230
+msgid ""
+"<b>Secret</b><br />Secret is long hashed string associated with your "
+"application. You can get it from Application Settings page."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:231
+msgid ""
+"<b>Canvas URL</b><br />Copy the current URL to your facebook application "
+"settings."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:232
+msgid ""
+"<b>Secure Canvas URL</b><br />Copy the current URL to your facebook "
+"application settings."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:233
+msgid ""
+"<b>Debug URL</b><br />This link can be used for troubleshooting the issues "
+"directly."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:346
+msgid "Requested Canvas does not exist."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:353
+msgid "Canvas settings are invalid. Check \"Secret\" field."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:358
+msgid "You did not specify Facebook Template for requested Canvas"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:413
+msgid "You did not specify the page for requested Canvas"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:466
+msgid "Can't find proper Facebook Template file \""
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:599
+msgid "Manage Facebook Tabs"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1020
+msgid "Facebook Tabs updated."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1153
+msgid "Unnamed Canvas"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1274
+msgid "Add New"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1277
+msgid ""
+"Apps on Facebook are web apps that are loaded in the context of Facebook in "
+"what we refer to as a Canvas Page."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1315
+msgid "Name:"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1318
+msgid ""
+"Note that Name is used for canvas link generation ( see Facebook Application "
+"Setup options below )."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1329
+msgid "Page:"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1332
+msgid ""
+"Set the page which will be shown in your Facebook Application/Tab canvas."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1339
+msgid "Type"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1341 lib/class-wpp-facebook-tabs.php:1347
+msgid "Page"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1342
+#, php-format
+msgid "%1$s"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1344
+msgid "Note: Select the type to determine the available pages below."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1354
+msgid "Search..."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1359
+msgid "Hide the selected page from Regular WordPress."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1360
+msgid "Note: Hidden page will not be accessible in other Premium Features too."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1367
+msgid "Template Settings:"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1370
+msgid ""
+"Set the template, CSS and other options for your Facebook Application/Tab "
+"canvas."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1377
+msgid "Template:"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1390
+msgid ""
+"Note: The list of available templates depends on selected page type. You can "
+"add your own templates. See help link above."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1393
+msgid "Enable theme's template parts."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1394
+msgid ""
+"Note: canvas uses default WP-Property template parts by default. If enabled, "
+"application will try to load parts from theme folder. But custom part "
+"templates can be incompatible with default CSS styles."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1397
+msgid "Open links in new window."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1400
+msgid "Open forms in new window."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1403
+msgid "Disable default CSS."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1407
+msgid "Allow inline CSS."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1410
+msgid "Inline CSS:"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1418
+msgid "Facebook Application Setup:"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1420
+msgid "Applicable for both Application and Page Tab"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1421
+msgid ""
+"You will need to create an app using your Facebook account.  Once the app is "
+"created, you will be able to add it to one of your pages."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1421
+msgid "Create Facebook App."
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1427
+msgid "App ID:"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1429
+msgid "Add to Facebook"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1432
+msgid "Secret:"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1438
+msgid "Canvas URL:"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1443
+msgid "Secure Canvas URL:"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1447
+msgid "Debug URL:"
+msgstr ""
+
+#: lib/class-wpp-facebook-tabs.php:1462
+msgid "Save Changes"
+msgstr ""
+
+#: static/views/fb-tab-property.php:81
+msgid "Return to building page."
+msgstr ""
+
+#: wp-property-facebook-tabs.php:43
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-facebook-tabs.php:51
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-facebook-tabs.php:59
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-facebook-tabs.php:63
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-facebook-tabs.php:84
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""
+
+#~ msgid "Inquiry"
+#~ msgstr "Enquiry"
+
+#~ msgid "Inquire About"
+#~ msgstr "Enquire About"
+
+#, fuzzy
+#~ msgid "Inquiry About:"
+#~ msgstr "Enquire About"
+
+#, fuzzy
+#~ msgid "Inquiry message:"
+#~ msgstr "Enquiry"

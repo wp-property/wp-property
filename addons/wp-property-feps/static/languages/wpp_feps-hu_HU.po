@@ -1,0 +1,3426 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-26 19:07+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: \n"
+"Language: hu_HU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-feps.php:237
+msgid "FEPS Details"
+msgstr ""
+
+#: lib/class-wpp-feps.php:260 lib/class-wpp-feps.php:287
+#: lib/class-wpp-feps.php:727 lib/class-wpp-feps.php:776
+#: lib/class-wpp-feps.php:2567
+msgid "Not set"
+msgstr ""
+
+#: lib/class-wpp-feps.php:269 lib/class-wpp-feps.php:747
+#, fuzzy
+msgid "Property Form"
+msgstr "Üzlet: %s"
+
+#: lib/class-wpp-feps.php:273 lib/class-wpp-feps.php:751
+msgid "Author"
+msgstr ""
+
+#: lib/class-wpp-feps.php:281 lib/class-wpp-feps.php:762
+msgid "Sponsored"
+msgstr ""
+
+#: lib/class-wpp-feps.php:282 lib/class-wpp-feps.php:736
+#: lib/class-wpp-feps.php:763 static/views/feps-purchase-template.php:51
+#: static/views/feps-subplans-template.php:45
+msgid "Yes"
+msgstr "Igen"
+
+#: lib/class-wpp-feps.php:282 lib/class-wpp-feps.php:736
+#: lib/class-wpp-feps.php:763 static/views/feps-purchase-template.php:51
+#: static/views/feps-subplans-template.php:45
+msgid "No"
+msgstr ""
+
+#: lib/class-wpp-feps.php:286 lib/class-wpp-feps.php:771
+#: lib/class-wpp-feps.php:2599 lib/class-wpp-feps.php:2615
+#: static/views/feps-purchase-template.php:35
+#: static/views/feps-tabs-template.php:4
+#, fuzzy
+msgid "Subscription Plan"
+msgstr "Leírás"
+
+#: lib/class-wpp-feps.php:291 lib/class-wpp-feps.php:766
+msgid "Expired date"
+msgstr ""
+
+#: lib/class-wpp-feps.php:313 lib/class-wpp-feps.php:542
+msgid "FEPS"
+msgstr ""
+
+#: lib/class-wpp-feps.php:351
+#, php-format
+msgid "%1s Forms"
+msgstr ""
+
+#: lib/class-wpp-feps.php:353
+#, php-format
+msgid "<a href=\"%s\">Manage %s Forms"
+msgstr ""
+
+#: lib/class-wpp-feps.php:357 lib/class-wpp-feps.php:4674
+msgid "FEPS Menu"
+msgstr ""
+
+#: lib/class-wpp-feps.php:360
+#, php-format
+msgid ""
+"It is neccessary block menu which contains user's specific data and links to "
+"submitted %s via FEPS frontend forms."
+msgstr ""
+
+#: lib/class-wpp-feps.php:361
+#, php-format
+msgid ""
+"Menu can be added to your site via <b>FEPS Menu</b> <a href=\"%s\">widget</"
+"a> or <b>%s</b> shortcode."
+msgstr ""
+
+#: lib/class-wpp-feps.php:362 lib/class-wpp-feps.php:556
+msgid "Note, menu is shown only for logged in users."
+msgstr ""
+
+#: lib/class-wpp-feps.php:366
+msgid "\"Add Credits to Balance\" custom label"
+msgstr ""
+
+#: lib/class-wpp-feps.php:368
+#, php-format
+msgid "\"Add New %s\" custom label"
+msgstr ""
+
+#: lib/class-wpp-feps.php:369
+#, php-format
+msgid "Disable Menu if there are no %s and no credits on Balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:374 lib/class-wpp-feps.php:573
+msgid "Specific Pages"
+msgstr ""
+
+#: lib/class-wpp-feps.php:377
+#, php-format
+msgid ""
+"The feature has specific pages. The links below can be added directly to "
+"your <a href=\"%s\">Menus</a> or wherever else, i.e. if you don't want to "
+"use FEPS menu."
+msgstr ""
+
+#: lib/class-wpp-feps.php:378
+msgid ""
+"But note, that the current pages are available only for logged in users."
+msgstr ""
+
+#: lib/class-wpp-feps.php:381 lib/class-wpp-feps.php:581
+#, fuzzy
+msgid "Templates"
+msgstr "sablon"
+
+#: lib/class-wpp-feps.php:383 lib/class-wpp-feps.php:577
+#, fuzzy
+msgid "Overview Page"
+msgstr "Nézet"
+
+#: lib/class-wpp-feps.php:394
+#, fuzzy
+msgid "Edit Page"
+msgstr "Üzlet módosítása"
+
+#: lib/class-wpp-feps.php:405 lib/class-wpp-feps.php:420
+#: lib/class-wpp-feps.php:579
+msgid "Add Credits Page"
+msgstr ""
+
+#: lib/class-wpp-feps.php:415 lib/class-wpp-feps.php:583
+msgid "Links"
+msgstr ""
+
+#: lib/class-wpp-feps.php:416
+#, php-format
+msgid "Overview Page ( All %s )"
+msgstr ""
+
+#: lib/class-wpp-feps.php:417
+#, php-format
+msgid "Overview Page ( Published %s )"
+msgstr ""
+
+#: lib/class-wpp-feps.php:418
+#, php-format
+msgid "Overview Page ( Pending %s )"
+msgstr ""
+
+#: lib/class-wpp-feps.php:426 lib/class-wpp-feps.php:587
+#, fuzzy
+msgid "Administration"
+msgstr "Beállítások"
+
+#: lib/class-wpp-feps.php:432
+#, php-format
+msgid "Enable Column <b>FEPS Details</b> on <a href='%s'>All %s</a> page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:439
+msgid "Notifications"
+msgstr ""
+
+#: lib/class-wpp-feps.php:441
+#, php-format
+msgid ""
+"All FEPS notifications can be customized via <a href=\"%s\">WP-CRM</a> "
+"plugin. For more details, look through <b>FEPS -> Integration with other "
+"UsabilityDynamics plugins</b> section in Help tab above."
+msgstr ""
+
+#: lib/class-wpp-feps.php:460
+msgid "General Information"
+msgstr "Általános informió"
+
+#: lib/class-wpp-feps.php:461
+#, fuzzy
+msgid "Form Name"
+msgstr "Eladásra"
+
+#: lib/class-wpp-feps.php:462
+#, fuzzy
+msgid "Shortcode"
+msgstr "Áttekintő oldal kódja"
+
+#: lib/class-wpp-feps.php:463
+#, fuzzy
+msgid "General Options"
+msgstr "Általános beállítások"
+
+#: lib/class-wpp-feps.php:464
+#, fuzzy
+msgid "Subscriptions Plans"
+msgstr "Leírás"
+
+#: lib/class-wpp-feps.php:465
+#, fuzzy
+msgid "Propery Attributes"
+msgstr "WP-Property kiemelt kiegészítők"
+
+#: lib/class-wpp-feps.php:472
+msgid "Front End Property Submissions (FEPS)"
+msgstr ""
+
+#: lib/class-wpp-feps.php:473
+#, php-format
+msgid ""
+"Note, that <a href=\"%s\">Settings page</a> also contains helpfull "
+"information about FEPS premium feature functionality. So if the current "
+"'Help' does not contain enough information to help you, we suggest to "
+"proceed there for looking through FEPS tab and 'Help' information."
+msgstr ""
+
+#: lib/class-wpp-feps.php:474
+msgid ""
+"Front End Property Submission (FEPS) lets you create forms and display them "
+"on the front-end of the website. The forms may be used by visitors to submit "
+"properties for free or for credits."
+msgstr ""
+
+#: lib/class-wpp-feps.php:475
+#, php-format
+msgid ""
+"If you want to display a %1$s submission form for homes in a certain "
+"neighborhood, you can place the FEPS form into the content of the parent "
+"(neighborhood) %1$s like so"
+msgstr ""
+
+#: lib/class-wpp-feps.php:477
+#, php-format
+msgid "On a pending %s a body class is added for styling, which is: <b>%s</b>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:478
+#, php-format
+msgid ""
+"Pending pages use the same front-end templates as regular %s, and will load "
+"conditional %s-type templates if they exist.  Below is the the load order of "
+"templates based on specificity:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:485
+#, php-format
+msgid ""
+"So if your %1$s type is called \"<b>%2$s</b>\", then the %1$s type slug is "
+"<b>%3$s</b>, and the template would be: <b>%4$s</b>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:488
+msgid ""
+"Form's name must be unique. Form slug, which is used for setting shortcode "
+"( attribute \"form\" ) is generated using form name. So, be carefull with "
+"changing name of already existing form!"
+msgstr ""
+
+#: lib/class-wpp-feps.php:491
+#, php-format
+msgid ""
+"Shortcode [wpp_feps_form form=\"{form_slug}\"] renders passed form on page. "
+"You can add it to any content including widget areas on your site. But we "
+"strongly recommend to add the current shortcode only to page's ( pages, "
+"posts, %s ) content to prevent different issues."
+msgstr ""
+
+#: lib/class-wpp-feps.php:492
+#, fuzzy
+msgid "Available shortcode attributes"
+msgstr "Elrejtett tartalmak"
+
+#: lib/class-wpp-feps.php:494
+msgid ""
+"Required attribute. The slug of the FEPS form, this is required to identify "
+"which form must be displayed."
+msgstr ""
+
+#: lib/class-wpp-feps.php:495
+#, php-format
+msgid ""
+"Default value is not set. Use to set the parent ID of all the submitted "
+"%1$s. This works well if you want to group all the submitted %1$s under a "
+"parent. For example, if you want to allow visitors to submit condos that "
+"below to a certain neighborhood, you would create the neighborhood %1$s, "
+"then place FEPS forms into their content."
+msgstr ""
+
+#: lib/class-wpp-feps.php:496
+#, php-format
+msgid ""
+"Available values \"true\" and \"false\". Default value is \"true\". If set "
+"to \"true\", the form will automatically detect if it is displayed on a %1$s "
+"page, and use the current %1$s as parent for newly added %2$s. If parent_id "
+"is set, detect parent does not do anything."
+msgstr ""
+
+#: lib/class-wpp-feps.php:497
+msgid ""
+"Default value is \"450px\". Sets the height of the address map, in pixels."
+msgstr ""
+
+#: lib/class-wpp-feps.php:498
+msgid ""
+"Default value is \"Requested FEPS form not found\". This is the text to "
+"display when the form is not found, this is only needed if a form has been "
+"deleted, but shortcodes still reference it throughout your site."
+msgstr ""
+
+#: lib/class-wpp-feps.php:502
+#, php-format
+msgid ""
+"<h4>Sponsored Listing:</h4>It enables billable %s submissions.<br/><a href="
+"\"%s\">WP-Invoice</a> plugin and <a href=\"%s\">Single Page Checkout</a> "
+"plugin must be installed to enable this option."
+msgstr ""
+
+#: lib/class-wpp-feps.php:503
+#, php-format
+msgid ""
+"<h4>%1$s Status:</h4>Status to assign to new %2$s after they are submitted."
+"<br /><i>Note, the current option is disabled for sponsored listings. "
+"Sponsored Submission will be automatically published after successfull "
+"payment. In other case, it has pending status.</i>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:504
+#, php-format
+msgid "<h4>%1$s Type:</h4>Default %1$s type of submitted %2$s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:505
+#, php-format
+msgid ""
+"<h4>Automatically remove FEPS of the current Form with 'Pending' status:</"
+"h4>Set a period of time in which Pending %1$s will be removed. Set 0 if you "
+"don't want Pending %1$s to be removed."
+msgstr ""
+
+#: lib/class-wpp-feps.php:506
+msgid ""
+"<h4>Preview Thumbnail Size:</h4>The size of the image to be used to display "
+"the thumbnail of an uploaded image."
+msgstr ""
+
+#: lib/class-wpp-feps.php:507
+msgid ""
+"<h4>Image Upload Limit:</h4>The maximum number of images that can be "
+"uploaded per submission.<br /><i>Note, the current option is disabled for "
+"sponsored listings. Images limit for sponsored listings must be set for "
+"every Subscription plan separately.</i>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:508
+#, php-format
+msgid ""
+"<h4>New User Role:</h4>Role to assign to users submitting %1$s if they do "
+"not already have an account."
+msgstr ""
+
+#: lib/class-wpp-feps.php:509
+#, php-format
+msgid ""
+"<h4>Allow user to edit and remove his FEPS:</h4>Whether or not to allow user "
+"to edit and delete their %1$s submitted by FEPS."
+msgstr ""
+
+#: lib/class-wpp-feps.php:510
+msgid ""
+"<h4>Disable new user account creation notification:</h4>Whether or not to "
+"send new user notifications.<br /><i>Note, the current option is disabled "
+"for sponsored listings.</i>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:513
+#, php-format
+msgid ""
+"The current functionality is available only for <b>sponsored listings</b> "
+"( see \"%s\" tab ) when <a href=\"%s\">WP-Invoice</a> plugin and <a href=\"%s"
+"\">Single Page Checkout (SPC)</a> plugin are installed and activated."
+msgstr ""
+
+#: lib/class-wpp-feps.php:514 lib/class-wpp-feps.php:4022
+msgid "Name"
+msgstr "Név"
+
+#: lib/class-wpp-feps.php:515
+#, fuzzy
+msgid "Just a name of Subscription plan."
+msgstr "Leírás"
+
+#: lib/class-wpp-feps.php:516 lib/class-wpp-feps.php:4023
+msgid "Price"
+msgstr "Ár"
+
+#: lib/class-wpp-feps.php:517
+msgid ""
+"Currency is set via WP-Invoice settings. The exchange rate is 1 chosen "
+"currency = 1 credit."
+msgstr ""
+
+#: lib/class-wpp-feps.php:518 lib/class-wpp-feps.php:734
+#: lib/class-wpp-feps.php:2608 lib/class-wpp-feps.php:4024
+#, fuzzy
+msgid "Duration"
+msgstr "Leírás"
+
+#: lib/class-wpp-feps.php:519
+#, php-format
+msgid ""
+"The published period. The expired date is based on this option and will be "
+"set after successfully payment. When expiry date is over, status of %s will "
+"be automatically set as \"%s\"."
+msgstr ""
+
+#: lib/class-wpp-feps.php:520 lib/class-wpp-feps.php:4025
+#, fuzzy
+msgid "Is Featured"
+msgstr "Kiemelt"
+
+#: lib/class-wpp-feps.php:521
+#, php-format
+msgid "%s will be featured if option is checked."
+msgstr ""
+
+#: lib/class-wpp-feps.php:522 lib/class-wpp-feps.php:735
+#: lib/class-wpp-feps.php:2610 lib/class-wpp-feps.php:4026
+#, fuzzy
+msgid "Images Limit"
+msgstr "Összes kép:"
+
+#: lib/class-wpp-feps.php:523
+#, php-format
+msgid ""
+"To enable this option, Image Upload must be set in <b>%s</b>. The amount of "
+"images which can be uploaded to the %s with the current subscription plan. "
+"Note: limit must not be less than 1 or empty."
+msgstr ""
+
+#: lib/class-wpp-feps.php:524 lib/class-wpp-feps.php:3045
+#: lib/class-wpp-feps.php:4027
+msgid "Description"
+msgstr "Leírás"
+
+#: lib/class-wpp-feps.php:525
+msgid ""
+"Optional. Some helpfull information about subscription plan, advertisement, "
+"offer or whatever else can be added here."
+msgstr ""
+
+#: lib/class-wpp-feps.php:528
+#, php-format
+msgid ""
+"The list of %s attributes fields which will be shown in FEPS form. User will "
+"be able to add/edit only the chosen attributes."
+msgstr ""
+
+#: lib/class-wpp-feps.php:529
+#, php-format
+msgid ""
+"Note, <b>%1$s type</b> can be set only in %3$s. So all %2$s added via the "
+"same form will have the same %1$s type. "
+msgstr ""
+
+#: lib/class-wpp-feps.php:547
+#, php-format
+msgid "Front End %s Submissions (FEPS)"
+msgstr ""
+
+#: lib/class-wpp-feps.php:548
+#, php-format
+msgid ""
+"Front End %1$s Submission (FEPS) allows you to create multiple forms using "
+"the interface found under %2$s -> %1$s Forms. Multiple forms can be used to "
+"setup targeted pages that limit the number of images for the form, direct "
+"all submissions into a certain %1$s type, or %1$s status."
+msgstr ""
+
+#: lib/class-wpp-feps.php:549
+#, php-format
+msgid ""
+"It also allows to create forms for sponsored listings if you have installed "
+"<a href=\"%s\">WP-Invoice</a> plugin and <a href=\"%s\">Single Page Checkout "
+"(SPC)</a> plugin."
+msgstr ""
+
+#: lib/class-wpp-feps.php:551
+#, fuzzy
+msgid "Property Forms"
+msgstr "Üzlet: %s"
+
+#: lib/class-wpp-feps.php:552
+#, php-format
+msgid ""
+"Detailed information can be found on <a href=\"%s\">%s Forms</a> page in "
+"Help tab."
+msgstr ""
+
+#: lib/class-wpp-feps.php:554
+msgid "FEPS Menu Widget/Shortcode"
+msgstr ""
+
+#: lib/class-wpp-feps.php:555
+msgid ""
+"It's a block menu which contains some specific information and FEPS tools "
+"for management."
+msgstr ""
+
+#: lib/class-wpp-feps.php:557
+#, php-format
+msgid ""
+"Menu can be added to frontend pages via <b>FEPS Menu</b> widget or <b>%s</b> "
+"shortcode"
+msgstr ""
+
+#: lib/class-wpp-feps.php:558
+#, php-format
+msgid "<b>%s</b> shortcode has the following available attributes:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:560
+#, php-format
+msgid ""
+"Shows title of menu if attribute is passed. Default is empty. Example, <b>"
+"%s</b>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:561
+#, php-format
+msgid ""
+"Shows %s overview links by %s statuses. Available values are <b>true</b>|"
+"<b>false</b>. Default is false. Example, <b>%s</b>\"."
+msgstr ""
+
+#: lib/class-wpp-feps.php:562
+#, php-format
+msgid ""
+"If set, shows the link to FEPS %s Form page. Default is empty. Example, <b>"
+"%s</b>\"."
+msgstr ""
+
+#: lib/class-wpp-feps.php:563
+#, php-format
+msgid ""
+"Shows user's current credits balance. Available values are <b>true</b>|"
+"<b>false</b>. Default is true. Example, <b>%s</b>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:564 lib/class-wpp-feps.php:566
+msgid ""
+"Note, to use this attribute, WP-Invoice plugin and WP-Invoice Single Page "
+"Checkout plugin must be installed."
+msgstr ""
+
+#: lib/class-wpp-feps.php:565
+#, php-format
+msgid ""
+"Shows the link to Add Credits page. Available values are <b>true</b>|"
+"<b>false</b>. Default is true. Example, <b>%s</b>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:569
+msgid "FEPS Information Widget/Shortcode"
+msgstr ""
+
+#: lib/class-wpp-feps.php:570
+msgid ""
+"It's a block which contains some specific information about current property."
+msgstr ""
+
+#: lib/class-wpp-feps.php:571
+#, php-format
+msgid "It's only shown on Edit FEPS %s page for logged in users"
+msgstr ""
+
+#: lib/class-wpp-feps.php:574
+#, php-format
+msgid ""
+"FEPS premium feature adds specific <b>frontend</b> user's pages which are "
+"created on a fly, so they are not available in your existing <a href=\"%s"
+"\">Pages</a>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:575
+msgid ""
+"The links to these pages are added to FEPS Menu. Note, these pages are "
+"available only for logged in users."
+msgstr ""
+
+#: lib/class-wpp-feps.php:576
+msgid "The specific FEPS pages are the following"
+msgstr ""
+
+#: lib/class-wpp-feps.php:577
+#, php-format
+msgid ""
+"The current one shows the list of already submitted via FEPS forms %1$s by "
+"current logged in user. If %2$s Form, used for submission, allows to edit "
+"%2$s, it also shows the links \"Edit\" and \"Remove\" for the current %2$s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:578
+#, php-format
+msgid ""
+"Also, FEPS allows to show %s on the current page by statuses. See <b>FEPS "
+"Menu</b> and <b>Links</b> section in the current Help tab for details."
+msgstr ""
+
+#: lib/class-wpp-feps.php:579
+#, php-format
+msgid ""
+"On the current page logged in user can add credits to their FEPS balance. "
+"The current page is available only if <a href=\"%s\">WP-Invoice</a> plugin "
+"and <a href=\"%s\">WP-Invoice Single Page Checkout</a> plugin are installed. "
+"<b><i>Note, user's credit balance can be manually edited by administrator "
+"via Edit User page (profile)</i></b>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:580
+#, fuzzy, php-format
+msgid "Edit %s Page"
+msgstr "Üzlet módosítása"
+
+#: lib/class-wpp-feps.php:580
+#, php-format
+msgid ""
+"Here user can edit the %1$s added via FEPS %1$s form. There are different "
+"links for every %1$s, so the link can not be provided. Note, the form, used "
+"for submission, must exist and must be enabled option which allows to edit "
+"and remove %2$s. "
+msgstr ""
+
+#: lib/class-wpp-feps.php:582
+#, php-format
+msgid ""
+"You can set custom available template for FEPS pages. More information you "
+"can find <a href=\"%s\">here</a>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:584
+#, php-format
+msgid ""
+"You can use given links to FEPS pages, for example, for adding custom menu "
+"in <a href=\"%s\">Menus</a> or wherever else."
+msgstr ""
+
+#: lib/class-wpp-feps.php:585
+msgid ""
+"Note, that FEPS pages are available only for logged in users. In other case "
+"user will be redirected to home page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:588
+#, php-format
+msgid ""
+"Specific column \"FEPS details\" can be added to the table on <a href=\"%s"
+"\">All %s </a>page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:589
+msgid ""
+"To add this column, you should check the option. Column contains detailed "
+"FEPS information about the current property, which can be helpful for "
+"management."
+msgstr ""
+
+#: lib/class-wpp-feps.php:590
+msgid ""
+"Note, if the option is enabled but you don't see the column, you should "
+"check \"<i>Screen Option</i>\" settings."
+msgstr ""
+
+#: lib/class-wpp-feps.php:592
+msgid "Integration with other UsabilityDynamics plugins"
+msgstr ""
+
+#: lib/class-wpp-feps.php:593
+#, php-format
+msgid ""
+"Functionality of FEPS premium feature can increased via other following "
+"wordpress plugins developed by <a href=\"%s\">UsabilityDynamics, Inc</a>:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:594
+#, php-format
+msgid "<a href=\"%s\">WP-Invoice</a>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:595
+#, php-format
+msgid "<a href=\"%s\">WP-CRM</a>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:596
+msgid "WP-Invoice"
+msgstr ""
+
+#: lib/class-wpp-feps.php:597
+#, php-format
+msgid ""
+"To add aditional functionality to FEPS premium feature, <a href=\"%s\">WP-"
+"Invoice Single Page Checkout</a> plugin must be installed and activated."
+msgstr ""
+
+#: lib/class-wpp-feps.php:598
+#, php-format
+msgid ""
+"It allows you to use FEPS %s Forms as billable service where users have to "
+"pay for publishing %s on your site."
+msgstr ""
+
+#: lib/class-wpp-feps.php:599
+#, php-format
+msgid ""
+"Billable service is called Sponsored listings. Sponsored listings allows you "
+"to set different Subscription plans where you are able to set expired dates "
+"and images limit for submitted %s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:600
+msgid "WP-CRM"
+msgstr ""
+
+#: lib/class-wpp-feps.php:601
+msgid ""
+"If WP-Invoice plugin is installed you are able to see all user's completed "
+"transactions on CRM User Edit page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:602
+msgid ""
+"Also, you have ability to manage FEPS notifications using WP-CRM plugin. Go "
+"to CRM -> Settings -> Notifications."
+msgstr ""
+
+#: lib/class-wpp-feps.php:603
+#, php-format
+msgid ""
+"For your notifications on any of this Trigger actions - <i>FEPS: Pending "
+"Approval</i>, <i>FEPS: %s Submitted</i>, <i>FEPS: User Account Approved</i>, "
+"<i>FEPS: User Account Created</i> &mdash; you can use the following "
+"shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:605
+msgid ""
+"For Trigger action <i>FEPS: Pending Approval</i> - you can use the following "
+"shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:607
+#, php-format
+msgid ""
+"For Trigger action <i>FEPS: %s Submitted</i> - you can use the following "
+"shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:609
+msgid ""
+"For Trigger action <i>FEPS: User Account Approved</i> - you can use the "
+"following shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:611
+msgid ""
+"For Trigger action <i>FEPS: User Account Created</i> - you can use this "
+"shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:733
+#, php-format
+msgid "Price: <b>%01.2f</b> credits"
+msgstr ""
+
+#: lib/class-wpp-feps.php:736
+msgid "Featured"
+msgstr "Kiemelt"
+
+#: lib/class-wpp-feps.php:741
+msgid "Click to toggle"
+msgstr ""
+
+#: lib/class-wpp-feps.php:742
+msgid "Front End Property Submission (FEPS) Details"
+msgstr ""
+
+#: lib/class-wpp-feps.php:755
+#, php-format
+msgid "The user has <b>%01.2f</b> credits on the balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:808
+msgid "FEPS Subscription Plan"
+msgstr ""
+
+#: lib/class-wpp-feps.php:824 static/views/feps-purchase-template.php:42
+#: static/views/feps-subplans-template.php:36
+msgid "Price:"
+msgstr "Ár:"
+
+#: lib/class-wpp-feps.php:825
+#, php-format
+msgid "<b>%01.2f</b> credits"
+msgstr ""
+
+#: lib/class-wpp-feps.php:828 static/views/feps-purchase-template.php:46
+#: static/views/feps-subplans-template.php:40
+#, fuzzy
+msgid "Duration:"
+msgstr "Leírás"
+
+#: lib/class-wpp-feps.php:833 static/views/feps-purchase-template.php:55
+#: static/views/feps-subplans-template.php:48
+#, fuzzy
+msgid "Images:"
+msgstr "Összes kép:"
+
+#: lib/class-wpp-feps.php:968
+#, fuzzy
+msgid "Renewal of Subscription Plan"
+msgstr "Leírás"
+
+#: lib/class-wpp-feps.php:969
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPublish time for Your %2$s \"[property_title]\" "
+"has expired.%1$s%1$sSubscription Plan has been renewed and [credits] credits "
+"were withdrawn from your balance.%1$s%1$sClick this link to view all your "
+"[status] %3$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1010
+#, fuzzy
+msgid "Options:"
+msgstr "Beállítások"
+
+#: lib/class-wpp-feps.php:1014 static/views/feps-subplans-template.php:66
+#, php-format
+msgid ""
+"Enable automatic renewal of Subscription plan for the current %1$s when "
+"subscription time is expired."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1018 static/views/feps-subplans-template.php:67
+msgid ""
+"Credits will be automatically withdrawn from your balance. Notice, automatic "
+"renewal will be done only if you have enough credits on your balance."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1185
+msgid "Publish Time Has Expired"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1186
+msgid "Publish time has expired for [property_title]."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1189
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPublish time for Your %3$s [property_title] has "
+"expired.%1$s%1$sYou have [days] %2$s to choose new subscription for your "
+"%3$s.%1$s%1$sClick this link to view all your [status] %4$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1189
+#, fuzzy
+msgid "day"
+msgstr "Ma"
+
+#: lib/class-wpp-feps.php:1192
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPublish time for Your %2$s [property_title] has "
+"expired.%1$s%1$sIf You wish you could choose new subscription for your %2$s."
+"%1$s%1$sClick this link to view all your [status] %3$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1195
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour %2$s [property_title] status has been "
+"changed from Published to Pending. Click this link to view all your [status] "
+"%3$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1198
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour %2$s [property_title] has been restored. "
+"The current status is [status]. Click this link to view all your [status] "
+"%3$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1222
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPending time for Your %2$s [property_title] was "
+"over and it had been removed.%1$s%1$sYou still able to make a new %2$s "
+"Submission if you need. Please visit our site:%1$s[site_url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1224
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour %2$s [property_title] has been removed.%1$s"
+"%1$sYou still able to make a new %2$s Submission if you need. Please visit "
+"our site:%1$s[site_url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1227
+#, php-format
+msgid "%1$s was deleted"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1229
+#, php-format
+msgid "%1$s [property_title] was deleted ."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1366
+msgid "Manage FEPS"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1525
+msgid " (Pending Approval)"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1663
+#, fuzzy
+msgid "created"
+msgstr "Kiemelt"
+
+#: lib/class-wpp-feps.php:1670
+msgid "Submitting data is incorrect"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1678
+#, php-format
+msgid "%s submitting is prohibited"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1683 lib/class-wpp-feps.php:1801
+#: lib/class-wpp-feps.php:1867
+msgid "An error occurred, the form could not be found"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1712
+#, php-format
+msgid "Your submission was not successful: %s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1736
+#, fuzzy
+msgid "updated"
+msgstr "Üzlet frissítve."
+
+#: lib/class-wpp-feps.php:1739
+#, php-format
+msgid "You must be logged in to edit %s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1776
+#, php-format
+msgid "Your %s has been successfully %s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1778
+#, php-format
+msgid ""
+"Your %s and Account have been successfully %s. Check your e-mail to activate "
+"account and log in for continuing."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1993
+#, php-format
+msgid "Upgraded FEPS to version %1s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2146
+msgid "This listing is pending your approval."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2151
+#, fuzzy
+msgid "Publish Now"
+msgstr "Csúszka"
+
+#: lib/class-wpp-feps.php:2190
+msgid ""
+"Form can not be removed because it has Properties which were added using "
+"this form. You have to remove all related Properties before."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2193
+msgid "Form ID is undefined."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2270 lib/class-wpp-feps.php:2342
+#, php-format
+msgid "%1$s Forms"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2359
+#, php-format
+msgid "%1$s Form"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2369
+#, php-format
+msgid ""
+"Show <span title=\"Front End %2$s Submissions\">FEPS</span> column in All "
+"%1$s Page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2418 lib/class-wpp-feps.php:3961
+msgid "Add Credits to Balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2423
+#, fuzzy, php-format
+msgid "Add New %s"
+msgstr "Új hozzáadása"
+
+#: lib/class-wpp-feps.php:2482
+msgid "My Balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2484
+msgid "credit"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2484 static/views/feps-purchase-template.php:71
+msgid "credits"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2500 lib/class-wpp-feps.php:2514
+#, php-format
+msgid "My %s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2503 lib/class-wpp-feps.php:3214
+msgid "All"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2584 lib/class-wpp-feps.php:3061
+#: lib/class-wpp-feps.php:3096
+msgid "Title"
+msgstr "Cím"
+
+#: lib/class-wpp-feps.php:2588
+msgid "Status"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2593
+#, fuzzy
+msgid "Expired"
+msgstr "Üzlet oldal"
+
+#: lib/class-wpp-feps.php:2603
+msgid "Paid"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2604
+#, php-format
+msgid "%01.2f credits"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2607
+msgid "Plan Details"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2616
+msgid "Not Paid Yet"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2641
+msgid "Requested FEPS form not found."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2689
+msgid "The requested form does not have any fields."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2775
+#, php-format
+msgid "Requested %1$s not found."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2779
+#, php-format
+msgid "It's not FEPS's %1$s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2784
+#, php-format
+msgid "It's not your %1$s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2788
+#, fuzzy
+msgid "Wrong FEPS form used"
+msgstr "Üzlet frissítve."
+
+#: lib/class-wpp-feps.php:2793
+#, php-format
+msgid "Managing of %1$s are not allowed"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2868
+#, fuzzy
+msgid "FEPS forms updated."
+msgstr "Üzlet frissítve."
+
+#: lib/class-wpp-feps.php:2876
+#, fuzzy, php-format
+msgid "%1$s Content"
+msgstr "Cím"
+
+#: lib/class-wpp-feps.php:2877
+#, fuzzy, php-format
+msgid "%1$s Type"
+msgstr "Típus"
+
+#: lib/class-wpp-feps.php:2881 lib/class-wpp-feps.php:3643
+msgid "Image Upload"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2901
+#, php-format
+msgid "Front End %1$s Submissions"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2902
+msgid "Add New"
+msgstr "Új hozzáadása"
+
+#: lib/class-wpp-feps.php:2944
+#, fuzzy
+msgid "Form Name:"
+msgstr "Eladásra"
+
+#: lib/class-wpp-feps.php:2949
+msgid ""
+"Enter form name. Form slug will be generated using form name. Note that Form "
+"Name is used for internal reference."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2956
+#, fuzzy
+msgid "Shortcode:"
+msgstr "Áttekintő oldal kódja"
+
+#: lib/class-wpp-feps.php:2961
+#, fuzzy
+msgid "Copy and paste this shortcode into any page or post to display the form"
+msgstr "Másolja ki és illessze be a kódot az oldalba. "
+
+#: lib/class-wpp-feps.php:2968
+#, fuzzy
+msgid "General Options:"
+msgstr "Általános beállítások"
+
+#: lib/class-wpp-feps.php:2976
+#, php-format
+msgid "%1$s Status:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2984
+#, fuzzy, php-format
+msgid "%1$s Type:"
+msgstr "Típus"
+
+#: lib/class-wpp-feps.php:2990
+#, php-format
+msgid ""
+"Note: This type will be set by default if %1$s Type is not set in %1$s "
+"Attributes below."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2993
+msgid ""
+"Automatically remove FEPS of the currrent Form with 'Pending' status to "
+"trash in"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2995
+msgid "days."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2996
+msgid "Note: If value is 0 or empty, FEPS will not be removed."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2999
+#, fuzzy
+msgid "Preview Thumbnail Size:"
+msgstr "Előlép méret:"
+
+#: lib/class-wpp-feps.php:3003
+msgid "Image Upload Limit:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3007
+msgid "New User Role:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3016
+#, php-format
+msgid "Automatically load added images into %1$s Slideshow. "
+msgstr ""
+
+#: lib/class-wpp-feps.php:3017
+#, php-format
+msgid ""
+"Note: You can use [property_slideshow] shortcode on Single %1$s page to show "
+"added images. Also, some premium themes such as Denali support automatic "
+"slideshow view on single %1$s pages."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3022
+msgid "Allow user to edit and remove his FEPS."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3023
+msgid "Note: on remove FEPS will be just moved to trash."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3027
+msgid "Disable new user account creation notification."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3031
+msgid "Notify user on update status of his FEPS."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3039
+#, fuzzy, php-format
+msgid "%1$s Attributes"
+msgstr "Elrejtett tartalmak"
+
+#: lib/class-wpp-feps.php:3044
+msgid "Main"
+msgstr "Fő"
+
+#: lib/class-wpp-feps.php:3054 lib/class-wpp-feps.php:3083
+#, fuzzy
+msgid "Attribute"
+msgstr "Elrejtett tartalmak"
+
+#: lib/class-wpp-feps.php:3057
+#, fuzzy, php-format
+msgid "%1$s Title"
+msgstr "Cím"
+
+#: lib/class-wpp-feps.php:3065 lib/class-wpp-feps.php:3107
+#, fuzzy
+msgid "Toggle Advanced Settings"
+msgstr "Általános beállítások"
+
+#: lib/class-wpp-feps.php:3101
+#, fuzzy
+msgid "Required"
+msgstr "Kiemelt"
+
+#: lib/class-wpp-feps.php:3104
+#, fuzzy
+msgid "Remove attribute"
+msgstr "Elrejtett tartalmak"
+
+#: lib/class-wpp-feps.php:3123
+msgid "Add Row"
+msgstr "Sor hozzáadása"
+
+#: lib/class-wpp-feps.php:3140
+msgid "Save Changes"
+msgstr "Módosítások mentése"
+
+#: lib/class-wpp-feps.php:3226
+msgid "My FEPS Listings"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3304
+msgid "Editing"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3473
+#, fuzzy
+msgid "Upload Image"
+msgstr "Összes kép:"
+
+#: lib/class-wpp-feps.php:3489
+#, php-format
+msgid "No more than %1d image(s). Click image to delete it."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3844
+msgid "<strong>ERROR</strong>: Account is not approved."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3861
+msgid ""
+"There is a JavaScript error on this page preventing it from displaying the "
+"dynamic map."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3889
+msgid "Your location has been successfully found by Google Maps."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3892
+msgid "Your address could not be found, please try again."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3991
+msgid "Days"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3992
+msgid "Weeks"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3993
+msgid "Months"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3994
+msgid "Years"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3997
+msgid "Basic"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4002
+msgid "Default One-Day Subscription Plan"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4017
+#, fuzzy
+msgid "Subscription Plans"
+msgstr "Leírás"
+
+#: lib/class-wpp-feps.php:4028
+#, fuzzy
+msgid "Actions"
+msgstr "Beállítások"
+
+#: lib/class-wpp-feps.php:4056
+msgid "Delete"
+msgstr "Törlés"
+
+#: lib/class-wpp-feps.php:4063
+msgid "Add Subscription Plan"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4120 lib/class-wpp-feps.php:4138
+msgid "This is Sponsored Listing"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4362
+msgid "User Account Approved"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4370
+msgid "Account Approved"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4371
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour account on [site_url] has been approved.%1$s"
+"%1$sClick this link to visit site:%1$s[site_url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4373
+msgid "User Account Approved."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4376
+#, php-format
+msgid ""
+"Thank you! Your account has been activated. <a href=\"%s\">Back to the site!"
+"</a>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4376
+msgid "Account has been activated"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4453
+msgid "Something went wrong. Please, try again later. [Error 001]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4459
+msgid "Something went wrong. Please, try again later. [Error 002]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4464
+msgid "Something went wrong. Please, try again later. [Error 003]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4479
+msgid "Thank you! Your payment has been successfully made."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4481
+#, php-format
+msgid "<a href=\"%s\">View %s</a>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4487
+msgid "Something went wrong. Please, try again later. [Error 005]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4491
+msgid "Not enough credits."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4496
+msgid "You must be logged in to be able to do this action."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4500
+msgid "Something went wrong. Please, try again. [Error 006]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4516
+msgid "Front End Property Submissions (FEPS)."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4520
+msgid "Available Credits (Balance)"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4528 static/views/feps-purchase-template.php:43
+#, php-format
+msgid "%s%01.2f = %01.2f credit"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4563
+msgid "Validation error. Check form fields"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4564
+msgid "Please type in your e-mail address."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4565
+msgid "Checking if account exists."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4566
+msgid "Checking your credentials."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4567
+msgid "Your credentials have been verified."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4568
+msgid "Your login credentials are not correct."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4569
+msgid "Account found, please type in your password."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4570
+msgid "Your account has been created. Check your e-mail to activate account."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4632 static/views/feps-subplans-template.php:80
+msgid "Next"
+msgstr "Következő"
+
+#: lib/class-wpp-feps.php:4636
+#, fuzzy
+msgid "Update"
+msgstr "Frissítések keresése"
+
+#: lib/class-wpp-feps.php:4640
+msgid "Publish"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4640 static/views/feps-submit-template.php:98
+msgid "Submit"
+msgstr "Enviar"
+
+#: lib/class-wpp-feps.php:4674
+msgid "Shows FEPS Menu. It's available only for logged in users"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4713 lib/class-wpp-feps.php:4790
+msgid "Title:"
+msgstr "Cím:"
+
+#: lib/class-wpp-feps.php:4720
+msgid "Don't show Funds Balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4726
+msgid "Don't show 'Add Credits to Balance' link "
+msgstr ""
+
+#: lib/class-wpp-feps.php:4733
+#, php-format
+msgid "Show Filter by Statuses instead of default link to 'My %s' page"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4738
+#, php-format
+msgid "'Add New %s' link to page:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4759
+#, fuzzy
+msgid "FEPS Information"
+msgstr "Általános informió"
+
+#: lib/class-wpp-feps.php:4759
+#, php-format
+msgid ""
+"Shows Information about current FEPS %1$s. It's available only for logged in "
+"users and shown only on Edit %1$s page."
+msgstr ""
+
+#: static/views/feps-purchase-template.php:26
+msgid "Edit"
+msgstr ""
+
+#: static/views/feps-purchase-template.php:27
+#, php-format
+msgid "You can modify the current %s anytime."
+msgstr ""
+
+#: static/views/feps-purchase-template.php:39
+#, fuzzy
+msgid "Change"
+msgstr "Módosítások mentése"
+
+#: static/views/feps-purchase-template.php:50
+#: static/views/feps-subplans-template.php:44
+#, fuzzy
+msgid "Featured:"
+msgstr "Kiemelt"
+
+#: static/views/feps-purchase-template.php:67
+#, fuzzy
+msgid "Current Balance"
+msgstr "Valuta"
+
+#: static/views/feps-purchase-template.php:88
+#, fuzzy, php-format
+msgid "Publish the current %s"
+msgstr "Üzletek"
+
+#: static/views/feps-purchase-template.php:91
+#, php-format
+msgid "<strong>%01.2f</strong> credits will be withdrawn from your balance."
+msgstr ""
+
+#: static/views/feps-purchase-template.php:99
+#, fuzzy
+msgid "Add Credits"
+msgstr "Új üzlet hozzáadása"
+
+#: static/views/feps-purchase-template.php:102
+#, php-format
+msgid ""
+"You don't have enough credits on your balance. Current submission requires "
+"<strong>%01.2f</strong> credits. After credits will be added, the current %s "
+"will be automatically published."
+msgstr ""
+
+#: static/views/feps-submit-template.php:72
+msgid "Your e-mail:"
+msgstr ""
+
+#: static/views/feps-submit-template.php:83
+msgid "Your Password:"
+msgstr ""
+
+#: static/views/feps-subplans-template.php:22
+#, fuzzy
+msgid "Choose Subscription Plan"
+msgstr "Leírás"
+
+#: static/views/feps-subplans-template.php:50
+msgid "The available amount of images which can be uploaded for the property"
+msgstr ""
+
+#: static/views/feps-subplans-template.php:59
+#, fuzzy
+msgid "Subscription Plan Options"
+msgstr "Leírás"
+
+#: static/views/feps-subplans-template.php:76
+msgid "Back"
+msgstr ""
+
+#: static/views/feps-tabs-template.php:3
+#, fuzzy
+msgid "Information"
+msgstr "Általános informió"
+
+#: static/views/feps-tabs-template.php:5
+msgid "Checkout"
+msgstr ""
+
+#: static/views/wpi_authorize-checkout-feps.php:60
+#: static/views/wpi_paypal-checkout-feps.php:114
+msgid "Agreement"
+msgstr ""
+
+#: static/views/wpi_authorize-checkout-feps.php:82
+#: static/views/wpi_paypal-checkout-feps.php:136
+msgid "Process Payment"
+msgstr ""
+
+#: static/views/wpi_authorize-checkout-feps.php:83
+#: static/views/wpi_paypal-checkout-feps.php:137
+msgid "of"
+msgstr ""
+
+#: static/views/wpi_checkout-feps.php:9
+#, fuzzy
+msgid "Payment Method"
+msgstr "Üzlet  beállítások"
+
+#: static/views/wpi_checkout-feps.php:14
+msgid "Method"
+msgstr ""
+
+#: static/views/wpi_checkout-feps.php:62
+msgid "Specified gateways are not available"
+msgstr ""
+
+#: static/views/wpi_paypal-checkout-feps.php:84
+msgid "Custom Amount"
+msgstr ""
+
+#: static/views/wpi_paypal-checkout-feps.php:88
+msgid "Your Amount"
+msgstr ""
+
+#: static/views/wpi_paypal-checkout-feps.php:103
+msgid "Enter Amount"
+msgstr ""
+
+#: wp-property-feps.php:54
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-feps.php:62
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-feps.php:70
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-feps.php:74
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-feps.php:95
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""
+
+#~ msgid "Building"
+#~ msgstr "Épület"
+
+#~ msgid "Floorplan"
+#~ msgstr "Alaprajz"
+
+#~ msgid "Single Family Home"
+#~ msgstr "Egyszerű családi ház"
+
+#~ msgid "Address"
+#~ msgstr "Cégnév"
+
+#~ msgid "Bedrooms"
+#~ msgstr "Hálószobák"
+
+#~ msgid "Bathrooms"
+#~ msgstr "Fürdőszobák"
+
+#~ msgid "Deposit"
+#~ msgstr "Előleg"
+
+#~ msgid "Area"
+#~ msgstr "Terület"
+
+#~ msgid "Phone Number"
+#~ msgstr "telefonszám"
+
+#~ msgid "Lease Terms"
+#~ msgstr "Bérleti feltételek"
+
+#~ msgid "Pet Policy"
+#~ msgstr "Állattartás"
+
+#~ msgid "School"
+#~ msgstr "Iskola"
+
+#~ msgid "Tagline"
+#~ msgstr "Szlogen"
+
+#~ msgid "Studio"
+#~ msgstr "Stúdió"
+
+#~ msgid "The property type will determine the layout."
+#~ msgstr "Az üzlet típusa befolyásolja az alaprajzot"
+
+#~ msgid ""
+#~ "Customize what appears in search results in the attribute section.  For "
+#~ "example: 1bed, 2baths, area varies slightly."
+#~ msgstr ""
+#~ "Állítsa be, hogy mi jelenjen meg a keresési eredmények között az "
+#~ "attribútum részben..Például: 1 háló, 2 fürdő, stb."
+
+#~ msgid "Will appear on overview pages and on top of every listing page."
+#~ msgstr ""
+#~ "Meg fog jelleni minden áttekintő oldalon, valamint minden lista oldal "
+#~ "tetején."
+
+#, fuzzy
+#~ msgid "View "
+#~ msgstr "Összes mutatása"
+
+#~ msgid "Property Type"
+#~ msgstr "Üzlet típus"
+
+#~ msgid "City"
+#~ msgstr "Város"
+
+#~ msgid "For Sale"
+#~ msgstr "Eladásra"
+
+#~ msgid "For Rent"
+#~ msgstr "Bérlésre"
+
+#~ msgid "This is a rental property."
+#~ msgstr "Ez egy bérelhető üzlet."
+
+#~ msgid "This property is for sale."
+#~ msgstr "Ez az üzlet eladó."
+
+#, fuzzy
+#~ msgid "Format phone number."
+#~ msgstr "Általános telefonszám"
+
+#, fuzzy
+#~ msgid " sq. ft."
+#~ msgstr "négyzetméter"
+
+#, fuzzy
+#~ msgid "Address was validated by Google Maps."
+#~ msgstr ""
+#~ "<span class='description'>A címet hitelesítette a Google Maps.</span>"
+
+#, fuzzy
+#~ msgid ""
+#~ "Address has not yet been validated, should be formatted as: street, city, "
+#~ "state, postal code, country. Locations are validated through Google Maps."
+#~ msgstr ""
+#~ "<span class='description'>A cím még nincs hitelesítve, próbáljon meg "
+#~ "változtatni a következőkön: utca, város, állam, irányító szám, ország. A "
+#~ "hely hitelesítve lesz a Google Maps által.</span>"
+
+#, fuzzy
+#~ msgid "Show"
+#~ msgstr "Csúszka"
+
+#, fuzzy
+#~ msgid "Add to Featured"
+#~ msgstr "Új üzlet hozzáadása"
+
+#~ msgid "Processing..."
+#~ msgstr "Feldolgozás..."
+
+#, fuzzy
+#~ msgid "Uploading"
+#~ msgstr "Töltés"
+
+#~ msgid "Cancel"
+#~ msgstr "Mégse"
+
+#, fuzzy
+#~ msgid "Previous"
+#~ msgstr "Előző"
+
+#, fuzzy
+#~ msgid "Show %s entries"
+#~ msgstr "%s képek mutatása"
+
+#, fuzzy
+#~ msgid "No matching records found"
+#~ msgstr "Nem található üzlet"
+
+#, fuzzy
+#~ msgid "Loading..."
+#~ msgstr "Töltés"
+
+#, fuzzy
+#~ msgid "Search:"
+#~ msgstr "Keresés"
+
+#, fuzzy
+#~ msgid "Display:"
+#~ msgstr "Kijelzés"
+
+#, fuzzy
+#~ msgid "Select a unique ID attribute."
+#~ msgstr "Válasszon egyet"
+
+#~ msgid "Settings"
+#~ msgstr "Beállítások"
+
+#, fuzzy
+#~ msgid "Enabled Options"
+#~ msgstr "Beállítások"
+
+#~ msgid "Developer"
+#~ msgstr "Fejlesztő"
+
+#, fuzzy
+#~ msgid "%1s Attributes"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "Advanced Stats Settings:"
+#~ msgstr "Általános beállítások"
+
+#~ msgid "Slug"
+#~ msgstr "Slug"
+
+#, fuzzy
+#~ msgid "Add Group"
+#~ msgstr "Sor hozzáadása"
+
+#, fuzzy
+#~ msgid "Attribute Name"
+#~ msgstr "Funkció név"
+
+#, fuzzy
+#~ msgid "Search Input"
+#~ msgstr "Keresés"
+
+#, fuzzy
+#~ msgid "Sortable."
+#~ msgstr "Rendezhető"
+
+#, fuzzy
+#~ msgid "Searchable."
+#~ msgstr "Kereshető"
+
+#, fuzzy
+#~ msgid "Admin Only."
+#~ msgstr "Admin UI"
+
+#, fuzzy
+#~ msgid "Show in \"All Properties\" table."
+#~ msgstr "Gyermek üzletek mutatása."
+
+#, fuzzy
+#~ msgid "%1s Types"
+#~ msgstr "Típus"
+
+#~ msgid "Type"
+#~ msgstr "Típus"
+
+#~ msgid "Hidden Attributes"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "Inherit from Parent"
+#~ msgstr "Öröklődés"
+
+#~ msgid "Searchable"
+#~ msgstr "Kereshető"
+
+#~ msgid "Location Matters"
+#~ msgstr "Helyszín fontos"
+
+#, fuzzy
+#~ msgid "Parent Selection"
+#~ msgstr "Üzlet  beállítások"
+
+#, fuzzy
+#~ msgid "Advanced Options"
+#~ msgstr "Beállítások"
+
+#~ msgid "Show Log."
+#~ msgstr "Napló mutatása"
+
+#~ msgid "Child Properties"
+#~ msgstr "Üzlet altipusok"
+
+#~ msgid "Menu Sort Order:"
+#~ msgstr "Menü elrendezés:"
+
+#, fuzzy
+#~ msgid "Display in featured listings."
+#~ msgstr "Üzlet mutatása a kiemelt listában."
+
+#, fuzzy
+#~ msgid "Property updated. <a href=\"%s\">view property</a>"
+#~ msgstr "Üzlet frissítve <a href=\"%s\">üzlet megnézése</a>"
+
+#~ msgid "Custom field updated."
+#~ msgstr "Egyedi mező frissítve."
+
+#~ msgid "Custom field deleted."
+#~ msgstr "Egyedi mező törölve."
+
+#~ msgid "Property updated."
+#~ msgstr "Üzlet frissítve."
+
+#~ msgid "Property restored to revision from %s"
+#~ msgstr "Imóvel restaurado para a versão %s"
+
+#~ msgid "Property published. <a href=\"%s\">View property</a>"
+#~ msgstr "Üzlet publikálva <a href=\"%s\">Üzlet megnézése</a>"
+
+#~ msgid "Property saved."
+#~ msgstr "Üzlet elmentve."
+
+#~ msgid ""
+#~ "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+#~ msgstr ""
+#~ "Üzlet feltöltve. <a target=\"_blank\" href=\"%s\">Üzlet megtekintése</a>"
+
+#~ msgid "M j, Y @ G:i"
+#~ msgstr "Y. F j.  l H:i"
+
+#~ msgid "Overview"
+#~ msgstr "Nézet"
+
+#~ msgid "Order"
+#~ msgstr "Sorrend"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Előkép"
+
+#~ msgid "Search"
+#~ msgstr "Keresés"
+
+#~ msgid "Floor plans at location:"
+#~ msgstr "Alaprajz a címhez:"
+
+#, fuzzy
+#~ msgid "View Properties"
+#~ msgstr "Üzlet megtekintése"
+
+#, fuzzy
+#~ msgid "Add/Edit Properties"
+#~ msgstr "Üzlet módosítása"
+
+#, fuzzy
+#~ msgid "Edit Other Properties"
+#~ msgstr "Üzlet keresése"
+
+#, fuzzy
+#~ msgid "Delete Properties"
+#~ msgstr "Üzlet keresése"
+
+#, fuzzy
+#~ msgid "Publish Properties"
+#~ msgstr "Üzletek"
+
+#, fuzzy
+#~ msgid "Manage Settings"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Manage Taxonomies"
+#~ msgstr "Csúszka"
+
+#, fuzzy
+#~ msgid "For more information:"
+#~ msgstr "Általános informió"
+
+#, fuzzy
+#~ msgid "An error occurred during API key request: <b>%s</b>."
+#~ msgstr "Hiba történt a prémium kiegészítés ellenőrzésénél: <b> %s <b>"
+
+#~ msgid "Properties"
+#~ msgstr "Üzletek"
+
+#~ msgid "Property"
+#~ msgstr "Üzlet"
+
+#~ msgid "Property: %s"
+#~ msgstr "Üzlet: %s"
+
+#~ msgid "Features"
+#~ msgstr "Szolgáltatások"
+
+#~ msgid "Feature"
+#~ msgstr "Funkció"
+
+#, fuzzy
+#~ msgid "Search Features"
+#~ msgstr "Keresési beálíltások"
+
+#, fuzzy
+#~ msgid "All Features"
+#~ msgstr "Szolgáltatások"
+
+#, fuzzy
+#~ msgid "Parent Feature"
+#~ msgstr "Funkció"
+
+#, fuzzy
+#~ msgid "Parent Feature:"
+#~ msgstr "Funkció"
+
+#, fuzzy
+#~ msgid "Edit Feature"
+#~ msgstr "Funkció"
+
+#, fuzzy
+#~ msgid "Update Feature"
+#~ msgstr "Funkció"
+
+#, fuzzy
+#~ msgid "Add New Feature"
+#~ msgstr "Új üzlet hozzáadása"
+
+#, fuzzy
+#~ msgid "New Feature Name"
+#~ msgstr "Funkció név"
+
+#~ msgid "Community Features"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Community Feature"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Search Community Features"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "All Community Features"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Parent Community Feature"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Parent Community Feature:"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Edit Community Feature"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Update Community Feature"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Add New Community Feature"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "New Community Feature Name"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "All Properties"
+#~ msgstr "Üzletek"
+
+#, fuzzy
+#~ msgid "Add Property"
+#~ msgstr "Új üzlet hozzáadása"
+
+#~ msgid "Add New Property"
+#~ msgstr "Új üzlet hozzáadása"
+
+#~ msgid "Edit Property"
+#~ msgstr "Üzlet módosítása"
+
+#~ msgid "New Property"
+#~ msgstr "Új üzlet"
+
+#~ msgid "View Property"
+#~ msgstr "Üzlet megtekintése"
+
+#~ msgid "Search Properties"
+#~ msgstr "Üzlet keresése"
+
+#~ msgid "No properties found"
+#~ msgstr "Nem található üzlet"
+
+#~ msgid "No properties found in Trash"
+#~ msgstr "Nem található üzlet a lomtárban"
+
+#, fuzzy
+#~ msgid "Default"
+#~ msgstr "Törlés"
+
+#~ msgid ""
+#~ "One of the folders that is necessary for downloading additional features "
+#~ "for the WP-Property plugin is not writable.  This means features cannot "
+#~ "be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-"
+#~ "property/core/premium</b> permissions to 0755."
+#~ msgstr ""
+#~ "Az egyik mappa, ami feltétlenül szükséges a WP-Property bővítménynek hogy "
+#~ "le tudja tölteni a további jellegzetességeket nem írható. Ez azt jelenti, "
+#~ "hogy a kiegészítőt ne tudja letölteni. Ahhoz hogy ez működjön, Őnnek be "
+#~ "kell állítania a <b> wp-content/plugins6wp-property/core/premium </b> "
+#~ "engedélyt 0755-re."
+
+#, fuzzy
+#~ msgid "Cache was successfully cleared"
+#~ msgstr "Frissítés sikeres."
+
+#, fuzzy
+#~ msgid ""
+#~ "An error occurred during premium feature check. API Key '<b>%s</b>' is "
+#~ "incorrect."
+#~ msgstr "Hiba történt a prémium kiegészítés ellenőrzésénél: <b> %s <b>"
+
+#, fuzzy
+#~ msgid "WP-Property Premium Feature: %s"
+#~ msgstr "WP-Property kiemelt kiegészítők"
+
+#~ msgid "Update ran successfully."
+#~ msgstr "Frissítés sikeres."
+
+#, fuzzy
+#~ msgid "An error occurred during premium feature check: <b> %s </b>."
+#~ msgstr "Hiba történt a prémium kiegészítés ellenőrzésénél: <b> %s <b>"
+
+#~ msgid " sq ft."
+#~ msgstr "négyzetméter"
+
+#~ msgid "Get Directions"
+#~ msgstr "Útvonal"
+
+#~ msgid "General Settings"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Login"
+#~ msgstr "Napló"
+
+#, fuzzy
+#~ msgid "Submit Inquiry"
+#~ msgstr "Enviar"
+
+#, fuzzy
+#~ msgid "Date"
+#~ msgstr "Törlés"
+
+#, fuzzy
+#~ msgid "Published"
+#~ msgstr "Csúszka képek:"
+
+#, fuzzy
+#~ msgid "Pending"
+#~ msgstr "Töltés"
+
+#, fuzzy
+#~ msgid "Show all dates"
+#~ msgstr "%s képek mutatása"
+
+#, fuzzy
+#~ msgid "General Help"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Default Properties Page"
+#~ msgstr "Kiemelt üzletek"
+
+#~ msgid "Display"
+#~ msgstr "Kijelzés"
+
+#, fuzzy
+#~ msgid "Premium Features"
+#~ msgstr "WP-Property kiemelt kiegészítők"
+
+#, fuzzy
+#~ msgid "Tab allows you to manage your WP-Property Premium Features"
+#~ msgstr "WP-Property kiemelt kiegészítők"
+
+#, fuzzy
+#~ msgid "More Help"
+#~ msgstr "Több"
+
+#, fuzzy
+#~ msgid "published"
+#~ msgstr "Csúszka képek:"
+
+#, fuzzy
+#~ msgid "pending"
+#~ msgstr "Töltés"
+
+#, fuzzy
+#~ msgid "Nothing found."
+#~ msgstr "Nem található üzlet"
+
+#, fuzzy
+#~ msgid "New User account created."
+#~ msgstr "Tábla nincs kész."
+
+#, fuzzy
+#~ msgid "Status Updated"
+#~ msgstr "Üzlet frissítve."
+
+#, fuzzy
+#~ msgid "or"
+#~ msgstr "Több"
+
+#, fuzzy
+#~ msgid "No published properties."
+#~ msgstr "Gyermek üzletek mutatása."
+
+#, fuzzy
+#~ msgid "Attributes to Display:"
+#~ msgstr "Cím mutatása"
+
+#~ msgid "%s at %s for %s"
+#~ msgstr "%s mikor %s kinek %s"
+
+#~ msgid "More"
+#~ msgstr "Több"
+
+#~ msgid "View All"
+#~ msgstr "Összes mutatása"
+
+#, fuzzy
+#~ msgid ""
+#~ "The widget will show other properties that share a parent with the "
+#~ "currently displayed property."
+#~ msgstr "Mutassa a gyermek üzleteket a jelenleg kijelzetteknél"
+
+#, fuzzy
+#~ msgid "Hide images."
+#~ msgstr "Csúszka képek:"
+
+#~ msgid "Image Size:"
+#~ msgstr "Képméret:"
+
+#, fuzzy
+#~ msgid "Listings to display?"
+#~ msgstr "Hányat mutasson?"
+
+#, fuzzy
+#~ msgid "Select the attributes you want to display: "
+#~ msgstr "Állítsa be az információkat, amiket ki szeretne jelezni."
+
+#~ msgid "Address Format:"
+#~ msgstr "Címormátum"
+
+#~ msgid "Show \"More\" link?"
+#~ msgstr "\"Több\" link mutatása"
+
+#~ msgid "Show \"View All\" link?"
+#~ msgstr "\"Összes mutatása\" link mutatása"
+
+#~ msgid "Show child properties (if any) for currently displayed property"
+#~ msgstr "Mutassa a gyermek üzleteket a jelenleg kijelzetteknél"
+
+#~ msgid ""
+#~ "The widget will not be displayed if the currently viewed property has no "
+#~ "children."
+#~ msgstr "Widget nem fog megjelenni, hacsak az üzlet  nemalkategóriában van."
+
+#, fuzzy
+#~ msgid "Hide Images?"
+#~ msgstr "Csúszka képek:"
+
+#~ msgid "Select the stats you want to display"
+#~ msgstr "Állítsa be az információkat, amiket ki szeretne jelezni."
+
+#, fuzzy
+#~ msgid "Featured %1s"
+#~ msgstr "Szolgáltatások"
+
+#~ msgid "List of properties that were marked as Featured"
+#~ msgstr ""
+#~ "Azoknak az üzleteknek a listája, amik megvannak jelölve kiemelt jelzővel"
+
+#~ msgid "Featured Properies"
+#~ msgstr "Imóveis Kiemelt üzletek"
+
+#~ msgid "List of the latest properties created on this site"
+#~ msgstr "Az utolsónak felrakott üzletek listája "
+
+#~ msgid "Latest Properties"
+#~ msgstr "Legutolsó üzletek"
+
+#~ msgid "Select stats you want to display"
+#~ msgstr "Válasszon tulajdonságokat, amiket mutatni szeretne"
+
+#, fuzzy
+#~ msgid "%1s Search"
+#~ msgstr "Keresés"
+
+#, fuzzy
+#~ msgid "Display a highly customizable  %1s search form."
+#~ msgstr "A jobban módosítható üzletkereső mutatása"
+
+#~ msgid "Property types to search:"
+#~ msgstr "Üzlet típusok a kereséshez:"
+
+#, fuzzy
+#~ msgid "All Attributes"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "Grouped Attributes"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "Default Sort Order"
+#~ msgstr "Menü elrendezés:"
+
+#~ msgid "Items per page"
+#~ msgstr "1 oldalon levő adatok"
+
+#~ msgid "Search Properies"
+#~ msgstr "Keresési beálíltások"
+
+#~ msgid "List of all images attached to the current property"
+#~ msgstr "Az összes kép mutatása, ami ehhez az üzletekhez van kapcsolva"
+
+#, fuzzy
+#~ msgid "Large Image Size:"
+#~ msgstr "Képméret:"
+
+#~ msgid "Show %s Images"
+#~ msgstr "%s képek mutatása"
+
+#, fuzzy
+#~ msgid "Show Image Captions"
+#~ msgstr "%s képek mutatása"
+
+#, fuzzy
+#~ msgid "Show Image Descriptions."
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "API Failure: %1s."
+#~ msgstr "Szolgáltatások"
+
+#~ msgid "Log Started."
+#~ msgstr "Naplózás elkezdődött."
+
+#~ msgid "Clear Log"
+#~ msgstr "Tiszta log"
+
+#~ msgid "Timestamp"
+#~ msgstr "Időbélyeg"
+
+#~ msgid "Event"
+#~ msgstr "Esemény"
+
+#~ msgid "User"
+#~ msgstr "Felhasználó"
+
+#, fuzzy
+#~ msgid "Agent Shortcodes"
+#~ msgstr "Áttekintő oldal kódja"
+
+#, fuzzy
+#~ msgid "Show agent information:"
+#~ msgstr "Általános informió"
+
+#, fuzzy
+#~ msgid "To query agent properties:"
+#~ msgstr "Gyermek üzletek mutatása."
+
+#, fuzzy
+#~ msgid "Shortcode Attribute Fields"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "Agent Image Size"
+#~ msgstr "Képméret:"
+
+#, fuzzy
+#~ msgid "Agent Information"
+#~ msgstr "Általános informió"
+
+#, fuzzy
+#~ msgid "Agent"
+#~ msgstr "Esemény"
+
+#, fuzzy
+#~ msgid "No Properties."
+#~ msgstr "Üzletek"
+
+#, fuzzy
+#~ msgid "Display Name"
+#~ msgstr "Kijelzés"
+
+#, fuzzy
+#~ msgid "Username"
+#~ msgstr "Felhasználó"
+
+#, fuzzy
+#~ msgid "E-Mail"
+#~ msgstr "Fő"
+
+#~ msgid "Options"
+#~ msgstr "Beállítások"
+
+#, fuzzy
+#~ msgid "Associated Properties"
+#~ msgstr "Kiemelt üzletek"
+
+#, fuzzy
+#~ msgid "Images"
+#~ msgstr "Összes kép:"
+
+#, fuzzy
+#~ msgid "Agent Fields"
+#~ msgstr "Üzlet mezői"
+
+#, fuzzy
+#~ msgid "Agent updated."
+#~ msgstr "Üzlet frissítve."
+
+#, fuzzy
+#~ msgid "Agent created."
+#~ msgstr "Tábla nincs kész."
+
+#, fuzzy
+#~ msgid "Edit Agent"
+#~ msgstr "Üzlet módosítása"
+
+#, fuzzy
+#~ msgid "No images found."
+#~ msgstr "Nem található üzlet"
+
+#, fuzzy
+#~ msgid "Add Image"
+#~ msgstr "Összes kép:"
+
+#, fuzzy
+#~ msgid "Edit posts"
+#~ msgstr "Üzlet módosítása"
+
+#, fuzzy
+#~ msgid "Edit pages"
+#~ msgstr "Üzlet módosítása"
+
+#, fuzzy
+#~ msgid "Publish pages"
+#~ msgstr "Csúszka képek:"
+
+#, fuzzy
+#~ msgid "Delete pages"
+#~ msgstr "Törlés"
+
+#, fuzzy
+#~ msgid "Delete posts"
+#~ msgstr "Törlés"
+
+#, fuzzy
+#~ msgid "Image"
+#~ msgstr "Képméret:"
+
+#, fuzzy
+#~ msgid "Email Address"
+#~ msgstr "Cégnév"
+
+#, fuzzy
+#~ msgid "<b>Page Settings</b><br/>"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Name:"
+#~ msgstr "Név"
+
+#, fuzzy
+#~ msgid "Page:"
+#~ msgstr "Szülő"
+
+#, fuzzy
+#~ msgid "Page"
+#~ msgstr "Szülő"
+
+#, fuzzy
+#~ msgid "Search..."
+#~ msgstr "Keresés"
+
+#, fuzzy
+#~ msgid "Template Settings:"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Template:"
+#~ msgstr "sablon"
+
+#, fuzzy
+#~ msgid "PDF Flyer Options"
+#~ msgstr "Szupertérkép opció"
+
+#, fuzzy
+#~ msgid "Exclude %1s from PDF Lists"
+#~ msgstr "Üzlet kizárása a szupertérképről"
+
+#, fuzzy
+#~ msgid "Full Description"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Attributes"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "File Name:"
+#~ msgstr "Funkció név"
+
+#, fuzzy
+#~ msgid "Actions:"
+#~ msgstr "Beállítások"
+
+#, fuzzy
+#~ msgid "View PDF"
+#~ msgstr "Összes mutatása"
+
+#, fuzzy
+#~ msgid "Properties per page:"
+#~ msgstr "1 oldalon levő adatok"
+
+#, fuzzy
+#~ msgid "Show child properties."
+#~ msgstr "Gyermek üzletek mutatása."
+
+#, fuzzy
+#~ msgid "Contact Information"
+#~ msgstr "Általános informió"
+
+#, fuzzy
+#~ msgid "Refresh Page"
+#~ msgstr "Áttekintő oldal"
+
+#, fuzzy
+#~ msgid "Location"
+#~ msgstr "Töltés"
+
+#, fuzzy
+#~ msgid "Flyer Display"
+#~ msgstr "Kijelzés"
+
+#, fuzzy
+#~ msgid "Description (if exists)"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Location on Map (if exists)"
+#~ msgstr "Helyszín fontos"
+
+#, fuzzy
+#~ msgid "Secondary Images"
+#~ msgstr "Csúszka képek:"
+
+#, fuzzy
+#~ msgid "Show %1$s images."
+#~ msgstr "%s képek mutatása"
+
+#, fuzzy
+#~ msgid "\" is generated."
+#~ msgstr "Tábla nincs kész."
+
+#, fuzzy
+#~ msgid "Allows user to publish properties."
+#~ msgstr "Gyermek üzletek mutatása."
+
+#, fuzzy
+#~ msgid "WP Property Capabilities"
+#~ msgstr "WP-Property csúszka"
+
+#, fuzzy
+#~ msgid "Labels"
+#~ msgstr "ágyak"
+
+#, fuzzy
+#~ msgid "Singular Property:"
+#~ msgstr "Üzlet módosítása"
+
+#, fuzzy
+#~ msgid "Plural Property:"
+#~ msgstr "Üzlet"
+
+#, fuzzy
+#~ msgid "Overview Page Contextual Help:"
+#~ msgstr "Áttekintő oldal"
+
+#, fuzzy
+#~ msgid "Add "
+#~ msgstr "Új hozzáadása"
+
+#, fuzzy
+#~ msgid "Add New "
+#~ msgstr "Új hozzáadása"
+
+#, fuzzy
+#~ msgid "Search "
+#~ msgstr "Keresés"
+
+#, fuzzy
+#~ msgid "Property Title"
+#~ msgstr "Üzlet típus"
+
+#, fuzzy
+#~ msgid "Property Content"
+#~ msgstr "Üzletek további adatai"
+
+#, fuzzy
+#~ msgid "Property Excerpt"
+#~ msgstr "Üzletek további adatai"
+
+#, fuzzy
+#~ msgid "Property Status"
+#~ msgstr "Üzletek alapadatai"
+
+#, fuzzy
+#~ msgid "Property Order"
+#~ msgstr "Üzlet keresés"
+
+#, fuzzy
+#~ msgid "Property Date"
+#~ msgstr "Üzlet oldal"
+
+#, fuzzy
+#~ msgid "Property Author"
+#~ msgstr "Üzletek további adatai"
+
+#, fuzzy
+#~ msgid "Starting "
+#~ msgstr "Beállítások"
+
+#, fuzzy
+#~ msgid "Last Import"
+#~ msgstr "Novo Imóvel"
+
+#, fuzzy
+#~ msgid "Time: "
+#~ msgstr "Cím:"
+
+#, fuzzy
+#~ msgid "No objects found."
+#~ msgstr "Nem található üzlet"
+
+#, fuzzy
+#~ msgid "Available tags in source: %1s"
+#~ msgstr "Rendelkezésre álló címkék"
+
+#, fuzzy
+#~ msgid "Property Importer"
+#~ msgstr "Üzlet típus"
+
+#, fuzzy
+#~ msgid "Sort by:"
+#~ msgstr "Rendezhető"
+
+#, fuzzy
+#~ msgid "Created Properties"
+#~ msgstr "Kiemelt üzletek"
+
+#, fuzzy
+#~ msgid "Updated Properties"
+#~ msgstr "Kiemelt üzletek"
+
+#, fuzzy
+#~ msgid "Total Properties"
+#~ msgstr "Üzletek"
+
+#, fuzzy
+#~ msgid "Created "
+#~ msgstr "Kiemelt"
+
+#, fuzzy
+#~ msgid "Total Properties: "
+#~ msgstr "Üzletek"
+
+#, fuzzy
+#~ msgid "Delete All Properties"
+#~ msgstr "Üzlet keresése"
+
+#, fuzzy
+#~ msgid "Source"
+#~ msgstr "Több"
+
+#, fuzzy
+#~ msgid "Type:"
+#~ msgstr "Típus"
+
+#, fuzzy
+#~ msgid "Google Spreadsheet"
+#~ msgstr "Google térkép"
+
+#, fuzzy
+#~ msgid "WP-Property Feed"
+#~ msgstr "Üzlet mezői"
+
+#, fuzzy
+#~ msgid "Google Username"
+#~ msgstr "Google térkép"
+
+#, fuzzy
+#~ msgid "Google Password"
+#~ msgstr "Google térkép"
+
+#, fuzzy
+#~ msgid "Property Resource."
+#~ msgstr "Üzlet elmentve."
+
+#, fuzzy
+#~ msgid "Default is \"Property\""
+#~ msgstr "Üzlet típus"
+
+#, fuzzy
+#~ msgid "Property Resource Class."
+#~ msgstr "Üzlet elmentve."
+
+#, fuzzy
+#~ msgid "RETS Version."
+#~ msgstr "Verzió"
+
+#, fuzzy
+#~ msgid "Property Query."
+#~ msgstr "Üzlet galéria"
+
+#, fuzzy
+#~ msgid "Default Property Type"
+#~ msgstr "Üzlet típus"
+
+#, fuzzy
+#~ msgid "properties in the feed."
+#~ msgstr "Nem található üzlet"
+
+#, fuzzy
+#~ msgid " valid images."
+#~ msgstr "Csúszka képek:"
+
+#, fuzzy
+#~ msgid "hour(s) ago."
+#~ msgstr "%s órával korábban"
+
+#, fuzzy
+#~ msgid "Attribute Map"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "WP-Property Attribute"
+#~ msgstr "WP-Property kiemelt kiegészítők"
+
+#, fuzzy
+#~ msgid "WordPress Attributes"
+#~ msgstr "Üzlet címe"
+
+#, fuzzy
+#~ msgid "Street Number"
+#~ msgstr "telefonszám"
+
+#, fuzzy
+#~ msgid "County"
+#~ msgstr "Város"
+
+#, fuzzy
+#~ msgid "State"
+#~ msgstr "Rendezhető"
+
+#, fuzzy
+#~ msgid "WP-Property Attributes"
+#~ msgstr "WP-Property kiemelt kiegészítők"
+
+#, fuzzy
+#~ msgid "Property Agent"
+#~ msgstr "Üzletek további adatai"
+
+#, fuzzy
+#~ msgid "Global Property ID"
+#~ msgstr "Üzlet"
+
+#, fuzzy
+#~ msgid "Display Address"
+#~ msgstr "Cégnév"
+
+#, fuzzy
+#~ msgid "Address validation has failed."
+#~ msgstr "Cím nincs hitelesítve"
+
+#, fuzzy
+#~ msgid "Manage Slideshow"
+#~ msgstr "Csúszka"
+
+#, fuzzy
+#~ msgid "Slide"
+#~ msgstr "Csúszka"
+
+#, fuzzy
+#~ msgid "Carousel Thumbnail Size:"
+#~ msgstr "Térkép előkép mérete:"
+
+#~ msgid "Slideshow Options"
+#~ msgstr "csúszka beállításai"
+
+#~ msgid "Slideshow Images:"
+#~ msgstr "Csúszka képek:"
+
+#~ msgid "All Images:"
+#~ msgstr "Összes kép:"
+
+#~ msgid "Slideshow"
+#~ msgstr "Csúszka"
+
+#~ msgid "Global Slideshow"
+#~ msgstr "Globális csúszka"
+
+#, fuzzy
+#~ msgid "Slideshow Size: "
+#~ msgstr "Csúszka képek:"
+
+#, fuzzy
+#~ msgid "Display in Global Slideshow Caption:"
+#~ msgstr "Globális csúszka"
+
+#, fuzzy
+#~ msgid "Title."
+#~ msgstr "Cím"
+
+#, fuzzy
+#~ msgid "Tagline."
+#~ msgstr "Szlogen"
+
+#, fuzzy
+#~ msgid "Thumbnail Size"
+#~ msgstr "Előlép méret:"
+
+#, fuzzy
+#~ msgid "Slices:"
+#~ msgstr "Csúszka"
+
+#~ msgid "Slideshow selection and order saved."
+#~ msgstr "Csúszka kiválasztva és a sorrend elmentve."
+
+#~ msgid "WP-Property Slideshow"
+#~ msgstr "WP-Property csúszka"
+
+#~ msgid ""
+#~ "This slideshow can be integrated into your front-end pages by either "
+#~ "using the shortcode, or pasting PHP code into your theme."
+#~ msgstr ""
+#~ "Ezt a csúszkát használhatja a kezdő oldalon, ha beilleszti az oldalba a "
+#~ "kódját, vagy berakja a PHP kódba a asblonjánál."
+
+#~ msgid ""
+#~ "Drag images from selection on the left to the selection on the right, and "
+#~ "then click save."
+#~ msgstr ""
+#~ "Húzza a képeket a bal oldali kiválasztásból a jobb oldali kiválasztásba, "
+#~ "majd nyomja meg a mentés gombot."
+
+#~ msgid ""
+#~ "This list gets all images from your media library that are over %s pixels "
+#~ "wide and %s pixels tall."
+#~ msgstr ""
+#~ "Ez a lista mutatja az összes képet a média könyvtárból, ami %s pixel "
+#~ "szélességnél és %s pixel magasságnál nagyobb."
+
+#~ msgid "Save Selection and Order"
+#~ msgstr "Kiválasztás és sorrend elmentése"
+
+#, fuzzy
+#~ msgid "Manage Supermap"
+#~ msgstr "Szupertérkép opció"
+
+#, fuzzy
+#~ msgid "Supermap"
+#~ msgstr "Szupertérkép opció"
+
+#, fuzzy
+#~ msgid "Sidebar Attributes"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "Map Markers:"
+#~ msgstr "Anunciantes"
+
+#, fuzzy
+#~ msgid "Default by Google"
+#~ msgstr "Alapértelmezett sablon"
+
+#~ msgid "Supermap Options"
+#~ msgstr "Szupertérkép opció"
+
+#, fuzzy
+#~ msgid "Exclude property from Supermap"
+#~ msgstr "Üzlet kizárása a szupertérképről"
+
+#, fuzzy
+#~ msgid "Sorry, no %s found, try expanding your search."
+#~ msgstr ""
+#~ "Elnézést, nem található üzlet - próbálja meg kiterjeszteni a keresést, "
+#~ "vagy <a href=\"%s\">nézze meg az összeset</a>."
+
+#, fuzzy
+#~ msgid "No results found."
+#~ msgstr "Nem található üzlet"
+
+#, fuzzy
+#~ msgid "Show More"
+#~ msgstr "\"Több\" link mutatása"
+
+#~ msgid "Loading"
+#~ msgstr "Töltés"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "Összes mutatása"
+
+#, fuzzy
+#~ msgid "Settings updated."
+#~ msgstr "Üzlet frissítve."
+
+#, fuzzy
+#~ msgid "Feature Updates"
+#~ msgstr "Funkció név"
+
+#~ msgid "Check Updates"
+#~ msgstr "Frissítések keresése"
+
+#, fuzzy
+#~ msgid "Enable comments."
+#~ msgstr "Beállítások"
+
+#, fuzzy
+#~ msgid "Default %1s Page"
+#~ msgstr "Alapértelmezett sablon"
+
+#~ msgid "Property (Default)"
+#~ msgstr "Üzlet  (általános)"
+
+#, fuzzy
+#~ msgid "Attribute to use for physical addresses:"
+#~ msgstr "Hol jelenjen meg az üzlet címe."
+
+#~ msgid "Default Phone Number"
+#~ msgstr "Általános telefonszám"
+
+#, fuzzy
+#~ msgid ""
+#~ "Phone number to use when a %1s-specific phone number is not specified."
+#~ msgstr "Telefonszám használata, ha nincs megadva saját telefonszám."
+
+#~ msgid "Image Sizes"
+#~ msgstr "Kép méretek"
+
+#~ msgid "Width"
+#~ msgstr "Szélesség"
+
+#~ msgid "Height"
+#~ msgstr "Magasság"
+
+#~ msgid "Overview Shortcode"
+#~ msgstr "Áttekintő oldal kódja"
+
+#, fuzzy
+#~ msgid ""
+#~ "These are the settings for the [property_overview] shortcode.  The "
+#~ "shortcode displays a list of all building / root %1s.<br />The display "
+#~ "settings may be edited further by customizing the <b>wp-content/plugins/"
+#~ "wp-properties/templates/property-overview.php</b> file.  To avoid losing "
+#~ "your changes during updates, create a <b>property-overview.php</b> file "
+#~ "in your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Ezek a beállítások a [property_overview] kódhoz. A kód kijelzi az "
+#~ "épületek listáját / alap információit.<br />\n"
+#~ "\t\t\t\tA kijelzendő információkat lehet módosítani akövetkező kódban: "
+#~ "<b>wp-content/plugins/wp-properties/templates/property.php</b>. Hogy "
+#~ "elkerüljük az esetleges veszteségeket a frissítés során, készítsünk egy "
+#~ "<b>property.php</b> fáljt a sablon mappába, amely autómatikusan "
+#~ "betöltődik."
+
+#~ msgid "Thumbnail size:"
+#~ msgstr "Előkép mérete:"
+
+#, fuzzy
+#~ msgid "Show children %1s."
+#~ msgstr "Gyermek üzletek mutatása."
+
+#, fuzzy
+#~ msgid "Show larger image of %1s when image is clicked using fancybox."
+#~ msgstr ""
+#~ "Nagyobb kép mutatása az üzleteknél, amikor a a képre kattintanak, "
+#~ "fancyboxxal. "
+
+#, fuzzy
+#~ msgid "Show pagination on bottom of results."
+#~ msgstr "Lapszámolás bekapcsolása a keresési eredménynél"
+
+#, fuzzy
+#~ msgid "%1s Page"
+#~ msgstr "Üzlet módosítása"
+
+#, fuzzy
+#~ msgid ""
+#~ "The display settings may be edited further by customizing the <b>wp-"
+#~ "content/plugins/wp-properties/templates/property.php</b> file.  To avoid "
+#~ "losing your changes during updates, create a <b>property.php</b> file in "
+#~ "your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Ezek a beállítások a [property_overview] kódhoz. A kód kijelzi az "
+#~ "épületek listáját / alap információit.<br />\n"
+#~ "\t\t\t\tA kijelzendő információkat lehet módosítani akövetkező kódban: "
+#~ "<b>wp-content/plugins/wp-properties/templates/property.php</b>. Hogy "
+#~ "elkerüljük az esetleges veszteségeket a frissítés során, készítsünk egy "
+#~ "<b>property.php</b> fáljt a sablon mappába, amely autómatikusan "
+#~ "betöltődik."
+
+#~ msgid "Google Maps"
+#~ msgstr "Google térkép"
+
+#~ msgid "Map Thumbnail Size:"
+#~ msgstr "Térkép előkép mérete:"
+
+#~ msgid "Map Zoom Level:"
+#~ msgstr "Térkép nagyítás szintje"
+
+#, fuzzy
+#~ msgid "Default is \"%s\""
+#~ msgstr "Alapértelmezett sablon"
+
+#, fuzzy
+#~ msgid "Show %1s Title"
+#~ msgstr "Cím"
+
+#, fuzzy
+#~ msgid "Show Directions Link"
+#~ msgstr "Útvonal"
+
+#~ msgid "Address Display"
+#~ msgstr "Cím mutatása"
+
+#~ msgid "Available tags:"
+#~ msgstr "Rendelkezésre álló címkék"
+
+#, fuzzy
+#~ msgid "Currency & Numbers"
+#~ msgstr "Jelenlegi szimbólum"
+
+#~ msgid "Currency symbol."
+#~ msgstr "Jelenlegi szimbólum"
+
+#, fuzzy
+#~ msgid "Currency symbol placement:"
+#~ msgstr "Jelenlegi szimbólum"
+
+#, fuzzy
+#~ msgid "Before number"
+#~ msgstr "telefonszám"
+
+#, fuzzy
+#~ msgid "Admin Settings"
+#~ msgstr "Beállítások"
+
+#~ msgid "Disable plugin."
+#~ msgstr "Bővítmény kikapcsolása"
+
+#~ msgid "Feature installed, using version"
+#~ msgstr "Kiegészítő telepítve, használt verzió "
+
+#, fuzzy
+#~ msgid ""
+#~ "Please visit <a href=\"%s\">UsabilityDynamics.com</a> to purchase this "
+#~ "feature."
+#~ msgstr ""
+#~ "Kérem látogassa meg a következő oldalt a kiegészítő megvásárlásához: <a "
+#~ "href=\"%s\">TwinCitiesTech.com</a> "
+
+#, fuzzy
+#~ msgid "Revalidate"
+#~ msgstr "Hiteleítve"
+
+#~ msgid "Lookup"
+#~ msgstr "Kikeresés"
+
+#, fuzzy
+#~ msgid "Get %1s image data."
+#~ msgstr "Üzlet elmentve."
+
+#~ msgid ""
+#~ "Look up the <b>$wp_properties</b> global settings array.  This array "
+#~ "stores all the default settings, which are overwritten by database "
+#~ "settings, and custom filters."
+#~ msgstr ""
+#~ "Nézd meg a <b>$wp_properties</b> tömböt. Ez a tömb tartalmazza az összes "
+#~ "beállítást. "
+
+#~ msgid "Show $wp_properties"
+#~ msgstr "$wp_properties mutatása"
+
+#, fuzzy
+#~ msgid "Clear Cache"
+#~ msgstr "Tiszta log"
+
+#~ msgid "(no parent)"
+#~ msgstr "(nincs szülő)"
+
+#~ msgid "Parent"
+#~ msgstr "Szülő"
+
+#~ msgid "Template"
+#~ msgstr "sablon"
+
+#~ msgid "Page Template"
+#~ msgstr "oldal sablon"
+
+#~ msgid "Default Template"
+#~ msgstr "Alapértelmezett sablon"
+
+#, fuzzy
+#~ msgid "ID of parent property"
+#~ msgstr "Ez egy bérelhető üzlet."
+
+#, fuzzy
+#~ msgid "%1s Type"
+#~ msgstr "Típus"
+
+#~ msgid "Return to building page."
+#~ msgstr "Vissza az épület oldalra"
+
+#, fuzzy
+#~ msgid "Expiry Date"
+#~ msgstr "Üzlet oldal"
+
+#~ msgid ""
+#~ "Sorry, we could not find what you were looking for.  Since you are here, "
+#~ "take a look at some of our properties."
+#~ msgstr ""
+#~ "Elnézést, de nem találtuk meg amit keres. De ha már itt van, nézze meg "
+#~ "néhány üzletünket."
+
+#~ msgid ""
+#~ "Sorry, no properties found - try expanding your search, or <a href=\"%s"
+#~ "\">view all</a>."
+#~ msgstr ""
+#~ "Elnézést, nem található üzlet - próbálja meg kiterjeszteni a keresést, "
+#~ "vagy <a href=\"%s\">nézze meg az összeset</a>."
+
+#~ msgid "Prev"
+#~ msgstr "Előző"
+
+#, fuzzy
+#~ msgid "Other"
+#~ msgstr "Sorrend"
+
+#, fuzzy
+#~ msgid "Cancel reply"
+#~ msgstr "Mégse"
+
+#~ msgid "Version"
+#~ msgstr "Verzió"
+
+#~ msgid "Property Page"
+#~ msgstr "Üzlet oldal"
+
+#, fuzzy
+#~ msgid "Show Property Title"
+#~ msgstr "Üzlet típus"
+
+#, fuzzy
+#~ msgid "Property ID:"
+#~ msgstr "Üzlet"
+
+#~ msgid "Interested?"
+#~ msgstr "Érdekli?"
+
+#, fuzzy
+#~ msgid "Read Property"
+#~ msgstr "Új üzlet"
+
+#, fuzzy
+#~ msgid "Delete Property"
+#~ msgstr "Új üzlet"
+
+#, fuzzy
+#~ msgid "Read Private Properties"
+#~ msgstr "Kiemelt üzletek"
+
+#~ msgid "Feature Name"
+#~ msgstr "Funkció név"
+
+#, fuzzy
+#~ msgid "General"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Slug:"
+#~ msgstr "Slug"
+
+#, fuzzy
+#~ msgid "Property Status:"
+#~ msgstr "Üzletek alapadatai"
+
+#, fuzzy
+#~ msgid "Property Type:"
+#~ msgstr "Üzlet típus"
+
+#~ msgid "Cache table does not exist. Attempting to create:"
+#~ msgstr "Cashe tábla nem létezik. Beleegyezés a készítésbe:"
+
+#~ msgid "Table created and exists."
+#~ msgstr "Tábla készen van, és működik."
+
+#~ msgid "Table not created."
+#~ msgstr "Tábla nincs kész."
+
+#~ msgid "Tomorrow "
+#~ msgstr "Holnap"
+
+#~ msgid "Yesterday "
+#~ msgstr "tegnap"
+
+#~ msgid " in %d days "
+#~ msgstr "%d napon belül"
+
+#~ msgid "%d days ago"
+#~ msgstr "%d nappal ezelőtt"
+
+#~ msgid "Automatically logged failed JSON response: "
+#~ msgstr "Autómatikus naplózási hiba JSON válasz:"
+
+#~ msgid "%s hours ago"
+#~ msgstr "%s órával korábban"
+
+#~ msgid "%s minutes ago"
+#~ msgstr "%s perccel ezelőtt"
+
+#~ msgid "Address Attribute"
+#~ msgstr "Üzlet címe"
+
+#~ msgid "and localize for:"
+#~ msgstr "és hova legyen lokalizálva"
+
+#~ msgid "Order By:"
+#~ msgstr "Sorrend:"
+
+#~ msgid "Bed(s):"
+#~ msgstr "Háló(k):"
+
+#~ msgid "Bath(s):"
+#~ msgstr "Fürdő(k):"
+
+#~ msgid "Square Ft:"
+#~ msgstr "Négyzetméter:"
+
+#~ msgid ""
+#~ "Be advised, since you don't have permalinks enabled, you must visit the "
+#~ "<a href=\"%s\">Settings Page</a> and set a custom property overview page."
+#~ msgstr ""
+#~ "Mivel nincsnenek beállítva a közvetlen linkek, ezért el kell mennie a  <a "
+#~ "href=\"%s\">Beállítások</a> oldalra és be kell állítania egy egyedi üzlet "
+#~ "mutatási oldalt."
+
+#~ msgid ""
+#~ "By default, your property overview will be displayed on the <a href=\"%s"
+#~ "\">%s</a> page. You may change the overview page on the <a href=\"%s"
+#~ "\">Settings Page</a>"
+#~ msgstr ""
+#~ "Általános beállításként az ön üzlet összegző oldala ezen az oldalon "
+#~ "jelenik meg: <a href=\"%s\">%s</a>. Ön ezt tudja módosítani a <a href=\"%s"
+#~ "\">Beállítások oldalon</a>"
+
+#~ msgid "Thank you for installing WP-Property!"
+#~ msgstr "Köszönjük, hogy feltelepítette a WP-Property-t!"
+
+#~ msgid ""
+#~ "<p>You may also visit <a href=\"http://twincitiestech.com/plugins/wp-"
+#~ "property/\">TwinCitiesTech.com</a> for more information, and <a href="
+#~ "\"http://twincitiestech.com/plugins/wp-property/screencasts/"
+#~ "\">screencasts</a>.</div>"
+#~ msgstr ""
+#~ "<p>Ön meglátogathatja a <a href=\"http://twincitiestech.com/plugins/wp-"
+#~ "property/\">TwinCitiesTech.com</a>-ot több információért, és<a href="
+#~ "\"http://twincitiestech.com/plugins/wp-property/screencasts/"
+#~ "\">képernyővideóért</a>.</div>"
+
+#~ msgid "Validated:"
+#~ msgstr "Hiteleítve"
+
+#~ msgid "view on map"
+#~ msgstr "Megnézni a térképen"
+
+#, fuzzy
+#~ msgid "Show other properties (if any) with the same Parent"
+#~ msgstr "Mutassa a gyermek üzleteket a jelenleg kijelzetteknél"
+
+#~ msgid "Do you want to use pagination?"
+#~ msgstr "Szeretné használni a lapszámozást?"
+
+#~ msgid "Popup Image Size:"
+#~ msgstr "Popup képméret:"
+
+#, fuzzy
+#~ msgid "Thumbnail Width"
+#~ msgstr "Előkép szélessége"
+
+#~ msgid "Disable slideshow on property page."
+#~ msgstr "Csúszka kikapcsolása az üzlet oldalon."
+
+#~ msgid "Some Slideshow Options"
+#~ msgstr "Néhány csúszka beállítás"
+
+#~ msgid "WPP Slideshow"
+#~ msgstr "WPP csúszka"
+
+#~ msgid "WPP Slideshow with options"
+#~ msgstr "WPP csúszka beállításokkal"
+
+#~ msgid "Property Types"
+#~ msgstr "Üzlet típusok"
+
+#~ msgid "Show common values."
+#~ msgstr "Mutasd az összeset"
+
+#~ msgid "Cancel."
+#~ msgstr "Mégse."
+
+#~ msgid "Plugins"
+#~ msgstr "Bővítmények"
+
+#~ msgid "Troubleshooting"
+#~ msgstr "Problémamegoldás"
+
+#, fuzzy
+#~ msgid "View list of available shortcodes."
+#~ msgstr "Elérhető kódok:"
+
+#~ msgid "These are the general display settings"
+#~ msgstr "Ezek az általános kijelzési beállítások"
+
+#~ msgid ""
+#~ "Display larger image, or slideshow, at the top of the property listing."
+#~ msgstr "Nagyobb kép vagy csúszka kijelzése az üzletek listájánál."
+
+#~ msgid ""
+#~ "Premium features will become available shortly, we are still waiting on "
+#~ "more feedback on the core of the plugin."
+#~ msgstr ""
+#~ "Prémium tartalmak hamarosan elérhetőek lesznek, még várunk több "
+#~ "visszajelzésre a bővítményeknél."
+
+#~ msgid "[learn more]"
+#~ msgstr "[bővebben]"
+
+#~ msgid "Show Image?"
+#~ msgstr "Kép mutatása?"
+
+#~ msgid "select image dimensions"
+#~ msgstr "Kép dimenziójának kiválasztása"
+
+#~ msgid ""
+#~ "This width used on \"Media &rarr; Slideshow\" page to display available "
+#~ "images"
+#~ msgstr ""
+#~ "Ennek a szélességnek a használata a \"Média &rarr; Csúszka\" oldalon a "
+#~ "képek kijelzésére"
+
+#~ msgid "Property Slideshow <br>(displayed on individual property pages)"
+#~ msgstr "Üzlet  csúszka <br> (egyéni Üzlet oldalakon való kijelzésre)"
+
+#~ msgid "For rent"
+#~ msgstr "Bérlésre"
+
+#~ msgid "For sale"
+#~ msgstr "Eladásra"
+
+#~ msgid "bed"
+#~ msgstr "ágy"
+
+#~ msgid ""
+#~ "If unchecked, you will have to copy and paste one of the shortcodes into "
+#~ "the content to display property information on the page."
+#~ msgstr ""
+#~ "Ha kikkantintja a pipát, akkor be kell valahova másolni az alább levő "
+#~ "kódot, hogy megjelenítse az üzlet információkat az oldalon. "
+
+#~ msgid "[property_overview] - Property Overview"
+#~ msgstr "[property_overview] - Üzletoldal kódja"
+
+#~ msgid "Speaker"
+#~ msgstr "Anunciante"
+
+#~ msgid "Horizontal Slider"
+#~ msgstr "Slider horizontal"

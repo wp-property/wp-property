@@ -221,6 +221,11 @@ namespace UsabilityDynamics\WPP {
         }
 
         /**
+         * Load WP Add-ons library.
+         */
+        new \UsabilityDynamics\WPA\Addons(ud_get_wp_property()->get_instance());
+
+        /**
          * Load WP List Table library.
          */
         new \UsabilityDynamics\WPLT\Bootstrap();
@@ -521,7 +526,7 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Gets declared Feature Flags from composer.json
-       * 
+       *
        * @return array
        */
       public function get_feature_flags()

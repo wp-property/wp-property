@@ -1,0 +1,9 @@
+#wpp_property_import_setup #wpp_property_import_attribute_mapper tbody tr td {
+  vertical-align: top;
+}
+#wpp_property_import_setup #wpp_property_import_attribute_mapper tbody tr td.matches-section .toggle_advanced_settings {
+  line-height: 30px;
+}
+#wpp_property_import_setup #wpp_property_import_attribute_mapper tbody tr td.matches-section .advanced-options {
+  display: none;
+}

@@ -1,0 +1,7 @@
+select[name="wpp_settings[admin_attr_fields][_ws_walkscore]"] {
+  display: none;
+}
+
+tr[slug="_ws_walkscore"] .wpp_delete_row {
+  display: none;
+}

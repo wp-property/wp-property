@@ -1,0 +1,5405 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Property v1.38.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-29 13:52+0200\n"
+"PO-Revision-Date: 2014-09-29 13:52+0200\n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: Usability Dynamics <info@usabilitydynamics.com>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:70
+msgid "Manage Supermap"
+msgstr "Gerenciar Supermapa"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:84
+msgid "Supermap"
+msgstr "Supermapa"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:115
+#, fuzzy
+msgid "Example Area"
+msgstr "Áreas do Mapa:"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:157
+msgid "Sidebar Attributes"
+msgstr "Atributos da Barra Lateral"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:159
+msgid ""
+"Select the attributes you want to display in the left sidebar on the "
+"supermap."
+msgstr ""
+"Selecione os atributos que você deseja exibir na barra à esquerda no "
+"supermapa."
+
+# @ wpp
+#: lib/class-wpp-supermap.php:173
+msgid ""
+"Display \"View Property\" link in the left sidebar. It directs user to "
+"Property Page."
+msgstr ""
+"Exibir link \"Ver imóvel\" na barra esquerda. Isto direciona o usuário para "
+"a Página de Imóvel."
+
+# @ wpp
+#: lib/class-wpp-supermap.php:179
+msgid "Supermap Sidebar Thumbnail:"
+msgstr "Miniatura da Barra Lateral do Supermapa"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:184
+msgid "Do not show a property thumbnail in sidebar."
+msgstr "Não exiba uma miniatura do imóvel na barra lateral."
+
+# @ wpp
+#: lib/class-wpp-supermap.php:187
+msgid ""
+"If you create a new image size, please be sure to regenerate all thumbnails. "
+msgstr ""
+"Caso crie um novo tamanho de imagem, não se esqueça de regenerar todas as "
+"miniaturas. "
+
+# @ wpp
+#: lib/class-wpp-supermap.php:192
+msgid "Map Markers:"
+msgstr "Marcadores do Mapa:"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:198
+msgid "Image"
+msgstr "Imagem"
+
+# @ wpp
+# @ default
+#: lib/class-wpp-supermap.php:199 lib/class-wpp-supermap.php:341
+msgid "Name"
+msgstr "Nome"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:200
+msgid "Slug"
+msgstr "Slug"
+
+# @ wpp
+# @ default
+#: lib/class-wpp-supermap.php:227 lib/class-wpp-supermap.php:374
+msgid "Delete"
+msgstr "Deletar"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:235
+msgid "Add Marker"
+msgstr "Adicionar Marcador"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:335
+msgid "Map Areas:"
+msgstr "Áreas do Mapa:"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:337
+msgid ""
+"<p>Map areas let you draw our areas on the map, such as neighborhoods.</"
+"p><p>Just add to shortcode attribute <b>show_areas=all</b> to draw all areas "
+"on the map. Also You can use area's slugs to show them on the map, like as "
+"<b>show_areas=new_york,washington</b>. Please, use coordinates in this "
+"format: <b>(82.72, -37.79)(69.54, -57.48)(68.93, -18.63).</b></p><p><i>This "
+"is an experimental feature, you may not want to use it on a live site.  "
+"We're eager to hear your feedback regarding this feature and the "
+"capabilities that would be useful to you.</i></p>"
+msgstr ""
+"<p>Áreas do Mapa permitem que você desenha áreas em seu mapa, como bairros, "
+"por exemplo.</p><p>Basta adicionar o atributo de shortcode "
+"<b>show_areas=all</b> para desenhar todas as áreas em seu mapa. É possível "
+"usar slugs de áreas para exibi-las em seu mapa, tais como "
+"<b>show_areas=copacabana,leblon</b>. Utilize as coordenadas neste formato: "
+"<b>(82.72, -37.79)(69.54, -57.48)(68.93, -18.63).</b></p><p><i>Esta recurso "
+"ainda é experimental, você poderá ou não utilizá-lo em seu site.  Queremos "
+"saber o que acha deste recurso e também de outras características que podem "
+"ser úteis a você.</i></p>"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:342
+msgid "Coordinates"
+msgstr "Coordenadas"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:343
+msgid "Fill Color"
+msgstr "Cor de Preenchimento"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:344
+msgid "Opacity"
+msgstr "Opacidade"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:345
+msgid "Stoke Color"
+msgstr "Cor quando riscado"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:346
+msgid "Hover Color"
+msgstr "Cor quando pairando"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:382
+msgid "Add Row"
+msgstr "Adicionar Linha"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:424 lib/class-wpp-supermap.php:675
+msgid "Map Marker"
+msgstr "Marcador do Mapa"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:426 lib/class-wpp-supermap.php:677
+msgid "Default by Google"
+msgstr "Padrão por Google"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:493
+msgid "File should be an image"
+msgstr "Arquivo precisa ser uma imagem"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:546
+msgid "Looks like, Image can not be uploaded."
+msgstr "Parece que não foi possível fazer o upload da imagem."
+
+# @ wpp
+#: lib/class-wpp-supermap.php:624
+msgid "Supermap Options"
+msgstr "Opções do Supermapa"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:637
+msgid "Exclude property from Supermap"
+msgstr "Excluir Imóvel do Supermapa"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:828 lib/class-wpp-supermap.php:1170
+msgid "Options"
+msgstr "Opções"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:840
+#, php-format
+msgid "Element cannot be rendered, missing %1s script."
+msgstr "Elemente não pôde ser executado, faltando %1s script."
+
+# @ wpp
+#: lib/class-wpp-supermap.php:928
+#, fuzzy, php-format
+msgid "Sorry, no %s found, try expanding your search."
+msgstr ""
+"Nenhum imóvel encontrado - tente expandir sua busca, ou <a href=\"%s\">ver "
+"todos</a>."
+
+# @ wp
+# @ wpp
+#: lib/class-wpp-supermap.php:1052 lib/class-wpp-supermap.php:1641
+msgid "Yes"
+msgstr "Sim"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:1068 lib/class-wpp-supermap.php:1656
+msgid "View Property"
+msgstr "Ver Imóvel"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:1131
+msgid "No results found."
+msgstr "Não foram encontrados resultados."
+
+# @ wpp
+#: lib/class-wpp-supermap.php:1677
+msgid "Show More"
+msgstr "Exibir Mais"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:1678
+#, fuzzy
+msgid "Loading..."
+msgstr "Carregando"
+
+# @ wpp
+#: lib/class-wpp-supermap.php:1790
+msgid "Loading"
+msgstr "Carregando"
+
+#: wp-property-supermap.php:43
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-supermap.php:51
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-supermap.php:59
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-supermap.php:63
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+# @ wpp
+#: wp-property-supermap.php:84
+#, fuzzy, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr "<b>%s</b> %s foi instalado."
+
+# @ wpp
+#~ msgid "Building"
+#~ msgstr "Edifício"
+
+# @ wpp
+#~ msgid "Floorplan"
+#~ msgstr "Planta"
+
+# @ wpp
+#~ msgid "Single Family Home"
+#~ msgstr "Residência"
+
+# @ wpp
+#~ msgid "Address"
+#~ msgstr "Endereço"
+
+# @ wpp
+#~ msgid "Price"
+#~ msgstr "Preço"
+
+# @ wpp
+#~ msgid "Bedrooms"
+#~ msgstr "Quartos"
+
+# @ wpp
+#~ msgid "Bathrooms"
+#~ msgstr "Banheiros"
+
+# @ wpp
+#~ msgid "Deposit"
+#~ msgstr "Despensa"
+
+# @ wpp
+#~ msgid "Area"
+#~ msgstr "Área"
+
+# @ wpp
+#~ msgid "Phone Number"
+#~ msgstr "Telefone"
+
+# @ wpp
+#~ msgid "Lease Terms"
+#~ msgstr "Termos de Contrato"
+
+# @ wpp
+#~ msgid "Pet Policy"
+#~ msgstr "Animas de Estimação"
+
+# @ wpp
+#~ msgid "School"
+#~ msgstr "Escola"
+
+# @ wpp
+#~ msgid "Tagline"
+#~ msgstr "Slogan"
+
+# @ wpp
+#~ msgid "Studio"
+#~ msgstr "Estúdio"
+
+# @ wpp
+#~ msgid "The property type will determine the layout."
+#~ msgstr "O tipo de imóvel irá determinar o layout."
+
+# @ wpp
+#~ msgid ""
+#~ "Customize what appears in search results in the attribute section.  For "
+#~ "example: 1bed, 2baths, area varies slightly."
+#~ msgstr ""
+#~ "Personalize o que aparece nos resultados da busca na seção de atributos. "
+#~ "Por exemplo: 1cama, 2banheiros, área varia poucamente."
+
+# @ wpp
+#~ msgid "Will appear on overview pages and on top of every listing page."
+#~ msgstr ""
+#~ "Aparecerá nas páginas de sumário e no topo de cada página catalogada."
+
+# @ wpp
+#~ msgid "View "
+#~ msgstr "Ver "
+
+# @ wpp
+# @ default
+#~ msgid "Property Type"
+#~ msgstr "Tipo de Imóvel"
+
+# @ wpp
+#~ msgid "City"
+#~ msgstr "Cidade"
+
+# @ wpp
+#~ msgid "For Sale"
+#~ msgstr "Venda"
+
+# @ wpp
+#~ msgid "For Rent"
+#~ msgstr "Locação"
+
+# @ wpp
+#~ msgid "This is a rental property."
+#~ msgstr "Este é um imóvel de locação."
+
+# @ wpp
+#~ msgid "This property is for sale."
+#~ msgstr "Este é uma imóvel de venda."
+
+# @ wpp
+#~ msgid "Set Coordinates Manually."
+#~ msgstr "Estabelecer Coordenadas Manualmente."
+
+# @ wpp
+#~ msgid "Latitude"
+#~ msgstr "Latitude"
+
+# @ wpp
+#~ msgid "Longitude"
+#~ msgstr "Longitude"
+
+# @ wpp
+#~ msgid "Format phone number."
+#~ msgstr "Formatar número de telefone."
+
+# @ wpp
+#~ msgid ""
+#~ "Convert \"Yes\" and \"True\" values to checked icons on the front-end."
+#~ msgstr ""
+#~ "Converta os valores \"Sim\" e \"Verdadeiro\" nos ícones checados no front-"
+#~ "endl."
+
+# @ wpp
+#~ msgid " sq. ft."
+#~ msgstr "m²"
+
+# @ wpp
+#~ msgid "Address was validated by Google Maps."
+#~ msgstr "Endereço foi validado pelo Google Maps."
+
+# @ wpp
+#~ msgid ""
+#~ "Address has not yet been validated, should be formatted as: street, city, "
+#~ "state, postal code, country. Locations are validated through Google Maps."
+#~ msgstr ""
+#~ "Endereço ainda não foi validado, deverá ser formatado como: rua, cidade, "
+#~ "estado, código postal, país. Localidades são validadas atravé do Google "
+#~ "Maps."
+
+# @ wpp
+#~ msgid "Show"
+#~ msgstr "Exibição"
+
+# @ wpp
+#~ msgid "Hide"
+#~ msgstr "Esconder"
+
+# @ wpp
+#~ msgid "Featured"
+#~ msgstr "Destacado"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Add to Featured"
+#~ msgstr "Destacar"
+
+# @ wpp
+#~ msgid ""
+#~ "You are about to set ALL your properties to the selected property type. "
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "Você está prestes a colocar TODOS os seus imóveis no tipo de imóvel "
+#~ "selecionado. Você tem certeza?"
+
+# @ wpp
+#~ msgid "Processing..."
+#~ msgstr "Processando..."
+
+# @ wpp
+#~ msgid "Uploading"
+#~ msgstr "Fazendo Upload"
+
+# @ wpp
+#~ msgid "Drop files here to upload"
+#~ msgstr "Solte arquivos aqui para fazer upload"
+
+# @ wpp
+#~ msgid "Upload Image"
+#~ msgstr "Fazer Upload de Imagem"
+
+# @ wpp
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
+
+# @ wpp
+#~ msgid "Failed"
+#~ msgstr "Falhou"
+
+# @ wpp
+#~ msgid "First"
+#~ msgstr "Primeira"
+
+# @ wpp
+#~ msgid "Previous"
+#~ msgstr "Anterior"
+
+# @ wpp
+#~ msgid "Next"
+#~ msgstr "Próximo"
+
+# @ wpp
+#~ msgid "Last"
+#~ msgstr "Última"
+
+# @ wpp
+#~ msgid "Show %s entries"
+#~ msgstr "Exibir %s imóveis"
+
+# @ wpp
+#~ msgid "No matching records found"
+#~ msgstr "Não foram encontrados registros correspondentes"
+
+# @ wpp
+#~ msgid "No data available in table"
+#~ msgstr "Sem dados disponíveis na tabela"
+
+# @ wpp
+#~ msgid "Showing %s to %s of %s entries"
+#~ msgstr "Exibindo %s para %s de %s entradas"
+
+# @ wpp
+#~ msgid "Showing % to % of % entries"
+#~ msgstr "Exibindo % para % de % entradas"
+
+# @ wpp
+#~ msgid "(filtered from %s total entries)"
+#~ msgstr "(filtrada de %s entradas totais)"
+
+# @ wpp
+#~ msgid "Search:"
+#~ msgstr "Pesquisar:"
+
+# @ wpp
+#~ msgid "Display:"
+#~ msgstr "Exibir:"
+
+# @ wpp
+#~ msgid "records"
+#~ msgstr "imóveis"
+
+# @ wpp
+#~ msgid "All"
+#~ msgstr "Todos"
+
+# @ wpp
+#~ msgid "Request error:"
+#~ msgstr "Erro de requisição:"
+
+# @ wpp
+#~ msgid "The source evaluation resulted in an Internal Server Error!"
+#~ msgstr "A validação da fonte resultou em um Erro Interno do Servidor!"
+
+# @ wpp
+#~ msgid "Automatically Match"
+#~ msgstr "Combinar Automaticamente"
+
+# @ wpp
+#~ msgid "Unique ID attribute."
+#~ msgstr "Atributo único de ID."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Select a unique ID attribute."
+#~ msgstr "Deletar Atributo"
+
+# @ wpp
+#~ msgid "Settings"
+#~ msgstr "Configurações"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Enabled Options"
+#~ msgstr "Opções Avançadas"
+
+# @ wpp
+#~ msgid "Are you sure?"
+#~ msgstr "Tem certeza?"
+
+# @ wpp
+#~ msgid "An error occured."
+#~ msgstr "Ocorreu um erro."
+
+# @ wpp
+#~ msgid "Save Configuration"
+#~ msgstr "Salvar Configuração"
+
+# @ wpp
+#~ msgid "Schedule has been saved."
+#~ msgstr "Agendamento salvo."
+
+# @ wpp
+#~ msgid "Saving the XML Importer schedule, please wait..."
+#~ msgstr "Salvando o agendamento de Importação XML, aguarde..."
+
+# @ wpp
+#~ msgid "Updating the XML Importer schedule, please wait..."
+#~ msgstr "Atualizando o agendamento de Importação XML, por favor, aguarde..."
+
+# @ wpp
+#~ msgid "Schedule has been updated."
+#~ msgstr "Agendamento foi atualizado."
+
+# @ wpp
+#~ msgid ""
+#~ "500 Internal Server Error! Your hosting account is most likely running "
+#~ "out of memory."
+#~ msgstr ""
+#~ "500 - Erro interno do servidor! Sua conta de hospedagem provavelmente não "
+#~ "está com memória suficiente."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Please save schedule first."
+#~ msgstr "Por favor, salve antes de adicionar imagens."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Toggle Advanced"
+#~ msgstr "Alternar Configurações Avançadas"
+
+# @ wpp
+#~ msgid "Cannot Load Source: Reload."
+#~ msgstr "Não foi possível carregar a Fonte: Recarregar."
+
+# @ wpp
+#~ msgid "Internal Server Error!."
+#~ msgstr "Erro Interno do Servidor!."
+
+# @ wpp
+#~ msgid "Source Is Good. Reload."
+#~ msgstr "Fonte é Boa. Recarregar."
+
+# @ wpp
+#~ msgid "Manage Admin Tools"
+#~ msgstr "Gerenciar Ferramentas de Administração"
+
+# @ wpp
+#~ msgid "Developer"
+#~ msgstr "Desenvolvedor"
+
+# @ default
+#~ msgid ""
+#~ "The <b>slug</b> is automatically created from the title and is used in "
+#~ "the back-end.  It is also used for template selection, example: floorplan "
+#~ "will look for a template called property-floorplan.php in your theme "
+#~ "folder, or default to property.php if nothing is found."
+#~ msgstr ""
+#~ "O <b>slug</b> é automaticamente criado através do título e é usado no "
+#~ "back-end. É também usado para seleção de templates, exemplo: planta irá "
+#~ "procurar um template chamado property-floorplan.php em sua pasta de "
+#~ "temas, ou padrão para property.php se nada for encontrado."
+
+# @ default
+#~ msgid ""
+#~ "If <b>Searchable</b> is checked then the property will be loaded for "
+#~ "search, and available on the property search widget."
+#~ msgstr ""
+#~ "Se <b>Pesquisável</b> é checada então o imóvel será carragada para "
+#~ "pesquisa, e disponível no aplicativo de busca de imóveis."
+
+# @ default
+#~ msgid ""
+#~ "If <b>Location Matters</b> is checked, then an address field will be "
+#~ "displayed for the property, and validated against Google Maps API.  "
+#~ "Additionally, the property will be displayed on the SuperMap, if the "
+#~ "feature is installed."
+#~ msgstr ""
+#~ "Se <b>Localização Relevante</b> é checada, então o campo de endereço será "
+#~ "exibido para o imóvel, e validado no Google Maps API. Adicionalmente, o "
+#~ "imóvel será exibido no SuperMap, se este recurso estiver instalado."
+
+# @ default
+#~ msgid ""
+#~ "<b>Hidden Attributes</b> determine which attributes are not applicable to "
+#~ "the given property type, and will be grayed out in the back-end."
+#~ msgstr ""
+#~ "<b>Atributos Escondidos</b> determinam que atributos não serão aplicáveis "
+#~ "para o tipo de imóvel dado, e serão escurecido no back-end."
+
+# @ default
+#~ msgid ""
+#~ "<b>Inheritance</b> determines which attributes should be automatically "
+#~ "inherited from the parent property"
+#~ msgstr ""
+#~ "<b>Herança</b> determina quais atributos deverão ser automaticamente "
+#~ "herdados do imóvel primário."
+
+# @ default
+#~ msgid ""
+#~ "Property attributes are meant to be short entries that can be searchable, "
+#~ "on the back-end attributes will be displayed as single-line input boxes. "
+#~ "On the front-end they are displayed using a definitions list."
+#~ msgstr ""
+#~ "Atributos de imóveis deverão ser entradas curtas que podem ser buscadas, "
+#~ "no back-end os atributos serão exibidos como caixas de entrada de linha "
+#~ "única. No front-end estes serão exibidos usando uma lista de definições."
+
+# @ default
+#~ msgid ""
+#~ "Making an attribute as \"searchable\" will list it as one of the "
+#~ "searchable options in the Property Search widget settings."
+#~ msgstr ""
+#~ "Tornando um atributo como \"pesquisável\" listará este como uma das "
+#~ "opções pesquisáveis na configuração do aplicativo da Busca de Imóveis."
+
+# @ default
+#~ msgid ""
+#~ "Be advised, attributes added via add_filter() function supercede the "
+#~ "settings on this page."
+#~ msgstr ""
+#~ "Tome nota, atributos adicionados pela função add_filter() substituem as "
+#~ "configurações nesta página."
+
+# @ wpp
+#~ msgid ""
+#~ "<b>Search Input:</b> Select and input type and enter comma-separated "
+#~ "values that you would like to be used in property search, on the front-"
+#~ "end."
+#~ msgstr ""
+#~ "<b>Entrada de pesquisa:</b> Seleção, tipo de entrada e valores separados "
+#~ "por vírgula que você deseja utilizar em pesquisa de imóveis no site."
+
+# @ wpp
+#~ msgid ""
+#~ "<b>Data Entry:</b> Enter comma-separated values that you would like to "
+#~ "use on the back-end when editing properties."
+#~ msgstr ""
+#~ "<b>Entrada de Dados:</b> Digite valores separados por vírgula que você "
+#~ "deseja utilizar no site, quando estiver editando imóveis."
+
+# @ wpp
+#~ msgid ""
+#~ "Attention! This attribute (slug) is used by Google Validator and Address "
+#~ "Display functionality. It is set automaticaly and can not be edited on "
+#~ "Property Adding/Updating page."
+#~ msgstr ""
+#~ "Atenção! Este atributo (slug) é utilizado pelo Googel Validator e a "
+#~ "função de Exibir Endereços. Ele é configurado automaticamente e não pode "
+#~ "ser editado em Adicionar Imóvel/Atualizar página."
+
+# @ wpp
+#~ msgid "%1s Attributes"
+#~ msgstr "Atributos de %1s"
+
+# @ wpp
+#~ msgid "Advanced Stats Settings:"
+#~ msgstr "Configurações Avançadas:"
+
+# @ wpp
+#~ msgid "expand all"
+#~ msgstr "expandir todos"
+
+# @ wpp
+#~ msgid "collapse all"
+#~ msgstr "colapsar todos"
+
+# @ wpp
+#~ msgid "Sort Stats by Groups"
+#~ msgstr "Exibir Informações por Grupo"
+
+# @ wpp
+#~ msgid "Group Name"
+#~ msgstr "Nome do Grupo"
+
+# @ wpp
+#~ msgid "Main"
+#~ msgstr "Principal"
+
+# @ wpp
+#~ msgid "Group Color"
+#~ msgstr "Cor do grupo"
+
+# @ wpp
+#~ msgid "Assign"
+#~ msgstr "Atribuir"
+
+# @ wpp
+#~ msgid "Add Group"
+#~ msgstr "Adicionar Grupo"
+
+# @ wpp
+#~ msgid "Unassign from Group"
+#~ msgstr "Não alocada do Grupo"
+
+# @ wpp
+#~ msgid "Apply"
+#~ msgstr "Aplicar"
+
+# @ wpp
+#~ msgid "Attribute Name"
+#~ msgstr "Nome do atributo"
+
+# @ wpp
+#~ msgid "Group"
+#~ msgstr "Grupo"
+
+# @ wpp
+#~ msgid "Search Input"
+#~ msgstr "Entrada de Pesquisa"
+
+# @ wpp
+#~ msgid "Data Entry"
+#~ msgstr "Entrada de Dados"
+
+# @ wpp
+#~ msgid "Toggle Advanced Settings"
+#~ msgstr "Alternar Configurações Avançadas"
+
+# @ wpp
+#~ msgid "Sortable."
+#~ msgstr "Ordenável."
+
+# @ wpp
+#~ msgid "Searchable."
+#~ msgstr "Pesquisável."
+
+# @ wpp
+#~ msgid "Admin Only."
+#~ msgstr "Somente para a Administração."
+
+# @ wpp
+#~ msgid "Format: numeric."
+#~ msgstr "Formato: numérico."
+
+# @ wpp
+#~ msgid "Format: currency."
+#~ msgstr "Formato: moeda."
+
+# @ wpp
+#~ msgid "Show in \"All Properties\" table."
+#~ msgstr "Exibir na tela \"Todos os Imóveis\"."
+
+# @ wpp
+#~ msgid "Delete Attribute"
+#~ msgstr "Deletar Atributo"
+
+# @ wpp
+#~ msgid "Free Text"
+#~ msgstr "Texto Livre"
+
+# @ wpp
+#~ msgid "Text Input Range"
+#~ msgstr "Text Input Range"
+
+# @ wpp
+#~ msgid "Range Dropdown"
+#~ msgstr "Multi-seleção"
+
+# @ wpp
+#~ msgid "Dropdown Selection"
+#~ msgstr "Seleção"
+
+# @ wpp
+#~ msgid "Single Checkbox"
+#~ msgstr "Checkbox"
+
+# @ wpp
+#~ msgid "Multi-Checkbox"
+#~ msgstr "Multi-checkbox"
+
+# @ wpp
+#~ msgid "%1s Meta"
+#~ msgstr "Informações de %1s"
+
+# @ wpp
+#~ msgid ""
+#~ "Meta is used for descriptions,  on the back-end  meta fields will be "
+#~ "displayed as textareas.  On the front-end they will be displayed as "
+#~ "individual sections."
+#~ msgstr ""
+#~ "Meta é usado para descrições, no back-end campos meta serão exibidos como "
+#~ "áreas de textos. No front-end eles serão exibidos como seções individuais."
+
+# @ wpp
+#~ msgid "Attribute Slug"
+#~ msgstr "Slug de Atributo"
+
+# @ wpp
+#~ msgid "Show in Admin Only"
+#~ msgstr "Mostrar somente aos Administradores"
+
+# @ wpp
+#~ msgid "Delete Meta Attribute"
+#~ msgstr "Deletar Atributo Meta"
+
+# @ wpp
+#~ msgid "%1s Types"
+#~ msgstr "Tipos de %1s"
+
+# @ wpp
+#~ msgid "Type"
+#~ msgstr "Tipo"
+
+# @ wpp
+#~ msgid "Hidden Attributes"
+#~ msgstr "Atributos Escondidos"
+
+# @ wpp
+#~ msgid "Inherit from Parent"
+#~ msgstr "Herdar do Primário"
+
+# @ wpp
+#~ msgid "Searchable"
+#~ msgstr "Pesquisável"
+
+# @ wpp
+#~ msgid "Location Matters"
+#~ msgstr "Localização Relevante"
+
+# @ wpp
+#~ msgid "Toggle Attributes Selection"
+#~ msgstr "Alternar Seleção de Atributos"
+
+# @ wpp
+#~ msgid "Parent Selection"
+#~ msgstr "Seleção Primária"
+
+# @ wpp
+# @ default
+#~ msgid "Advanced Options"
+#~ msgstr "Opções Avançadas"
+
+# @ wpp
+#~ msgid "Show Log."
+#~ msgstr "Exibir Log."
+
+# @ wpp
+#~ msgid ""
+#~ "The log is always active, but the UI is hidden.  If enabled, it will be "
+#~ "visible in the admin sidebar."
+#~ msgstr ""
+#~ "Este log é sempre ativo, mas a UI é escondida. Se ativada, esta será "
+#~ "visível na barra do lado de administração."
+
+# @ wpp
+#~ msgid "Enable 'Falls Under' deep depth."
+#~ msgstr "Ativar 'Inclusão' profunda."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Allows to set child %1s as parent."
+#~ msgstr "Permita definir imóveis secundários como primários."
+
+# @ wpp
+#~ msgid "Disable automatic feature updates."
+#~ msgstr "Desativar atualização automática de recursos."
+
+# @ wpp
+#~ msgid "If disabled, feature updates will not be downloaded automatically."
+#~ msgstr ""
+#~ "Se desabilitado, atualização de recursos não serão mais baixadas "
+#~ "automaticamente."
+
+# @ wpp
+#~ msgid "Disable WordPress update_post_caches() function."
+#~ msgstr "Desativar a função update_post_caches() do WordPress."
+
+# @ wpp
+#, fuzzy
+#~ msgid "This may solve Out of Memory issues if you have a lot of %1s."
+#~ msgstr ""
+#~ "Isto pode resolver problemas por Falta de Memória caso você tenha muitos "
+#~ "imóveis."
+
+# @ wpp
+#~ msgid ""
+#~ "Enable developer mode - some extra information displayed via Firebug "
+#~ "console."
+#~ msgstr ""
+#~ "Ativar modo de desenvolvedor - algumas informações extras serão exibidas "
+#~ "através do console do Firebug."
+
+# @ wpp
+#~ msgid "Child Properties"
+#~ msgstr "Imóveis Secundários"
+
+# @ wpp
+#~ msgid "Menu Sort Order:"
+#~ msgstr "Ordem de Exibição do Menu:"
+
+# @ wpp
+#~ msgid "Display in featured listings."
+#~ msgstr "Exibir na lista de Destaques"
+
+# @ wpp
+#~ msgid "Property updated. <a href=\"%s\">view property</a>"
+#~ msgstr "Imóvel atualizado. <a href=\"%s\">Ver imóvel</a>"
+
+# @ wpp
+#~ msgid "Custom field updated."
+#~ msgstr "Campo personalizado atualizado."
+
+# @ wpp
+#~ msgid "Custom field deleted."
+#~ msgstr "Campo personalizado deletado."
+
+# @ wpp
+#~ msgid "Property updated."
+#~ msgstr "Imóvel atualizado."
+
+# @ wpp
+#~ msgid "Property restored to revision from %s"
+#~ msgstr "Imóvel restaurado para revisão a partir de %s"
+
+# @ wpp
+#~ msgid "Property published. <a href=\"%s\">View property</a>"
+#~ msgstr "Imóvel atualizado. <a href=\"%s\">Ver imóvel</a>"
+
+# @ wpp
+#~ msgid "Property saved."
+#~ msgstr "Imóvel salvo."
+
+# @ wpp
+#~ msgid ""
+#~ "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+#~ msgstr "Imóvel enviado. <a target=\"_blank\" href=\"%s\">Prever imóvel</a>"
+
+# @ wpp
+#~ msgid ""
+#~ "Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Preview property</a>"
+#~ msgstr ""
+#~ "Imóvel programado para: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Prever imóvel</a>"
+
+# @ wpp
+# @ default
+#~ msgid "M j, Y @ G:i"
+#~ msgstr "M j, Y @ G:i"
+
+# @ wpp
+#~ msgid ""
+#~ "Property draft updated. <a target=\"_blank\" href=\"%s\">Preview "
+#~ "property</a>"
+#~ msgstr ""
+#~ "Esboço do Imóvel atualizado. <a target=\"_blank\" href=\"%s\">Prever "
+#~ "Imóvel</a>"
+
+# @ wpp
+#~ msgid "Title"
+#~ msgstr "Título"
+
+# @ wpp
+#~ msgid "Overview"
+#~ msgstr "Visão Geral"
+
+# @ wpp
+#~ msgid "Order"
+#~ msgstr "Ordem"
+
+# @ wpp
+#~ msgid "Thumbnail"
+#~ msgstr "Miniatura"
+
+# @ wpp
+#~ msgid "General Information"
+#~ msgstr "Informações Gerais"
+
+# @ wpp
+#~ msgid "NO NAME"
+#~ msgstr "SEM NOME"
+
+# @ wpp
+#~ msgid "Search"
+#~ msgstr "Pesquisar"
+
+# @ wpp
+#~ msgid "Floor plans at location:"
+#~ msgstr "Plantas da localização:"
+
+# @ wpp
+#~ msgid "Sort By:"
+#~ msgstr "Ordenar:"
+
+# @ wpp
+#~ msgid "View Properties"
+#~ msgstr "Ver Imóveis"
+
+# @ wpp
+#~ msgid "Add/Edit Properties"
+#~ msgstr "Adicionar/Editar Imóveis"
+
+# @ wpp
+#~ msgid "Edit Other Properties"
+#~ msgstr "Editar Outros Imóveis"
+
+# @ wpp
+#~ msgid "Delete Properties"
+#~ msgstr "Deletar Imóveis"
+
+# @ wpp
+#~ msgid "Publish Properties"
+#~ msgstr "Publicar Imóveis"
+
+# @ wpp
+#~ msgid "Manage Settings"
+#~ msgstr "Gerenciar Configurações"
+
+# @ wpp
+#~ msgid "Manage Taxonomies"
+#~ msgstr "Gerenciar Taxonomias"
+
+# @ wpp
+#~ msgid "For more information:"
+#~ msgstr "Para mais informações:"
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"https://usabilitydynamics.com/products/wp-property/\" target="
+#~ "\"_blank\">WP-Property Product Page</a>"
+#~ msgstr ""
+#~ "<a href=\"http://usabilitydynamics.com/products/wp-property/\" target="
+#~ "\"_blank\">Página de produtos do WP-Property</a>"
+
+# @ wpp
+#~ msgid ""
+#~ "<a href=\"https://usabilitydynamics.com/products/wp-property/forum/\" "
+#~ "target=\"_blank\">WP-Property Forums</a>"
+#~ msgstr ""
+#~ "<a href=\"https://usabilitydynamics.com/products/wp-property/forum/\" "
+#~ "target=\"_blank\">Fórum do WP-Property</a>"
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"https://usabilitydynamics.com/help/\" target=\"_blank\">WP-"
+#~ "Property Tutorials</a>"
+#~ msgstr ""
+#~ "<a href=\"http://usabilitydynamics.com/help/\" target=\"_blank"
+#~ "\">Tutoriais do WP-Property</a>"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Please upgrade Wordpress to the latest version for detailed help."
+#~ msgstr ""
+#~ "Por favor, atualize para o WordPress 3.3, para uma ajuda mais detalha."
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "Or visit <a href=\"https://usabilitydynamics.com/tutorials/wp-property-"
+#~ "help/\" target=\"_blank\">WP-Property Help Page</a> on UsabilityDynamics."
+#~ "com"
+#~ msgstr ""
+#~ "<a href=\"http://usabilitydynamics.com/products/wp-property/\" target="
+#~ "\"_blank\">Página de produtos do WP-Property</a>"
+
+# @ wpp
+#~ msgid "An error occurred during API key request: <b>%s</b>."
+#~ msgstr "Um erro ocorreu na requisição da chave da API: <b>%s</b>."
+
+# @ default
+# @ wpp
+#~ msgid "Properties"
+#~ msgstr "Imóveis"
+
+# @ default
+# @ wpp
+#~ msgid "Property"
+#~ msgstr "Imóvel"
+
+# @ wpp
+#~ msgid "Property: %s"
+#~ msgstr "Imóveis: %s"
+
+# @ wpp
+#~ msgid "Sidebar located on the %s page."
+#~ msgstr "Barra lateral localizada na página %s."
+
+# @ wpp
+#~ msgctxt "taxonomy general name"
+#~ msgid "Features"
+#~ msgstr "Detalhes"
+
+# @ wpp
+#~ msgctxt "taxonomy singular name"
+#~ msgid "Feature"
+#~ msgstr "Detalhe"
+
+# @ wpp
+#~ msgid "Search Features"
+#~ msgstr "Pesquisar Detalhes"
+
+# @ wpp
+#~ msgid "All Features"
+#~ msgstr "Todas os Detalhes"
+
+# @ wpp
+#~ msgid "Parent Feature"
+#~ msgstr "Detalhe Primário"
+
+# @ wpp
+#~ msgid "Parent Feature:"
+#~ msgstr "Detalhe Primário:"
+
+# @ wpp
+#~ msgid "Edit Feature"
+#~ msgstr "Editar Detalhe"
+
+# @ wpp
+#~ msgid "Update Feature"
+#~ msgstr "Atualizar Detalhe"
+
+# @ wpp
+#~ msgid "Add New Feature"
+#~ msgstr "Adicionar Novo Detalhe"
+
+# @ wpp
+#~ msgid "New Feature Name"
+#~ msgstr "Nome da Novo Detalhe"
+
+# @ wpp
+#~ msgid "Feature"
+#~ msgstr "Detalhes"
+
+# @ wpp
+#~ msgctxt "taxonomy general name"
+#~ msgid "Community Features"
+#~ msgstr "Proximidades"
+
+# @ wpp
+#~ msgctxt "taxonomy singular name"
+#~ msgid "Community Feature"
+#~ msgstr "Proximidade"
+
+# @ wpp
+#~ msgid "Search Community Features"
+#~ msgstr "Pesquisar Proximidades"
+
+# @ wpp
+#~ msgid "All Community Features"
+#~ msgstr "Todas as Proximidades"
+
+# @ wpp
+#~ msgid "Parent Community Feature"
+#~ msgstr "Proximidade Primária"
+
+# @ wpp
+#~ msgid "Parent Community Feature:"
+#~ msgstr "Proximidade Primária:"
+
+# @ wpp
+#~ msgid "Edit Community Feature"
+#~ msgstr "Editar Proximidade"
+
+# @ wpp
+#~ msgid "Update Community Feature"
+#~ msgstr "Atualizar Proximidade"
+
+# @ wpp
+#~ msgid "Add New Community Feature"
+#~ msgstr "Adicionar Nova Proximidade"
+
+# @ wpp
+#~ msgid "New Community Feature Name"
+#~ msgstr "Nome do Nova Proximidade"
+
+# @ wpp
+#~ msgid "Community Feature"
+#~ msgstr "Proximidades"
+
+# @ wpp
+#~ msgid "All Properties"
+#~ msgstr "Todos os Imóveis"
+
+# @ wpp
+#~ msgid "Add Property"
+#~ msgstr "Adicionar Imóvel"
+
+# @ wpp
+#~ msgid "Add New Property"
+#~ msgstr "Adicionar Novo Imóvel"
+
+# @ wpp
+#~ msgid "Edit Property"
+#~ msgstr "Editar Imóvel"
+
+# @ wpp
+#~ msgid "New Property"
+#~ msgstr "Novo Imóvel"
+
+# @ wpp
+#~ msgid "Search Properties"
+#~ msgstr "Pesquisar Imóveis"
+
+# @ wpp
+#~ msgid "No properties found"
+#~ msgstr "Não foram encontrados imóveis"
+
+# @ wpp
+#~ msgid "No properties found in Trash"
+#~ msgstr "Não foram encontrados imóveis na Lixeira"
+
+# @ wpp
+#~ msgid "Could not detect."
+#~ msgstr "Não foi possível detectar."
+
+# @ wpp
+#~ msgid "Set %1s properties to \"%2s\" property type"
+#~ msgstr "Estabelecer %1s imóveis para \"%2s\" tipo de imóvel"
+
+# @ wpp
+#~ msgid "Default"
+#~ msgstr "Padrão"
+
+# @ wpp
+#~ msgid ""
+#~ "If you have problems automatically downloading premium features, it may "
+#~ "be due to PHP not having ownership issues over the premium feature folder."
+#~ msgstr ""
+#~ "Caso tenha problemas ao baixar automaticamente os recursos premium, pode "
+#~ "ser devido ao PHP não possuir direitos autorais sobre o diretório de "
+#~ "recursos premium."
+
+# @ wpp
+#~ msgid ""
+#~ "There is an ownership issue with the premium folder, which means your "
+#~ "site cannot download WP-Property premium features and receive updates.  "
+#~ "Please contact your host to fix this - PHP needs ownership over the <b>wp-"
+#~ "content/plugins/wp-property/core/premium</b> folder.  Be advised: "
+#~ "changing the file permissions will not fix this."
+#~ msgstr ""
+#~ "Ocorreu um problema de direitos autorais com o pacote premium, que "
+#~ "significa que o seu site não pôde baixar os recursos premium do WP-"
+#~ "Property e receber atualizações. Por favor, entre em contato com sua "
+#~ "hospedagem para consertar isto. O PHP precisa de direitos sobre a pasta "
+#~ "<b>wp-content/plugins/wp-property/core/premium</b>. Tenha em mente que "
+#~ "alterar a permissão dos arquivos não irá consertar isto."
+
+# @ wpp
+#~ msgid ""
+#~ "One of the folders that is necessary for downloading additional features "
+#~ "for the WP-Property plugin is not writable.  This means features cannot "
+#~ "be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-"
+#~ "property/core/premium</b> permissions to 0755."
+#~ msgstr ""
+#~ "Uma das pastas que é necessário para baixar utilidades adicionais para o "
+#~ "plugin WP-Property não é copiável. Isto significa que as utilidades não "
+#~ "pode ser baixadas. Para consertar isto, você deve configurar as <b>wp-"
+#~ "content/plugins/wp-property/core/premium</b> permissões para 0755."
+
+# @ wpp
+#~ msgid "Updated %1$d %2$s using the %3$s localization."
+#~ msgstr "Atualizados %1$d %2$s utilizando a linguagem de localização %3$s."
+
+# @ wpp
+#~ msgid "%1$d %2$s has empty address."
+#~ msgstr "%1$d %2$s está com o campo de endereço vazio."
+
+# @ wpp
+#, fuzzy
+#~ msgid "%1$d %2$s could not be updated."
+#~ msgstr "A chave API não pode ser recriada."
+
+# @ wpp
+#~ msgid "%1$d %2$s was ignored because query limit was exceeded."
+#~ msgstr "%1$d %2$s foi ignorado pois excedeu o limite de requisições."
+
+# @ wpp
+#~ msgid "Cache was successfully cleared"
+#~ msgstr "O cache foi esvaziado com sucesso"
+
+# @ wpp
+#~ msgid "The API key could not be generated."
+#~ msgstr "A chave API não pode ser gerada."
+
+# @ wpp
+#~ msgid ""
+#~ "An error occurred during premium feature check. API Key '<b>%s</b>' is "
+#~ "incorrect."
+#~ msgstr ""
+#~ "Um erro ocorreu durante a verificação de recurso premium. A chave de API "
+#~ "'<b>%s</b>' está incorreta."
+
+# @ wpp
+#~ msgid "Could not do remote request."
+#~ msgstr "Não foi possível fazer uma requisição remota."
+
+# @ wpp
+#~ msgid "Response code from requested server is %s."
+#~ msgstr "Código de resposta do servidor requisitado é %s."
+
+# @ wpp
+#~ msgid ""
+#~ "Requested server returned empty result or timeout was exceeded. Please, "
+#~ "try again later."
+#~ msgstr ""
+#~ "O servidor requisitado retornou um resultado vazio ou o tempo limite foi "
+#~ "excedido. Por favor, tente novamente mais tarde."
+
+# @ wpp
+#~ msgid "There are no available premium features."
+#~ msgstr "Não existem recursos premium disponíveis."
+
+# @ wpp
+#~ msgid ""
+#~ "No premium features were downloaded because the setting is disabled. "
+#~ "Enable in the \"Developer\" tab."
+#~ msgstr ""
+#~ "Recursos Premium não foram baixados porque a configuração está "
+#~ "desativada. Ative-a na aba \"Desenvolvedor\"."
+
+# @ wpp
+#~ msgid ""
+#~ "Specific directory for uploading premium features can not be created."
+#~ msgstr ""
+#~ "Não foi possível criar o diretório específico para fazer o upload de "
+#~ "recursos premium."
+
+# @ wpp
+#~ msgid "<b>%s</b> updated from version %s to %s ."
+#~ msgstr "<b>%s</b> versão atualizada de %s para %s ."
+
+# @ wpp
+#~ msgid "WP-Property Premium Feature: %s"
+#~ msgstr "Recurso Premium do WP-Property; %s"
+
+# @ wpp
+#~ msgid "There are no file permissions to upload or update premium features."
+#~ msgstr ""
+#~ "Não existem permissões para fazer upload ou atualizar recursos premium."
+
+# @ wpp
+#~ msgid ""
+#~ "There are no available premium features. Check your licenses for the "
+#~ "current domain"
+#~ msgstr ""
+#~ "Não existem recursos premium disponíveis. Verifique suas licenças para "
+#~ "este domínio."
+
+# @ wpp
+#~ msgid "Update ran successfully."
+#~ msgstr "Atualização ocorreu com sucesso."
+
+# @ wpp
+#~ msgid "You have the latest premium features versions."
+#~ msgstr "Você já possui as últimas versões dos recursos premium."
+
+# @ wpp
+#~ msgid "Features"
+#~ msgstr "Detalhes"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Request can not be verified."
+#~ msgstr "Nomes de usuários não podem ser alterados"
+
+# @ wpp
+#, fuzzy
+#~ msgid "An error occurred during premium feature check: <b> %s </b>."
+#~ msgstr ""
+#~ "Um erro ocorreu durante a checagem de utilizades prêmio: <b>  %s </b>."
+
+# @ wp
+# @ wpp
+#~ msgid "No"
+#~ msgstr "Não"
+
+# @ wpp
+#~ msgid " sq ft."
+#~ msgstr "m2"
+
+# @ wpp
+#~ msgid "Get Directions"
+#~ msgstr "Obter Direções"
+
+# @ wpp
+#~ msgid "General Settings"
+#~ msgstr "Configurações Gerais"
+
+# @ wpp
+#~ msgid "Find your property"
+#~ msgstr "Encontre seu Imóvel"
+
+# @ wpp
+# @ default
+#~ msgid "Edit"
+#~ msgstr "Editar"
+
+# @ wpp
+#~ msgid "Contact us"
+#~ msgstr "Contate-nos"
+
+# @ wpp
+#~ msgid "Login"
+#~ msgstr "Login"
+
+# @ wpp
+#~ msgid "Explore"
+#~ msgstr "Explorar"
+
+# @ wpp
+#~ msgid "Message"
+#~ msgstr "Mensagem"
+
+# @ wpp
+#~ msgid "E-mail"
+#~ msgstr "Email"
+
+# @ wpp
+#~ msgid "Send Message"
+#~ msgstr "Enviar Mensagem"
+
+# @ wpp
+#~ msgid "Submit Inquiry"
+#~ msgstr "Enviar Proposta"
+
+# @ wpp
+#~ msgid "Inquiry"
+#~ msgstr "Proposta"
+
+# @ wpp
+#~ msgid "Comment About"
+#~ msgstr "Comentário Sobre"
+
+# @ wpp
+#~ msgid "Inquire About"
+#~ msgstr "Proposta"
+
+# @ wpp
+#~ msgid "Inquiry About:"
+#~ msgstr "Proposta:"
+
+# @ wpp
+#~ msgid "Inquiry message:"
+#~ msgstr "Mensagem da Proposta:"
+
+# @ wpp
+#~ msgid "You forgot to enter your e-mail."
+#~ msgstr "Você esqueceu de digitar seu email."
+
+# @ wpp
+#~ msgid "You forgot to enter a message."
+#~ msgstr "Você esqueceu de digitar sua mensagem."
+
+# @ wpp
+#~ msgid "You forgot to enter your  name."
+#~ msgstr "Você esqueceu de digitar seu nome."
+
+# @ wpp
+#~ msgid "Error with sending message. Please contact site administrator."
+#~ msgstr "Erro ao enviar mensagem. Por favor contate o administrador do site."
+
+# @ wpp
+#~ msgid "Thank you for your message."
+#~ msgstr "Obrigado por enviar sua mensagem."
+
+# @ wpp
+#~ msgid "Status"
+#~ msgstr "Situação"
+
+# @ wpp
+#~ msgid "Author"
+#~ msgstr "Autor"
+
+# @ wpp
+#~ msgid "Date"
+#~ msgstr "Data"
+
+# @ wpp
+#~ msgid "Published"
+#~ msgstr "Publicado"
+
+# @ wpp
+#~ msgid "Pending"
+#~ msgstr "Pendente"
+
+# @ wpp
+#~ msgid "Trashed"
+#~ msgstr "Lixeira"
+
+# @ wpp
+#~ msgid "Any"
+#~ msgstr "Qualquer"
+
+# @ wpp
+# @ default
+#~ msgid "Show all dates"
+#~ msgstr "Mostrar todas as datas"
+
+# @ wpp
+#~ msgid "General Help"
+#~ msgstr "Informações Gerais"
+
+# @ wpp
+#~ msgid "Comming soon..."
+#~ msgstr "Em breve..."
+
+# @ wpp
+#~ msgid "Default Properties Page"
+#~ msgstr "Página padrão de Imóveis"
+
+# @ wpp
+#~ msgid ""
+#~ "The default <b>property page</b> will be used to display property search "
+#~ "results, as well as be the base for property URLs. "
+#~ msgstr ""
+#~ "A <b>página de imóveis</b> padrão será usada para exibir resultados de "
+#~ "pesquisas de imóveis, bem como ser a base de URL para todos os imóveis. "
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "By default, the <b>Default Properties Page</b> is set to <b>properties</"
+#~ "b>, which is a dynamically created page used for displaying property "
+#~ "search results. "
+#~ msgstr ""
+#~ "Por padrão, a <b>página de imóveis</b> padrão é definada como <b>Imóveis</"
+#~ "b>. Uma página dinamicamente criada que exibe resultados de pesquisas "
+
+# @ wpp
+#~ msgid "Display"
+#~ msgstr "Exibir"
+
+# @ wpp
+#~ msgid ""
+#~ "This tab allows you to do many things. Make custom picture sizes that "
+#~ "will let you to make posting pictures easier. Change the way you view "
+#~ "property photos with the use of Fancy Box, Choose  to use pagination on "
+#~ "the bottom of property pages and whether or not to show child properties. "
+#~ "Manage Google map attributes and map thumbnail sizes. Select here which "
+#~ "attributes you want to show once a property is pin pointed on your map. "
+#~ "Change your currency and placement of symbols."
+#~ msgstr ""
+#~ "Esta aba permite fazer muitas coisas. Criar tamanho personalizados de "
+#~ "imagens, que tornarão mais fáceis a publicação de imagens. Alterar o modo "
+#~ "como as fotos de imóveis são vistas utilizando o Fancy Box. Escolher a "
+#~ "paginação no final da página e exibir ou não imóveis secundários. "
+#~ "Gerenciar atributos e tamanhos de miniaturas do Google Maps. Escolher "
+#~ "aqui quais atributos deseja exibir uma vez que imóveis são apontados no "
+#~ "seu mapa. Alterar a moeda e o local do símbolo."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Premium Features"
+#~ msgstr "Recursos Premium"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Tab allows you to manage your WP-Property Premium Features"
+#~ msgstr "Recursos Premium do WP-Property"
+
+# @ wpp
+#~ msgid "Help"
+#~ msgstr "Ajuda"
+
+# @ wpp
+#~ msgid ""
+#~ "This tab will help you troubleshoot your plugin, do exports and check for "
+#~ "updates for Premium Features"
+#~ msgstr ""
+#~ "Esta aba irá lhe ajudar a solucionar problemas com o plugin, realizar "
+#~ "exportações e checar por atualizações dos Recursos Premium"
+
+# @ wpp
+#~ msgid "More Help"
+#~ msgstr "Mais ajuda"
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "Visit <a target=\"_blank\" href=\"https://usabilitydynamics.com/products/"
+#~ "wp-property/\">WP-Property Help Page</a> on UsabilityDynamics.com for "
+#~ "more help."
+#~ msgstr ""
+#~ "<a href=\"http://usabilitydynamics.com/products/wp-property/\" target="
+#~ "\"_blank\">Página de produtos do WP-Property</a>"
+
+# @ wpp
+#~ msgid ""
+#~ "You cannot use your site as Facebook Application. You should <a href=\"%s"
+#~ "\">purchase</a> WP-Property Premium Feature \"Facebook Tabs\" to manage "
+#~ "your Facebook Tabs."
+#~ msgstr ""
+#~ "Não é possível usar seu como um aplicativo do Facebook. É necessário <a "
+#~ "href=\"%s\">adquirir</a> o Recurso Premium do WP-Property \"Facebook Tabs"
+#~ "\" para gerenciar suas Abas do Facebook."
+
+# @ wpp
+#~ msgid "published"
+#~ msgstr "publicado"
+
+# @ wpp
+#~ msgid "pending"
+#~ msgstr "pendente"
+
+# @ wpp
+#~ msgid "trashed"
+#~ msgstr "excluído"
+
+# @ wpp
+#~ msgid "inherited"
+#~ msgstr "herdado"
+
+# @ wpp
+#~ msgid "drafted"
+#~ msgstr "em rascunho"
+
+# @ default
+#~ msgid "Nothing found."
+#~ msgstr "Nada encontrado."
+
+# @ wpp
+#~ msgid "No Subject"
+#~ msgstr "Sem Assunto"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Account Created"
+#~ msgstr "Corretor criado."
+
+# @ wpp
+#~ msgid "New User account created."
+#~ msgstr "Nova conta de usuário criada."
+
+# @ wpp
+#~ msgid "User Account Created"
+#~ msgstr "Conta de usuário criada"
+
+# @ wpp
+#~ msgid "Submission Approved"
+#~ msgstr "Envio Aprovado"
+
+# @ wpp
+#~ msgid ""
+#~ "Hello.%1$s%1$sYour %2$s has been published.%1$s%1$sYou can view it using "
+#~ "this URL: %1$s[property_link]"
+#~ msgstr ""
+#~ "Olá.%1$s%1$sSeu %2$s foi publicado.%1$s%1$sÉ possível vê-lo através desta "
+#~ "URL: %1$s[property_link]"
+
+# @ wpp
+#~ msgid "User-submitted %1$s ([property_title]) approved and published."
+#~ msgstr ""
+#~ "%1$s ([property_title]) enviado por um cliente foi aprovado e publicado."
+
+# @ wpp
+#~ msgid "Status Updated"
+#~ msgstr "Situação Atualizada"
+
+# @ wpp
+#~ msgid ""
+#~ "Hello.%1$s%1$sYour %2$s status has been updated.%1$s%1$sYou can view it "
+#~ "using this URL: %1$s[property_link]"
+#~ msgstr ""
+#~ "Olá.%1$s%1$sO status de seu %2$s foi atualizado.%1$s%1$sÉ possível vê-lo "
+#~ "através desta URL: %1$s[property_link]"
+
+# @ wpp
+#~ msgid "Submission Received"
+#~ msgstr "Envio Aprovado"
+
+# @ wpp
+#~ msgid "Feed URL:"
+#~ msgstr "URL do Feed:"
+
+# @ wpp
+#~ msgid "Open"
+#~ msgstr "Abrir"
+
+# @ wpp
+#~ msgid "You may append the export URL with the following arguments:"
+#~ msgstr "Você pode adicionar o URL exportado com os seguintes argumentos:"
+
+# @ wpp
+#~ msgid "Slug for the property type."
+#~ msgstr "Slug para o tipo de imóvel."
+
+# @ wpp
+#~ msgid "or"
+#~ msgstr "ou"
+
+# @ wpp
+#~ msgid "There has been an error retreiving your API key."
+#~ msgstr "Houve um erro ao buscar sua chave API."
+
+# @ wpp
+#~ msgid "Invalid API key."
+#~ msgstr "Chave de API inválida."
+
+# @ wpp
+#~ msgid "No published properties."
+#~ msgstr "Sem imóveis publicados."
+
+# @ wpp
+#~ msgid "There is an Error on trying to create XML feed."
+#~ msgstr "Ocorreu um Erro ao tentar criar o feed XML."
+
+# @ wpp
+#~ msgid ""
+#~ "Display a list of selected %1s attributes when loaded on a single %2s "
+#~ "page."
+#~ msgstr ""
+#~ "Exibir uma lista de atributos selecionados de %1s quando carregados em "
+#~ "uma única página de %2s."
+
+# @ default
+# @ wpp
+#~ msgid "Title:"
+#~ msgstr "Título:"
+
+# @ wpp
+#~ msgid "Attributes to Display:"
+#~ msgstr "Atributos a exibir:"
+
+# @ wpp
+#~ msgid "Display attributes labels."
+#~ msgstr "Exibir rótulos de atributos."
+
+# @ wpp
+#~ msgid "Other %1s"
+#~ msgstr "Outros %1s"
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "Display a list of %1s that share a parent with the currently displayed "
+#~ "property."
+#~ msgstr ""
+#~ "Exibir uma lista de %1s que compartilhem o mesmo imóvel primário que o "
+#~ "exibido no momento."
+
+# @ wpp
+#~ msgid "%s at %s for %s"
+#~ msgstr "%s em %s para %s"
+
+# @ wpp
+#~ msgid "More"
+#~ msgstr "Mais"
+
+# @ wpp
+#~ msgid "View All"
+#~ msgstr "Ver Todos"
+
+# @ wpp
+#~ msgid ""
+#~ "The widget will show other properties that share a parent with the "
+#~ "currently displayed property."
+#~ msgstr ""
+#~ "O widget irá exibir outros imóveis que compartilharem o mesmo imóvel "
+#~ "primário que o exibido no momento."
+
+# @ wpp
+#~ msgid "Hide images."
+#~ msgstr "Esconder imagens."
+
+# @ wpp
+#~ msgid "Image Size:"
+#~ msgstr "Tamanho da Imagem:"
+
+# @ wpp
+#~ msgid "Listings to display?"
+#~ msgstr "Exibir quantos imóveis?"
+
+# @ wpp
+#~ msgid "Select the attributes you want to display: "
+#~ msgstr "Selecione os atributos que deseja exibir: "
+
+# @ wpp
+#~ msgid "Address Format:"
+#~ msgstr "Formato do Endereço:"
+
+# @ wpp
+#~ msgid "Show \"More\" link?"
+#~ msgstr "Mostar \"Mais\" link?"
+
+# @ wpp
+#~ msgid "Show \"View All\" link?"
+#~ msgstr "Mostrar o link \"Ver Todos\"?"
+
+# @ wpp
+#~ msgid "If property has no parent, show other properties of same type."
+#~ msgstr ""
+#~ "Se um imóvel não possuir primário, exibir outros imóveis do mesmo tipo."
+
+# @ wpp
+#~ msgid "Randomize order of displayed properties."
+#~ msgstr "Torne aleatória a ordem de exibição de imóveis."
+
+# @ wpp
+#~ msgid "Child %1s"
+#~ msgstr "%1s Secundários"
+
+# @ wpp
+#~ msgid "Show child properties (if any) for currently displayed property"
+#~ msgstr ""
+#~ "Exibir imóveis secundários (caso existam) para o imóvel exibido no momento"
+
+# @ wpp
+#~ msgid ""
+#~ "The widget will not be displayed if the currently viewed property has no "
+#~ "children."
+#~ msgstr ""
+#~ "O componente não será exibidio se o imóvel em vista não possui "
+#~ "secundários."
+
+# @ wpp
+#~ msgid "Hide Images?"
+#~ msgstr "Esconder Imagens?"
+
+# @ wpp
+#~ msgid "Select the stats you want to display"
+#~ msgstr "Selecione as informações que deseje exibir"
+
+# @ wpp
+#~ msgid "Featured %1s"
+#~ msgstr "%1s Destacados"
+
+# @ wpp
+#~ msgid "List of properties that were marked as Featured"
+#~ msgstr "Listar imóveis que estão marcados como Destaque"
+
+# @ wpp
+#~ msgid "Display properties in random order?"
+#~ msgstr "Exibir imóveis aleatoriamente?"
+
+# @ wpp
+#~ msgid "Featured Properies"
+#~ msgstr "Imóveis Destacados"
+
+# @ wpp
+#~ msgid "Latest %1s"
+#~ msgstr "%1s Recentes"
+
+# @ wpp
+#~ msgid "List of the latest properties created on this site"
+#~ msgstr "Listar os imóveis recentemente criados neste site"
+
+# @ wpp
+#~ msgid "Latest Properties"
+#~ msgstr "Imóveis Recentes"
+
+# @ wpp
+#~ msgid "Select stats you want to display"
+#~ msgstr "Selecione as informações que deseje exibir"
+
+# @ wpp
+#~ msgid "%1s Search"
+#~ msgstr "Pesquisar %1s"
+
+# @ wpp
+#~ msgid "Display a highly customizable  %1s search form."
+#~ msgstr "Exibir um formulário de pesquisa de %1s altamente personalizado."
+
+# @ wpp
+#~ msgid "No searchable property types were found."
+#~ msgstr "Tipos de imóvel pesquisados não foram encontrados."
+
+# @ wpp
+#~ msgid "Property types to search:"
+#~ msgstr "Tipos de imóveis a pesquisar:"
+
+# @ wpp
+#~ msgid "Select the attributes you want to search."
+#~ msgstr "Selecione os atributes que deseja pesquisar."
+
+# @ wpp
+#~ msgid "All Attributes"
+#~ msgstr "Todos os Atributos"
+
+# @ wpp
+#~ msgid "Grouped Attributes"
+#~ msgstr "Atributos Agrupados"
+
+# @ wpp
+#~ msgid "Ungrouped"
+#~ msgstr "Desagrupados"
+
+# @ default
+#~ msgid "Group attributes together."
+#~ msgstr "Agrupar atributos."
+
+# @ wpp
+#~ msgid "Default Sort Order"
+#~ msgstr "Ordem de Exibição Padrão"
+
+# @ default
+#~ msgid "Descending"
+#~ msgstr "Descendente"
+
+# @ default
+#~ msgid "Acending"
+#~ msgstr "Ascendente"
+
+# @ wpp
+#~ msgid "Use pagination"
+#~ msgstr "Usar paginação"
+
+# @ wpp
+#~ msgid "Items per page"
+#~ msgstr "Ítens por página"
+
+# @ wpp
+#~ msgid "Toggle Advanced Search Options"
+#~ msgstr "Alternar Opções de Busca Avançada"
+
+# @ wpp
+#~ msgid "Search Properies"
+#~ msgstr "Pesquisar Imóveis"
+
+# @ wpp
+#~ msgid "%1s Gallery"
+#~ msgstr "Galeria de %1s"
+
+# @ wpp
+#~ msgid "List of all images attached to the current property"
+#~ msgstr "Listar todas as imagens anexadas a este Imóvel "
+
+# @ default
+#~ msgid "Regular Size:"
+#~ msgstr "Tamanho normal:"
+
+# @ default
+#~ msgid "Large Image Size:"
+#~ msgstr "Tamanho das imagens largas:"
+
+# @ wpp
+#~ msgid "Show %s Images"
+#~ msgstr "Exibir imagens %s"
+
+# @ wpp
+#~ msgid "Show Image Captions"
+#~ msgstr "Exibir título das imagens"
+
+# @ wpp
+#~ msgid "Show Image Descriptions."
+#~ msgstr "Exibir descrição das imagens."
+
+# @ wpp
+#~ msgid "API service not specified."
+#~ msgstr "Serviço de API não especificado."
+
+# @ wpp
+#~ msgid "API Failure: %1s."
+#~ msgstr "Falha na API: %1s."
+
+# @ default
+#~ msgid ""
+#~ "You cannot call UD_API::log() before the %1$s hook, since the current "
+#~ "user is not yet known."
+#~ msgstr ""
+#~ "Não é possível chamar UD_API::log() antes do gancho %1$s, uma vez que o "
+#~ "usuário atual não é conhecido ainda."
+
+# @ wpp
+#~ msgid "Log Started."
+#~ msgstr "Log iniciado."
+
+# @ default
+#~ msgid "You cannot call UD_API::add_log_page() after the %1$s hook."
+#~ msgstr "Não é possível chamar UD_API::add_log_page() após o gancho %1$s."
+
+# @ wpp
+#~ msgid "Log Page for"
+#~ msgstr "Página de Log para"
+
+# @ wpp
+#~ msgid "Clear Log"
+#~ msgstr "Limpar log"
+
+# @ wpp
+#~ msgid "Timestamp"
+#~ msgstr "Horário"
+
+# @ wpp
+#~ msgid "Event"
+#~ msgstr "Evento"
+
+# @ wpp
+#~ msgid "User"
+#~ msgstr "Usuário"
+
+# @ wpp
+#~ msgid "Related Object"
+#~ msgstr "Objetos Relacionados"
+
+# @ default
+# @ wpp
+#~ msgid "None"
+#~ msgstr "Não foram encontrados"
+
+# @ wpp
+#~ msgid "This may solve Out of Memory issues if you have a lot of properties."
+#~ msgstr ""
+#~ "Isto pode resolver problemas por Falta de Memória caso você tenha muitos "
+#~ "imóveis."
+
+# @ wpp
+#~ msgid "Agent Shortcodes"
+#~ msgstr "Shortcodes de Corretores"
+
+# @ wpp
+#~ msgid "Show agent information:"
+#~ msgstr "Exibir informação de Corretor:"
+
+# @ wpp
+#~ msgid ", or you can specify which fields to show:"
+#~ msgstr ", ou você pode especificar que campos mostrar:"
+
+# @ wpp
+#~ msgid "To query agent properties:"
+#~ msgstr "Pesquisar corretor de imóveis:"
+
+# @ wpp
+#~ msgid "Shortcode Attribute Fields"
+#~ msgstr "Ordenar Atributos por Shortcode"
+
+# @ wpp
+#~ msgid "The following attributes can be used in the [agent_card] shortcode."
+#~ msgstr "Os seguintes atributes pode ser utilizadas no [agent_card] código."
+
+# @ wpp
+#~ msgid "Example Using All Available Fields"
+#~ msgstr "Exemplo usando todos os campos disponíveis"
+
+# @ wpp
+#~ msgid "Manage Real Estate Agents"
+#~ msgstr "Gerencial Corretores de Imóveis"
+
+# @ default
+#~ msgid "%1$s <span class=\"count\">(%2$s)</span>"
+#~ msgstr "%1$s <span class=\"contar\">(%2$s)</span>"
+
+# @ wpp
+#~ msgid "Match the \"Property Agent\" attribute to "
+#~ msgstr "Corresponda o atributo para \"Corretor de Imóveis\" "
+
+# @ wpp
+#~ msgid " field, when it is found, and associate with agent."
+#~ msgstr "campo, quando encontrado, e associado a corretores."
+
+# @ wpp
+#~ msgid "Agent Image Size"
+#~ msgstr "Tamanho da Imagem do Corretor"
+
+# @ wpp
+#~ msgid "Agent Information"
+#~ msgstr "Informaçao do Corretor"
+
+# @ wpp
+#~ msgid "Agent"
+#~ msgstr "Corretor"
+
+# @ wpp
+#~ msgid "No Properties."
+#~ msgstr "Sem imóveis."
+
+# @ wpp
+#~ msgid "Create Agent"
+#~ msgstr "Criar Corretor"
+
+# @ wpp
+#~ msgid "Update Agent"
+#~ msgstr "Atualizar Corretor"
+
+# @ wpp
+#~ msgid "Display Name"
+#~ msgstr "Nome de Exibição"
+
+# @ wpp
+#~ msgid "Username"
+#~ msgstr "Nome de usuário"
+
+# @ wpp
+#~ msgid "Usernames cannot be changed."
+#~ msgstr "Nomes de usuários não podem ser alterados"
+
+# @ wpp
+#~ msgid "E-Mail"
+#~ msgstr "Email"
+
+# @ wpp
+#~ msgid "Widget Bio"
+#~ msgstr "Widget de Biografia"
+
+# @ wpp
+#~ msgid "Content that is displayed in the agent widget."
+#~ msgstr "Conteúdo que é exibido no widget do corretor"
+
+# @ wpp
+#~ msgid "Full Bio"
+#~ msgstr "Biografia Completa"
+
+# @ wpp
+#~ msgid "Content that can be displayed in the shortcode."
+#~ msgstr "Conteúdo que pode ser exibido no código."
+
+# @ default
+#~ msgid "Primary"
+#~ msgstr "Primário"
+
+# @ default
+#~ msgid "Save"
+#~ msgstr "Salvar"
+
+# @ default
+#~ msgid "Associated Properties"
+#~ msgstr "Imóveis Associados"
+
+# @ default
+#~ msgid "Images"
+#~ msgstr "Imagens"
+
+# @ wpp
+#~ msgid "Agents"
+#~ msgstr "Corretores"
+
+# @ wpp
+#~ msgid "Agent Roles"
+#~ msgstr "Cargos de Corretores"
+
+# @ wpp
+#~ msgid "User roles that can be associated with properties as agents."
+#~ msgstr ""
+#~ "Funções de usuário que podem ser associadas como corretores de imóveis."
+
+# @ wpp
+#~ msgid "Agent Fields"
+#~ msgstr "Campos de Corretores"
+
+# @ wpp
+#~ msgid "Extra data fields to be used for agent profiles."
+#~ msgstr "Espaço extra de dados a ser usado para perfil do corretor."
+
+# @ wpp
+#~ msgid ""
+#~ "Custom fields may be used to adapt the information about agents to suit "
+#~ "your needs."
+#~ msgstr ""
+#~ "Campos personalizáveis podem ser utilizados para adaptar a informação "
+#~ "sobre corretores para atender as suas necessidades."
+
+# @ wpp
+#~ msgid "Field name"
+#~ msgstr "Campo de nome"
+
+# @ wpp
+# @ default
+#~ msgid "Add New"
+#~ msgstr "Adicionar Novo"
+
+# @ wpp
+#~ msgid "User removed."
+#~ msgstr "Usuário removido."
+
+# @ default
+#~ msgid "Please enter a valid e-mail."
+#~ msgstr "Por favor, digite um email válido."
+
+# @ wpp
+#~ msgid "Agent updated."
+#~ msgstr "Corretor atualizado."
+
+# @ wpp
+#~ msgid "Agent created."
+#~ msgstr "Corretor criado."
+
+# @ wpp
+#~ msgid "Edit Agent"
+#~ msgstr "Editar Corretor"
+
+# @ wpp
+#~ msgid "Associated Agents"
+#~ msgstr "Corretores Associados"
+
+# @ wpp
+#~ msgid "You can add fields on the <a href=\"%s\">settings page</a>."
+#~ msgstr ""
+#~ "Você pode adicionar campos em <a href=\"%s\">Página de Configurações</a>."
+
+# @ wpp
+#~ msgid "Flyer Writeup"
+#~ msgstr "Informações da Ficha"
+
+# @ wpp
+#~ msgid "Please enter a writeup for flyers."
+#~ msgstr "Por favor, escreva alguma informação para a ficha."
+
+# @ wpp
+#~ msgid "Agent ID is not set"
+#~ msgstr "ID de Corretor não está definido"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Image of Real Estate Agent #"
+#~ msgstr "Imagem do Corretor de Imóveis #"
+
+# @ wpp
+#~ msgid "Image for User #"
+#~ msgstr "Imagem para Usuário #"
+
+# @ wpp
+#~ msgid "Please save first to add images."
+#~ msgstr "Por favor, salve antes de adicionar imagens."
+
+# @ wpp
+#~ msgid "No images found."
+#~ msgstr "Não foram encontradas imagens."
+
+# @ wpp
+#~ msgid "Remove"
+#~ msgstr "Remover"
+
+# @ wpp
+#~ msgid "Please enable JavaScript to use file uploader"
+#~ msgstr "Por favor, ative o JavaScript para enviar arquivos"
+
+# @ wpp
+#~ msgid "Add Image"
+#~ msgstr "Adicionar imagem"
+
+# @ wpp
+#~ msgid "Moderate comments"
+#~ msgstr "Moderar comentários"
+
+# @ wpp
+#~ msgid "Manage categories"
+#~ msgstr "Gerenciar categorias"
+
+# @ wpp
+#~ msgid "Manage links"
+#~ msgstr "Gerenciar links"
+
+# @ wpp
+#~ msgid "Upload files"
+#~ msgstr "Fazer upload de arquivos"
+
+# @ wpp
+#~ msgid "Edit posts"
+#~ msgstr "Editar posts"
+
+# @ wpp
+#~ msgid "Edit other's posts"
+#~ msgstr "Editar posts de outros"
+
+# @ wpp
+#~ msgid "Edit published posts"
+#~ msgstr "Editar posts publicados"
+
+# @ wpp
+#~ msgid "Publish posts"
+#~ msgstr "Publicar posts"
+
+# @ wpp
+#~ msgid "Edit pages"
+#~ msgstr "Editar páginas"
+
+# @ wpp
+#~ msgid "Read"
+#~ msgstr "Ler"
+
+# @ wpp
+#~ msgid "Edit other's pages"
+#~ msgstr "Editar páginas de outros"
+
+# @ wpp
+#~ msgid "Edit published pages"
+#~ msgstr "Editar páginas publicadas"
+
+# @ wpp
+#~ msgid "Publish pages"
+#~ msgstr "Publicar páginas"
+
+# @ wpp
+#~ msgid "Delete pages"
+#~ msgstr "Deletar páginas"
+
+# @ wpp
+#~ msgid "Delete other's pages"
+#~ msgstr "Deletar páginas de outros"
+
+# @ wpp
+#~ msgid "Delete published pages"
+#~ msgstr "Deletar páginas publicadas"
+
+# @ wpp
+#~ msgid "Delete posts"
+#~ msgstr "Deletar posts"
+
+# @ wpp
+#~ msgid "Delete other's posts"
+#~ msgstr "Deletar posts de outros"
+
+# @ wpp
+#~ msgid "Delete published posts"
+#~ msgstr "Deletar posts publicados"
+
+# @ wpp
+#~ msgid "Delete private posts"
+#~ msgstr "Deletar posts privados"
+
+# @ wpp
+#~ msgid "Edit private posts"
+#~ msgstr "Editar posts privados"
+
+# @ wpp
+#~ msgid "Read private posts"
+#~ msgstr "Ler posts privados"
+
+# @ wpp
+#~ msgid "Delete private pages"
+#~ msgstr "Deletar páginas privadas"
+
+# @ wpp
+#~ msgid "Edit private pages"
+#~ msgstr "Editar páginas privadas"
+
+# @ wpp
+#~ msgid "Read private pages"
+#~ msgstr "Ler páginas privadas"
+
+# @ wpp
+# @ default
+#~ msgid "Email"
+#~ msgstr "Email"
+
+# @ wpp
+#~ msgid ""
+#~ "Agent can see only the properties which are assigned to him. Agent will "
+#~ "be automatically assigned to the property which he will create."
+#~ msgstr ""
+#~ "O Corretor pode somente ver os imóveis que são encarregadas para ele. O "
+#~ "Corretor será automaticamente encarregado do imóvel que ele irá criar."
+
+# @ wpp
+#~ msgid "Widget Text"
+#~ msgstr "Texto de Widget"
+
+# @ wpp
+#~ msgid "Email Address"
+#~ msgstr "Email"
+
+# @ wpp
+#, fuzzy
+#~ msgid "<b>Page Settings</b><br/>"
+#~ msgstr "Gerenciar Configurações"
+
+# @ wpp
+# @ default
+#, fuzzy
+#~ msgid "Name:"
+#~ msgstr "Nome"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Search..."
+#~ msgstr "Pesquisar"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Template Settings:"
+#~ msgstr "Gerenciar Configurações"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Template:"
+#~ msgstr "Modelo"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Disable default CSS."
+#~ msgstr "Carregar CSS padrão."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Add to Facebook"
+#~ msgstr "Destacar"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Secure Canvas URL:"
+#~ msgstr "URL do Feed:"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Debug URL:"
+#~ msgstr "URL do Feed:"
+
+# @ wpp
+#~ msgid "Save Changes"
+#~ msgstr "Salvar Alterações"
+
+# @ wpp
+#, fuzzy
+#~ msgid "FEPS Details"
+#~ msgstr "Detalhes"
+
+# @ wpp
+#~ msgid "Not set"
+#~ msgstr "Não definido"
+
+# @ default
+#, fuzzy
+#~ msgid "Property Form"
+#~ msgstr "Formulários de Imóveis"
+
+# @ wpp
+#~ msgid "Subscription Plan"
+#~ msgstr "Plano de Inscrição"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Expired date"
+#~ msgstr "Data de Expiração"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Templates"
+#~ msgstr "Modelo"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Overview Page"
+#~ msgstr "Visão Geral"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Edit Page"
+#~ msgstr "Editar páginas"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Add Credits Page"
+#~ msgstr "Adicionar Créditos"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Administration"
+#~ msgstr "Criação de Lista"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Notifications"
+#~ msgstr "Localidade"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Form Name"
+#~ msgstr "Nome do Grupo"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Shortcode"
+#~ msgstr "Shortcodes de Corretores"
+
+# @ wpp
+#, fuzzy
+#~ msgid "General Options"
+#~ msgstr "Configurações Gerais"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Subscriptions Plans"
+#~ msgstr "Plano de Inscrição"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Propery Attributes"
+#~ msgstr "Atributos do WP-Property"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Available shortcode attributes"
+#~ msgstr "Ordenar Atributos por Shortcode"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Just a name of Subscription plan."
+#~ msgstr "Plano de Inscrição"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Duration"
+#~ msgstr "Duração:"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Is Featured"
+#~ msgstr "Destacado"
+
+# @ default
+#, fuzzy
+#~ msgid "Images Limit"
+#~ msgstr "Imagens"
+
+# @ wpp
+#~ msgid "Description"
+#~ msgstr "Descrição"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Property Forms"
+#~ msgstr "Imóveis: %s"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Edit %s Page"
+#~ msgstr "Editar páginas"
+
+# @ wpp
+#, fuzzy
+#~ msgid "FEPS Subscription Plan"
+#~ msgstr "Plano de Inscrição"
+
+# @ wpp
+#~ msgid "Price:"
+#~ msgstr "Preço:"
+
+# @ wpp
+#~ msgid "Duration:"
+#~ msgstr "Duração:"
+
+# @ wpp
+#~ msgid "Images:"
+#~ msgstr "Imagens:"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Renewal of Subscription Plan"
+#~ msgstr "Plano de Inscrição"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Options:"
+#~ msgstr "Opções"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Manage FEPS"
+#~ msgstr "Gerenciar Configurações"
+
+# @ wpp
+#, fuzzy
+#~ msgid "created"
+#~ msgstr "Criou "
+
+# @ wpp
+#, fuzzy
+#~ msgid "updated"
+#~ msgstr "Atualizado "
+
+# @ default
+#, fuzzy
+#~ msgid "You must be logged in to edit %s"
+#~ msgstr ""
+#~ "Você deve ser <a href=\"%s\">logged in</a> para postar um comentário."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Your %s has been successfully %s."
+#~ msgstr "Validação de endereço foi completada com sucesso."
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "Your %s and Account have been successfully %s. Check your e-mail to "
+#~ "activate account and log in for continuing."
+#~ msgstr "Sua conta foi criada. Verifique seu email para ativar a conta."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Publish Now"
+#~ msgstr "Publicar"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Add Credits to Balance"
+#~ msgstr "Adicionar Créditos"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Add New %s"
+#~ msgstr "Adicionar Novo "
+
+# @ wpp
+#, fuzzy
+#~ msgid "My Balance"
+#~ msgstr "Saldo Atual"
+
+# @ wpp
+#, fuzzy
+#~ msgid "credit"
+#~ msgstr "créditos"
+
+# @ wpp
+#~ msgid "credits"
+#~ msgstr "créditos"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Expired"
+#~ msgstr "Data de Expiração"
+
+# @ wpp
+#, fuzzy
+#~ msgid "%01.2f credits"
+#~ msgstr "%s%01.2f = %01.2f crédito"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Plan Details"
+#~ msgstr "Detalhes"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Not Paid Yet"
+#~ msgstr "Não definido"
+
+# @ wpp
+#, fuzzy
+#~ msgid "FEPS forms updated."
+#~ msgstr "Imóvel atualizado."
+
+# @ wpp
+#, fuzzy
+#~ msgid "%1$s Content"
+#~ msgstr "Título"
+
+# @ wpp
+#, fuzzy
+#~ msgid "%1$s Type"
+#~ msgstr "Tipo de %1s"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Form Name:"
+#~ msgstr "Nome do arquivo:"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Shortcode:"
+#~ msgstr "Shortcodes de Corretores"
+
+# @ wpp
+#, fuzzy
+#~ msgid "General Options:"
+#~ msgstr "Configurações Gerais"
+
+# @ wpp
+#, fuzzy
+#~ msgid "%1$s Status:"
+#~ msgstr "Situação"
+
+# @ wpp
+#, fuzzy
+#~ msgid "%1$s Type:"
+#~ msgstr "Tipo de %1s"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Preview Thumbnail Size:"
+#~ msgstr "Tamanho da Miniatura do Mapa:"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Image Upload Limit:"
+#~ msgstr "Tamanho Limite de Upload de Imagens:"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Automatically load added images into %1$s Slideshow. "
+#~ msgstr ""
+#~ "Automaticamente delete todas as imagens do imóvel e todos os extras "
+#~ "quando um imóvel for deletado."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Allow user to edit and remove his FEPS."
+#~ msgstr "Permitir que usuários publiquem imóveis."
+
+# @ wpp
+#, fuzzy
+#~ msgid "%1$s Attributes"
+#~ msgstr "Atributos de %1s"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Attribute"
+#~ msgstr "Atributos"
+
+# @ wpp
+#, fuzzy
+#~ msgid "%1$s Title"
+#~ msgstr "Título"
+
+# @ wpp
+# @ default
+#, fuzzy
+#~ msgid "Editing"
+#~ msgstr "Editar"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Your location has been successfully found by Google Maps."
+#~ msgstr "Validação de endereço foi completada com sucesso."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Default One-Day Subscription Plan"
+#~ msgstr "Plano de Inscrição"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Subscription Plans"
+#~ msgstr "Plano de Inscrição"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Actions"
+#~ msgstr "Ações:"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Add Subscription Plan"
+#~ msgstr "Plano de Inscrição"
+
+# @ wpp
+#, fuzzy
+#~ msgid "User Account Approved"
+#~ msgstr "Conta de usuário criada"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Account Approved"
+#~ msgstr "Corretor criado."
+
+# @ wpp
+#, fuzzy
+#~ msgid "User Account Approved."
+#~ msgstr "Conta de usuário criada"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Account has been activated"
+#~ msgstr "Agendamento salvo."
+
+# @ default
+#, fuzzy
+#~ msgid "You must be logged in to be able to do this action."
+#~ msgstr ""
+#~ "Você deve ser <a href=\"%s\">logged in</a> para postar um comentário."
+
+# @ wpp
+#~ msgid "%s%01.2f = %01.2f credit"
+#~ msgstr "%s%01.2f = %01.2f crédito"
+
+# @ wpp
+#~ msgid "Please type in your e-mail address."
+#~ msgstr "Por favor, digite seu email."
+
+# @ wpp
+#~ msgid "Checking if account exists."
+#~ msgstr "Checando se a conta existe."
+
+# @ wpp
+#~ msgid "Checking your credentials."
+#~ msgstr "Checando suas credenciais."
+
+# @ wpp
+#~ msgid "Your credentials have been verified."
+#~ msgstr "Suas credenciais foram verificadas."
+
+# @ wpp
+#~ msgid "Your login credentials are not correct."
+#~ msgstr "Suas credenciais para login não são corretas."
+
+# @ wpp
+#~ msgid "Account found, please type in your password."
+#~ msgstr "Conta encontrada, por favor digite seu password."
+
+# @ wpp
+#~ msgid ""
+#~ "Your account has been created. Check your e-mail to activate account."
+#~ msgstr "Sua conta foi criada. Verifique seu email para ativar a conta."
+
+# @ wpp
+#~ msgid "Update"
+#~ msgstr "Atualizar"
+
+# @ wpp
+#~ msgid "Publish"
+#~ msgstr "Publicar"
+
+# @ wpp
+#~ msgid "Submit"
+#~ msgstr "Enviar"
+
+# @ wpp
+#, fuzzy
+#~ msgid "FEPS Information"
+#~ msgstr "Informação"
+
+# @ wpp
+#~ msgid "Manage PDF Flyer"
+#~ msgstr "Gerenciar Ficha em PDF"
+
+# @ wpp
+#~ msgid ""
+#~ "Unless <b>Don't make accessible for public</b> is checked for a list, it "
+#~ "will be accessible by anybody who visits your website, provided they have "
+#~ "a link to the list.  The lists are stored in your uploads folder, but to "
+#~ "the users they appear to be below your main <b>Property Page</b>.  In "
+#~ "other words, if your default property page is 'all-properties', all your "
+#~ "lists will have urls that will go something like: http://website.com/all-"
+#~ "properties/the-list-filename.pdf"
+#~ msgstr ""
+#~ "A não ser que <b>Não seja acessível ao público</b> é checado para uma "
+#~ "lista, isto será acessível por qualquer um que visite seru website, desde "
+#~ "que eles têm um link para a lista. As listas são armazenadas em sua pasta "
+#~ "de uploads, mas para os usuários elas aparecem abaixo de sua principal "
+#~ "<b>Página de Imóveis</b>. Em outras palavras, se sua página de imóvel "
+#~ "padrão é 'Todos os Imóveis', todas suas listas terão urls que irão para "
+#~ "algo como:  http://website.com/all-properties/the-list-filename.pdf"
+
+# @ wpp
+#~ msgid ""
+#~ "By default, the PDF lists are generated every time you save this page, "
+#~ "and when any property is updated or created.  You may select "
+#~ "<b>Regenerate list every time it is opened</b> to have the list generated "
+#~ "every time it is opened in a browser, however, this may cause some "
+#~ "unnecessary strain on your server."
+#~ msgstr ""
+#~ "Por padrão, as listas PDF são produzidas sempre que você salva esta "
+#~ "página, e quando qualquer imóvel é atualizado ou criado. Você pode "
+#~ "selecionar <b>Reproduzir listas sempre que isto estiver aberto</b> para "
+#~ "ter a lista reproduzida sempre que aberta num browser, entretanto, isto "
+#~ "pode causar um peso desnecessário no seu servidor."
+
+# @ wpp
+#~ msgid "Advanced Query"
+#~ msgstr "Pesquisa Avançada"
+
+# @ wpp
+#~ msgid ""
+#~ "The advanced query can be used just like the [property_overview] "
+#~ "shortcode. For example, if you wanted the list to only show two bedroom "
+#~ "properties, your query would simply be: <b>[property_overview "
+#~ "bedrooms=2]</b>."
+#~ msgstr ""
+#~ "A pesquisa avançada pode ser usada assim como o shortcode "
+#~ "[property_overview]. Por exemplo, caso deseje que a lista somente exiba "
+#~ "imóveis de dois quartos, sua chamada deverá ser: <b>[property_overview "
+#~ "quartos=2]</b>."
+
+# @ wpp
+#~ msgid ""
+#~ "You could make these as complex as you would like. If you wanted to query "
+#~ "all apartments between $400 and $700 dollars in St. Paul, you would use: "
+#~ "<b>[property_overview property_type=apartment price=400-700 city='St. "
+#~ "Paul' sort_by=route limit_query=10]</b>."
+#~ msgstr ""
+#~ "Poderá personalizar isso o quão complexo necessitar. Caso deseje "
+#~ "requisitar imóveis entre R$400 e R$700 reais em São Paulo, poderá "
+#~ "utilizar: <b>[property_overview property_type=apartamento price=400-700 "
+#~ "city='São Paulo' sort_by=rota limit_query=10]</b>."
+
+# @ wpp
+#~ msgid "List Creation"
+#~ msgstr "Criação de Lista"
+
+# @ wpp
+#~ msgid ""
+#~ "PDF Lists are deleted every time a change is made to this page, and may "
+#~ "either be regenerated by clicking the Regenerate button below, or by "
+#~ "trying to open the list on the front-end."
+#~ msgstr ""
+#~ "Listas PDF são deletadas sempre que uma alteração é feita nesta página, e "
+#~ "pode tanto ser reproduzida ao clicar no botão Reprodução abaixo, ou ao "
+#~ "tentar abrir a lista no front-end."
+
+# @ wpp
+#~ msgid ""
+#~ "When a single property is updated, the list(s) it is included on are "
+#~ "deleted as well.  It is up to you if you want to regenerate the lists "
+#~ "manually, or wait for a visitor to attempt to open a list, at which point "
+#~ "it will be regenerated automatically."
+#~ msgstr ""
+#~ "Quando um único imóvel é atualizado, a(s) lista(s) onde está(estão) "
+#~ "incluído(s) são deletada(s) também. Fica a sua disposição regenerar as "
+#~ "listas manualmente, ou esperar um visitante tentar abrir uma lista, e "
+#~ "então ela será regenerada automaticamente."
+
+# @ wpp
+#~ msgid "PDF Flyer Options"
+#~ msgstr "Opções da Ficha em PDF"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Exclude %1s from PDF Lists"
+#~ msgstr "Excluir imóvel das Listas de PDF"
+
+# @ wpp
+#~ msgid "PDF Lists"
+#~ msgstr "Listas de PDF"
+
+# @ wpp
+#~ msgid "Full Description"
+#~ msgstr "Descrição Completa"
+
+# @ wpp
+#~ msgid "List settings updated and old lists have been deleted. "
+#~ msgstr ""
+#~ "Configuração de Listas atualizadas e listas antigas foram deletadas. "
+
+# @ wpp
+#~ msgid "Sample PDF List"
+#~ msgstr "Exemplo de Lista em PDF"
+
+# @ default
+#~ msgid ""
+#~ "Regenerating PDF Lists. If you have a lot of properties this process may "
+#~ "take a while, please do not close this browser window until it is "
+#~ "complete."
+#~ msgstr ""
+#~ "Reproduzindo Listas PDF. Se você tiver muitos imóveis este processo pode "
+#~ "ser demorado, por favor não feche esta janela até que seja completo."
+
+# @ default
+# @ wpp
+#~ msgid "Finished."
+#~ msgstr "Terminado."
+
+# @ wpp
+#~ msgid "Attributes"
+#~ msgstr "Atributos"
+
+# @ wpp
+#~ msgid "List Name:"
+#~ msgstr "Nome da Lista:"
+
+# @ wpp
+#~ msgid "File Name:"
+#~ msgstr "Nome do arquivo:"
+
+# @ wpp
+#~ msgid "Actions:"
+#~ msgstr "Ações:"
+
+# @ default
+#~ msgid "View PDF"
+#~ msgstr "Ver PDF"
+
+# @ wpp
+#~ msgid "Group by:"
+#~ msgstr "Agrupar por:"
+
+# @ wpp
+#~ msgid "Properties per page:"
+#~ msgstr "Imóveis por página:"
+
+# @ wpp
+#~ msgid "Show child properties."
+#~ msgstr "Exibir imóveis secundários."
+
+# @ wpp
+#~ msgid "Don't make accessible for public."
+#~ msgstr "Não abrir acesso ao público."
+
+# @ wpp
+#~ msgid "Regenerate list every time it is opened."
+#~ msgstr "Regenerar lista todas vez que ela é aberta."
+
+# @ wpp
+#~ msgid "Contact Information"
+#~ msgstr "Informação para Contato"
+
+# @ wpp
+#~ msgid "Contact Information will be shown on every page"
+#~ msgstr "Informação de Contato será exibida em cada página"
+
+# @ wpp
+#~ msgid ""
+#~ "You may use WPP Query arguments here to perform a more advanced queryies, "
+#~ "and limits. Wrap your query into [property_overview] as with a regular "
+#~ "shortcode."
+#~ msgstr ""
+#~ "Você pode usar os argumentos do de Requisição do WPP para realizar "
+#~ "requisições mais avançadas. Digite sua requisição dentro de "
+#~ "[property_overview], como num shortcode comum."
+
+# @ wpp
+#~ msgid "Font:"
+#~ msgstr "Fonte:"
+
+# @ wpp
+#~ msgid ""
+#~ "The default font is Helvetica. If you have any problems with current font "
+#~ "try choosing another one from the list."
+#~ msgstr ""
+#~ "A fonte padrão é Helvetica. Caso tenha problemas com a fonte atual tente "
+#~ "escolher outra desta lista."
+
+# @ wpp
+#~ msgid "Header & Footer background color:"
+#~ msgstr "Cor de fundo do Cabeçalho & Rodapé:"
+
+# @ wpp
+#~ msgid "Header & Footer text color:"
+#~ msgstr "Cor de texto do Cabeçalho & Rodapé:"
+
+# @ wpp
+#~ msgid "Text color:"
+#~ msgstr "Cor do texto:"
+
+# @ default
+#~ msgid "Add List"
+#~ msgstr "Adicionar Listas"
+
+# @ default
+#~ msgid "Save Lists"
+#~ msgstr "Salvar Listas"
+
+# @ default
+#~ msgid ""
+#~ "Regenerate all PDF Lists.  This will create, or recreate, all your lists."
+#~ msgstr ""
+#~ "Reproduzir todas Listas PDF. Isto vai criar, ou recriar, todas suas "
+#~ "listas."
+
+# @ default
+#~ msgid "Refresh Page"
+#~ msgstr "Atualizar Página"
+
+# @ default
+#~ msgid "Shortcode examples:"
+#~ msgstr "Exemplos de shortcode:"
+
+# @ default
+#~ msgid "Returns a formatted HTML link to the PDF List."
+#~ msgstr "Retorna um link formatado HTML à lista PDF."
+
+# @ default
+#~ msgid "Returns a html link to the PDF List with custom title."
+#~ msgstr "Retorna um link html para a Lista PDF com título personalizado."
+
+# @ default
+#~ msgid "Returns the raw URL to the PDF List (for use in custom html)."
+#~ msgstr ""
+#~ "Retorna a URL bruta para a Lista PDF (para usar em html personalizada)."
+
+# @ default
+#~ msgid "For use with a custom CSS class."
+#~ msgstr "Para ser usado com uma classe personalizada de CSS."
+
+# @ default
+#~ msgid "Returns url_to_custom_image with a link to the PDF List."
+#~ msgstr "Retorna url_to_custom_image com um link para a Lista PDF."
+
+# @ wpp
+#~ msgid "PDF Flyer"
+#~ msgstr "Ficha em PDF"
+
+# @ wpp
+#~ msgid "Details"
+#~ msgstr "Detalhes"
+
+# @ wpp
+#~ msgid "Location"
+#~ msgstr "Localidade"
+
+# @ wpp
+#~ msgid ", or <a href=\"%s\" target=\"_blank\">view flyer</a>."
+#~ msgstr ", ou <a href=\"%s\" target=\"_blank\">ver ficha</a>."
+
+# @ wpp
+#~ msgid "PDF"
+#~ msgstr "PDF"
+
+# @ wpp
+#~ msgid "Warning: <b>%s</b> is not writable, PDF flyer cannot be created."
+#~ msgstr ""
+#~ "Aviso: <b>%s</b> não pode ser escrito, a Ficha em PDF não pôde ser criada."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Show panel that allows you to create PDF %1s lists."
+#~ msgstr ""
+#~ "Mostrar um painel que possibilidade a criação de listagens de imóveis em "
+#~ "PDF."
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "Generate %1s flyers automatically when somebody tries to view them for "
+#~ "the first time."
+#~ msgstr ""
+#~ "Gerar a ficha do imóvel automaticamente quando alguém tenta vê-lo pela "
+#~ "primeira vez."
+
+# @ wpp
+#~ msgid "Generate QR Code."
+#~ msgstr "Gerar Código QR."
+
+# @ wpp
+#~ msgid ""
+#~ "Truncate the Description when it's displayed in Flyer (It can be helpful, "
+#~ "when the data can not be placed on one page)."
+#~ msgstr ""
+#~ "Reduzir a descrição exibida na Ficha (isto pode ser útil quando os dados "
+#~ "não cabem em uma só página)"
+
+# @ wpp
+#~ msgid "Flyer Display"
+#~ msgstr "Exibição da Ficha"
+
+# @ wpp
+#~ msgid "Title (Header)"
+#~ msgstr "Título (Cabeçalho)"
+
+# @ wpp
+#~ msgid "Tagline under Title (Header)"
+#~ msgstr "Slogan abaixo do Título (Cabeçalho)"
+
+# @ wpp
+#~ msgid "QR Code's note (a note explaining what a QR Code is, if it exists)"
+#~ msgstr "Nota do Código QR (uma nota explicativa sobre o QR, caso exista)"
+
+# @ wpp
+#~ msgid "Description (if exists)"
+#~ msgstr "Descrição (caso exista)"
+
+# @ wpp
+#~ msgid "Location on Map (if exists)"
+#~ msgstr "Local no Mapa (caso exista)"
+
+# @ wpp
+#~ msgid "Features (if exists)"
+#~ msgstr "Detalhes (caso existam)"
+
+# @ wpp
+#~ msgid "Agent Information (if exists)"
+#~ msgstr "Informações do Corretor (caso existam)"
+
+# @ wpp
+#~ msgid "Primary Photo Size"
+#~ msgstr "Tamanho de Foto Primária"
+
+# @ wpp
+#~ msgid "Font"
+#~ msgstr "Fonte"
+
+# @ wpp
+#~ msgid ""
+#~ "The default font is Helvetica. If you have any problems with the current "
+#~ "font try choosing another one from the list."
+#~ msgstr ""
+#~ "A fonte padrão é Helvetica. Caso tenha problemas com a fonte atual tente "
+#~ "escolher outra desta lista."
+
+# @ wpp
+#~ msgid "Secondary Images"
+#~ msgstr "Imagens Secundárias"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Show %1$s images."
+#~ msgstr "Exibir imagens %s"
+
+# @ wpp
+#~ msgid "Logo URL"
+#~ msgstr "URL da Logo"
+
+# @ wpp
+#~ msgid "Use JPEG and GIF images only."
+#~ msgstr "Use imagens somente em JPEG e GIF."
+
+# @ wpp
+#~ msgid "Header color"
+#~ msgstr "Cor do Cabeçalho"
+
+# @ wpp
+#~ msgid "Section background color"
+#~ msgstr "Cor de fundo da seção"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Shortcode examples:<br />"
+#~ msgstr "Exemplos de shortcode:"
+
+# @ wpp
+#~ msgid ""
+#~ "<strong>[property_flyer]</strong> - Returns a html link to the PDF "
+#~ "Flyer<br />"
+#~ msgstr ""
+#~ "<strong>[property_flyer]</strong> - Retorna um link html para a Ficha em "
+#~ "PDF<br />"
+
+# @ wpp
+#~ msgid ""
+#~ "<strong>[property_flyer title='PDF Flyer']</strong> - Returns a html link "
+#~ "to the PDF Flyer with custom title.<br />"
+#~ msgstr ""
+#~ "<strong>[property_flyer title='Título da Ficha em PDF']</strong> - "
+#~ "Retorna um link html para a Ficha em PDF, com um título personalizado."
+#~ "<br />"
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "<strong>[property_flyer urlonly='yes']</strong> -  Returns the raw URL to "
+#~ "the PDF Flyer (for use in custom html).<br />"
+#~ msgstr ""
+#~ "Retorna a URL bruta para a Lista de Fichas em PDF (para usar em html "
+#~ "personalizada)."
+
+# @ wpp
+#~ msgid ""
+#~ "<strong>[property_flyer class='custom_css_class']</strong> - For use with "
+#~ "a custom CSS class.<br />"
+#~ msgstr ""
+#~ "<strong>[property_flyer class='classe_CSS']</strong> - Para ser usado com "
+#~ "uma classe CSS personalizada.<br />"
+
+# @ wpp
+#~ msgid ""
+#~ "<strong>[property_flyer image='url_to_custom_image']</strong> - Returns "
+#~ "url_to_custom_image with a link to the PDF Flyer."
+#~ msgstr ""
+#~ "<strong>[property_flyer image='url_de_imagem']</strong> - Retorna uma "
+#~ "imagem personalizada com o link para a Ficha em PDF."
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "You can regenerate all your PDF flyers, but depending on your server, it "
+#~ "can be very time consuming if you have many %1s."
+#~ msgstr ""
+#~ "Você poderá regenerar todos as suas Fichas em PDF, mas dependendo do seu "
+#~ "servidor, isto poderá levar bastante tempo, caso você tenha muitos "
+#~ "imóveis."
+
+# @ wpp
+#~ msgid "Regenerate all Flyers"
+#~ msgstr "Regenerar todas Fichas em PDF"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Close Result's Logs"
+#~ msgstr "Filtrar Resultados"
+
+# @ wpp
+#, fuzzy
+#~ msgid "PDF Flyer for property \""
+#~ msgstr "Ficha em PDF para "
+
+# @ wpp
+#, fuzzy
+#~ msgid "\" is generated."
+#~ msgstr "\" foi gerado."
+
+# @ wpp
+#~ msgid "<b>Error. PDF Flyer for property \""
+#~ msgstr "<b>Erro. Ficha em PDF para o imóvel \""
+
+# @ wpp
+#, fuzzy
+#~ msgid "\" could not be generated.</b>"
+#~ msgstr "\" não pode ser regenerado</b>."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Could not regenerate PDF Flyer for property \""
+#~ msgstr "Não foi possível regenerar uma Ficha em PDF para o imóvel \""
+
+# @ wpp
+#, fuzzy
+#~ msgid "\". Looks like, something caused error on server."
+#~ msgstr ""
+#~ "Aparentemente, algo causou um erro no servidor. Por favor, tente "
+#~ "reproduzir PDF Flyer mais tarde."
+
+# @ wpp
+#~ msgid "Property List is got. Start generate PDF Flyers..."
+#~ msgstr "Lista de Imóveis aceita. Começando a gerar Fichas em PDF..."
+
+# @ wpp
+#~ msgid "There are no any property to generate PDF Flyer for."
+#~ msgstr "Não há nenhum imóvel para produzir a Ficha em PDF."
+
+# @ wpp
+#~ msgid ""
+#~ "Looks like, something caused error on server. Please, try to regenerate "
+#~ "PDF Flyers later."
+#~ msgstr ""
+#~ "Aparentemente, algo causou um erro no servidor. Por favor, tente "
+#~ "reproduzir a Ficha em PDF mais tarde."
+
+# @ wpp
+#~ msgid "Could not find a PDF flyer for %1s."
+#~ msgstr "Não foi possível encontrar uma Ficha em PDF para %1s."
+
+# @ wpp
+#~ msgid "Flyer"
+#~ msgstr "Ficha"
+
+# @ wpp
+#~ msgid "PDF flyer for "
+#~ msgstr "Ficha em PDF para "
+
+# @ wpp
+#~ msgid "Manage Capabilities"
+#~ msgstr "Gerenciar Capacidades"
+
+# @ wpp
+#~ msgid "Manage White Label"
+#~ msgstr "Gerenciar Rotulação"
+
+# @ wpp
+#~ msgid "Capabilities"
+#~ msgstr "Capacidades"
+
+# @ wpp
+#~ msgid ""
+#~ "Adds Properties menu and user can see the list of all available "
+#~ "properties."
+#~ msgstr ""
+#~ "Adiciona o menu de Imóveis e os usuários poderão ver uma lista de todos "
+#~ "os imóveis disponíveis."
+
+# @ wpp
+#~ msgid ""
+#~ "It is required capability to manage WP-Property. All cababilities depend "
+#~ "on this one."
+#~ msgstr ""
+#~ "Esta capacidade é necessária para gerenciar o WP-Property. Todas as "
+#~ "capacidades dependem desta."
+
+# @ wpp
+#~ msgid ""
+#~ "For example, user can not edit property if he has capability 'Add/Edit "
+#~ "Property', but doesn't have 'View Properties' capability."
+#~ msgstr ""
+#~ "Por exemplo, o usuário não pode editar imóveis caso tenha a capacidade "
+#~ "'Adicionar/Editar Imóvel', mas não tem 'Ver Imóveis'."
+
+# @ wpp
+#~ msgid ""
+#~ "Allows to edit properties where user is not author ( which he didn't "
+#~ "create )"
+#~ msgstr ""
+#~ "Permitir edição de imóveis em que o usuário não é a autor ( imóveis que "
+#~ "ele não criou )"
+
+# @ wpp
+#~ msgid ""
+#~ "Allows user to delete properties. This capability depends on 'Add/Edit "
+#~ "Properties' and 'Edit Other Properties'."
+#~ msgstr ""
+#~ "Permitir que usuários excluam imóveis. Esta capacidade depende de "
+#~ "'Adicionar/Editar Imóveis' e 'Editar Imóveis de Outros'."
+
+# @ wpp
+#~ msgid ""
+#~ "User can delete properties where he is author if he has 'Add/Edit "
+#~ "Properties' capability"
+#~ msgstr ""
+#~ "O usuário pode excluir imóveis em que ele é o autor caso tenha a "
+#~ "capacidade 'Adicionar/Editar Imóveis'."
+
+# @ wpp
+#~ msgid ""
+#~ "User can delete properties where he is not author if he has 'Edit Other "
+#~ "Properties' capability"
+#~ msgstr ""
+#~ "Usuários poderão excluir imóveis quando forem o autor caso tenham a "
+#~ "capacidade 'Editar Imóveis de Outros'"
+
+# @ wpp
+#~ msgid "Allows user to publish properties."
+#~ msgstr "Permitir que usuários publiquem imóveis."
+
+# @ wpp
+#~ msgid ""
+#~ "Allows user to manage WP-Property settings. Adds 'Settings' page to menu."
+#~ msgstr ""
+#~ "Permitir que usuários gerenciem as configurações do WP-Property. Adiciona "
+#~ "a página 'Configurações' ao menu."
+
+# @ wpp
+#~ msgid ""
+#~ "Allows user to manage taxonomies such as <b>Feature</b> and <b>Community "
+#~ "Feature</b>"
+#~ msgstr ""
+#~ "Permita que usuários gerenciem taxonomias como <b>Detalhe</b> e "
+#~ "<b>Proximidades</b>"
+
+# @ wpp
+#~ msgid "Other manage capabilities"
+#~ msgstr "Outras capacidades de gerenciamento"
+
+# @ wpp
+#~ msgid "WP Property Capabilities"
+#~ msgstr "Capacidades do WP-Property"
+
+# @ default
+#~ msgid ""
+#~ "User Roles capabilities management. See more details what every "
+#~ "capability does %shere%s."
+#~ msgstr ""
+#~ "Gerenciamento de capacidades de Cargos de Usuários. Veja mais detalhes "
+#~ "sobre o que cada capacidade faz %saqui%s."
+
+# @ wpp
+#~ msgid "Role"
+#~ msgstr "Cargo"
+
+# @ wpp
+#~ msgid "Administrator has all capabilities which can not be managed."
+#~ msgstr ""
+#~ "Administrador possuí todas as capacidades que não podem ser gerenciadas."
+
+# @ wpp
+#~ msgid "Taxonomies"
+#~ msgstr "Taxonomias"
+
+# @ wpp
+#~ msgid "Disable %1$s taxonomy."
+#~ msgstr "Desativar a taxonomia %1$s."
+
+# @ wpp
+#~ msgid "White Label"
+#~ msgstr "Rotulação"
+
+# @ wpp
+#~ msgid "Labels"
+#~ msgstr "Rótulos"
+
+# @ wpp
+#~ msgid "Contextual Menus"
+#~ msgstr "Menus Contextuais"
+
+# @ wpp
+#~ msgid ""
+#~ "Use this menu to rename WP-Property components, for example if you are "
+#~ "listing \"Real Estate\", or \"Vehicles\"."
+#~ msgstr ""
+#~ "Use este menu para renomear componentes do WP-Property, por exemplo, caso "
+#~ "estiver listando \"Imóveis\", ou \"Veículos\"."
+
+# @ wpp
+#~ msgid "Singular Property:"
+#~ msgstr "Imóvel Singular:"
+
+# @ wpp
+#~ msgid ""
+#~ "Default is \"Property\", will change the label in the navigation menus."
+#~ msgstr ""
+#~ "Padrão é \"Imóvel\", isto irá modificar o rótulo nos menus de navegação."
+
+# @ wpp
+#~ msgid "Plural Property:"
+#~ msgstr "Imóvel Plural:"
+
+# @ wpp
+#~ msgid ""
+#~ "Default is \"Properties\", will change the label in the navigation menus."
+#~ msgstr ""
+#~ "Padrão é \"Imóveis\", isto irá modificar o rótulo nos menus de navegação."
+
+# @ wpp
+#~ msgid ""
+#~ "Contextual menus are displayed when a user clicks the \"Help\" tab in the "
+#~ "top right corner of a page."
+#~ msgstr ""
+#~ "Menus contextuais são exibidos quando um usuário clica no botão \"Ajuda\" "
+#~ "no canto superior-direito da página."
+
+# @ wpp
+#~ msgid "Overview Page Contextual Help:"
+#~ msgstr "Ajuda do Sumário Contextual:"
+
+# @ wpp
+#~ msgid "Add "
+#~ msgstr "Adicionar "
+
+# @ wpp
+#~ msgid "Add New "
+#~ msgstr "Adicionar Novo "
+
+# @ wpp
+#~ msgid "Edit "
+#~ msgstr "Editar "
+
+# @ wpp
+#~ msgid "New "
+#~ msgstr "Novo "
+
+# @ wpp
+#~ msgid "All "
+#~ msgstr "Todos "
+
+# @ wpp
+#~ msgid "Search "
+#~ msgstr "Pesquisar "
+
+# @ wpp
+#~ msgid "No "
+#~ msgstr "Não "
+
+# @ wpp
+#~ msgid " found."
+#~ msgstr " imóveis."
+
+# @ default
+#~ msgid "Property Title"
+#~ msgstr "Título do Imóvel"
+
+# @ default
+#~ msgid "Property Content"
+#~ msgstr "Conteúdo do Imóvel"
+
+# @ default
+#, fuzzy
+#~ msgid "Property Excerpt"
+#~ msgstr "Tipo de Imóvel"
+
+# @ default
+#, fuzzy
+#~ msgid "Property Status"
+#~ msgstr "Situação do Imóvel:"
+
+# @ default
+#, fuzzy
+#~ msgid "Property Order"
+#~ msgstr "Tipo de Imóvel"
+
+# @ default
+#, fuzzy
+#~ msgid "Property Date"
+#~ msgstr "Página do Imóvel"
+
+# @ default
+#, fuzzy
+#~ msgid "Property Author"
+#~ msgstr "Formulários de Imóveis"
+
+# @ wpp
+#~ msgid ""
+#~ "Attachment referenced in database not found on disk: (%1s), removing "
+#~ "reference from DB."
+#~ msgstr ""
+#~ "Anexo referenciado no banco de dados não foi encontrado no disco: (%1s), "
+#~ "removendo referência do banco de dados."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Image directory %1s could not be created."
+#~ msgstr "A chave API não pode ser recriada."
+
+# @ wpp
+#~ msgid "System (Primary) Key is not found."
+#~ msgstr "Chave (Primária) do Sistema não encontrada."
+
+# @ wpp
+#~ msgid "Could not save image saved image - empty file returned by server."
+#~ msgstr ""
+#~ "Não foi possível salvar a imagem - um arquivo vazio foi retornado ao "
+#~ "servidor."
+
+# @ wpp
+#~ msgid "Image %1s downloaded, but appears corrupt - deleting."
+#~ msgstr "Imagem %1s baixada, mas aparentemente está corrompida - deletando."
+
+# @ wpp
+#~ msgid "Pending Image Downloads"
+#~ msgstr "Download de Imagens Pendentes"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Starting "
+#~ msgstr "Configurações"
+
+# @ wpp
+#~ msgid "on process start. Memory limit: %s. Before %s"
+#~ msgstr "no início do processo. Limite de memória: %s. Antes %s"
+
+# @ wpp
+#~ msgid "Manage XML Importer"
+#~ msgstr "Gerenciar o Importador de XML"
+
+# @ wpp
+#~ msgid "Ignore updates on XMLI process"
+#~ msgstr "Ignorar atualizações em processos do XMLI"
+
+# @ wpp
+#~ msgid ""
+#~ "Imported on: <b>%1$s</b> <a href=\"%2$s\" title=\"%3$s\">Importer</a>"
+#~ msgstr ""
+#~ "Importado em: <b>%1$s</b> <a href=\"%2$s\" title=\"%3$s\">Importador</a>"
+
+# @ default
+#~ msgid "ago"
+#~ msgstr "atrás"
+
+# @ wpp
+#~ msgid "Last Import"
+#~ msgstr "Última importação"
+
+# @ wpp
+#~ msgid "none"
+#~ msgstr "nenhum"
+
+# @ wpp
+#~ msgid "Memory Usage: %s. Difference: %s. Details: %s"
+#~ msgstr "Uso de Memória: %s. Diferença: %s. Detalhes: %s"
+
+# @ default
+#, fuzzy
+#~ msgid "Time: "
+#~ msgstr "Tempo: "
+
+# @ wpp
+#~ msgid ""
+#~ "There are (%1s) unattached files related to listings that were imported "
+#~ "using the XML Importer."
+#~ msgstr ""
+#~ "Existem (%1s) arquivos desanexados relacionados a listagens que foram "
+#~ "importadas utilizando o Importador XML."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Delete Unattached Files"
+#~ msgstr "Deletar páginas de outros"
+
+# @ wpp
+#~ msgid "Look up XML import history."
+#~ msgstr "Procurar histórico de importações XML."
+
+# @ wpp
+#~ msgid "Show XML Import History"
+#~ msgstr "Exibir histórico de Importação"
+
+# @ wpp
+#~ msgid "Show last 500 imported items in descending order."
+#~ msgstr "Exibir últimos 500 itens importados em ordem decrescente."
+
+# @ wpp
+#~ msgid "( Imported )"
+#~ msgstr "( Importado )"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Schedule coult not be imported."
+#~ msgstr "A chave API não pode ser recriada."
+
+# @ wpp
+#~ msgid "Importer"
+#~ msgstr "Importação"
+
+# @ wpp
+#~ msgid ""
+#~ "Starting Cron-Initiated Import: %1s. Using XML Importer %2s and WP-"
+#~ "Property %3s."
+#~ msgstr ""
+#~ "Iniciando Importação a partir do Cron: %1s. Utilizando Importador XML %2s "
+#~ "e WP-Property %3s."
+
+# @ wpp
+#, fuzzy
+#~ msgid "XML Importer Help"
+#~ msgstr "Ajuda do Importador XML"
+
+# @ wpp
+#~ msgid ""
+#~ "By default, xPath are executed in the xPath input boxes. <a target="
+#~ "\"_blank\" href=\"http://www.w3schools.com/xpath/xpath_syntax.asp\">W3 "
+#~ "Schools XPath Syntax</a>. "
+#~ msgstr ""
+#~ "Por padrão, o XPath é executado em caixas de texto do XPath. <a target="
+#~ "\"_blank\" href=\"http://www.w3schools.com/xpath/xpath_syntax.asp\">W3 "
+#~ "Schools Sintaxe do XPath</a>. "
+
+# @ wpp
+#~ msgid ""
+#~ "Example: get all the option values that have a label for \"height\": "
+#~ "<b>options/option[label = \"Height\"]/value </b>"
+#~ msgstr ""
+#~ "Exemplo: obter todos os valores para opções que possuem um rótulo para "
+#~ "\"height\": <b>options/option[label = \"Height\"]/value </b>"
+
+# @ wpp
+#~ msgid "XPath Query to Property Elements"
+#~ msgstr "Chamado XPath para elementos de Imóveis"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Import Limits"
+#~ msgstr "Tamanho Limite de Upload de Imagens:"
+
+# @ wpp
+#~ msgid "Running the Import"
+#~ msgstr "Importando"
+
+# @ wpp
+#~ msgid ""
+#~ "There are two ways to process an import, using the browser, or by setting "
+#~ "up a cron job.  Using the browser is easy, and viable when you have a "
+#~ "small feed, or a very good server. "
+#~ msgstr ""
+#~ "Existem dois tipos de processar uma importação, utilizando o navegador ou "
+#~ "definindo um cron job. Utilizando o navegador é fácil e viável quando sua "
+#~ "lista de imóveis é pequena, ou quando dispõe de um bom servidor. "
+
+# @ wpp
+#~ msgid "Function: free_text"
+#~ msgstr "Função: free_text"
+
+# @ wpp
+#~ msgid "Function: uppercase"
+#~ msgstr "Função: todas maiúsculas"
+
+# @ wpp
+#~ msgid ""
+#~ "To convert all alphabetic characters to uppercase, use the <b>uppercase</"
+#~ "b> command, like so: <b>uppercase: {xpath}</b>."
+#~ msgstr ""
+#~ "Para converter todos os caracteres do alfabeto para maiúsculas, use o "
+#~ "comando <b>uppercase</b>, exemplo: <b>uppercase: {xpath}</b>."
+
+# @ wpp
+#~ msgid "Function: concat"
+#~ msgstr "Função: concat"
+
+# @ wpp
+#~ msgid "Function: concat_list"
+#~ msgstr "Função: concat_list"
+
+# @ wpp
+#~ msgid ""
+#~ "Found %1s properties from database that were imported from this feed."
+#~ msgstr ""
+#~ "Foram encontrados %1s imóveis do banco de dados que foram importados "
+#~ "desta fonte."
+
+# @ wpp
+#~ msgid "Property ID %1s has been deleted. Total deleted so far: %2s"
+#~ msgstr "Imóvel ID %1s foi deletedo. Total deletado até agora: %2s"
+
+# @ wpp
+#~ msgid ""
+#~ "Deleted %1s unattached property files that were created from an XML "
+#~ "import."
+#~ msgstr ""
+#~ "%1s arquivos de imóveis não anexados criados pelo Importador XML foram "
+#~ "deletados."
+
+# @ wpp
+#~ msgid "Something went wrong, did not delete any unattached images."
+#~ msgstr ""
+#~ "Ocorreu algum problema, não foi possível excluir nenhuma imagem anexada."
+
+# @ wpp
+#~ msgid "All %1$s properties have been deleted in %2$s seconds."
+#~ msgstr "Todos os %1$s imóveis foram deletados em %2$s segundos."
+
+# @ wpp
+#~ msgid ""
+#~ "Although %1$s properties were found, only %2$s have been deleted in %3$s "
+#~ "seconds."
+#~ msgstr ""
+#~ "Embora %1$s imóveis foram encontrados, somente %2$s foram deletados, em "
+#~ "%3$s segundos."
+
+# @ wpp
+#~ msgid "Something went wrong, no properties were found to delete."
+#~ msgstr ""
+#~ "Aconteceu alguma coisa errada, não foram encontrados imóveis para excluir."
+
+# @ wpp
+#~ msgid "before %s"
+#~ msgstr "antes %s"
+
+# @ wpp
+#~ msgid "after %s"
+#~ msgstr "após %s"
+
+# @ wpp
+#~ msgid "Created temporary directory for import: %1$s."
+#~ msgstr "Diretório temporário criado para a importação: %1$s."
+
+# @ wpp
+#~ msgid "Could not load XML Object from raw data: %1s."
+#~ msgstr "Não foi possível carregar o objeto XML a partir do dado bruto: %1s."
+
+# @ wpp
+#~ msgid ""
+#~ "Could not load XML Object from raw data - empty result returned. Check "
+#~ "your settings."
+#~ msgstr ""
+#~ "Não foi possível carregar o Objeto XML dos dados brutos - um resultado "
+#~ "vazio retornou. Verifique suas configurações."
+
+# @ wpp
+#~ msgid "before getting the list of XML objects (listings)"
+#~ msgstr "antes de conseguir a lista de objetos XML (listas)"
+
+# @ wpp
+#~ msgid "after getting the list of XML objects (listings)"
+#~ msgstr "após de conseguir a lista de objetos XML (listas)"
+
+# @ wpp
+#~ msgid "Data loaded from cache."
+#~ msgstr "Dados carregados do cache."
+
+# @ wpp
+#~ msgid " object(s) found with XPath Rule: "
+#~ msgstr " objeto(s) encontrados com a Regra de XPath: "
+
+# @ wpp
+#~ msgid ""
+#~ "%1s objects identified: <a href=\"%2s\" target=\"_blank\">download "
+#~ "processed XML file</a> ( %3s )."
+#~ msgstr ""
+#~ "%1s objetos identificados: <a href=\"%2s\" target=\"_blank\">baixar o "
+#~ "arquivo XML processado</a> ( %3s )."
+
+# @ wpp
+#~ msgid "Root Element XPath Rule: "
+#~ msgstr "Elemento Raiz da Regra XPath: "
+
+# @ wpp
+#~ msgid "No Root Element XPath Rule, displaying most root elements."
+#~ msgstr ""
+#~ "Sem elemento raiz da Regra XPath, exibindo a maioria dos elementos raiz."
+
+# @ wpp
+#, fuzzy
+#~ msgid "No objects found."
+#~ msgstr "Não foram encontrados resultados."
+
+# @ wpp
+#~ msgid "Preview truncated: showing: %1s of full feed:"
+#~ msgstr "Pré-visualizar dados truncados: exibindo: %1s da fonte completa:"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Available tags in source: %1s"
+#~ msgstr "Tags disponíveis:"
+
+# @ wpp
+#~ msgid "XPath rules for object #%1d processed with %2d extracted attributes."
+#~ msgstr ""
+#~ "Regras XPath para o objeto #%1d foram processadas com %2d atributos "
+#~ "extraídos."
+
+# @ wpp
+#~ msgid "Stopping import due to specified pre-QC limit of %1d."
+#~ msgstr "Parando importação devido ao limite especificado do pre-QC de %1d."
+
+# @ wpp
+#~ msgid "Importing %1s"
+#~ msgstr "Importando %1s"
+
+# @ wpp
+#~ msgid "Deleted all ( %1s ) properties that originated from this feed."
+#~ msgstr "Todos os imóveis desta fonte ( %1s ) foram removidos."
+
+# @ wpp
+#~ msgid ""
+#~ "Did not find any properties that have been imported from this feed to "
+#~ "remove."
+#~ msgstr ""
+#~ "Não foi possível encontrar nenhum imóvel importado desta fonte para "
+#~ "remover."
+
+# @ wpp
+#~ msgid "Did not remove any old properties."
+#~ msgstr "Não remova nenhum imóvel antigo."
+
+# @ wpp
+#~ msgid "Stopping import due to specified post-QC limit of %1d."
+#~ msgstr "Parando importação devido ao limite especificado do post-QC de %1d."
+
+# @ wpp
+#~ msgid "Object cycle done. Completed %1d cycles."
+#~ msgstr "Ciclo de objeto foi realizado. %1d ciclos foram completados."
+
+# @ wpp
+#~ msgid "Deleted ( %1s ) properties that are no longer in the feed."
+#~ msgstr ""
+#~ "Imóveis que não estavam mais presentes na fonte ( %1s ) foram removidos."
+
+# @ wpp
+#~ msgid "Deleted the import temporary directory."
+#~ msgstr "Diretório temporário de importação foi deletado."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Import temporary directory is not been created"
+#~ msgstr "A chave API não pode ser recriada."
+
+# @ wpp
+#~ msgid "Unable to delete the import temporary directory"
+#~ msgstr "Não foi possível excluir o diretório temporário de importação"
+
+# @ wpp
+#~ msgid "Schedule imported from file."
+#~ msgstr "Agendar importação a partir de um arquivo."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Property Importer"
+#~ msgstr "Importação"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Sort by:"
+#~ msgstr "Ordenar:"
+
+# @ wpp
+#~ msgid "Last Run"
+#~ msgstr "Última importação"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Created Properties"
+#~ msgstr "Imóveis Destacados"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Updated Properties"
+#~ msgstr "Imóveis Recentes"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Total Properties"
+#~ msgstr "Todos os Imóveis"
+
+# @ wpp
+#~ msgid "Limit"
+#~ msgstr "Limite"
+
+# @ wpp
+#~ msgid "Saved Import Schedules"
+#~ msgstr "Agendamentos salvos"
+
+# @ wpp
+#~ msgid "Last run "
+#~ msgstr "Última importação "
+
+# @ wpp
+#~ msgid " ago."
+#~ msgstr " atrás."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Updated "
+#~ msgstr "Atualizado "
+
+# @ wpp
+#~ msgid " objects."
+#~ msgstr " objetos."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Created "
+#~ msgstr "Criou "
+
+# @ wpp
+#~ msgid "Limited to "
+#~ msgstr "Limitado a "
+
+# @ wpp
+#, fuzzy
+#~ msgid "Total Properties: "
+#~ msgstr "Todos os Imóveis: "
+
+# @ wpp
+#, fuzzy
+#~ msgid "Source URL:"
+#~ msgstr "URL do Feed:"
+
+# @ wpp
+#~ msgid "Cron Command:"
+#~ msgstr "Comando de CRON:"
+
+# @ wpp
+#~ msgid "Run Import in Browser"
+#~ msgstr "Processar Importação"
+
+# @ wpp
+#~ msgid "Save to File"
+#~ msgstr "Salvar para arquivo"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Delete All Properties"
+#~ msgstr "Excluir todos os imóveis"
+
+# @ wpp
+#~ msgid "You do not have any saved schedules. Create one now."
+#~ msgstr "Você não possuí nenhum agendamento. Crie um agora."
+
+# @ wpp
+#~ msgid "Import Schedule"
+#~ msgstr "Agendar importação"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Upload File"
+#~ msgstr "Fazer upload de arquivos"
+
+# @ wpp
+#~ msgid "Import name"
+#~ msgstr "Nome da Importação"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Source"
+#~ msgstr "Shortcode:"
+
+# @ wpp
+#~ msgid "URL"
+#~ msgstr "URL"
+
+# @ wpp
+#~ msgid "Type:"
+#~ msgstr "Tipo:"
+
+# @ wpp
+#~ msgid "XML / JSON"
+#~ msgstr "XML / JSON"
+
+# @ wpp
+#~ msgid "CSV"
+#~ msgstr "CSV"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Google Spreadsheet"
+#~ msgstr "Google Maps"
+
+# @ wpp
+#, fuzzy
+#~ msgid "WP-Property Feed"
+#~ msgstr "Imóvel salvo."
+
+# @ wpp
+#~ msgid "RETS"
+#~ msgstr "RETS"
+
+# @ wpp
+#~ msgid "Send GET variables as POST data."
+#~ msgstr "Enviar variáveis GET como dados POST."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Google Username"
+#~ msgstr "Nome de usuário"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Google Password"
+#~ msgstr "Google Maps"
+
+# @ wpp
+#~ msgid "Google Extra Query Vars"
+#~ msgstr "Variáveis Extras de Requisição do Google"
+
+# @ wpp
+#, fuzzy
+#~ msgid "RETS Username."
+#~ msgstr "Nome de usuário"
+
+# @ wpp
+#, fuzzy
+#~ msgid "RETS Password."
+#~ msgstr "Senha:"
+
+# @ wpp
+#~ msgid "Property Resource."
+#~ msgstr "Recurso do imóvel."
+
+# @ wpp
+#~ msgid "Default is \"Property\""
+#~ msgstr "O padrão é \"Imóvel\""
+
+# @ wpp
+#, fuzzy
+#~ msgid "Property Resource Class."
+#~ msgstr "Formulários de Imóveis"
+
+# @ wpp
+#~ msgid "Primary Key for Resource."
+#~ msgstr "Chave Primário para o Recurso."
+
+# @ wpp
+#~ msgid "Photo Object."
+#~ msgstr "Objeto de foto."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Default is \"Photo\""
+#~ msgstr "Página Padrão de %1s"
+
+# @ wpp
+#~ msgid "User-Agent String."
+#~ msgstr "String de User-Agent"
+
+# @ wpp
+#~ msgid "May be required by your RETS"
+#~ msgstr "Pode ser requerido por seu RETS"
+
+# @ wpp
+#~ msgid "User-Agent Password."
+#~ msgstr "Senha do User-Agent."
+
+# @ wpp
+#, fuzzy
+#~ msgid "RETS Version."
+#~ msgstr "Versão"
+
+# @ wpp
+#~ msgid "Version is set by your RETS provider."
+#~ msgstr "A versão é definida pelo seu provedor RETS."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Property Query."
+#~ msgstr "Imóvel atualizado."
+
+# @ wpp
+#~ msgid ""
+#~ "Accepts <a href=\"https://www.flexmls.com/support/rets/tutorials/dmql/\" "
+#~ "target=\"_blank\">DMQL</a> - Default is \"(ListingStatus=|Active)\""
+#~ msgstr ""
+#~ "Aceitar <a href=\"https://www.flexmls.com/support/rets/tutorials/dmql/\" "
+#~ "target=\"_blank\">DMQL</a> - O padrão é \"(ListingStatus=|Active)\""
+
+# @ wpp
+#, fuzzy
+#~ msgid "Toggle Advanced Source Options"
+#~ msgstr "Alternar Opções de Busca Avançada"
+
+# @ wpp
+#~ msgid "What is this?"
+#~ msgstr "O que é isto?"
+
+# @ wpp
+#~ msgid "Preview Raw Data"
+#~ msgstr "Pré-visualizar dados brutos"
+
+# @ wpp
+#~ msgid "Close Preview"
+#~ msgstr "Fechar Pré-visualização"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Default Property Type"
+#~ msgstr "Página padrão de Imóveis"
+
+# @ wpp
+#~ msgid ""
+#~ "Will be defaulted to if no xPath rule exists for the \"Property Type\"."
+#~ msgstr ""
+#~ "Será usado com padrão se nenhuma regra do XPath existir para \"Tipos de "
+#~ "Imóveis\"."
+
+# @ wpp
+#~ msgid "<b>Pre-QC Limit:</b> Limit import to the first"
+#~ msgstr "<b>Limite Pre-QC:</b> Limitar importação para os primeiros"
+
+# @ wpp
+#, fuzzy
+#~ msgid "properties in the feed."
+#~ msgstr "Não foram encontrados imóveis"
+
+# @ wpp
+#~ msgid "More about limits."
+#~ msgstr "Mais sobre limites."
+
+# @ wpp
+#~ msgid "<b>Post-QC Limit:</b> Limit import to the first"
+#~ msgstr "<b>Limite Post-QC:</b> Limitar importação para os primeiros"
+
+# @ wpp
+#~ msgid "created properties that have passed quality standards."
+#~ msgstr "imóveis criados que passarem pelos padrões de qualidade."
+
+# @ wpp
+#~ msgid "Number of image importing threads spawned"
+#~ msgstr "Número de filamentos gerados pela importação de imagens"
+
+# @ wpp
+#~ msgid "Default is 10. Not recommended to increase the number."
+#~ msgstr "O padrão é 10. Não é recomendado aumentar este número."
+
+# @ wpp
+#~ msgid ""
+#~ "Only import images that are over %1spx in width, and %2spx in height."
+#~ msgstr ""
+#~ "Importar somente imagens maiores que %1spx de largura e %2spx de altura."
+
+# @ wpp
+#~ msgid "Minimum sizes are ignored if blank."
+#~ msgstr "Valores em brancos serão ignorados."
+
+# @ wpp
+#~ msgid "Imported properties must have at least "
+#~ msgstr "Imóveis importados precisam conter ao menos "
+
+# @ wpp
+#~ msgid ", but no more than "
+#~ msgstr ", mas não mais do que "
+
+# @ wpp
+#, fuzzy
+#~ msgid " valid images."
+#~ msgstr " imagens válidas."
+
+# @ wpp
+#~ msgid "Do not update properties that have been imported less than "
+#~ msgstr "Não atualizar imóveis importados em menos de "
+
+# @ wpp
+#, fuzzy
+#~ msgid "hour(s) ago."
+#~ msgstr "%s horas atrás"
+
+# @ wpp
+#~ msgid "Automatically set the first image as the thumbnail."
+#~ msgstr "Definir a primeira imagem como imagem de destaque automaticamente."
+
+# @ wpp
+#~ msgid ""
+#~ "Remove properties that are no longer in source XML from this site's "
+#~ "database. This can now be done if the the import configuration does not "
+#~ "have a Pre-QC or Post-QC Limit."
+#~ msgstr ""
+#~ "Remover imóveis que não estejam mais no arquivo XML fonte do banco de "
+#~ "dados deste site. Isto agora pode ser feito caso as configurações de "
+#~ "importação não possuam limites Pre-QC ou Post-QC."
+
+# @ wpp
+#~ msgid ""
+#~ "When updating an existing property, remove all old images before "
+#~ "downloading new ones."
+#~ msgstr ""
+#~ "Ao atualizar imóveis existentes, remover todas as imagens antes de baixar "
+#~ "novas imagens."
+
+# @ wpp
+#~ msgid ""
+#~ "Send email updates to the site admin e-mail address ( %1s ) when import "
+#~ "schedules are executed and completed."
+#~ msgstr ""
+#~ "Enviar atualizações por email para o administrador do site ( %1s ) quando "
+#~ "agendamentos de forem executados e completados."
+
+# @ wpp
+#~ msgid ""
+#~ "Remove all properties that were originally imported from this feed on "
+#~ "import."
+#~ msgstr "Remover todos os imóveis previamente importados deste arquivo."
+
+# @ wpp
+#~ msgid "Completely remove <b>all</b> existing properties prior to import."
+#~ msgstr ""
+#~ "Remover completamente <b>todos os imóveis</b> existentes neste site."
+
+# @ wpp
+#~ msgid "Fix strings that are in all caps."
+#~ msgstr "Corrigir strings que estão em maiúsculas."
+
+# @ wpp
+#~ msgid "Scan for any formatting tags and strip them out."
+#~ msgstr "Rastrear tags de formatação e retira-las."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Automatically load imported images into property slideshow."
+#~ msgstr ""
+#~ "Automaticamente delete todas as imagens do imóvel e todos os extras "
+#~ "quando um imóvel for deletado."
+
+# @ wpp
+#~ msgid "Geolocate imported listings."
+#~ msgstr "Geolocalizar listagens importadas."
+
+# @ wpp
+#~ msgid "Enable detailed logging to assist with troubleshooting."
+#~ msgstr "Habilitar log detalhado para ajudar em resolução de problemas."
+
+# @ wpp
+#~ msgid "Show SQL Queries and errors."
+#~ msgstr "Exibir inquéritos e erros de SQL."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Toggle Advanced Options"
+#~ msgstr "Alternar Opções de Busca Avançada"
+
+# @ wpp
+#~ msgid "Automatic Matching"
+#~ msgstr "Correspondendo Automaticamente"
+
+# @ wpp
+#~ msgid ""
+#~ "This will work for WP-Property exports and imports, but will have mixed "
+#~ "results with uniquely formatted feeds."
+#~ msgstr ""
+#~ "Isto funciona para importações e exportações entre instalações com WP-"
+#~ "Property, mas pode ter resultados confusos para arquivos com outras "
+#~ "formatações."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Attribute Map"
+#~ msgstr "Atributo"
+
+# @ wpp
+#~ msgid ""
+#~ "Use XPath rules to setup the paths to the individual XML attributes to "
+#~ "match them up with WP-Property attributes."
+#~ msgstr ""
+#~ "Use regras XPath para configurar os caminhos para que atributos "
+#~ "individuais do XML correspondam os atributos do WP-Property."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Sort Attribute Rules"
+#~ msgstr "Shortcode de Campos de Atributos"
+
+# @ wpp
+#, fuzzy
+#~ msgid "WP-Property Attribute"
+#~ msgstr "Atributos Agrupados"
+
+# @ wpp
+#~ msgid "XPath Rule"
+#~ msgstr "Regra XPath."
+
+# @ wpp
+#, fuzzy
+#~ msgid "WordPress Attributes"
+#~ msgstr "Atributo do Endereço"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Street Number"
+#~ msgstr "Telefone"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Street"
+#~ msgstr "Definir"
+
+# @ wpp
+#, fuzzy
+#~ msgid "County"
+#~ msgstr "Comentar"
+
+# @ wpp
+#, fuzzy
+#~ msgid "State"
+#~ msgstr "Situação"
+
+# @ wpp
+#~ msgid "Country"
+#~ msgstr "País"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Postal Code"
+#~ msgstr "Postar Comentário"
+
+# @ wpp
+#, fuzzy
+#~ msgid "WP-Property Attributes"
+#~ msgstr "Atributos do WP-Property"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Property Agent"
+#~ msgstr "Corretor de Imóveis"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Global Property ID"
+#~ msgstr "ID Global dos Imóveis"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Display Address"
+#~ msgstr "Endereço"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Delete Selected"
+#~ msgstr "Deletar Permanentemente"
+
+# @ wpp
+#~ msgid "Preview Import"
+#~ msgstr "Prever Importação"
+
+# @ wpp
+#~ msgid "Process Full Import"
+#~ msgstr "Processar Importação"
+
+# @ wpp
+#~ msgid "Updating existing listing."
+#~ msgstr "Atualizar listagem existente."
+
+# @ default
+#~ msgid ""
+#~ "Attempted to update property, but wp_update_post() did not return an ID. "
+#~ msgstr ""
+#~ "Tentativa de atualizar imóveis, mas o wp_update_post() não retornou "
+#~ "nenhum ID. "
+
+# @ wpp
+#~ msgid "Creating new listing."
+#~ msgstr "Criar nova listagem."
+
+# @ wpp
+#~ msgid "Object import failed. Error: %1s."
+#~ msgstr "Importação de objeto falhou. Erro: %1s."
+
+# @ wpp
+#~ msgid ""
+#~ "Object import failed - no Property Title detected or set, a requirement "
+#~ "to creating a property."
+#~ msgstr ""
+#~ "Importação do objeto falhou - não foi detectado ou definido o título do "
+#~ "imóvel, um dado necessário para criar um imóvel."
+
+# @ wpp
+#~ msgid ""
+#~ "Object import failed.  Post cold not be created nor updated, and post_id "
+#~ "was not found or created."
+#~ msgstr ""
+#~ "Importação de objeto falhou.  Não foi possível criar ou atualizar o post, "
+#~ "e o post_id não foi encontrado ou criado."
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "Address validation was skipped because address has already been validated."
+#~ msgstr ""
+#~ "Validação de endereço foi ignorada uma vez que o endereço já foi validado."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Address validation has failed."
+#~ msgstr "Validação de endereço falhou."
+
+# @ wpp
+#~ msgid "Address validation has been successfully completed."
+#~ msgstr "Validação de endereço foi completada com sucesso."
+
+# @ wpp
+#~ msgid "on disk using file_get_contents()"
+#~ msgstr "no disco, utilizando file_get_contents()"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Attempting to get image  ( "
+#~ msgstr "Tentativa de baixar imagem  (  )  utilizando o wp_remote_get()"
+
+# @ wpp
+#~ msgid "Unable to get image %1s using the %2s method."
+#~ msgstr "Não foi possível baixar a imagem %1s utilizando o método %2s."
+
+# @ wpp
+#~ msgid "Image %1s corrupted - skipped."
+#~ msgstr "Imagem %1s está corrompida - foi desconsiderada."
+
+# @ wpp
+#~ msgid ""
+#~ "Image %1s downloaded, but image size failed quality standards - deleting."
+#~ msgstr ""
+#~ "Imagem %1s baixada, mas o tamanho da imagem falhou nos padrões de "
+#~ "qualidade - deletando."
+
+# @ wpp
+#~ msgid "Unable to save image %1s."
+#~ msgstr "Não foi possível salvar a imagem %1s."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Manage Slideshow"
+#~ msgstr "Gerenciar links"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Fade into background color"
+#~ msgstr "Cor de fundo da seção"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Crop images."
+#~ msgstr "Esconder imagens."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Carousel Thumbnail Size:"
+#~ msgstr "Tamanho da Miniatura do Mapa:"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Slideshow Options"
+#~ msgstr "Opções Avançadas"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Slideshow Images:"
+#~ msgstr "Exibir imagens %s"
+
+# @ wpp
+#, fuzzy
+#~ msgid "All Images:"
+#~ msgstr "Imagens:"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Title."
+#~ msgstr "Título"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Tagline."
+#~ msgstr "Slogan"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Show pagination buttons in slideshow."
+#~ msgstr "Exibir paginação no final dos resultados."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Thumbnail Size"
+#~ msgstr "Tamanho da Miniatura:"
+
+# @ wpp
+#, fuzzy
+#~ msgid "WP-Property Slideshow"
+#~ msgstr "Imóvel salvo."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Save Selection and Order"
+#~ msgstr "Seleção Primária"
+
+# @ default
+#~ msgid "Restore"
+#~ msgstr "Restaurar"
+
+# @ default
+#~ msgid "Edit &#8220;%s&#8221;"
+#~ msgstr "Editar &#8220;%s&#8221;"
+
+# @ default
+#~ msgid "Edit this item"
+#~ msgstr "Editar este ítem"
+
+# @ default
+#~ msgid "Restore this item from the Trash"
+#~ msgstr "Restaure este ítem da Lixeira"
+
+# @ default
+#~ msgid "Move this item to the Trash"
+#~ msgstr "Mover este ítem para a Lixeira"
+
+# @ default
+#~ msgid "Trash"
+#~ msgstr "Lixeira"
+
+# @ default
+#~ msgid "Delete this item permanently"
+#~ msgstr "Deletar este ítem permanentemente"
+
+# @ default
+#~ msgid "Delete Permanently"
+#~ msgstr "Deletar Permanentemente"
+
+# @ default
+#~ msgid "View &#8220;%s&#8221;"
+#~ msgstr "Ver &#8220;%s&#8221;"
+
+# @ default
+#~ msgid "View"
+#~ msgstr "Ver"
+
+# @ wpp
+#~ msgid "Toggle %1s more."
+#~ msgstr "Alternar mais %1s."
+
+# @ wpp
+#~ msgid "Settings updated."
+#~ msgstr "Configurações atualizadas."
+
+# @ wpp
+#~ msgid "Feature Updates"
+#~ msgstr "Atualizações de Recursos"
+
+# @ wpp
+#~ msgid "Check Updates"
+#~ msgstr "Checar Atualizações"
+
+# @ wpp
+#~ msgid ""
+#~ "to download, or update, all premium features purchased for this domain."
+#~ msgstr ""
+#~ "para baixar, ou atualizar, todos os recursos premium comprados para este "
+#~ "domínio."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Enable comments."
+#~ msgstr "Moderar comentários"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Exclude %1s from regular search results."
+#~ msgstr "Incluir %1s em pesquisas normais."
+
+# @ wpp
+#~ msgid "Disable \"on-the-fly\" image regeneration."
+#~ msgstr "Desativar regeneração automática de imagens."
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "Automatically delete all %1s images and attachments when a %2s is deleted."
+#~ msgstr ""
+#~ "Automaticamente delete todas as imagens do imóvel e todos os extras "
+#~ "quando um imóvel é deletado."
+
+# @ wpp
+#~ msgid "Default %1s Page"
+#~ msgstr "Página Padrão de %1s"
+
+# @ wpp
+#~ msgid "Property (Default)"
+#~ msgstr "Imóvel (Padrão)"
+
+# @ wpp
+#~ msgid "You must have permalinks enabled to change the Default %1s page."
+#~ msgstr ""
+#~ "Você precisa ter permalinks habilitados para alterar a página padrão de "
+#~ "%1s."
+
+# @ wpp
+#~ msgid ""
+#~ "Automatically overwrite this page's content with [property_overview]."
+#~ msgstr ""
+#~ "Sobrescreva automaticamente o conteúdo desta página com "
+#~ "[property_overview]."
+
+# @ wpp
+#~ msgid ""
+#~ "When showing property search results, don't override the page content "
+#~ "with [property_overview]."
+#~ msgstr ""
+#~ "Quando exibir resultados de pesquisa de imóveis, não sobrescreva a página "
+#~ "com o conteúdo de [property_overview]."
+
+# @ wpp
+#~ msgid ""
+#~ "If checked, be sure to include [property_overview] somewhere in the "
+#~ "content, or no properties will be displayed."
+#~ msgstr ""
+#~ "Se checado, tenha certeza de incluir [property_overview] em algum lugar "
+#~ "no conteúdo, ou nenhum imóvel será exibido."
+
+# @ wpp
+#~ msgid "Automatic Geolocation"
+#~ msgstr "Geolocalização Automática"
+
+# @ wpp
+#~ msgid "Attribute to use for physical addresses:"
+#~ msgstr "Usar este atributo como endereço:"
+
+# @ wpp
+#~ msgid "Localize addresses in:"
+#~ msgstr "Localizar endereços na linguagem:"
+
+# @ wpp
+#~ msgid ""
+#~ "Load default CSS. If unchecked, the wp-properties.css in your theme "
+#~ "folder will not be loaded."
+#~ msgstr ""
+#~ "Carregar o CSS padrão. Caso não marque isto, o arquivo 'wp-properties."
+#~ "css', em sua pasta de temas, não será carregado."
+
+# @ wpp
+#~ msgid "Load default CSS."
+#~ msgstr "Carregar CSS padrão."
+
+# @ wpp
+#~ msgid "Do not load theme-specific stylesheet."
+#~ msgstr "Não carregue a folha de estilos específica ao tema."
+
+# @ wpp
+#~ msgid ""
+#~ "This version of WP-Property has a stylesheet made specifically for the "
+#~ "theme you are using."
+#~ msgstr ""
+#~ "Esta versão do WP-Property possui uma folha de estilos feita "
+#~ "especialmente para o tema que você está usando."
+
+# @ wpp
+#~ msgid "Default Phone Number"
+#~ msgstr "Telefone Padrão"
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "Phone number to use when a %1s-specific phone number is not specified."
+#~ msgstr ""
+#~ "Número de telefone usado por padrão, quando um número de telefone não é "
+#~ "especificado para aquele imóvel."
+
+# @ wpp
+#~ msgid "Image Sizes"
+#~ msgstr "Tamanho da Imagem"
+
+# @ wpp
+#~ msgid "Image sizes used throughout the plugin."
+#~ msgstr "Tamanho de todas as imagens usadas pelo plugin."
+
+# @ wpp
+#~ msgid "Width"
+#~ msgstr "Largura"
+
+# @ wpp
+#~ msgid "Height"
+#~ msgstr "Altura"
+
+# @ wpp
+#~ msgid "Overview Shortcode"
+#~ msgstr "Shortcode Sumário"
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "These are the settings for the [property_overview] shortcode.  The "
+#~ "shortcode displays a list of all building / root %1s.<br />The display "
+#~ "settings may be edited further by customizing the <b>wp-content/plugins/"
+#~ "wp-properties/templates/property-overview.php</b> file.  To avoid losing "
+#~ "your changes during updates, create a <b>property-overview.php</b> file "
+#~ "in your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Estas são as configurações para o shortcode [property_overview]. O "
+#~ "shortcode exibe uma lista de todos os imóveis. <br /> A configuração "
+#~ "exibida pode ser ediatada ainda mais customizando o arquivo <b>wp-content/"
+#~ "plugins/wp-properties/templates/property-overview.php</b>. Para evitar "
+#~ "perder suas modificações durante atualizações, crie um arquivo "
+#~ "<b>property-overview.php</b> em seu diretório de templates, que será "
+#~ "automaticamente carregado."
+
+# @ wpp
+#~ msgid "Thumbnail size:"
+#~ msgstr "Tamanho da Miniatura:"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Show children %1s."
+#~ msgstr "Exibir imóveis secundários."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Show larger image of %1s when image is clicked using fancybox."
+#~ msgstr ""
+#~ "Exibir uma imagem ampliada do imóvel, utilizando o Fancybox, quando a "
+#~ "imagem for clicada."
+
+# @ wpp
+#~ msgid "Show pagination on bottom of results."
+#~ msgstr "Exibir paginação no final dos resultados."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Add sorting by %1s's title."
+#~ msgstr "Adicionar título do imóvel à ordenação da lista de imóveis."
+
+# @ wpp
+#, fuzzy
+#~ msgid "%1s Page"
+#~ msgstr "Página Padrão de %1s"
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "The display settings may be edited further by customizing the <b>wp-"
+#~ "content/plugins/wp-properties/templates/property.php</b> file.  To avoid "
+#~ "losing your changes during updates, create a <b>property.php</b> file in "
+#~ "your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Estas são as configurações para o shortcode [property_overview]. O "
+#~ "shortcode exibe uma lista de todos os imóveis. <br /> A configuração "
+#~ "exibida pode ser editada ainda mais customizando o arquivo <b>wp-content/"
+#~ "plugins/wp-properties/templates/property.php</b>. Para evitar perder suas "
+#~ "modificações durante atualizações, crie um arquivo <b>property.php</b> em "
+#~ "seu diretório de templates, que será automaticamente carregado."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Sort %1s stats by groups."
+#~ msgstr "Exibir informações de imóveis por grupo."
+
+# @ wpp
+#~ msgid ""
+#~ "Show Checkboxed Image instead of \"%s\" and hide \"%s\" for %s/%s values"
+#~ msgstr ""
+#~ "Exibir um quadrado com visto ao invés de \"%s\" e esconder \"%s\" para "
+#~ "valores %s/%s"
+
+# @ wpp
+#~ msgid "Google Maps"
+#~ msgstr "Google Maps"
+
+# @ wpp
+#~ msgid "Map Thumbnail Size:"
+#~ msgstr "Tamanho da Miniatura do Mapa:"
+
+# @ wpp
+#~ msgid "Map Zoom Level:"
+#~ msgstr "Nível de Zoom do Mapa:"
+
+# @ wpp
+#~ msgid "Custom Latitude Coordinate"
+#~ msgstr "Coordenada de Latitude Personalizada"
+
+# @ wpp
+#~ msgid "Default is \"%s\""
+#~ msgstr "O padrão é \"%s\""
+
+# @ wpp
+#~ msgid "Custom Longitude Coordinate"
+#~ msgstr "Coordenada de Longitude Personalizada"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Attributes to display in popup after a %1s on a map is clicked."
+#~ msgstr ""
+#~ "Atributos a serem exibidos em um popup após um imóvel no mapa ser clicado."
+
+# @ wpp
+#, fuzzy
+#~ msgid "Show %1s Title"
+#~ msgstr "Título"
+
+# @ wpp
+#~ msgid "Show Directions Link"
+#~ msgstr "Mostre Links de Direções"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Do not show a list of child %1s in Infobox. "
+#~ msgstr ""
+#~ "Não exiba uma lista de imóveis secundários na caixa de informação de "
+#~ "imóveis primários. "
+
+# @ wpp
+#~ msgid "Address Display"
+#~ msgstr "Mostrar Endereço"
+
+# @ wpp
+#~ msgid "Available tags:"
+#~ msgstr "Tags disponíveis:"
+
+# @ wpp
+#~ msgid "Currency & Numbers"
+#~ msgstr "Moeda & Números"
+
+# @ wpp
+#~ msgid "Currency symbol."
+#~ msgstr "Símbolo da moeda."
+
+# @ wpp
+#~ msgid "Thousands separator symbol:"
+#~ msgstr "Símbolo de separação de milhar:"
+
+# @ wpp
+#~ msgid ". (period)"
+#~ msgstr ". (ponto)"
+
+# @ wpp
+#~ msgid ", (comma)"
+#~ msgstr ", (vírgula)"
+
+# @ default
+#~ msgid "The character separating the 1 and the 5: $1<b>,</b>500"
+#~ msgstr "O caractere separando o 1 e o 5: $1<b>,</b>500"
+
+# @ wpp
+#~ msgid "Currency symbol placement:"
+#~ msgstr "Posição do símbolo da moeda:"
+
+# @ wpp
+#~ msgid "Before number"
+#~ msgstr "Antes do número"
+
+# @ wpp
+#~ msgid "After number"
+#~ msgstr "Depois do número"
+
+# @ wpp
+#~ msgid ""
+#~ "Parent property's aggregated value should be set as average of children "
+#~ "values. If not, - the aggregated value will be set as sum of children "
+#~ "values."
+#~ msgstr ""
+#~ "Valores agregados de imóveis primários deverão ser definidos como médias "
+#~ "de valores de secundários. Caso não sejam, os valores agregados serão a "
+#~ "soma dos valores de secundários."
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "Aggregated value is set only for numeric and currency attributes and can "
+#~ "be updated ( set ) only on child %1s's saving."
+#~ msgstr ""
+#~ "Valores agregados são somente para atributos números ou valores e podem "
+#~ "ser atualizados (definidos) somente ao salvar imóveis secundários."
+
+# @ wpp
+#~ msgid "Admin Settings"
+#~ msgstr "Configurações da Administração"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Thumbnail size for %1s images displayed on %2s page: "
+#~ msgstr ""
+#~ "Tamanho de miniatura para imagens de imóveis exibidas na Página do "
+#~ "Imóvel. "
+
+# @ wpp
+#, fuzzy
+#~ msgid "Completely hide hidden attributes when editing %1s."
+#~ msgstr ""
+#~ "Esconda completamente os atributes escondidos quando estiver editando "
+#~ "imóveis."
+
+# @ wpp
+#~ msgid "[purchase feature]"
+#~ msgstr "[adquirir recurso]"
+
+# @ default
+#~ msgid ""
+#~ "This feature is disabled because it requires WP-Property %1$s or higher."
+#~ msgstr ""
+#~ "Este recurso está desativada porque requer WP-Property %1$s ou maior."
+
+# @ wpp
+#~ msgid "Disable plugin."
+#~ msgstr "Desabilitar plugin."
+
+# @ wpp
+#~ msgid "Feature installed, using version"
+#~ msgstr "Recurso instalado, usando versão"
+
+# @ wpp
+#~ msgid ""
+#~ "Please visit <a href=\"%s\">UsabilityDynamics.com</a> to purchase this "
+#~ "feature."
+#~ msgstr ""
+#~ "Por favor visite <a href=\"%s\">UsabilityDynamics.com</a>  para comprar "
+#~ "este recurso."
+
+# @ wpp
+#~ msgid ""
+#~ "If prompted for your domain name during a premium feature purchase, enter "
+#~ "as appears here:"
+#~ msgstr ""
+#~ "Ao comprar recursos premium, digite o domínio exatamente como a seguir:"
+
+# @ wpp
+#~ msgid "Restore Backup of WP-Property Configuration"
+#~ msgstr "Restaurar o Backup de Configuração do WP-Property."
+
+# @ wpp
+#~ msgid "Download Backup of Current WP-Property Configuration."
+#~ msgstr "Baixar backup da configuração atual do WP-Property."
+
+# @ wpp
+#~ msgid "Revalidate all addresses using"
+#~ msgstr "Revalidar todos os endereços usando"
+
+# @ wpp
+#~ msgid "localization"
+#~ msgstr "localização"
+
+# @ wpp
+#~ msgid "Revalidate"
+#~ msgstr "Revalidar"
+
+# @ wpp
+#, fuzzy
+#~ msgid ""
+#~ "Enter in the ID of the %1s you want to look up, and the class will be "
+#~ "displayed below."
+#~ msgstr ""
+#~ "Digite o ID do imóvel que deseja pesquisar, e a classe será exibida "
+#~ "abaixo."
+
+# @ wpp
+#~ msgid "Lookup"
+#~ msgstr "Procurar"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Get %1s image data."
+#~ msgstr "Obter dados da imagem do imóvel."
+
+# @ wpp
+#~ msgid ""
+#~ "Look up the <b>$wp_properties</b> global settings array.  This array "
+#~ "stores all the default settings, which are overwritten by database "
+#~ "settings, and custom filters."
+#~ msgstr ""
+#~ "Veja o <b>$wp_properties</b> arranjo de configurações globais. Este "
+#~ "arranjo armazena todas as configurações padrão, que são sobre-escritas "
+#~ "por cofiguração  da database, e filtros personalizados."
+
+# @ wpp
+#~ msgid "Show $wp_properties"
+#~ msgstr "Exibir $wp_properties"
+
+# @ wpp
+#~ msgid ""
+#~ "Clear WPP Cache. Some shortcodes and widgets use cache, so the good "
+#~ "practice is clear it after widget, shortcode changes."
+#~ msgstr ""
+#~ "Limpar o Cache do WPP. Alguns shortcodes e widgets utilizam este cache. "
+#~ "Então a melhor prática é limpa-lo após alterações em widgets e shortcodes."
+
+# @ wpp
+#~ msgid "Clear Cache"
+#~ msgstr "Esvaziar Cache"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Set all %1s to same %2s type:"
+#~ msgstr "Marque o mesmo tipo para todos os imóveis:"
+
+# @ wpp
+#~ msgid "Set"
+#~ msgstr "Definir"
+
+# @ wpp
+#~ msgid "Memory Usage:"
+#~ msgstr "Uso de Memória:"
+
+# @ wpp
+#~ msgid "Peak Memory Usage:"
+#~ msgstr "Máximo de memória a ser usada:"
+
+# @ wpp
+#~ msgid "(no parent)"
+#~ msgstr "(sem primário)"
+
+# @ wpp
+#~ msgid "Parent"
+#~ msgstr "Primário"
+
+# @ wpp
+#~ msgid "Template"
+#~ msgstr "Modelo"
+
+# @ wpp
+#~ msgid "Page Template"
+#~ msgstr "Modelo da Página"
+
+# @ wpp
+#~ msgid "Default Template"
+#~ msgstr "Modelo Padrão"
+
+# @ wpp
+#~ msgid "Need help? Use the Help tab in the upper right of your screen."
+#~ msgstr ""
+#~ "Precisa de ajuda? Use o botão de Ajuda no canto superior-direito de sua "
+#~ "tela."
+
+# @ wpp
+#~ msgid "<strong>Warning!</strong> The %1s property type has been deleted."
+#~ msgstr "<strong>Aviso!</strong> O tipo de imóvel %1s foi deletado."
+
+# @ wpp
+#~ msgid "Falls Under"
+#~ msgstr "Dentro de"
+
+# @ wpp
+#~ msgid "ID of parent property"
+#~ msgstr "ID do imóvel primário"
+
+# @ wpp
+#~ msgid "Numbers only."
+#~ msgstr "Somente números."
+
+# @ wpp
+#~ msgid "Values aggregated from child properties."
+#~ msgstr "Valores agregados de imóveis secundários."
+
+# @ wpp
+#~ msgid "Editing %s is disabled, it may be inherited."
+#~ msgstr "Editar %s está desativado, isto pode ser herdado."
+
+# @ wpp
+#~ msgid "Enable."
+#~ msgstr "Sim"
+
+# @ wpp
+#~ msgid "Filter Results"
+#~ msgstr "Filtrar Resultados"
+
+# @ wpp
+#~ msgid "%1s Type"
+#~ msgstr "Tipo de %1s"
+
+# @ wpp
+#~ msgid "Return to building page."
+#~ msgstr "Retornar à página do imóvel."
+
+# @ wpp
+#~ msgid "You can modify the current %s anytime."
+#~ msgstr "Você pode modificar o %s atual a qualquer momento."
+
+# @ wpp
+#~ msgid "Change"
+#~ msgstr "Alterar"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Featured:"
+#~ msgstr "Destacado"
+
+# @ wpp
+#~ msgid "Current Balance"
+#~ msgstr "Saldo Atual"
+
+# @ wpp
+#~ msgid "Publish the current %s"
+#~ msgstr "Publicar o %s atual"
+
+# @ wpp
+#~ msgid "<strong>%01.2f</strong> credits will be withdrawn from your balance."
+#~ msgstr "<strong>%01.2f</strong> créditos serão debitados de sua conta."
+
+# @ wpp
+#~ msgid "Add Credits"
+#~ msgstr "Adicionar Créditos"
+
+# @ wpp
+#~ msgid ""
+#~ "You don't have enough credits on your balance. Current submission "
+#~ "requires <strong>%01.2f</strong> credits. After credits will be added, "
+#~ "the current %s will be automatically published."
+#~ msgstr ""
+#~ "Você não tem créditos suficientes em sua conta. Este envios requer "
+#~ "<strong>%01.2f</strong> em crédito. Após os créditos serem adicionados, "
+#~ "este %s será automaticamente publicado."
+
+# @ wpp
+#~ msgid "Your e-mail:"
+#~ msgstr "Email:"
+
+# @ wpp
+#~ msgid "Your Password:"
+#~ msgstr "Senha:"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Choose Subscription Plan"
+#~ msgstr "Plano de Inscrição"
+
+# @ wpp
+#~ msgid ""
+#~ "The available amount of images which can be uploaded for the property"
+#~ msgstr ""
+#~ "A quantidade permitida de imagens que podem ser enviadas para o imóvel"
+
+# @ wpp
+#, fuzzy
+#~ msgid "Subscription Plan Options"
+#~ msgstr "Plano de Inscrição"
+
+# @ wpp
+#~ msgid "Back"
+#~ msgstr "Voltar"
+
+# @ wpp
+#~ msgid "Information"
+#~ msgstr "Informação"
+
+# @ wpp
+#~ msgid "Checkout"
+#~ msgstr "Finalização"
+
+# @ wpp
+#~ msgid "Expiry Date"
+#~ msgstr "Data de Expiração"
+
+# @ wpp
+#~ msgid ""
+#~ "Sorry, we could not find what you were looking for.  Since you are here, "
+#~ "take a look at some of our properties."
+#~ msgstr ""
+#~ "Desculpe, não pudemos encontrar o que você procura. Já que você está "
+#~ "aqui, dê uma olhada em alguns de nossos imóveis."
+
+# @ wpp
+#~ msgid ""
+#~ "Sorry, no properties found - try expanding your search, or <a href=\"%s"
+#~ "\">view all</a>."
+#~ msgstr ""
+#~ "Nenhum imóvel encontrado - tente expandir sua busca, ou <a href=\"%s"
+#~ "\">ver todos</a>."
+
+# @ wpp
+#~ msgid " of "
+#~ msgstr " de "
+
+# @ wpp
+#~ msgid "Viewing page"
+#~ msgstr "Página"
+
+# @ wpp
+#~ msgid "of"
+#~ msgstr "de"
+
+# @ wpp
+#~ msgid "Prev"
+#~ msgstr "Anterior"
+
+# @ default
+#~ msgid ""
+#~ "Conditional query tags do not work before the query is run. Before then, "
+#~ "they always return false."
+#~ msgstr ""
+#~ "Tags de pesquisa condicional não funcionam antes da pesquisa correr. Se "
+#~ "antes, o retorno sempre é falso."
+
+# @ wpp
+#~ msgid "Other"
+#~ msgstr "Outro"
+
+# @ default
+#~ msgid "Website"
+#~ msgstr "Website"
+
+# @ default
+#~ msgid "Required fields are marked %s"
+#~ msgstr "Campos requeridos são marcados com %s"
+
+# @ default
+#~ msgctxt "noun"
+#~ msgid "Comment"
+#~ msgstr "Comentário"
+
+# @ default
+#~ msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
+#~ msgstr ""
+#~ "Você deve ser <a href=\"%s\">logged in</a> para postar um comentário."
+
+# @ default
+#~ msgid ""
+#~ "Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"Log out "
+#~ "of this account\">Log out?</a>"
+#~ msgstr ""
+#~ "Ligado como <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"Faça "
+#~ "logout desta conta\">Sair?</a>"
+
+# @ default
+#~ msgid "Your email address will not be published."
+#~ msgstr "Seu email não será publicado."
+
+# @ default
+#~ msgid ""
+#~ "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> "
+#~ "tags and attributes: %s"
+#~ msgstr ""
+#~ "Você pode utilizar estes <abbr title=\"HyperText Markup Language\">HTML</"
+#~ "abbr> tags e atributes: %s"
+
+# @ default
+#~ msgid "Leave a Reply"
+#~ msgstr "Responder"
+
+# @ default
+#~ msgid "Leave a Reply to %s"
+#~ msgstr "Respondar a %s"
+
+# @ default
+#~ msgid "Cancel reply"
+#~ msgstr "Cancelar Resposta"
+
+# @ default
+#~ msgid "Post Comment"
+#~ msgstr "Postar Comentário"
+
+# @ wpp
+#~ msgid "Process Payment"
+#~ msgstr "Processar Pagamento"
+
+# @ wpp
+#~ msgid "Payment Method"
+#~ msgstr "Método de Pagamento"
+
+# @ wpp
+#~ msgid "Method"
+#~ msgstr "Método"
+
+# @ wpp
+#~ msgid "Specified gateways are not available"
+#~ msgstr "Gateways especificadas não estão disponíveis"
+
+# @ wpp
+#~ msgid "Custom Amount"
+#~ msgstr "Quantia personalizada"
+
+# @ wpp
+#~ msgid "Your Amount"
+#~ msgstr "Sua quantia"
+
+# @ wpp
+#~ msgid "Enter Amount"
+#~ msgstr "Digite sua quantia"

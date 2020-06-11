@@ -1,0 +1,3674 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-26 19:05+0200\n"
+"PO-Revision-Date: 2014-09-26 19:05+0200\n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Poedit-KeywordsList: __;_e;_x;_n\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-feps.php:237
+msgid "FEPS Details"
+msgstr ""
+
+#: lib/class-wpp-feps.php:260 lib/class-wpp-feps.php:287
+#: lib/class-wpp-feps.php:727 lib/class-wpp-feps.php:776
+#: lib/class-wpp-feps.php:2567
+msgid "Not set"
+msgstr ""
+
+#: lib/class-wpp-feps.php:269 lib/class-wpp-feps.php:747
+#, fuzzy
+msgid "Property Form"
+msgstr "Objekt: %s"
+
+#: lib/class-wpp-feps.php:273 lib/class-wpp-feps.php:751
+msgid "Author"
+msgstr ""
+
+#: lib/class-wpp-feps.php:281 lib/class-wpp-feps.php:762
+msgid "Sponsored"
+msgstr ""
+
+#: lib/class-wpp-feps.php:282 lib/class-wpp-feps.php:736
+#: lib/class-wpp-feps.php:763 static/views/feps-purchase-template.php:51
+#: static/views/feps-subplans-template.php:45
+msgid "Yes"
+msgstr "Ja"
+
+#: lib/class-wpp-feps.php:282 lib/class-wpp-feps.php:736
+#: lib/class-wpp-feps.php:763 static/views/feps-purchase-template.php:51
+#: static/views/feps-subplans-template.php:45
+msgid "No"
+msgstr ""
+
+#: lib/class-wpp-feps.php:286 lib/class-wpp-feps.php:771
+#: lib/class-wpp-feps.php:2599 lib/class-wpp-feps.php:2615
+#: static/views/feps-purchase-template.php:35
+#: static/views/feps-tabs-template.php:4
+#, fuzzy
+msgid "Subscription Plan"
+msgstr "Beschreibung"
+
+#: lib/class-wpp-feps.php:291 lib/class-wpp-feps.php:766
+msgid "Expired date"
+msgstr ""
+
+#: lib/class-wpp-feps.php:313 lib/class-wpp-feps.php:542
+msgid "FEPS"
+msgstr ""
+
+#: lib/class-wpp-feps.php:351
+#, php-format
+msgid "%1s Forms"
+msgstr ""
+
+#: lib/class-wpp-feps.php:353
+#, php-format
+msgid "<a href=\"%s\">Manage %s Forms"
+msgstr ""
+
+#: lib/class-wpp-feps.php:357 lib/class-wpp-feps.php:4674
+msgid "FEPS Menu"
+msgstr ""
+
+#: lib/class-wpp-feps.php:360
+#, php-format
+msgid ""
+"It is neccessary block menu which contains user's specific data and links to "
+"submitted %s via FEPS frontend forms."
+msgstr ""
+
+#: lib/class-wpp-feps.php:361
+#, php-format
+msgid ""
+"Menu can be added to your site via <b>FEPS Menu</b> <a href=\"%s\">widget</"
+"a> or <b>%s</b> shortcode."
+msgstr ""
+
+#: lib/class-wpp-feps.php:362 lib/class-wpp-feps.php:556
+msgid "Note, menu is shown only for logged in users."
+msgstr ""
+
+#: lib/class-wpp-feps.php:366
+msgid "\"Add Credits to Balance\" custom label"
+msgstr ""
+
+#: lib/class-wpp-feps.php:368
+#, php-format
+msgid "\"Add New %s\" custom label"
+msgstr ""
+
+#: lib/class-wpp-feps.php:369
+#, php-format
+msgid "Disable Menu if there are no %s and no credits on Balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:374 lib/class-wpp-feps.php:573
+msgid "Specific Pages"
+msgstr ""
+
+#: lib/class-wpp-feps.php:377
+#, php-format
+msgid ""
+"The feature has specific pages. The links below can be added directly to "
+"your <a href=\"%s\">Menus</a> or wherever else, i.e. if you don't want to "
+"use FEPS menu."
+msgstr ""
+
+#: lib/class-wpp-feps.php:378
+msgid ""
+"But note, that the current pages are available only for logged in users."
+msgstr ""
+
+#: lib/class-wpp-feps.php:381 lib/class-wpp-feps.php:581
+#, fuzzy
+msgid "Templates"
+msgstr "Vorlage"
+
+#: lib/class-wpp-feps.php:383 lib/class-wpp-feps.php:577
+#, fuzzy
+msgid "Overview Page"
+msgstr "Übersicht"
+
+#: lib/class-wpp-feps.php:394
+#, fuzzy
+msgid "Edit Page"
+msgstr "Objekt bearbeiten"
+
+#: lib/class-wpp-feps.php:405 lib/class-wpp-feps.php:420
+#: lib/class-wpp-feps.php:579
+msgid "Add Credits Page"
+msgstr ""
+
+#: lib/class-wpp-feps.php:415 lib/class-wpp-feps.php:583
+msgid "Links"
+msgstr ""
+
+#: lib/class-wpp-feps.php:416
+#, php-format
+msgid "Overview Page ( All %s )"
+msgstr ""
+
+#: lib/class-wpp-feps.php:417
+#, php-format
+msgid "Overview Page ( Published %s )"
+msgstr ""
+
+#: lib/class-wpp-feps.php:418
+#, php-format
+msgid "Overview Page ( Pending %s )"
+msgstr ""
+
+#: lib/class-wpp-feps.php:426 lib/class-wpp-feps.php:587
+#, fuzzy
+msgid "Administration"
+msgstr "Einstellungen"
+
+#: lib/class-wpp-feps.php:432
+#, php-format
+msgid "Enable Column <b>FEPS Details</b> on <a href='%s'>All %s</a> page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:439
+msgid "Notifications"
+msgstr ""
+
+#: lib/class-wpp-feps.php:441
+#, php-format
+msgid ""
+"All FEPS notifications can be customized via <a href=\"%s\">WP-CRM</a> "
+"plugin. For more details, look through <b>FEPS -> Integration with other "
+"UsabilityDynamics plugins</b> section in Help tab above."
+msgstr ""
+
+#: lib/class-wpp-feps.php:460
+msgid "General Information"
+msgstr "Allgemeine Hinweise"
+
+#: lib/class-wpp-feps.php:461
+#, fuzzy
+msgid "Form Name"
+msgstr "Zu verkaufen"
+
+#: lib/class-wpp-feps.php:462
+#, fuzzy
+msgid "Shortcode"
+msgstr "Übersicht Shortcode"
+
+#: lib/class-wpp-feps.php:463
+#, fuzzy
+msgid "General Options"
+msgstr "Allgemeine Einstellungen"
+
+#: lib/class-wpp-feps.php:464
+#, fuzzy
+msgid "Subscriptions Plans"
+msgstr "Beschreibung"
+
+#: lib/class-wpp-feps.php:465
+#, fuzzy
+msgid "Propery Attributes"
+msgstr "WP-Property Premium-Funktionen"
+
+#: lib/class-wpp-feps.php:472
+msgid "Front End Property Submissions (FEPS)"
+msgstr ""
+
+#: lib/class-wpp-feps.php:473
+#, php-format
+msgid ""
+"Note, that <a href=\"%s\">Settings page</a> also contains helpfull "
+"information about FEPS premium feature functionality. So if the current "
+"'Help' does not contain enough information to help you, we suggest to "
+"proceed there for looking through FEPS tab and 'Help' information."
+msgstr ""
+
+#: lib/class-wpp-feps.php:474
+msgid ""
+"Front End Property Submission (FEPS) lets you create forms and display them "
+"on the front-end of the website. The forms may be used by visitors to submit "
+"properties for free or for credits."
+msgstr ""
+
+#: lib/class-wpp-feps.php:475
+#, php-format
+msgid ""
+"If you want to display a %1$s submission form for homes in a certain "
+"neighborhood, you can place the FEPS form into the content of the parent "
+"(neighborhood) %1$s like so"
+msgstr ""
+
+#: lib/class-wpp-feps.php:477
+#, php-format
+msgid "On a pending %s a body class is added for styling, which is: <b>%s</b>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:478
+#, php-format
+msgid ""
+"Pending pages use the same front-end templates as regular %s, and will load "
+"conditional %s-type templates if they exist.  Below is the the load order of "
+"templates based on specificity:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:485
+#, php-format
+msgid ""
+"So if your %1$s type is called \"<b>%2$s</b>\", then the %1$s type slug is "
+"<b>%3$s</b>, and the template would be: <b>%4$s</b>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:488
+msgid ""
+"Form's name must be unique. Form slug, which is used for setting shortcode "
+"( attribute \"form\" ) is generated using form name. So, be carefull with "
+"changing name of already existing form!"
+msgstr ""
+
+#: lib/class-wpp-feps.php:491
+#, php-format
+msgid ""
+"Shortcode [wpp_feps_form form=\"{form_slug}\"] renders passed form on page. "
+"You can add it to any content including widget areas on your site. But we "
+"strongly recommend to add the current shortcode only to page's ( pages, "
+"posts, %s ) content to prevent different issues."
+msgstr ""
+
+#: lib/class-wpp-feps.php:492
+#, fuzzy
+msgid "Available shortcode attributes"
+msgstr "Verborgene Attribute"
+
+#: lib/class-wpp-feps.php:494
+msgid ""
+"Required attribute. The slug of the FEPS form, this is required to identify "
+"which form must be displayed."
+msgstr ""
+
+#: lib/class-wpp-feps.php:495
+#, php-format
+msgid ""
+"Default value is not set. Use to set the parent ID of all the submitted "
+"%1$s. This works well if you want to group all the submitted %1$s under a "
+"parent. For example, if you want to allow visitors to submit condos that "
+"below to a certain neighborhood, you would create the neighborhood %1$s, "
+"then place FEPS forms into their content."
+msgstr ""
+
+#: lib/class-wpp-feps.php:496
+#, php-format
+msgid ""
+"Available values \"true\" and \"false\". Default value is \"true\". If set "
+"to \"true\", the form will automatically detect if it is displayed on a %1$s "
+"page, and use the current %1$s as parent for newly added %2$s. If parent_id "
+"is set, detect parent does not do anything."
+msgstr ""
+
+#: lib/class-wpp-feps.php:497
+msgid ""
+"Default value is \"450px\". Sets the height of the address map, in pixels."
+msgstr ""
+
+#: lib/class-wpp-feps.php:498
+msgid ""
+"Default value is \"Requested FEPS form not found\". This is the text to "
+"display when the form is not found, this is only needed if a form has been "
+"deleted, but shortcodes still reference it throughout your site."
+msgstr ""
+
+#: lib/class-wpp-feps.php:502
+#, php-format
+msgid ""
+"<h4>Sponsored Listing:</h4>It enables billable %s submissions.<br/><a href="
+"\"%s\">WP-Invoice</a> plugin and <a href=\"%s\">Single Page Checkout</a> "
+"plugin must be installed to enable this option."
+msgstr ""
+
+#: lib/class-wpp-feps.php:503
+#, php-format
+msgid ""
+"<h4>%1$s Status:</h4>Status to assign to new %2$s after they are submitted."
+"<br /><i>Note, the current option is disabled for sponsored listings. "
+"Sponsored Submission will be automatically published after successfull "
+"payment. In other case, it has pending status.</i>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:504
+#, php-format
+msgid "<h4>%1$s Type:</h4>Default %1$s type of submitted %2$s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:505
+#, php-format
+msgid ""
+"<h4>Automatically remove FEPS of the current Form with 'Pending' status:</"
+"h4>Set a period of time in which Pending %1$s will be removed. Set 0 if you "
+"don't want Pending %1$s to be removed."
+msgstr ""
+
+#: lib/class-wpp-feps.php:506
+msgid ""
+"<h4>Preview Thumbnail Size:</h4>The size of the image to be used to display "
+"the thumbnail of an uploaded image."
+msgstr ""
+
+#: lib/class-wpp-feps.php:507
+msgid ""
+"<h4>Image Upload Limit:</h4>The maximum number of images that can be "
+"uploaded per submission.<br /><i>Note, the current option is disabled for "
+"sponsored listings. Images limit for sponsored listings must be set for "
+"every Subscription plan separately.</i>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:508
+#, php-format
+msgid ""
+"<h4>New User Role:</h4>Role to assign to users submitting %1$s if they do "
+"not already have an account."
+msgstr ""
+
+#: lib/class-wpp-feps.php:509
+#, php-format
+msgid ""
+"<h4>Allow user to edit and remove his FEPS:</h4>Whether or not to allow user "
+"to edit and delete their %1$s submitted by FEPS."
+msgstr ""
+
+#: lib/class-wpp-feps.php:510
+msgid ""
+"<h4>Disable new user account creation notification:</h4>Whether or not to "
+"send new user notifications.<br /><i>Note, the current option is disabled "
+"for sponsored listings.</i>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:513
+#, php-format
+msgid ""
+"The current functionality is available only for <b>sponsored listings</b> "
+"( see \"%s\" tab ) when <a href=\"%s\">WP-Invoice</a> plugin and <a href=\"%s"
+"\">Single Page Checkout (SPC)</a> plugin are installed and activated."
+msgstr ""
+
+#: lib/class-wpp-feps.php:514 lib/class-wpp-feps.php:4022
+msgid "Name"
+msgstr "Name"
+
+#: lib/class-wpp-feps.php:515
+#, fuzzy
+msgid "Just a name of Subscription plan."
+msgstr "Beschreibung"
+
+#: lib/class-wpp-feps.php:516 lib/class-wpp-feps.php:4023
+msgid "Price"
+msgstr "Preis"
+
+#: lib/class-wpp-feps.php:517
+msgid ""
+"Currency is set via WP-Invoice settings. The exchange rate is 1 chosen "
+"currency = 1 credit."
+msgstr ""
+
+#: lib/class-wpp-feps.php:518 lib/class-wpp-feps.php:734
+#: lib/class-wpp-feps.php:2608 lib/class-wpp-feps.php:4024
+#, fuzzy
+msgid "Duration"
+msgstr "Beschreibung"
+
+#: lib/class-wpp-feps.php:519
+#, php-format
+msgid ""
+"The published period. The expired date is based on this option and will be "
+"set after successfully payment. When expiry date is over, status of %s will "
+"be automatically set as \"%s\"."
+msgstr ""
+
+#: lib/class-wpp-feps.php:520 lib/class-wpp-feps.php:4025
+#, fuzzy
+msgid "Is Featured"
+msgstr "Vorgestellt"
+
+#: lib/class-wpp-feps.php:521
+#, php-format
+msgid "%s will be featured if option is checked."
+msgstr ""
+
+#: lib/class-wpp-feps.php:522 lib/class-wpp-feps.php:735
+#: lib/class-wpp-feps.php:2610 lib/class-wpp-feps.php:4026
+#, fuzzy
+msgid "Images Limit"
+msgstr "Alle Abbildungen"
+
+#: lib/class-wpp-feps.php:523
+#, php-format
+msgid ""
+"To enable this option, Image Upload must be set in <b>%s</b>. The amount of "
+"images which can be uploaded to the %s with the current subscription plan. "
+"Note: limit must not be less than 1 or empty."
+msgstr ""
+
+#: lib/class-wpp-feps.php:524 lib/class-wpp-feps.php:3045
+#: lib/class-wpp-feps.php:4027
+msgid "Description"
+msgstr "Beschreibung"
+
+#: lib/class-wpp-feps.php:525
+msgid ""
+"Optional. Some helpfull information about subscription plan, advertisement, "
+"offer or whatever else can be added here."
+msgstr ""
+
+#: lib/class-wpp-feps.php:528
+#, php-format
+msgid ""
+"The list of %s attributes fields which will be shown in FEPS form. User will "
+"be able to add/edit only the chosen attributes."
+msgstr ""
+
+#: lib/class-wpp-feps.php:529
+#, php-format
+msgid ""
+"Note, <b>%1$s type</b> can be set only in %3$s. So all %2$s added via the "
+"same form will have the same %1$s type. "
+msgstr ""
+
+#: lib/class-wpp-feps.php:547
+#, php-format
+msgid "Front End %s Submissions (FEPS)"
+msgstr ""
+
+#: lib/class-wpp-feps.php:548
+#, php-format
+msgid ""
+"Front End %1$s Submission (FEPS) allows you to create multiple forms using "
+"the interface found under %2$s -> %1$s Forms. Multiple forms can be used to "
+"setup targeted pages that limit the number of images for the form, direct "
+"all submissions into a certain %1$s type, or %1$s status."
+msgstr ""
+
+#: lib/class-wpp-feps.php:549
+#, php-format
+msgid ""
+"It also allows to create forms for sponsored listings if you have installed "
+"<a href=\"%s\">WP-Invoice</a> plugin and <a href=\"%s\">Single Page Checkout "
+"(SPC)</a> plugin."
+msgstr ""
+
+#: lib/class-wpp-feps.php:551
+#, fuzzy
+msgid "Property Forms"
+msgstr "Objekt: %s"
+
+#: lib/class-wpp-feps.php:552
+#, php-format
+msgid ""
+"Detailed information can be found on <a href=\"%s\">%s Forms</a> page in "
+"Help tab."
+msgstr ""
+
+#: lib/class-wpp-feps.php:554
+msgid "FEPS Menu Widget/Shortcode"
+msgstr ""
+
+#: lib/class-wpp-feps.php:555
+msgid ""
+"It's a block menu which contains some specific information and FEPS tools "
+"for management."
+msgstr ""
+
+#: lib/class-wpp-feps.php:557
+#, php-format
+msgid ""
+"Menu can be added to frontend pages via <b>FEPS Menu</b> widget or <b>%s</b> "
+"shortcode"
+msgstr ""
+
+#: lib/class-wpp-feps.php:558
+#, php-format
+msgid "<b>%s</b> shortcode has the following available attributes:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:560
+#, php-format
+msgid ""
+"Shows title of menu if attribute is passed. Default is empty. Example, <b>"
+"%s</b>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:561
+#, php-format
+msgid ""
+"Shows %s overview links by %s statuses. Available values are <b>true</b>|"
+"<b>false</b>. Default is false. Example, <b>%s</b>\"."
+msgstr ""
+
+#: lib/class-wpp-feps.php:562
+#, php-format
+msgid ""
+"If set, shows the link to FEPS %s Form page. Default is empty. Example, <b>"
+"%s</b>\"."
+msgstr ""
+
+#: lib/class-wpp-feps.php:563
+#, php-format
+msgid ""
+"Shows user's current credits balance. Available values are <b>true</b>|"
+"<b>false</b>. Default is true. Example, <b>%s</b>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:564 lib/class-wpp-feps.php:566
+msgid ""
+"Note, to use this attribute, WP-Invoice plugin and WP-Invoice Single Page "
+"Checkout plugin must be installed."
+msgstr ""
+
+#: lib/class-wpp-feps.php:565
+#, php-format
+msgid ""
+"Shows the link to Add Credits page. Available values are <b>true</b>|"
+"<b>false</b>. Default is true. Example, <b>%s</b>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:569
+msgid "FEPS Information Widget/Shortcode"
+msgstr ""
+
+#: lib/class-wpp-feps.php:570
+msgid ""
+"It's a block which contains some specific information about current property."
+msgstr ""
+
+#: lib/class-wpp-feps.php:571
+#, php-format
+msgid "It's only shown on Edit FEPS %s page for logged in users"
+msgstr ""
+
+#: lib/class-wpp-feps.php:574
+#, php-format
+msgid ""
+"FEPS premium feature adds specific <b>frontend</b> user's pages which are "
+"created on a fly, so they are not available in your existing <a href=\"%s"
+"\">Pages</a>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:575
+msgid ""
+"The links to these pages are added to FEPS Menu. Note, these pages are "
+"available only for logged in users."
+msgstr ""
+
+#: lib/class-wpp-feps.php:576
+msgid "The specific FEPS pages are the following"
+msgstr ""
+
+#: lib/class-wpp-feps.php:577
+#, php-format
+msgid ""
+"The current one shows the list of already submitted via FEPS forms %1$s by "
+"current logged in user. If %2$s Form, used for submission, allows to edit "
+"%2$s, it also shows the links \"Edit\" and \"Remove\" for the current %2$s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:578
+#, php-format
+msgid ""
+"Also, FEPS allows to show %s on the current page by statuses. See <b>FEPS "
+"Menu</b> and <b>Links</b> section in the current Help tab for details."
+msgstr ""
+
+#: lib/class-wpp-feps.php:579
+#, php-format
+msgid ""
+"On the current page logged in user can add credits to their FEPS balance. "
+"The current page is available only if <a href=\"%s\">WP-Invoice</a> plugin "
+"and <a href=\"%s\">WP-Invoice Single Page Checkout</a> plugin are installed. "
+"<b><i>Note, user's credit balance can be manually edited by administrator "
+"via Edit User page (profile)</i></b>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:580
+#, fuzzy, php-format
+msgid "Edit %s Page"
+msgstr "Objekt bearbeiten"
+
+#: lib/class-wpp-feps.php:580
+#, php-format
+msgid ""
+"Here user can edit the %1$s added via FEPS %1$s form. There are different "
+"links for every %1$s, so the link can not be provided. Note, the form, used "
+"for submission, must exist and must be enabled option which allows to edit "
+"and remove %2$s. "
+msgstr ""
+
+#: lib/class-wpp-feps.php:582
+#, php-format
+msgid ""
+"You can set custom available template for FEPS pages. More information you "
+"can find <a href=\"%s\">here</a>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:584
+#, php-format
+msgid ""
+"You can use given links to FEPS pages, for example, for adding custom menu "
+"in <a href=\"%s\">Menus</a> or wherever else."
+msgstr ""
+
+#: lib/class-wpp-feps.php:585
+msgid ""
+"Note, that FEPS pages are available only for logged in users. In other case "
+"user will be redirected to home page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:588
+#, php-format
+msgid ""
+"Specific column \"FEPS details\" can be added to the table on <a href=\"%s"
+"\">All %s </a>page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:589
+msgid ""
+"To add this column, you should check the option. Column contains detailed "
+"FEPS information about the current property, which can be helpful for "
+"management."
+msgstr ""
+
+#: lib/class-wpp-feps.php:590
+msgid ""
+"Note, if the option is enabled but you don't see the column, you should "
+"check \"<i>Screen Option</i>\" settings."
+msgstr ""
+
+#: lib/class-wpp-feps.php:592
+msgid "Integration with other UsabilityDynamics plugins"
+msgstr ""
+
+#: lib/class-wpp-feps.php:593
+#, php-format
+msgid ""
+"Functionality of FEPS premium feature can increased via other following "
+"wordpress plugins developed by <a href=\"%s\">UsabilityDynamics, Inc</a>:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:594
+#, php-format
+msgid "<a href=\"%s\">WP-Invoice</a>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:595
+#, php-format
+msgid "<a href=\"%s\">WP-CRM</a>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:596
+msgid "WP-Invoice"
+msgstr ""
+
+#: lib/class-wpp-feps.php:597
+#, php-format
+msgid ""
+"To add aditional functionality to FEPS premium feature, <a href=\"%s\">WP-"
+"Invoice Single Page Checkout</a> plugin must be installed and activated."
+msgstr ""
+
+#: lib/class-wpp-feps.php:598
+#, php-format
+msgid ""
+"It allows you to use FEPS %s Forms as billable service where users have to "
+"pay for publishing %s on your site."
+msgstr ""
+
+#: lib/class-wpp-feps.php:599
+#, php-format
+msgid ""
+"Billable service is called Sponsored listings. Sponsored listings allows you "
+"to set different Subscription plans where you are able to set expired dates "
+"and images limit for submitted %s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:600
+msgid "WP-CRM"
+msgstr ""
+
+#: lib/class-wpp-feps.php:601
+msgid ""
+"If WP-Invoice plugin is installed you are able to see all user's completed "
+"transactions on CRM User Edit page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:602
+msgid ""
+"Also, you have ability to manage FEPS notifications using WP-CRM plugin. Go "
+"to CRM -> Settings -> Notifications."
+msgstr ""
+
+#: lib/class-wpp-feps.php:603
+#, php-format
+msgid ""
+"For your notifications on any of this Trigger actions - <i>FEPS: Pending "
+"Approval</i>, <i>FEPS: %s Submitted</i>, <i>FEPS: User Account Approved</i>, "
+"<i>FEPS: User Account Created</i> &mdash; you can use the following "
+"shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:605
+msgid ""
+"For Trigger action <i>FEPS: Pending Approval</i> - you can use the following "
+"shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:607
+#, php-format
+msgid ""
+"For Trigger action <i>FEPS: %s Submitted</i> - you can use the following "
+"shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:609
+msgid ""
+"For Trigger action <i>FEPS: User Account Approved</i> - you can use the "
+"following shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:611
+msgid ""
+"For Trigger action <i>FEPS: User Account Created</i> - you can use this "
+"shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:733
+#, php-format
+msgid "Price: <b>%01.2f</b> credits"
+msgstr ""
+
+#: lib/class-wpp-feps.php:736
+msgid "Featured"
+msgstr "Vorgestellt"
+
+#: lib/class-wpp-feps.php:741
+msgid "Click to toggle"
+msgstr ""
+
+#: lib/class-wpp-feps.php:742
+msgid "Front End Property Submission (FEPS) Details"
+msgstr ""
+
+#: lib/class-wpp-feps.php:755
+#, php-format
+msgid "The user has <b>%01.2f</b> credits on the balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:808
+msgid "FEPS Subscription Plan"
+msgstr ""
+
+#: lib/class-wpp-feps.php:824 static/views/feps-purchase-template.php:42
+#: static/views/feps-subplans-template.php:36
+msgid "Price:"
+msgstr "Preis:"
+
+#: lib/class-wpp-feps.php:825
+#, php-format
+msgid "<b>%01.2f</b> credits"
+msgstr ""
+
+#: lib/class-wpp-feps.php:828 static/views/feps-purchase-template.php:46
+#: static/views/feps-subplans-template.php:40
+#, fuzzy
+msgid "Duration:"
+msgstr "Beschreibung"
+
+#: lib/class-wpp-feps.php:833 static/views/feps-purchase-template.php:55
+#: static/views/feps-subplans-template.php:48
+#, fuzzy
+msgid "Images:"
+msgstr "Alle Abbildungen"
+
+#: lib/class-wpp-feps.php:968
+#, fuzzy
+msgid "Renewal of Subscription Plan"
+msgstr "Beschreibung"
+
+#: lib/class-wpp-feps.php:969
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPublish time for Your %2$s \"[property_title]\" "
+"has expired.%1$s%1$sSubscription Plan has been renewed and [credits] credits "
+"were withdrawn from your balance.%1$s%1$sClick this link to view all your "
+"[status] %3$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1010
+#, fuzzy
+msgid "Options:"
+msgstr "Optionen"
+
+#: lib/class-wpp-feps.php:1014 static/views/feps-subplans-template.php:66
+#, php-format
+msgid ""
+"Enable automatic renewal of Subscription plan for the current %1$s when "
+"subscription time is expired."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1018 static/views/feps-subplans-template.php:67
+msgid ""
+"Credits will be automatically withdrawn from your balance. Notice, automatic "
+"renewal will be done only if you have enough credits on your balance."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1185
+msgid "Publish Time Has Expired"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1186
+msgid "Publish time has expired for [property_title]."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1189
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPublish time for Your %3$s [property_title] has "
+"expired.%1$s%1$sYou have [days] %2$s to choose new subscription for your "
+"%3$s.%1$s%1$sClick this link to view all your [status] %4$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1189
+#, fuzzy
+msgid "day"
+msgstr "Heute"
+
+#: lib/class-wpp-feps.php:1192
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPublish time for Your %2$s [property_title] has "
+"expired.%1$s%1$sIf You wish you could choose new subscription for your %2$s."
+"%1$s%1$sClick this link to view all your [status] %3$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1195
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour %2$s [property_title] status has been "
+"changed from Published to Pending. Click this link to view all your [status] "
+"%3$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1198
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour %2$s [property_title] has been restored. "
+"The current status is [status]. Click this link to view all your [status] "
+"%3$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1222
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPending time for Your %2$s [property_title] was "
+"over and it had been removed.%1$s%1$sYou still able to make a new %2$s "
+"Submission if you need. Please visit our site:%1$s[site_url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1224
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour %2$s [property_title] has been removed.%1$s"
+"%1$sYou still able to make a new %2$s Submission if you need. Please visit "
+"our site:%1$s[site_url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1227
+#, php-format
+msgid "%1$s was deleted"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1229
+#, php-format
+msgid "%1$s [property_title] was deleted ."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1366
+msgid "Manage FEPS"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1525
+msgid " (Pending Approval)"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1663
+#, fuzzy
+msgid "created"
+msgstr "Vorgestellt"
+
+#: lib/class-wpp-feps.php:1670
+msgid "Submitting data is incorrect"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1678
+#, php-format
+msgid "%s submitting is prohibited"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1683 lib/class-wpp-feps.php:1801
+#: lib/class-wpp-feps.php:1867
+msgid "An error occurred, the form could not be found"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1712
+#, php-format
+msgid "Your submission was not successful: %s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1736
+#, fuzzy
+msgid "updated"
+msgstr "Objekt aktualisiert."
+
+#: lib/class-wpp-feps.php:1739
+#, php-format
+msgid "You must be logged in to edit %s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1776
+#, php-format
+msgid "Your %s has been successfully %s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1778
+#, php-format
+msgid ""
+"Your %s and Account have been successfully %s. Check your e-mail to activate "
+"account and log in for continuing."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1993
+#, php-format
+msgid "Upgraded FEPS to version %1s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2146
+msgid "This listing is pending your approval."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2151
+#, fuzzy
+msgid "Publish Now"
+msgstr "Diashow"
+
+#: lib/class-wpp-feps.php:2190
+msgid ""
+"Form can not be removed because it has Properties which were added using "
+"this form. You have to remove all related Properties before."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2193
+msgid "Form ID is undefined."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2270 lib/class-wpp-feps.php:2342
+#, php-format
+msgid "%1$s Forms"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2359
+#, php-format
+msgid "%1$s Form"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2369
+#, php-format
+msgid ""
+"Show <span title=\"Front End %2$s Submissions\">FEPS</span> column in All "
+"%1$s Page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2418 lib/class-wpp-feps.php:3961
+msgid "Add Credits to Balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2423
+#, fuzzy, php-format
+msgid "Add New %s"
+msgstr "Neue hinzufügen"
+
+#: lib/class-wpp-feps.php:2482
+msgid "My Balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2484
+msgid "credit"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2484 static/views/feps-purchase-template.php:71
+msgid "credits"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2500 lib/class-wpp-feps.php:2514
+#, php-format
+msgid "My %s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2503 lib/class-wpp-feps.php:3214
+msgid "All"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2584 lib/class-wpp-feps.php:3061
+#: lib/class-wpp-feps.php:3096
+msgid "Title"
+msgstr "Titel"
+
+#: lib/class-wpp-feps.php:2588
+msgid "Status"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2593
+#, fuzzy
+msgid "Expired"
+msgstr "Objektseite"
+
+#: lib/class-wpp-feps.php:2603
+msgid "Paid"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2604
+#, php-format
+msgid "%01.2f credits"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2607
+msgid "Plan Details"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2616
+msgid "Not Paid Yet"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2641
+msgid "Requested FEPS form not found."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2689
+msgid "The requested form does not have any fields."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2775
+#, php-format
+msgid "Requested %1$s not found."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2779
+#, php-format
+msgid "It's not FEPS's %1$s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2784
+#, php-format
+msgid "It's not your %1$s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2788
+#, fuzzy
+msgid "Wrong FEPS form used"
+msgstr "Objekt aktualisiert."
+
+#: lib/class-wpp-feps.php:2793
+#, php-format
+msgid "Managing of %1$s are not allowed"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2868
+#, fuzzy
+msgid "FEPS forms updated."
+msgstr "Objekt aktualisiert."
+
+#: lib/class-wpp-feps.php:2876
+#, fuzzy, php-format
+msgid "%1$s Content"
+msgstr "Titel"
+
+#: lib/class-wpp-feps.php:2877
+#, fuzzy, php-format
+msgid "%1$s Type"
+msgstr "Art"
+
+#: lib/class-wpp-feps.php:2881 lib/class-wpp-feps.php:3643
+msgid "Image Upload"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2901
+#, php-format
+msgid "Front End %1$s Submissions"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2902
+msgid "Add New"
+msgstr "Neue hinzufügen"
+
+#: lib/class-wpp-feps.php:2944
+#, fuzzy
+msgid "Form Name:"
+msgstr "Zu verkaufen"
+
+#: lib/class-wpp-feps.php:2949
+msgid ""
+"Enter form name. Form slug will be generated using form name. Note that Form "
+"Name is used for internal reference."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2956
+#, fuzzy
+msgid "Shortcode:"
+msgstr "Übersicht Shortcode"
+
+#: lib/class-wpp-feps.php:2961
+msgid "Copy and paste this shortcode into any page or post to display the form"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2968
+#, fuzzy
+msgid "General Options:"
+msgstr "Allgemeine Einstellungen"
+
+#: lib/class-wpp-feps.php:2976
+#, php-format
+msgid "%1$s Status:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2984
+#, fuzzy, php-format
+msgid "%1$s Type:"
+msgstr "Art"
+
+#: lib/class-wpp-feps.php:2990
+#, php-format
+msgid ""
+"Note: This type will be set by default if %1$s Type is not set in %1$s "
+"Attributes below."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2993
+msgid ""
+"Automatically remove FEPS of the currrent Form with 'Pending' status to "
+"trash in"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2995
+msgid "days."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2996
+msgid "Note: If value is 0 or empty, FEPS will not be removed."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2999
+#, fuzzy
+msgid "Preview Thumbnail Size:"
+msgstr "Thumbnail-Größe:"
+
+#: lib/class-wpp-feps.php:3003
+msgid "Image Upload Limit:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3007
+msgid "New User Role:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3016
+#, php-format
+msgid "Automatically load added images into %1$s Slideshow. "
+msgstr ""
+
+#: lib/class-wpp-feps.php:3017
+#, php-format
+msgid ""
+"Note: You can use [property_slideshow] shortcode on Single %1$s page to show "
+"added images. Also, some premium themes such as Denali support automatic "
+"slideshow view on single %1$s pages."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3022
+msgid "Allow user to edit and remove his FEPS."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3023
+msgid "Note: on remove FEPS will be just moved to trash."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3027
+msgid "Disable new user account creation notification."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3031
+msgid "Notify user on update status of his FEPS."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3039
+#, fuzzy, php-format
+msgid "%1$s Attributes"
+msgstr "Verborgene Attribute"
+
+#: lib/class-wpp-feps.php:3044
+msgid "Main"
+msgstr "Hauptseite"
+
+#: lib/class-wpp-feps.php:3054 lib/class-wpp-feps.php:3083
+#, fuzzy
+msgid "Attribute"
+msgstr "Verborgene Attribute"
+
+#: lib/class-wpp-feps.php:3057
+#, fuzzy, php-format
+msgid "%1$s Title"
+msgstr "Titel"
+
+#: lib/class-wpp-feps.php:3065 lib/class-wpp-feps.php:3107
+#, fuzzy
+msgid "Toggle Advanced Settings"
+msgstr "Allgemeine Einstellungen"
+
+#: lib/class-wpp-feps.php:3101
+#, fuzzy
+msgid "Required"
+msgstr "Vorgestellt"
+
+#: lib/class-wpp-feps.php:3104
+#, fuzzy
+msgid "Remove attribute"
+msgstr "Verborgene Attribute"
+
+#: lib/class-wpp-feps.php:3123
+msgid "Add Row"
+msgstr "Reihe hinzufügen"
+
+#: lib/class-wpp-feps.php:3140
+msgid "Save Changes"
+msgstr "Änderungen speichern"
+
+#: lib/class-wpp-feps.php:3226
+msgid "My FEPS Listings"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3304
+msgid "Editing"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3473
+#, fuzzy
+msgid "Upload Image"
+msgstr "Alle Abbildungen"
+
+#: lib/class-wpp-feps.php:3489
+#, php-format
+msgid "No more than %1d image(s). Click image to delete it."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3844
+msgid "<strong>ERROR</strong>: Account is not approved."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3861
+msgid ""
+"There is a JavaScript error on this page preventing it from displaying the "
+"dynamic map."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3889
+msgid "Your location has been successfully found by Google Maps."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3892
+msgid "Your address could not be found, please try again."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3991
+msgid "Days"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3992
+msgid "Weeks"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3993
+msgid "Months"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3994
+msgid "Years"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3997
+msgid "Basic"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4002
+msgid "Default One-Day Subscription Plan"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4017
+#, fuzzy
+msgid "Subscription Plans"
+msgstr "Beschreibung"
+
+#: lib/class-wpp-feps.php:4028
+#, fuzzy
+msgid "Actions"
+msgstr "Optionen"
+
+#: lib/class-wpp-feps.php:4056
+msgid "Delete"
+msgstr "Entfernen"
+
+#: lib/class-wpp-feps.php:4063
+msgid "Add Subscription Plan"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4120 lib/class-wpp-feps.php:4138
+msgid "This is Sponsored Listing"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4362
+msgid "User Account Approved"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4370
+msgid "Account Approved"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4371
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour account on [site_url] has been approved.%1$s"
+"%1$sClick this link to visit site:%1$s[site_url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4373
+msgid "User Account Approved."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4376
+#, php-format
+msgid ""
+"Thank you! Your account has been activated. <a href=\"%s\">Back to the site!"
+"</a>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4376
+msgid "Account has been activated"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4453
+msgid "Something went wrong. Please, try again later. [Error 001]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4459
+msgid "Something went wrong. Please, try again later. [Error 002]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4464
+msgid "Something went wrong. Please, try again later. [Error 003]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4479
+msgid "Thank you! Your payment has been successfully made."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4481
+#, php-format
+msgid "<a href=\"%s\">View %s</a>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4487
+msgid "Something went wrong. Please, try again later. [Error 005]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4491
+msgid "Not enough credits."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4496
+msgid "You must be logged in to be able to do this action."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4500
+msgid "Something went wrong. Please, try again. [Error 006]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4516
+msgid "Front End Property Submissions (FEPS)."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4520
+msgid "Available Credits (Balance)"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4528 static/views/feps-purchase-template.php:43
+#, php-format
+msgid "%s%01.2f = %01.2f credit"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4563
+msgid "Validation error. Check form fields"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4564
+msgid "Please type in your e-mail address."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4565
+msgid "Checking if account exists."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4566
+msgid "Checking your credentials."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4567
+msgid "Your credentials have been verified."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4568
+msgid "Your login credentials are not correct."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4569
+msgid "Account found, please type in your password."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4570
+msgid "Your account has been created. Check your e-mail to activate account."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4632 static/views/feps-subplans-template.php:80
+msgid "Next"
+msgstr "Nächste"
+
+#: lib/class-wpp-feps.php:4636
+#, fuzzy
+msgid "Update"
+msgstr "Auf Aktualisierungen prüfen"
+
+#: lib/class-wpp-feps.php:4640
+msgid "Publish"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4640 static/views/feps-submit-template.php:98
+msgid "Submit"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4674
+msgid "Shows FEPS Menu. It's available only for logged in users"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4713 lib/class-wpp-feps.php:4790
+msgid "Title:"
+msgstr "Titel"
+
+#: lib/class-wpp-feps.php:4720
+msgid "Don't show Funds Balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4726
+msgid "Don't show 'Add Credits to Balance' link "
+msgstr ""
+
+#: lib/class-wpp-feps.php:4733
+#, php-format
+msgid "Show Filter by Statuses instead of default link to 'My %s' page"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4738
+#, php-format
+msgid "'Add New %s' link to page:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4759
+#, fuzzy
+msgid "FEPS Information"
+msgstr "Allgemeine Hinweise"
+
+#: lib/class-wpp-feps.php:4759
+#, php-format
+msgid ""
+"Shows Information about current FEPS %1$s. It's available only for logged in "
+"users and shown only on Edit %1$s page."
+msgstr ""
+
+#: static/views/feps-purchase-template.php:26
+msgid "Edit"
+msgstr ""
+
+#: static/views/feps-purchase-template.php:27
+#, php-format
+msgid "You can modify the current %s anytime."
+msgstr ""
+
+#: static/views/feps-purchase-template.php:39
+#, fuzzy
+msgid "Change"
+msgstr "Änderungen speichern"
+
+#: static/views/feps-purchase-template.php:50
+#: static/views/feps-subplans-template.php:44
+#, fuzzy
+msgid "Featured:"
+msgstr "Vorgestellt"
+
+#: static/views/feps-purchase-template.php:67
+#, fuzzy
+msgid "Current Balance"
+msgstr "Währung"
+
+#: static/views/feps-purchase-template.php:88
+#, fuzzy, php-format
+msgid "Publish the current %s"
+msgstr "Objekte"
+
+#: static/views/feps-purchase-template.php:91
+#, php-format
+msgid "<strong>%01.2f</strong> credits will be withdrawn from your balance."
+msgstr ""
+
+#: static/views/feps-purchase-template.php:99
+#, fuzzy
+msgid "Add Credits"
+msgstr "Neues Objekt hinzufügen"
+
+#: static/views/feps-purchase-template.php:102
+#, php-format
+msgid ""
+"You don't have enough credits on your balance. Current submission requires "
+"<strong>%01.2f</strong> credits. After credits will be added, the current %s "
+"will be automatically published."
+msgstr ""
+
+#: static/views/feps-submit-template.php:72
+msgid "Your e-mail:"
+msgstr ""
+
+#: static/views/feps-submit-template.php:83
+msgid "Your Password:"
+msgstr ""
+
+#: static/views/feps-subplans-template.php:22
+#, fuzzy
+msgid "Choose Subscription Plan"
+msgstr "Beschreibung"
+
+#: static/views/feps-subplans-template.php:50
+msgid "The available amount of images which can be uploaded for the property"
+msgstr ""
+
+#: static/views/feps-subplans-template.php:59
+#, fuzzy
+msgid "Subscription Plan Options"
+msgstr "Beschreibung"
+
+#: static/views/feps-subplans-template.php:76
+msgid "Back"
+msgstr ""
+
+#: static/views/feps-tabs-template.php:3
+#, fuzzy
+msgid "Information"
+msgstr "Allgemeine Hinweise"
+
+#: static/views/feps-tabs-template.php:5
+msgid "Checkout"
+msgstr ""
+
+#: static/views/wpi_authorize-checkout-feps.php:60
+#: static/views/wpi_paypal-checkout-feps.php:114
+msgid "Agreement"
+msgstr ""
+
+#: static/views/wpi_authorize-checkout-feps.php:82
+#: static/views/wpi_paypal-checkout-feps.php:136
+msgid "Process Payment"
+msgstr ""
+
+#: static/views/wpi_authorize-checkout-feps.php:83
+#: static/views/wpi_paypal-checkout-feps.php:137
+msgid "of"
+msgstr ""
+
+#: static/views/wpi_checkout-feps.php:9
+#, fuzzy
+msgid "Payment Method"
+msgstr "Objekt-Einstellungen"
+
+#: static/views/wpi_checkout-feps.php:14
+msgid "Method"
+msgstr ""
+
+#: static/views/wpi_checkout-feps.php:62
+msgid "Specified gateways are not available"
+msgstr ""
+
+#: static/views/wpi_paypal-checkout-feps.php:84
+msgid "Custom Amount"
+msgstr ""
+
+#: static/views/wpi_paypal-checkout-feps.php:88
+msgid "Your Amount"
+msgstr ""
+
+#: static/views/wpi_paypal-checkout-feps.php:103
+msgid "Enter Amount"
+msgstr ""
+
+#: wp-property-feps.php:54
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-feps.php:62
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-feps.php:70
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-feps.php:74
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-feps.php:95
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""
+
+#~ msgid "Building"
+#~ msgstr "Gebäude"
+
+#~ msgid "Floorplan"
+#~ msgstr "Grundriss"
+
+#~ msgid "Single Family Home"
+#~ msgstr "Einfamilienhaus"
+
+#~ msgid "Address"
+#~ msgstr "Adresse"
+
+#~ msgid "Bedrooms"
+#~ msgstr "Schlafzimmer"
+
+#~ msgid "Bathrooms"
+#~ msgstr "Badezimmer"
+
+#~ msgid "Deposit"
+#~ msgstr "Anzahlung"
+
+#~ msgid "Area"
+#~ msgstr "Gebiet"
+
+#~ msgid "Phone Number"
+#~ msgstr "Telefonnummer"
+
+#~ msgid "Lease Terms"
+#~ msgstr "Mietbedingungen"
+
+#~ msgid "Pet Policy"
+#~ msgstr "Richtlinien zur Haustierhaltung"
+
+#~ msgid "School"
+#~ msgstr "Schule"
+
+#~ msgid "Tagline"
+#~ msgstr "Werbespruch"
+
+#~ msgid "Studio"
+#~ msgstr "Studio"
+
+#~ msgid "The property type will determine the layout."
+#~ msgstr "Die Art des Objekts bestimmt das Layout."
+
+#~ msgid ""
+#~ "Customize what appears in search results in the attribute section.  For "
+#~ "example: 1bed, 2baths, area varies slightly."
+#~ msgstr ""
+#~ "Die Attribute, die in Suchergebnissen angezeigt werden anpassen. Zum "
+#~ "Beispiel: 1 Schlafzimmer, 2 Badezimmer, die Fläche kann geringfügig "
+#~ "variieren."
+
+#~ msgid "Will appear on overview pages and on top of every listing page."
+#~ msgstr "Erscheint auf den Übersichtsseiten und am Anfang jeder Auflistung."
+
+#, fuzzy
+#~ msgid "View "
+#~ msgstr "Alle betrachten"
+
+#~ msgid "Property Type"
+#~ msgstr "Art der Immobilie"
+
+#~ msgid "City"
+#~ msgstr "Stadt"
+
+#~ msgid "For Sale"
+#~ msgstr "Zu verkaufen"
+
+#~ msgid "For Rent"
+#~ msgstr "Zu vermieten"
+
+#~ msgid "This is a rental property."
+#~ msgstr "Das ist ein Mietobjekt."
+
+#~ msgid "This property is for sale."
+#~ msgstr "Dieses Objekt steht zum Verkauf."
+
+#~ msgid "Latitude"
+#~ msgstr "Breitengrad"
+
+#~ msgid "Longitude"
+#~ msgstr "Längengrad"
+
+#, fuzzy
+#~ msgid "Format phone number."
+#~ msgstr "Standard-Telefonnummer"
+
+#, fuzzy
+#~ msgid " sq. ft."
+#~ msgstr "m2"
+
+#, fuzzy
+#~ msgid "Address was validated by Google Maps."
+#~ msgstr ""
+#~ "<span class='description'>Adresse wurde von Google Maps überprüft.</span>"
+
+#, fuzzy
+#~ msgid ""
+#~ "Address has not yet been validated, should be formatted as: street, city, "
+#~ "state, postal code, country. Locations are validated through Google Maps."
+#~ msgstr ""
+#~ "<span class='description'>Die Adresse wurde noch nicht überprüft und "
+#~ "sollte wie folgt formatiert sein: Straße, Stadt, Bundesland, "
+#~ "Postleitzahl, Land. Die Ortsangaben werden durch Google Maps überprüft.</"
+#~ "span>"
+
+#, fuzzy
+#~ msgid "Show"
+#~ msgstr "Diashow"
+
+#, fuzzy
+#~ msgid "Add to Featured"
+#~ msgstr "Neues Objekt hinzufügen"
+
+#~ msgid "Processing..."
+#~ msgstr "Bearbeite..."
+
+#, fuzzy
+#~ msgid "Uploading"
+#~ msgstr "Lade"
+
+#~ msgid "Cancel"
+#~ msgstr "Abbruch"
+
+#, fuzzy
+#~ msgid "Previous"
+#~ msgstr "Vorige"
+
+#, fuzzy
+#~ msgid "Show %s entries"
+#~ msgstr " %s Abbildungen anzeigen"
+
+#, fuzzy
+#~ msgid "No matching records found"
+#~ msgstr "Keine Objekte gefunden"
+
+#, fuzzy
+#~ msgid "Loading..."
+#~ msgstr "Lade"
+
+#, fuzzy
+#~ msgid "Search:"
+#~ msgstr "Suche"
+
+#, fuzzy
+#~ msgid "Display:"
+#~ msgstr "Darstellung"
+
+#, fuzzy
+#~ msgid "Automatically Match"
+#~ msgstr "Automatisch Standard-CSS einbinden."
+
+#~ msgid "Settings"
+#~ msgstr "Einstellungen"
+
+#, fuzzy
+#~ msgid "Enabled Options"
+#~ msgstr "Optionen"
+
+#~ msgid "Developer"
+#~ msgstr "Entwickler"
+
+#, fuzzy
+#~ msgid ""
+#~ "Property attributes are meant to be short entries that can be searchable, "
+#~ "on the back-end attributes will be displayed as single-line input boxes. "
+#~ "On the front-end they are displayed using a definitions list."
+#~ msgstr ""
+#~ "<p>Objektattribute sollten kurze Einträge sein, die suchbar sein können. "
+#~ "Auf dem Back-End werden die Attribute als Einzeilige Eingabefelder "
+#~ "dargestellt. Auf der Front-End werden sie mit Hilfe einer "
+#~ "Definitionsliste dargestellt.</p>\n"
+#~ "\t\t\t\t<p>Die Definition eines Attributs als \"searchable\", wird dieses "
+#~ "als eine der suchbaren Optionen in den Einstellungen des Immobilien-Such-"
+#~ "Widgets auflisten.</p>\n"
+#~ "\t\t\t\t<p>Seien Sie beraten, dass Attribute die mit der add_filter() "
+#~ "Funktion hinzugefügt werden, die Einstellungen dieser Seite ersetzen.</p>"
+
+#, fuzzy
+#~ msgid "%1s Attributes"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "Advanced Stats Settings:"
+#~ msgstr "Allgemeine Einstellungen"
+
+#~ msgid "Slug"
+#~ msgstr "Titelform"
+
+#, fuzzy
+#~ msgid "Add Group"
+#~ msgstr "Reihe hinzufügen"
+
+#, fuzzy
+#~ msgid "Attribute Name"
+#~ msgstr "Name der Funktion"
+
+#, fuzzy
+#~ msgid "Search Input"
+#~ msgstr "Suche"
+
+#, fuzzy
+#~ msgid "Sortable."
+#~ msgstr "Sortierbar"
+
+#, fuzzy
+#~ msgid "Searchable."
+#~ msgstr "Suchbar"
+
+#, fuzzy
+#~ msgid "Admin Only."
+#~ msgstr "Admin UI"
+
+#, fuzzy
+#~ msgid "Show in \"All Properties\" table."
+#~ msgstr "Zugeordnete Objekte anzeigen."
+
+#, fuzzy
+#~ msgid "Range Dropdown"
+#~ msgstr "Bereich (Ausgliederung)"
+
+#, fuzzy
+#~ msgid "Single Checkbox"
+#~ msgstr "Markierungsfeld"
+
+#, fuzzy
+#~ msgid "Multi-Checkbox"
+#~ msgstr "Markierungsfeld"
+
+#~ msgid ""
+#~ "Meta is used for descriptions,  on the back-end  meta fields will be "
+#~ "displayed as textareas.  On the front-end they will be displayed as "
+#~ "individual sections."
+#~ msgstr ""
+#~ "Metadaten werden für Beschreibungen benutzt. Auf dem Back-End werden  "
+#~ "Metafelder als Textbereiche und auf der Front-End als einzelne Abschnitte "
+#~ "dargestellt."
+
+#, fuzzy
+#~ msgid "%1s Types"
+#~ msgstr "Art"
+
+#~ msgid "Type"
+#~ msgstr "Art"
+
+#~ msgid "Hidden Attributes"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "Inherit from Parent"
+#~ msgstr "Erbgut"
+
+#~ msgid "Searchable"
+#~ msgstr "Suchbar"
+
+#~ msgid "Location Matters"
+#~ msgstr "Ort ist von Bedeutung"
+
+#, fuzzy
+#~ msgid "Parent Selection"
+#~ msgstr "Objekt-Einstellungen"
+
+#, fuzzy
+#~ msgid "Advanced Options"
+#~ msgstr "Optionen"
+
+#~ msgid "Show Log."
+#~ msgstr "Protokoll anzeigen."
+
+#~ msgid ""
+#~ "The log is always active, but the UI is hidden.  If enabled, it will be "
+#~ "visible in the admin sidebar."
+#~ msgstr ""
+#~ "Das Protokoll ist immer aktiv, aber das UI ist verborgen. Falls "
+#~ "aktiviert, wird es in der Admin-Seitenleiste sichtbar sein."
+
+#~ msgid "Child Properties"
+#~ msgstr "Zugeordnete Objekte"
+
+#~ msgid "Menu Sort Order:"
+#~ msgstr "Menü sortiert nach:"
+
+#, fuzzy
+#~ msgid "Display in featured listings."
+#~ msgstr "Objekt in vorgestellten Auflistungen darstellen."
+
+#, fuzzy
+#~ msgid "Property updated. <a href=\"%s\">view property</a>"
+#~ msgstr "Objekt aktualisiert. <a href=\"%s\">View property</a>"
+
+#~ msgid "Custom field updated."
+#~ msgstr "Benutzerdefiniertes Feld aktualisiert"
+
+#~ msgid "Custom field deleted."
+#~ msgstr "Benutzerdefiniertes Feld entfernt"
+
+#~ msgid "Property updated."
+#~ msgstr "Objekt aktualisiert."
+
+#~ msgid "Property restored to revision from %s"
+#~ msgstr "Objekt zur Änderung von %s wieder hergestellt"
+
+#~ msgid "Property published. <a href=\"%s\">View property</a>"
+#~ msgstr "Objekt veröffentlicht. <a href=\"%s\">View property</a>"
+
+#~ msgid "Property saved."
+#~ msgstr "Objekt gespeichert."
+
+#~ msgid ""
+#~ "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+#~ msgstr ""
+#~ "Objekt bereitgestellt. <a target=\"_blank\" href=\"%s\">Preview property</"
+#~ "a>"
+
+#~ msgid ""
+#~ "Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Preview property</a>"
+#~ msgstr ""
+#~ "Objekt vorgesehen für: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Preview property</a>"
+
+#~ msgid "M j, Y @ G:i"
+#~ msgstr "M j, Y @ G:i"
+
+#~ msgid ""
+#~ "Property draft updated. <a target=\"_blank\" href=\"%s\">Preview "
+#~ "property</a>"
+#~ msgstr ""
+#~ "Objektvorlage aktualisiert. <a target=\"_blank\" href=\"%s\">Preview "
+#~ "property</a>"
+
+#~ msgid "Overview"
+#~ msgstr "Übersicht"
+
+#~ msgid "Order"
+#~ msgstr "Reihenfolge"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Thumbnail"
+
+#~ msgid "Search"
+#~ msgstr "Suche"
+
+#~ msgid "Floor plans at location:"
+#~ msgstr "Grundrisse vor Ort:"
+
+#, fuzzy
+#~ msgid "View Properties"
+#~ msgstr "Objekt betrachten"
+
+#, fuzzy
+#~ msgid "Add/Edit Properties"
+#~ msgstr "Objekt bearbeiten"
+
+#, fuzzy
+#~ msgid "Edit Other Properties"
+#~ msgstr "Weitere Objekte"
+
+#, fuzzy
+#~ msgid "Delete Properties"
+#~ msgstr "Weitere Objekte"
+
+#, fuzzy
+#~ msgid "Publish Properties"
+#~ msgstr "Objekte"
+
+#, fuzzy
+#~ msgid "Manage Settings"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Manage Taxonomies"
+#~ msgstr "Diashow"
+
+#, fuzzy
+#~ msgid "For more information:"
+#~ msgstr "Allgemeine Hinweise"
+
+#, fuzzy
+#~ msgid "An error occurred during API key request: <b>%s</b>."
+#~ msgstr ""
+#~ "Ein Fehler trat während der Prüfung der Premium-Funktion auf: <b> %s </b>."
+
+#~ msgid "Properties"
+#~ msgstr "Objekte"
+
+#~ msgid "Property"
+#~ msgstr "Objekt"
+
+#~ msgid "Property: %s"
+#~ msgstr "Objekt: %s"
+
+#~ msgid "Features"
+#~ msgstr "Funktionen"
+
+#~ msgid "Feature"
+#~ msgstr "Funktion"
+
+#, fuzzy
+#~ msgid "Search Features"
+#~ msgstr "Objekte durchsuchen"
+
+#, fuzzy
+#~ msgid "All Features"
+#~ msgstr "Funktionen"
+
+#, fuzzy
+#~ msgid "Parent Feature"
+#~ msgstr "Funktion"
+
+#, fuzzy
+#~ msgid "Parent Feature:"
+#~ msgstr "Funktion"
+
+#, fuzzy
+#~ msgid "Edit Feature"
+#~ msgstr "Funktion"
+
+#, fuzzy
+#~ msgid "Update Feature"
+#~ msgstr "Funktion"
+
+#, fuzzy
+#~ msgid "Add New Feature"
+#~ msgstr "Neues Objekt hinzufügen"
+
+#, fuzzy
+#~ msgid "New Feature Name"
+#~ msgstr "Name der Funktion"
+
+#~ msgid "Community Features"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Community Feature"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Search Community Features"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "All Community Features"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Parent Community Feature"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Parent Community Feature:"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Edit Community Feature"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Update Community Feature"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Add New Community Feature"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "New Community Feature Name"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "All Properties"
+#~ msgstr "Objekte"
+
+#, fuzzy
+#~ msgid "Add Property"
+#~ msgstr "Neues Objekt hinzufügen"
+
+#~ msgid "Add New Property"
+#~ msgstr "Neues Objekt hinzufügen"
+
+#~ msgid "Edit Property"
+#~ msgstr "Objekt bearbeiten"
+
+#~ msgid "New Property"
+#~ msgstr "Neues Objekt"
+
+#~ msgid "View Property"
+#~ msgstr "Objekt betrachten"
+
+#~ msgid "Search Properties"
+#~ msgstr "Objekte durchsuchen"
+
+#~ msgid "No properties found"
+#~ msgstr "Keine Objekte gefunden"
+
+#~ msgid "No properties found in Trash"
+#~ msgstr "Keine Objekte im Papierkorb gefunden"
+
+#, fuzzy
+#~ msgid "Default"
+#~ msgstr "Entfernen"
+
+#~ msgid ""
+#~ "One of the folders that is necessary for downloading additional features "
+#~ "for the WP-Property plugin is not writable.  This means features cannot "
+#~ "be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-"
+#~ "property/core/premium</b> permissions to 0755."
+#~ msgstr ""
+#~ "Ein Ordner, der für das Herunterladen zusätzlicher Funktionen für das WP-"
+#~ "Property-Plugin nötig ist, ist nicht beschreibbar. Das bedeutet, dass die "
+#~ "Funktionen nicht geladen werden können. Um dies zu beheben, müssen Sie "
+#~ "die <b>wp-content/plugins/wp-property/core/premium</b>Rechte auf 0755 "
+#~ "setzen."
+
+#, fuzzy
+#~ msgid "Cache was successfully cleared"
+#~ msgstr "Die Aktualisierung war erfolgreich."
+
+#, fuzzy
+#~ msgid ""
+#~ "An error occurred during premium feature check. API Key '<b>%s</b>' is "
+#~ "incorrect."
+#~ msgstr ""
+#~ "Ein Fehler trat während der Prüfung der Premium-Funktion auf: <b> %s </b>."
+
+#, fuzzy
+#~ msgid "There are no available premium features."
+#~ msgstr "Erzwinge Prüfung erlaubter Premium-Funktionen"
+
+#, fuzzy
+#~ msgid "WP-Property Premium Feature: %s"
+#~ msgstr "WP-Property Premium-Funktionen"
+
+#~ msgid "Update ran successfully."
+#~ msgstr "Die Aktualisierung war erfolgreich."
+
+#, fuzzy
+#~ msgid "You have the latest premium features versions."
+#~ msgstr "Erzwinge Prüfung erlaubter Premium-Funktionen"
+
+#, fuzzy
+#~ msgid "An error occurred during premium feature check: <b> %s </b>."
+#~ msgstr ""
+#~ "Ein Fehler trat während der Prüfung der Premium-Funktion auf: <b> %s </b>."
+
+#~ msgid " sq ft."
+#~ msgstr "m2"
+
+#~ msgid "Get Directions"
+#~ msgstr "Wegbeschreibung"
+
+#~ msgid "General Settings"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Login"
+#~ msgstr "Protokoll"
+
+#, fuzzy
+#~ msgid "Date"
+#~ msgstr "Entfernen"
+
+#, fuzzy
+#~ msgid "Published"
+#~ msgstr "Diashow-Abbildungen:"
+
+#, fuzzy
+#~ msgid "Pending"
+#~ msgstr "Lade"
+
+#~ msgid "Any"
+#~ msgstr "Alle"
+
+#, fuzzy
+#~ msgid "Show all dates"
+#~ msgstr " %s Abbildungen anzeigen"
+
+#, fuzzy
+#~ msgid "General Help"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Default Properties Page"
+#~ msgstr "Vorgestellte Objekte"
+
+#, fuzzy
+#~ msgid ""
+#~ "The default <b>property page</b> will be used to display property search "
+#~ "results, as well as be the base for property URLs. "
+#~ msgstr ""
+#~ "Die <b>property page</b> wird als die Grundlage für URLs des Objekts "
+#~ "benutzt und um das Objekt in den Suchergebnissen darzustellen. Zum "
+#~ "Beispiel, wenn die URL Ihrer Objektseite  "
+
+#~ msgid "Display"
+#~ msgstr "Darstellung"
+
+#, fuzzy
+#~ msgid "Premium Features"
+#~ msgstr "WP-Property Premium-Funktionen"
+
+#, fuzzy
+#~ msgid "Tab allows you to manage your WP-Property Premium Features"
+#~ msgstr "WP-Property Premium-Funktionen"
+
+#, fuzzy
+#~ msgid "More Help"
+#~ msgstr "Mehr"
+
+#, fuzzy
+#~ msgid "published"
+#~ msgstr "Diashow-Abbildungen:"
+
+#, fuzzy
+#~ msgid "pending"
+#~ msgstr "Lade"
+
+#, fuzzy
+#~ msgid "Nothing found."
+#~ msgstr "Keine Objekte gefunden"
+
+#, fuzzy
+#~ msgid "New User account created."
+#~ msgstr "Verzeichnis nicht erstellt."
+
+#, fuzzy
+#~ msgid "Status Updated"
+#~ msgstr "Objekt aktualisiert."
+
+#, fuzzy
+#~ msgid "or"
+#~ msgstr "Mehr"
+
+#, fuzzy
+#~ msgid "No published properties."
+#~ msgstr "Zugeordnete Objekte anzeigen."
+
+#, fuzzy
+#~ msgid "Attributes to Display:"
+#~ msgstr "Adressenanzeige"
+
+#~ msgid "%s at %s for %s"
+#~ msgstr "%s zu %s für %s"
+
+#~ msgid "More"
+#~ msgstr "Mehr"
+
+#~ msgid "View All"
+#~ msgstr "Alle betrachten"
+
+#, fuzzy
+#~ msgid ""
+#~ "The widget will show other properties that share a parent with the "
+#~ "currently displayed property."
+#~ msgstr ""
+#~ "Zugeordnete Objekte (falls vorhanden) für das aktuell dargestellte "
+#~ "anzeigen"
+
+#, fuzzy
+#~ msgid "Hide images."
+#~ msgstr "Abbildungen ausblenden"
+
+#~ msgid "Image Size:"
+#~ msgstr "Größe der Abbildung"
+
+#~ msgid "Listings to display?"
+#~ msgstr "Darzustellende Auflistungen"
+
+#, fuzzy
+#~ msgid "Select the attributes you want to display: "
+#~ msgstr "Wählen Sie die Merkmale die Sie darstellen möchten"
+
+#~ msgid "Address Format:"
+#~ msgstr "Adressenformat:"
+
+#~ msgid "Show \"More\" link?"
+#~ msgstr "Zeigen \"Mehr\" Link?"
+
+#~ msgid "Show \"View All\" link?"
+#~ msgstr "Zeigen \"Alle betrachten\" Link?"
+
+#~ msgid "Show child properties (if any) for currently displayed property"
+#~ msgstr ""
+#~ "Zugeordnete Objekte (falls vorhanden) für das aktuell dargestellte "
+#~ "anzeigen"
+
+#~ msgid ""
+#~ "The widget will not be displayed if the currently viewed property has no "
+#~ "children."
+#~ msgstr ""
+#~ "Das Widget wird nicht dargestellt falls die zur Zeit betrachtete "
+#~ "Immobilie über keine zugeordneten Objekte verfügt."
+
+#~ msgid "Hide Images?"
+#~ msgstr "Abbildungen ausblenden"
+
+#~ msgid "Select the stats you want to display"
+#~ msgstr "Wählen Sie die Merkmale die Sie darstellen möchten"
+
+#, fuzzy
+#~ msgid "Featured %1s"
+#~ msgstr "Funktionen"
+
+#~ msgid "List of properties that were marked as Featured"
+#~ msgstr "Liste, als vorgestellt gekennzeichneter Objekte"
+
+#, fuzzy
+#~ msgid "Featured Properies"
+#~ msgstr "Vorgestellte Objekte"
+
+#~ msgid "List of the latest properties created on this site"
+#~ msgstr "Liste neuester Objekte, die auf dieser Seite erstellt wurden"
+
+#~ msgid "Latest Properties"
+#~ msgstr "Neueste Objekte"
+
+#~ msgid "Select stats you want to display"
+#~ msgstr "Wählen Sie die Merkmale die Sie darstellen möchten"
+
+#, fuzzy
+#~ msgid "%1s Search"
+#~ msgstr "Suche"
+
+#, fuzzy
+#~ msgid "Display a highly customizable  %1s search form."
+#~ msgstr "Ein hochanpassbares Objektsuchformular anzeigen"
+
+#~ msgid "No searchable property types were found."
+#~ msgstr "Es wurden keine durchsuchbaren Immobilienarten gefunden."
+
+#~ msgid "Property types to search:"
+#~ msgstr "Zu suchende Immobilienarten:"
+
+#~ msgid "Select the attributes you want to search."
+#~ msgstr "Wählen Sie die Attribute, die Sie durchsuchen möchten."
+
+#, fuzzy
+#~ msgid "All Attributes"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "Grouped Attributes"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "Default Sort Order"
+#~ msgstr "Menü sortiert nach:"
+
+#~ msgid "Items per page"
+#~ msgstr "Einträge pro Seite"
+
+#~ msgid "Search Properies"
+#~ msgstr "Objekte durchsuchen"
+
+#~ msgid "List of all images attached to the current property"
+#~ msgstr "Liste aller, zu diesem Objekt beigefügten Abbildungen"
+
+#, fuzzy
+#~ msgid "Large Image Size:"
+#~ msgstr "Größe der Abbildung"
+
+#~ msgid "Show %s Images"
+#~ msgstr " %s Abbildungen anzeigen"
+
+#, fuzzy
+#~ msgid "Show Image Captions"
+#~ msgstr " %s Abbildungen anzeigen"
+
+#, fuzzy
+#~ msgid "Show Image Descriptions."
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "API Failure: %1s."
+#~ msgstr "Funktionen"
+
+#~ msgid "Log Started."
+#~ msgstr "Protokollierung begonnen"
+
+#, fuzzy
+#~ msgid "Log Page for"
+#~ msgstr "UD Log Seite für"
+
+#~ msgid "Clear Log"
+#~ msgstr "Protokoll löschen"
+
+#~ msgid "Timestamp"
+#~ msgstr "Zeitstempel"
+
+#~ msgid "Event"
+#~ msgstr "Ereignis"
+
+#~ msgid "User"
+#~ msgstr "Nutzer"
+
+#, fuzzy
+#~ msgid "Agent Shortcodes"
+#~ msgstr "Übersicht Shortcode"
+
+#, fuzzy
+#~ msgid "Show agent information:"
+#~ msgstr "Allgemeine Hinweise"
+
+#, fuzzy
+#~ msgid "To query agent properties:"
+#~ msgstr "Zugeordnete Objekte anzeigen."
+
+#, fuzzy
+#~ msgid "Shortcode Attribute Fields"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "Agent Image Size"
+#~ msgstr "Größe der Abbildung"
+
+#, fuzzy
+#~ msgid "Agent Information"
+#~ msgstr "Allgemeine Hinweise"
+
+#, fuzzy
+#~ msgid "Agent"
+#~ msgstr "Ereignis"
+
+#, fuzzy
+#~ msgid "No Properties."
+#~ msgstr "Objekte"
+
+#, fuzzy
+#~ msgid "Display Name"
+#~ msgstr "Darstellung"
+
+#, fuzzy
+#~ msgid "Username"
+#~ msgstr "Nutzer"
+
+#, fuzzy
+#~ msgid "E-Mail"
+#~ msgstr "Hauptseite"
+
+#~ msgid "Options"
+#~ msgstr "Optionen"
+
+#, fuzzy
+#~ msgid "Associated Properties"
+#~ msgstr "Vorgestellte Objekte"
+
+#, fuzzy
+#~ msgid "Images"
+#~ msgstr "Alle Abbildungen"
+
+#, fuzzy
+#~ msgid "Agent Fields"
+#~ msgstr "Objektfelder"
+
+#, fuzzy
+#~ msgid "Agent updated."
+#~ msgstr "Objekt aktualisiert."
+
+#, fuzzy
+#~ msgid "Agent created."
+#~ msgstr "Verzeichnis nicht erstellt."
+
+#, fuzzy
+#~ msgid "Edit Agent"
+#~ msgstr "Objekt bearbeiten"
+
+#, fuzzy
+#~ msgid "No images found."
+#~ msgstr "Keine Objekte gefunden"
+
+#, fuzzy
+#~ msgid "Add Image"
+#~ msgstr "Alle Abbildungen"
+
+#, fuzzy
+#~ msgid "Edit posts"
+#~ msgstr "Objekt bearbeiten"
+
+#, fuzzy
+#~ msgid "Edit pages"
+#~ msgstr "Objekt bearbeiten"
+
+#, fuzzy
+#~ msgid "Publish pages"
+#~ msgstr "Diashow-Abbildungen:"
+
+#, fuzzy
+#~ msgid "Delete pages"
+#~ msgstr "Entfernen"
+
+#, fuzzy
+#~ msgid "Delete posts"
+#~ msgstr "Entfernen"
+
+#, fuzzy
+#~ msgid "Image"
+#~ msgstr "Größe der Abbildung"
+
+#, fuzzy
+#~ msgid "Email Address"
+#~ msgstr "Adresse"
+
+#, fuzzy
+#~ msgid "<b>Page Settings</b><br/>"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Name:"
+#~ msgstr "Name"
+
+#, fuzzy
+#~ msgid "Page:"
+#~ msgstr "Übergeordnetes"
+
+#, fuzzy
+#~ msgid "Page"
+#~ msgstr "Übergeordnetes"
+
+#, fuzzy
+#~ msgid "Search..."
+#~ msgstr "Suche"
+
+#, fuzzy
+#~ msgid "Template Settings:"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Template:"
+#~ msgstr "Vorlage"
+
+#, fuzzy
+#~ msgid "Disable default CSS."
+#~ msgstr "Automatisch Standard-CSS einbinden."
+
+#, fuzzy
+#~ msgid "PDF Flyer Options"
+#~ msgstr "Supermap-Optionen"
+
+#, fuzzy
+#~ msgid "Exclude %1s from PDF Lists"
+#~ msgstr "Objekt aus Supermap ausschließen"
+
+#, fuzzy
+#~ msgid "Full Description"
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Attributes"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "File Name:"
+#~ msgstr "Name der Funktion"
+
+#, fuzzy
+#~ msgid "Actions:"
+#~ msgstr "Optionen"
+
+#, fuzzy
+#~ msgid "View PDF"
+#~ msgstr "Alle betrachten"
+
+#, fuzzy
+#~ msgid "Properties per page:"
+#~ msgstr "Einträge pro Seite"
+
+#, fuzzy
+#~ msgid "Show child properties."
+#~ msgstr "Zugeordnete Objekte anzeigen."
+
+#, fuzzy
+#~ msgid "Contact Information"
+#~ msgstr "Allgemeine Hinweise"
+
+#, fuzzy
+#~ msgid "Refresh Page"
+#~ msgstr "Übersichtsseite"
+
+#, fuzzy
+#~ msgid "Location"
+#~ msgstr "Lade"
+
+#, fuzzy
+#~ msgid "Flyer Display"
+#~ msgstr "Darstellung"
+
+#, fuzzy
+#~ msgid "Description (if exists)"
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Location on Map (if exists)"
+#~ msgstr "Ort ist von Bedeutung"
+
+#, fuzzy
+#~ msgid "Secondary Images"
+#~ msgstr "Diashow-Abbildungen:"
+
+#, fuzzy
+#~ msgid "Show %1$s images."
+#~ msgstr " %s Abbildungen anzeigen"
+
+#, fuzzy
+#~ msgid "\" is generated."
+#~ msgstr "Verzeichnis nicht erstellt."
+
+#, fuzzy
+#~ msgid "Allows user to publish properties."
+#~ msgstr "Zugeordnete Objekte anzeigen."
+
+#, fuzzy
+#~ msgid "WP Property Capabilities"
+#~ msgstr "WP-Property Diashow"
+
+#, fuzzy
+#~ msgid "Singular Property:"
+#~ msgstr "Objekt bearbeiten"
+
+#, fuzzy
+#~ msgid "Plural Property:"
+#~ msgstr "Objekt"
+
+#, fuzzy
+#~ msgid "Overview Page Contextual Help:"
+#~ msgstr "Übersichtsseite"
+
+#, fuzzy
+#~ msgid "Add "
+#~ msgstr "Neue hinzufügen"
+
+#, fuzzy
+#~ msgid "Add New "
+#~ msgstr "Neue hinzufügen"
+
+#, fuzzy
+#~ msgid "Search "
+#~ msgstr "Suche"
+
+#, fuzzy
+#~ msgid "Property Title"
+#~ msgstr "Art der Immobilie"
+
+#, fuzzy
+#~ msgid "Property Content"
+#~ msgstr "Metadaten zum Objekt"
+
+#, fuzzy
+#~ msgid "Property Excerpt"
+#~ msgstr "Metadaten zum Objekt"
+
+#, fuzzy
+#~ msgid "Property Status"
+#~ msgstr "Merkmale des Objekts"
+
+#, fuzzy
+#~ msgid "Property Order"
+#~ msgstr "Objektsuche"
+
+#, fuzzy
+#~ msgid "Property Date"
+#~ msgstr "Objektseite"
+
+#, fuzzy
+#~ msgid "Property Author"
+#~ msgstr "Metadaten zum Objekt"
+
+#, fuzzy
+#~ msgid "Starting "
+#~ msgstr "Einstellungen"
+
+#, fuzzy
+#~ msgid "Time: "
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "No objects found."
+#~ msgstr "Keine Objekte gefunden"
+
+#, fuzzy
+#~ msgid "Available tags in source: %1s"
+#~ msgstr "Verfügbare Schlüsselworte:"
+
+#, fuzzy
+#~ msgid "Property Importer"
+#~ msgstr "Art der Immobilie"
+
+#, fuzzy
+#~ msgid "Sort by:"
+#~ msgstr "Sortierbar"
+
+#, fuzzy
+#~ msgid "Created Properties"
+#~ msgstr "Vorgestellte Objekte"
+
+#, fuzzy
+#~ msgid "Updated Properties"
+#~ msgstr "Vorgestellte Objekte"
+
+#, fuzzy
+#~ msgid "Total Properties"
+#~ msgstr "Objekte"
+
+#, fuzzy
+#~ msgid "Created "
+#~ msgstr "Vorgestellt"
+
+#, fuzzy
+#~ msgid "Total Properties: "
+#~ msgstr "Objekte"
+
+#, fuzzy
+#~ msgid "Delete All Properties"
+#~ msgstr "Weitere Objekte"
+
+#, fuzzy
+#~ msgid "Source"
+#~ msgstr "Mehr"
+
+#, fuzzy
+#~ msgid "Type:"
+#~ msgstr "Art"
+
+#, fuzzy
+#~ msgid "Google Spreadsheet"
+#~ msgstr "Google Maps"
+
+#, fuzzy
+#~ msgid "WP-Property Feed"
+#~ msgstr "Objektfelder"
+
+#, fuzzy
+#~ msgid "Google Username"
+#~ msgstr "Google Maps"
+
+#, fuzzy
+#~ msgid "Google Password"
+#~ msgstr "Google Maps"
+
+#, fuzzy
+#~ msgid "Property Resource."
+#~ msgstr "Objekt gespeichert."
+
+#, fuzzy
+#~ msgid "Default is \"Property\""
+#~ msgstr "Art der Immobilie"
+
+#, fuzzy
+#~ msgid "Property Resource Class."
+#~ msgstr "Objekt gespeichert."
+
+#, fuzzy
+#~ msgid "RETS Version."
+#~ msgstr "Version"
+
+#, fuzzy
+#~ msgid "Property Query."
+#~ msgstr "Galerie"
+
+#, fuzzy
+#~ msgid "Default Property Type"
+#~ msgstr "Art der Immobilie"
+
+#, fuzzy
+#~ msgid "properties in the feed."
+#~ msgstr "Keine Objekte gefunden"
+
+#, fuzzy
+#~ msgid " valid images."
+#~ msgstr "Abbildungen ausblenden"
+
+#, fuzzy
+#~ msgid "hour(s) ago."
+#~ msgstr "vor %s Stunden"
+
+#, fuzzy
+#~ msgid "Attribute Map"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "WP-Property Attribute"
+#~ msgstr "WP-Property Premium-Funktionen"
+
+#, fuzzy
+#~ msgid "WordPress Attributes"
+#~ msgstr "Adressenattribut"
+
+#, fuzzy
+#~ msgid "Street Number"
+#~ msgstr "Telefonnummer"
+
+#, fuzzy
+#~ msgid "County"
+#~ msgstr "Stadt"
+
+#, fuzzy
+#~ msgid "State"
+#~ msgstr "Sortierbar"
+
+#, fuzzy
+#~ msgid "WP-Property Attributes"
+#~ msgstr "WP-Property Premium-Funktionen"
+
+#, fuzzy
+#~ msgid "Property Agent"
+#~ msgstr "Metadaten zum Objekt"
+
+#, fuzzy
+#~ msgid "Global Property ID"
+#~ msgstr "Objekt"
+
+#, fuzzy
+#~ msgid "Display Address"
+#~ msgstr "Adresse"
+
+#, fuzzy
+#~ msgid "Address validation has failed."
+#~ msgstr "Adresse nicht überprüft."
+
+#, fuzzy
+#~ msgid "Manage Slideshow"
+#~ msgstr "Diashow"
+
+#, fuzzy
+#~ msgid "Slide"
+#~ msgstr "Diashow"
+
+#, fuzzy
+#~ msgid "Carousel Thumbnail Size:"
+#~ msgstr "Thumbnail-Größe Karte:"
+
+#~ msgid "Slideshow Options"
+#~ msgstr "Diashow-Optionen"
+
+#~ msgid "Slideshow Images:"
+#~ msgstr "Diashow-Abbildungen:"
+
+#~ msgid "All Images:"
+#~ msgstr "Alle Abbildungen"
+
+#~ msgid "Slideshow"
+#~ msgstr "Diashow"
+
+#~ msgid "Global Slideshow"
+#~ msgstr "Globale Diashow"
+
+#, fuzzy
+#~ msgid "Slideshow Size: "
+#~ msgstr "Diashow-Abbildungen:"
+
+#, fuzzy
+#~ msgid "Display in Global Slideshow Caption:"
+#~ msgstr "Globale Diashow"
+
+#, fuzzy
+#~ msgid "Title."
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "Tagline."
+#~ msgstr "Werbespruch"
+
+#~ msgid "Single Listing Slideshow"
+#~ msgstr "Diashow einzelner Auflistungen"
+
+#~ msgid "Slideshow image size to be used for single property pages."
+#~ msgstr ""
+#~ "Größe der Diashow-Abbildung, die für einzelne Objektseiten benutzt wird."
+
+#, fuzzy
+#~ msgid "Thumbnail Size"
+#~ msgstr "Thumbnail-Größe:"
+
+#~ msgid ""
+#~ "This width is used on \"Slideshow\" page on the Property editing page to "
+#~ "display available images, this setting <b>does not</b> affect the actual "
+#~ "slideshow on the front-end."
+#~ msgstr ""
+#~ "Diese Breite wird auf der \"Slideshow\" benutzt, die sich auf der Seite "
+#~ "zur Bearbeitung des Objekts befindet, um verfügbare Abbildungen "
+#~ "darzustellen. Diese Einstellung <b>beeinflusst nicht</b> die eigentliche "
+#~ "Diashow auf der Front-End."
+
+#, fuzzy
+#~ msgid "Slices:"
+#~ msgstr "Diashow"
+
+#~ msgid "Slideshow selection and order saved."
+#~ msgstr "Auswahl und Reihenfolge der Diashow gespeichert."
+
+#~ msgid "WP-Property Slideshow"
+#~ msgstr "WP-Property Diashow"
+
+#~ msgid ""
+#~ "This slideshow can be integrated into your front-end pages by either "
+#~ "using the shortcode, or pasting PHP code into your theme."
+#~ msgstr ""
+#~ "Diese Diashow kann, entweder durch die Benutzung von Shortcodes oder das "
+#~ "Einfügen vom PHP-Codes in Ihre Front-End-Seiten in Ihrem Thema integriert "
+#~ "werden."
+
+#~ msgid ""
+#~ "Drag images from selection on the left to the selection on the right, and "
+#~ "then click save."
+#~ msgstr ""
+#~ "Ziehen Sie die Abbildungen aus der Auswahl links in die Auswahl rechts "
+#~ "und bestätigen Sie mit Speichern."
+
+#~ msgid ""
+#~ "This list gets all images from your media library that are over %s pixels "
+#~ "wide and %s pixels tall."
+#~ msgstr ""
+#~ "Diese Liste holt alle Abbildungen aus Ihrer Medienbibliothek die größer "
+#~ "wie %s Pixel in Breite und %s Pixel in Höhe sind."
+
+#~ msgid "Save Selection and Order"
+#~ msgstr "Auswahl und Reihenfolge speichern"
+
+#, fuzzy
+#~ msgid "Manage Supermap"
+#~ msgstr "Supermap"
+
+#~ msgid "Supermap"
+#~ msgstr "Supermap"
+
+#, fuzzy
+#~ msgid "Sidebar Attributes"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid ""
+#~ "Select the attributes you want to display in the left sidebar on the "
+#~ "supermap."
+#~ msgstr "Wählen Sie die Attribute, die Sie durchsuchen möchten."
+
+#, fuzzy
+#~ msgid "Supermap Sidebar Thumbnail:"
+#~ msgstr "Thumbnail der Supermap-Seitenleiste:"
+
+#~ msgid ""
+#~ "If you create a new image size, please be sure to regenerate all "
+#~ "thumbnails. "
+#~ msgstr ""
+#~ "Wenn Sie eine neue Größe für Abbildungen erstellen, vergewissern Sie sich "
+#~ "alle Thumbnails zu erneuern. "
+
+#, fuzzy
+#~ msgid "Default by Google"
+#~ msgstr "Standardvorlage"
+
+#~ msgid "Supermap Options"
+#~ msgstr "Supermap-Optionen"
+
+#, fuzzy
+#~ msgid "Exclude property from Supermap"
+#~ msgstr "Objekt aus Supermap ausschließen"
+
+#, fuzzy
+#~ msgid "Sorry, no %s found, try expanding your search."
+#~ msgstr ""
+#~ "Es tut uns leid, es wurden keine Objekte gefunden. Versuchen Sie es mit "
+#~ "einer detaillierten Suche oder <a href=\"%s\">view all</a>."
+
+#, fuzzy
+#~ msgid "No results found."
+#~ msgstr "Keine Objekte gefunden"
+
+#, fuzzy
+#~ msgid "Show More"
+#~ msgstr "Zeigen \"Mehr\" Link?"
+
+#~ msgid "Loading"
+#~ msgstr "Lade"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "Alle betrachten"
+
+#, fuzzy
+#~ msgid "Settings updated."
+#~ msgstr "Objekt aktualisiert."
+
+#, fuzzy
+#~ msgid "Feature Updates"
+#~ msgstr "Name der Funktion"
+
+#~ msgid "Check Updates"
+#~ msgstr "Auf Aktualisierungen prüfen"
+
+#, fuzzy
+#~ msgid "Enable comments."
+#~ msgstr "Optionen"
+
+#, fuzzy
+#~ msgid "Default %1s Page"
+#~ msgstr "Standardvorlage"
+
+#~ msgid "Property (Default)"
+#~ msgstr "Objekt (Standard)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Automatically overwrite this page's content with [property_overview]."
+#~ msgstr ""
+#~ "Den Inhalt dieser Seite immer mit [property_overview] überschreiben."
+
+#, fuzzy
+#~ msgid ""
+#~ "When showing property search results, don't override the page content "
+#~ "with [property_overview]."
+#~ msgstr ""
+#~ "Den Inhalt dieser Seite immer mit [property_overview] überschreiben."
+
+#~ msgid ""
+#~ "If checked, be sure to include [property_overview] somewhere in the "
+#~ "content, or no properties will be displayed."
+#~ msgstr ""
+#~ "Falls markiert vergewissern Sie sich, [property_overview] irgendwo in den "
+#~ "Inhalt einzufügen, andernfalls werden keine Objekte dargestellt."
+
+#, fuzzy
+#~ msgid "Automatic Geolocation"
+#~ msgstr "Automatisch Standard-CSS einbinden."
+
+#, fuzzy
+#~ msgid "Attribute to use for physical addresses:"
+#~ msgstr "Attribut zur Nutzung für die Adresse:"
+
+#, fuzzy
+#~ msgid "Load default CSS."
+#~ msgstr "Automatisch Standard-CSS einbinden."
+
+#~ msgid "Default Phone Number"
+#~ msgstr "Standard-Telefonnummer"
+
+#, fuzzy
+#~ msgid ""
+#~ "Phone number to use when a %1s-specific phone number is not specified."
+#~ msgstr ""
+#~ "Telefonnummer die benutzt werden soll wenn keine objektspezifische "
+#~ "Telefonnummer angegeben wurde."
+
+#~ msgid "Image Sizes"
+#~ msgstr "Größe der Abbildungen"
+
+#~ msgid "Image sizes used throughout the plugin."
+#~ msgstr "Größe der Abbildungen die im Plugin benutzt werden"
+
+#~ msgid "Width"
+#~ msgstr "Breite"
+
+#~ msgid "Height"
+#~ msgstr "Höhe"
+
+#~ msgid "Overview Shortcode"
+#~ msgstr "Übersicht Shortcode"
+
+#, fuzzy
+#~ msgid ""
+#~ "These are the settings for the [property_overview] shortcode.  The "
+#~ "shortcode displays a list of all building / root %1s.<br />The display "
+#~ "settings may be edited further by customizing the <b>wp-content/plugins/"
+#~ "wp-properties/templates/property-overview.php</b> file.  To avoid losing "
+#~ "your changes during updates, create a <b>property-overview.php</b> file "
+#~ "in your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Das sind Einstellungen für den [property_overview] Shortcode. Der "
+#~ "Shortcode stellt eine Liste aller Gebäude / Top-Level-Gebäude dar.<br />\n"
+#~ "\t\t\t\tDie Einstellungen für die Darstellung können weiter angepasst "
+#~ "werden in dem die <b>wp-content/plugins/wp-properties/templates/property-"
+#~ "overview.php</b> Datei bearbeitet wird. Um den Verlust von Änderungen zu "
+#~ "vermeiden, erstellen Sie eine <b>property-overview.php</b> Datei in Ihrem "
+#~ "Vorlagenverzeichnis, welches automatisch geladen wird."
+
+#~ msgid "Thumbnail size:"
+#~ msgstr "Thumbnail-Größe:"
+
+#, fuzzy
+#~ msgid "Show children %1s."
+#~ msgstr "Zugeordnete Objekte anzeigen."
+
+#, fuzzy
+#~ msgid "Show larger image of %1s when image is clicked using fancybox."
+#~ msgstr ""
+#~ "Größere Abbildung des Objekts anzeigen wenn die Abbildung durch die "
+#~ "Benutzung von Fancybox aktiviert ist."
+
+#, fuzzy
+#~ msgid "Show pagination on bottom of results."
+#~ msgstr "Seitenumbruch-Optionen für Suchergebnisse"
+
+#, fuzzy
+#~ msgid "%1s Page"
+#~ msgstr "Objekt bearbeiten"
+
+#, fuzzy
+#~ msgid ""
+#~ "The display settings may be edited further by customizing the <b>wp-"
+#~ "content/plugins/wp-properties/templates/property.php</b> file.  To avoid "
+#~ "losing your changes during updates, create a <b>property.php</b> file in "
+#~ "your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Das sind Einstellungen für den [property_overview] Shortcode. Der "
+#~ "Shortcode stellt eine Liste aller Gebäude / Top-Level-Gebäude dar.<br />\n"
+#~ "\t\t\t\tDie Einstellungen für die Darstellung können weiter angepasst "
+#~ "werden in dem die <b>wp-content/plugins/wp-properties/templates/property-"
+#~ "overview.php</b> Datei bearbeitet wird. Um den Verlust von Änderungen zu "
+#~ "vermeiden, erstellen Sie eine <b>property-overview.php</b> Datei in Ihrem "
+#~ "Vorlagenverzeichnis, welches automatisch geladen wird."
+
+#~ msgid "Google Maps"
+#~ msgstr "Google Maps"
+
+#~ msgid "Map Thumbnail Size:"
+#~ msgstr "Thumbnail-Größe Karte:"
+
+#~ msgid "Map Zoom Level:"
+#~ msgstr "Zoom-Level Karte:"
+
+#, fuzzy
+#~ msgid "Default is \"%s\""
+#~ msgstr "Standardvorlage"
+
+#, fuzzy
+#~ msgid "Show %1s Title"
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "Show Directions Link"
+#~ msgstr "Wegbeschreibung"
+
+#~ msgid "Address Display"
+#~ msgstr "Adressenanzeige"
+
+#~ msgid "Available tags:"
+#~ msgstr "Verfügbare Schlüsselworte:"
+
+#, fuzzy
+#~ msgid "Currency & Numbers"
+#~ msgstr "Währungssymbol"
+
+#~ msgid "Currency symbol."
+#~ msgstr "Währungssymbol"
+
+#, fuzzy
+#~ msgid "Currency symbol placement:"
+#~ msgstr "Währungssymbol"
+
+#, fuzzy
+#~ msgid "Before number"
+#~ msgstr "Telefonnummer"
+
+#, fuzzy
+#~ msgid "Admin Settings"
+#~ msgstr "Einstellungen"
+
+#~ msgid "Disable plugin."
+#~ msgstr "Plugin deaktivieren."
+
+#~ msgid "Feature installed, using version"
+#~ msgstr "Funktion installiert, benutze Version"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please visit <a href=\"%s\">UsabilityDynamics.com</a> to purchase this "
+#~ "feature."
+#~ msgstr ""
+#~ "Bitte besuchen Sie <a href=\"%s\">TwinCitiesTech.com</a> um diese  "
+#~ "Funktion zu erwerben."
+
+#~ msgid "Revalidate"
+#~ msgstr "Erneut prüfen"
+
+#, fuzzy
+#~ msgid ""
+#~ "Enter in the ID of the %1s you want to look up, and the class will be "
+#~ "displayed below."
+#~ msgstr ""
+#~ "Die Kennzahl des Objekts, dass Sie prüfen möchten eintragen und die "
+#~ "Klasse wird unten dargestellt."
+
+#~ msgid "Lookup"
+#~ msgstr "Prüfen"
+
+#, fuzzy
+#~ msgid "Get %1s image data."
+#~ msgstr "Objekt gespeichert."
+
+#~ msgid ""
+#~ "Look up the <b>$wp_properties</b> global settings array.  This array "
+#~ "stores all the default settings, which are overwritten by database "
+#~ "settings, and custom filters."
+#~ msgstr ""
+#~ "Prüfen Sie die <b>$wp_properties</b> globale Schaltmatrix der "
+#~ "Einstellungen. Diese Schaltmatrix enthält alle Standardeinstellungen, die "
+#~ "von den Datenbankeinstellungen und anpassbaren Filtern überschrieben "
+#~ "werden."
+
+#~ msgid "Show $wp_properties"
+#~ msgstr "$wp_properties anzeigen"
+
+#, fuzzy
+#~ msgid "Clear Cache"
+#~ msgstr "Protokoll löschen"
+
+#~ msgid "(no parent)"
+#~ msgstr "(keine übergeordneten)"
+
+#~ msgid "Parent"
+#~ msgstr "Übergeordnetes"
+
+#~ msgid "Template"
+#~ msgstr "Vorlage"
+
+#~ msgid "Page Template"
+#~ msgstr "Seitenvorlage"
+
+#~ msgid "Default Template"
+#~ msgstr "Standardvorlage"
+
+#~ msgid "Need help? Use the Help tab in the upper right of your screen."
+#~ msgstr ""
+#~ "Brauchen Sie Hilfe? Nutzen Sie den Hilfe-Tab oben rechts auf Ihrem "
+#~ "Bildschirm."
+
+#~ msgid "Falls Under"
+#~ msgstr "Fällt unter"
+
+#, fuzzy
+#~ msgid "ID of parent property"
+#~ msgstr "Das ist ein Mietobjekt."
+
+#~ msgid "Editing %s is disabled, it may be inherited."
+#~ msgstr "Das Bearbeiten %s ist nicht möglich, es könnte vererbt sein."
+
+#, fuzzy
+#~ msgid "%1s Type"
+#~ msgstr "Art"
+
+#~ msgid "Return to building page."
+#~ msgstr "Kehren Sie zur Gebäudeseite zurück."
+
+#, fuzzy
+#~ msgid "Expiry Date"
+#~ msgstr "Objektseite"
+
+#~ msgid ""
+#~ "Sorry, we could not find what you were looking for.  Since you are here, "
+#~ "take a look at some of our properties."
+#~ msgstr ""
+#~ "Es tut uns leid, aber das Gesuchte kann nicht gefunden werden. Da Sie "
+#~ "schon mal hier sind, werfen Sie doch einen Blick auf unsere Immmobilien."
+
+#~ msgid ""
+#~ "Sorry, no properties found - try expanding your search, or <a href=\"%s"
+#~ "\">view all</a>."
+#~ msgstr ""
+#~ "Es tut uns leid, es wurden keine Objekte gefunden. Versuchen Sie es mit "
+#~ "einer detaillierten Suche oder <a href=\"%s\">view all</a>."
+
+#~ msgid "Prev"
+#~ msgstr "Vorige"
+
+#, fuzzy
+#~ msgid "Other"
+#~ msgstr "Reihenfolge"
+
+#, fuzzy
+#~ msgid "Cancel reply"
+#~ msgstr "Abbruch"
+
+#~ msgid "Version"
+#~ msgstr "Version"
+
+#~ msgid "Property Page"
+#~ msgstr "Objektseite"
+
+#, fuzzy
+#~ msgid "Show Property Title"
+#~ msgstr "Art der Immobilie"
+
+#, fuzzy
+#~ msgid "Property ID:"
+#~ msgstr "Objekt"
+
+#~ msgid "Interested?"
+#~ msgstr "Interessiert?"
+
+#, fuzzy
+#~ msgid "Read Property"
+#~ msgstr "Neues Objekt"
+
+#, fuzzy
+#~ msgid "Delete Property"
+#~ msgstr "Neues Objekt"
+
+#, fuzzy
+#~ msgid "Read Private Properties"
+#~ msgstr "Vorgestellte Objekte"
+
+#~ msgid "Feature Name"
+#~ msgstr "Name der Funktion"
+
+#~ msgid "WP-Property Premium Feature: %s updated to version %s from %s."
+#~ msgstr ""
+#~ "WP-Property Premium-Funktion: %s aktualisiert auf Version %s von %s."
+
+#~ msgid "WP-Property Premium Feature: %s updated to version %s."
+#~ msgstr "WP-Property Premium-Funktion: %s aktualisiert auf Version %s."
+
+#, fuzzy
+#~ msgid "General"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Slug:"
+#~ msgstr "Titelform"
+
+#, fuzzy
+#~ msgid "Property Status:"
+#~ msgstr "Merkmale des Objekts"
+
+#, fuzzy
+#~ msgid "Property Type:"
+#~ msgstr "Art der Immobilie"
+
+#~ msgid "Cache table does not exist. Attempting to create:"
+#~ msgstr "Cache-Verzeichnis existiert nicht. Versuche es zu erstellen:"
+
+#~ msgid "SQL Ran: %s , verifying existance."
+#~ msgstr "SQL ergab: %s , prüfe Existenz."
+
+#~ msgid "Table created and exists."
+#~ msgstr "Verzeichnis erstellt und vorhanden."
+
+#~ msgid "Table not created."
+#~ msgstr "Verzeichnis nicht erstellt."
+
+#, fuzzy
+#~ msgid "Tomorrow "
+#~ msgstr "Morgen"
+
+#, fuzzy
+#~ msgid "Yesterday "
+#~ msgstr "Gestern"
+
+#, fuzzy
+#~ msgid " in %d days "
+#~ msgstr "in %d Tagen"
+
+#~ msgid "%d days ago"
+#~ msgstr "vor %d Tagen"
+
+#~ msgid "Automatically logged failed JSON response: "
+#~ msgstr "Automatisch gesicherte, fehlgeschlagene JSON-Rückinformation: "
+
+#~ msgid "%s hours ago"
+#~ msgstr "vor %s Stunden"
+
+#~ msgid "%s minutes ago"
+#~ msgstr "vor %s Minuten"
+
+#~ msgid "Address Attribute"
+#~ msgstr "Adressenattribut"
+
+#~ msgid "and localize for:"
+#~ msgstr "und lokalisieren  für"
+
+#~ msgid "Order By:"
+#~ msgstr "Ausrichten nach:"
+
+#~ msgid "Bed(s):"
+#~ msgstr "Bett(en):"
+
+#~ msgid "Bath(s):"
+#~ msgstr "Badezimmer:"
+
+#~ msgid "Square Ft:"
+#~ msgstr "Quadratmeter:"
+
+#~ msgid ""
+#~ "Set Coordinates Manually (When unchecked the coordinates will be set (and "
+#~ "validated) by Google Maps)"
+#~ msgstr ""
+#~ "Die Koordinaten manuell setzen. (Falls nicht markiert, werden die "
+#~ "Koordinaten von Google Maps gesetzt (und überprüft)"
+
+#~ msgid ""
+#~ "Be advised, since you don't have permalinks enabled, you must visit the "
+#~ "<a href=\"%s\">Settings Page</a> and set a custom property overview page."
+#~ msgstr ""
+#~ "Da Sie keine Permalinks aktiviert haben, seien Sie beraten, dass Sie <a "
+#~ "href=\"%s\">Settings Page</a> aufrufen sollten und eine "
+#~ "benutzerdefinierte Objektnübersicht wählen müssen."
+
+#~ msgid ""
+#~ "By default, your property overview will be displayed on the <a href=\"%s"
+#~ "\">%s</a> page. You may change the overview page on the <a href=\"%s"
+#~ "\">Settings Page</a>"
+#~ msgstr ""
+#~ "Standardgemäß wird die Übersicht Ihrer Objekte auf dieser Seite <a href="
+#~ "\"%s\">%s</a> dargesetllt. Sie können die Übersichtsseite in den <a href="
+#~ "\"%s\">Settings Page</a> ändern."
+
+#~ msgid "Thank you for installing WP-Property!"
+#~ msgstr "Vielen Dank, dass Sie WP-Property installiert haben!"
+
+#~ msgid ""
+#~ "<p>You may also visit <a href=\"http://twincitiestech.com/plugins/wp-"
+#~ "property/\">TwinCitiesTech.com</a> for more information, and <a href="
+#~ "\"http://twincitiestech.com/plugins/wp-property/screencasts/"
+#~ "\">screencasts</a>.</div>"
+#~ msgstr ""
+#~ "<p>Für mehr Informationen können Sie auch <a href=\"http://twincitiestech."
+#~ "com/plugins/wp-property/\">TwinCitiesTech.com</a> und <a href=\"http://"
+#~ "twincitiestech.com/plugins/wp-property/screencasts/\">screencasts</a>.</"
+#~ "div> besuchen."
+
+#~ msgid "Validated:"
+#~ msgstr "Überprüft:"
+
+#~ msgid "view on map"
+#~ msgstr "auf Karte betrachten"
+
+#~ msgid "Show other properties (if any) with the same Parent"
+#~ msgstr ""
+#~ "Weitere zugeordnete Objekte (falls vorhanden) für das aktuell "
+#~ "dargestellte anzeigen"
+
+#~ msgid "Do you want to use pagination?"
+#~ msgstr "Möchten Sie Seitenumbrüche benutzen?"
+
+#~ msgid ""
+#~ "City is an automatically created attribute once the address is validated."
+#~ msgstr ""
+#~ "Stadt ist ein automatisch erstelltes Attribut, dass erzeugt wird sobald "
+#~ "die Adresse überprüft wurde."
+
+#~ msgid "Popup Image Size:"
+#~ msgstr "Größe der Popup-Abbildungen:"
+
+#~ msgid "Thumbnail Width"
+#~ msgstr "Thumbnail-Breite"
+
+#~ msgid ""
+#~ "To include the slideshow into the content of a property, use the "
+#~ "following shortcode: [property_slideshow]"
+#~ msgstr ""
+#~ "Um die Diashow in den Inhalt eines Objekts aufzunehmen nutzen Sie den "
+#~ "folgenden Shortcode: [property_slideshow]"
+
+#~ msgid ""
+#~ "Developers: Include the slideshow in your PHP files by using "
+#~ "global_slideshow(); for the global slideshow and "
+#~ "property_slideshow(property_id); for property-specific slideshows. "
+#~ msgstr ""
+#~ "Entwickler: Nehmen Sie die Diashow durch den Gebrauch von "
+#~ "global_slideshow(); für globale Diashows und "
+#~ "property_slideshow(property_id); für objektspezifische Diashows in Ihre "
+#~ "PHP-Datei auf. "
+
+#~ msgid "Disable slideshow on property page."
+#~ msgstr "Diashow auf der Objektseite deaktivieren."
+
+#~ msgid "Some Slideshow Options"
+#~ msgstr "Einige Diashow-Optionen"
+
+#~ msgid "WPP Slideshow"
+#~ msgstr "WPP Diashow"
+
+#~ msgid "WPP Slideshow with options"
+#~ msgstr "WPP Diashow mit Optionen"
+
+#~ msgid "Property Types"
+#~ msgstr "Arten von Immobilien"
+
+#~ msgid ""
+#~ "<p>Create new property types using this menu. </p>\n"
+#~ "\t\t\t\t<p>The <b>slug</b> is automatically created from the title and is "
+#~ "used in the back-end.  It is also used for template selection, example: "
+#~ "floorplan will look for a template called property-floorplan.php in your "
+#~ "theme folder, or default to property.php if nothing is found.</p>\n"
+#~ "\t\t\t\t<p>If <b>Searchable</b> is checked then the property will be "
+#~ "loaded for search, and available on the property search widget.</p>\n"
+#~ "\t\t\t\t<p>If <b>Location Matters</b> is checked, then an address field "
+#~ "will be displayed for the property, and validated against Google Maps "
+#~ "API.  Additionally, the property will be displayed on the SuperMap, if "
+#~ "the feature is installed.</p>\n"
+#~ "\t\t\t\t<p><b>Hidden Attributes</b> determine which attributes are not "
+#~ "applicable to the given property type, and will be grayed out in the back-"
+#~ "end.</p>\n"
+#~ "\t\t\t\t<p><b>Inheritance</b> determines which attributes should be "
+#~ "automatically inherited from the parent property.</p>"
+#~ msgstr ""
+#~ "<p>Erstellen Sie neue Immobilienarten indem Sie dieses Menü benutzen. </"
+#~ "p>\n"
+#~ "\t\t\t\t<p>Die <b>Titelform</b> wird automatisch aus dem Titel erzeugt "
+#~ "und wird im Back-End benutzt. Es wird auch für die Vorlagenauswahl "
+#~ "benutzt, z.B.: der Grundriss wird nach einer Vorlage in Ihrem Themen-"
+#~ "Ordner gesucht, der mit property-floorplan.php benannt ist oder "
+#~ "standardgemäß nach property.php falls nichts gefunden wurde.</p>\n"
+#~ "\t\t\t\t<p>Wenn <b>Suchbar</b> markiert ist, ist das Objekt für die Suche "
+#~ "geladen  und auf dem Immobilien-Such-Widget verfügbar.</p>\n"
+#~ "\t\t\t\t<p>Wenn <b>Ort ist von Bedeutung</b> markiert ist, dann wird ein "
+#~ "Adressenfeld für das Objekt dargestellt und mit den Daten des Google Maps "
+#~ "API verglichen. Zusätzlich, falls die Funktion installiert ist, wird das "
+#~ "Objekt auf der Supermap dargestellt.</p>\n"
+#~ "\t\t\t\t<p><b>Verborgene Attribute</b> bestimmen welche Attribute nicht "
+#~ "anwendbar sind für die gegebene Immobilienart und wird im Back-End "
+#~ "ausgegraut.</p>\n"
+#~ "\t\t\t\t<p><b>Vererbbar</b> bestimmt welche Attribute automatisch von dem "
+#~ "übergeordneten Objekt übernommen werden sollen.</p>"
+
+#~ msgid "input"
+#~ msgstr "Input"
+
+#~ msgid "range (input)"
+#~ msgstr "Bereich (Input)"
+
+#~ msgid "dropdown"
+#~ msgstr "Ausgliederung"
+
+#~ msgid "Show common values."
+#~ msgstr "Gemeinsame Werte anzeigen."
+
+#~ msgid "Cancel."
+#~ msgstr "Abbruch."
+
+#~ msgid "Plugins"
+#~ msgstr "Plugins"
+
+#~ msgid "Troubleshooting"
+#~ msgstr "Fehlerbehebung"
+
+#~ msgid "View list of available shortcodes."
+#~ msgstr "Die Liste verfügbarer Shortcodes anzeigen."
+
+#~ msgid "These are the general display settings"
+#~ msgstr "Allgemeine Einstellungen für die Darstellung"
+
+#~ msgid ""
+#~ "After adding/removing image size, be sure to <a href=\"%s\">regenerate "
+#~ "thumbnails</a> using the Regenerate Thumbnails plugin."
+#~ msgstr ""
+#~ "Vergewissern Sie sich, nach dem Hinzufügen/Entfernen der Größe für "
+#~ "Abbildungen, die <a href=\"%s\">regenerate thumbnails</a> durch die "
+#~ "Nutzung des Thumbnails-Erneuerungs-Plugins zu erneuern."
+
+#~ msgid ""
+#~ "We strongly recommend to <a href=\"http://wordpress.org/extend/plugins/"
+#~ "regenerate-thumbnails/\">Regenerate Thumbnails</a> plugin by Viper007Bond."
+#~ msgstr ""
+#~ "Wir empfehlen wärmstens das <a href=\"http://wordpress.org/extend/plugins/"
+#~ "regenerate-thumbnails/\">Regenerate Thumbnails</a> Plugin von "
+#~ "Viper007Bond."
+
+#~ msgid ""
+#~ "Display larger image, or slideshow, at the top of the property listing."
+#~ msgstr ""
+#~ "Größere Abbildungen oder Diashow am Anfang der Objekt-Auflistung "
+#~ "darstellen."
+
+#~ msgid "These settings are for the main property page on the back-end."
+#~ msgstr ""
+#~ "Diese Einstellungen sind für die Hauptobjektseite auf dem Back-End "
+#~ "bestimmt."
+
+#~ msgid ""
+#~ "Premium features will become available shortly, we are still waiting on "
+#~ "more feedback on the core of the plugin."
+#~ msgstr ""
+#~ "Premium-Funktionen werden in Kürze verfügbar sein, wir warten noch auf "
+#~ "mehr Rückinformationen über den Kern des Plugins."
+
+#~ msgid "[learn more]"
+#~ msgstr "[mehr]"

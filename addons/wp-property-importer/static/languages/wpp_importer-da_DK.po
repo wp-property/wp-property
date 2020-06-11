@@ -1,0 +1,2555 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-29 12:29+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: \n"
+"Language: da_DK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_x;_n\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-property-import.php:125
+msgid "Property Title"
+msgstr "Ejendommens Titel"
+
+#: lib/class-wpp-property-import.php:126
+msgid "Property Content"
+msgstr "Ejendoms indhold"
+
+#: lib/class-wpp-property-import.php:127
+msgid "Property Excerpt"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:128
+msgid "Property Status"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:129
+msgid "Property Order"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:130
+msgid "Property Date"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:131
+#, fuzzy
+msgid "Property Author"
+msgstr "Ejendom"
+
+#: lib/class-wpp-property-import.php:449
+#, php-format
+msgid ""
+"Attachment referenced in database not found on disk: (%1s), removing "
+"reference from DB."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:462
+#: lib/class-wpp-property-import.php:3890
+#, php-format
+msgid "Image directory %1s could not be created."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:476
+msgid "System (Primary) Key is not found."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:495
+msgid "Could not save image saved image - empty file returned by server."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:514
+#, php-format
+msgid "Image %1s downloaded, but appears corrupt - deleting."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:622
+#: lib/class-wpp-property-import.php:3320
+msgid "Pending Image Downloads"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:801
+#, fuzzy
+msgid "Starting "
+msgstr "Instillinger"
+
+#: lib/class-wpp-property-import.php:802
+#, php-format
+msgid "on process start. Memory limit: %s. Before %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:850
+msgid "Manage XML Importer"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:915
+msgid "Ignore updates on XMLI process"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:918
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:921
+#, php-format
+msgid "Imported on: <b>%1$s</b> <a href=\"%2$s\" title=\"%3$s\">Importer</a>"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1026
+msgid "ago"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1036
+msgid "Last Import"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1062
+#: lib/class-wpp-property-import.php:1064
+msgid "none"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1064
+#, php-format
+msgid "Memory Usage: %s. Difference: %s. Details: %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1123
+#: lib/class-wpp-property-import.php:1128
+#: lib/class-wpp-property-import.php:1152
+#: lib/class-wpp-property-import.php:1154
+msgid "Time: "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1200
+#, php-format
+msgid ""
+"There are (%1s) unattached files related to listings that were imported "
+"using the XML Importer."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1201
+#, fuzzy
+msgid "Delete Unattached Files"
+msgstr "Slet andre sider"
+
+#: lib/class-wpp-property-import.php:1207
+msgid "Look up XML import history."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1208
+msgid "Show XML Import History"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1210
+msgid "Show last 500 imported items in descending order."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1285
+msgid "( Imported )"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1294
+msgid "Schedule coult not be imported."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1350
+msgid "Importer"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1418
+#, php-format
+msgid ""
+"Starting Cron-Initiated Import: %1s. Using XML Importer %2s and WP-Property "
+"%3s."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1477
+msgid "XML Importer Help"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1478
+msgid ""
+"By default, xPath are executed in the xPath input boxes. <a target=\"_blank"
+"\" href=\"http://www.w3schools.com/xsl/xpath_syntax.asp\">W3 Schools XPath "
+"Syntax</a>. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1479
+msgid ""
+"Example: get all the option values that have a label for \"height\": "
+"<b>options/option[label = \"Height\"]/value </b>"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1481
+msgid ""
+"<b>Property Resource Class:</b> Typically this is used to specify the type "
+"of property listing, such as Commercial or Residential, the naming "
+"convention varies depending on RETS provider. Use <a href=\"http://rets."
+"usabilitydynamics.com/\" target=\"_blank\">rets.usabilitydynamics.com</a> to "
+"determine. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1482
+msgid ""
+"<b>Dynamic DMQL Query Tags:</b> The DMQL query for RETS supports the "
+"following dynamic tags: [this_month], [next_month] and [previous_month]. "
+"Example to get all listings modified within the current month: "
+"(DATE_MODIFIED=[this_month]+); to get all the listings modified before this "
+"month: (DATE_MODIFIED=[previous_month]-). These examples assume that the "
+"SystemName for the modified data is DATE_MODIFIED, which will actually vary "
+"from one MLS provider to the next.</p>"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1484
+msgid "XPath Query to Property Elements"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1485
+msgid ""
+"In order to begin importing data, you must first identify what the "
+"\"repeating property element\" is in the XML file.  Typically this would be "
+"something like <b>property</b> or <b>object</b>, where the corresponding "
+"XPath rules would be <b>//property</b> or <b>//object</b>, respectively. The "
+"easiest way to identify it is to look through the feed for a repeating "
+"pattern. The query must select the elements in order to cycle through them "
+"and apply the XPath Rules in the Attribute Map section. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1487
+msgid "Import Limits"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1488
+msgid ""
+"There are two type of limits - the first limit will stop the import after a "
+"certain number of objects have been processed before they are checked for "
+"quality, while the second limit will stop only after the specified number of "
+"objects has actually passsed quality inspection, and have been saved to the "
+"database."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1489
+msgid ""
+"Limiting imports works well when you are running incremental imports.  A "
+"limit of <b>10</b> will stop after 10 properties have been created.  The "
+"importer does not count properties that were skipped during import or that "
+"already exist in the system - properties that already exist will be marked "
+"as updated."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1491
+msgid "Running the Import"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1492
+msgid ""
+"There are two ways to process an import, using the browser, or by setting up "
+"a cron job.  Using the browser is easy, and viable when you have a small "
+"feed, or a very good server. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1493
+msgid ""
+"When working with larger feeds, or for the purposes of automation, it is "
+"advisable to execute your import script using a cron job.  For every "
+"\"Import Schedule\" you create, a <b>Cron Command</b> field will be "
+"displayed, followed by the command you would need to enter into the cron job "
+"builder, for the import schedule to be executed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1495
+msgid "Function: free_text"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1496
+msgid ""
+"To insert some common text, use the <b>free_text</b> command, like so: "
+"<b>free_text: Imported from Some List</b> and the text will be kept as is."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1498
+msgid "Function: uppercase"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1499
+msgid ""
+"To convert all alphabetic characters to uppercase, use the <b>uppercase</b> "
+"command, like so: <b>uppercase: {xpath}</b>."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1501
+msgid "Function: concat"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1502
+msgid ""
+"You can also combine free text wtih xPath rule results using <b>concat</b>, "
+"example: <b>concat:http://sourcesite.com/images/'Photo7'</b> will result in "
+"the text between the quotes being executed as xPath rules, while text "
+"outside of quotes being inserted as it is."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1503
+msgid ""
+"You can also use concat to combine multiple xPath rules together, for "
+"example you can create the Property Title from a few XML attributes: "
+"<b>concat:'bedrooms' bedroom house in 'location/city'</b>"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1505
+msgid "Function: concat_list"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1506
+msgid ""
+"Example: <b>concat_list root_path=\"options/option\" label_path=\"label\" "
+"value_path=\"value\" concat_character=\":\" paste_together=\",\"</b>  will "
+"look for options/option path, then grab child \"value\" and \"label\" paths "
+"and import them as a single line. If \"paste_together\" specified then all "
+"collected \"label / value\" pairs will be joined in single-line value using "
+"\"paste_together\"."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1546
+#, php-format
+msgid "Found %1s properties from database that were imported from this feed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1556
+#, php-format
+msgid "Property ID %1s has been deleted. Total deleted so far: %2s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1723
+#, php-format
+msgid ""
+"Deleted %1s unattached property files that were created from an XML import."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1729
+msgid "Something went wrong, did not delete any unattached images."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1755
+#, php-format
+msgid "All %1$s properties have been deleted in %2$s seconds."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1757
+#, php-format
+msgid ""
+"Although %1$s properties were found, only %2$s have been deleted in %3$s "
+"seconds."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1761
+msgid "Something went wrong, no properties were found to delete."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1812
+#, php-format
+msgid "before %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1814
+#: lib/class-wpp-property-import.php:2227
+#, php-format
+msgid "after %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1824
+msgid "before XML object initialization from response (string)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1828
+msgid "after XML object initialization"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1835
+#, php-format
+msgid "Created temporary directory for import: %1$s."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1858
+#, php-format
+msgid "Could not load XML Object from raw data: %1s."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1860
+msgid ""
+"Could not load XML Object from raw data - empty result returned. Check your "
+"settings."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1862
+msgid ""
+"Could not load XML Object from raw data. Looks like data has errors and can "
+"not be converted to XML Object."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1872
+msgid "before getting the list of XML objects (listings)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1880
+msgid "after getting the list of XML objects (listings)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1895
+msgid "Data loaded from cache."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1899
+msgid " object(s) found with XPath Rule: "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1900
+#, php-format
+msgid ""
+"%1s objects identified: <a href=\"%2s\" target=\"_blank\">download processed "
+"XML file</a> ( %3s )."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1902
+msgid "Root Element XPath Rule: "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1905
+msgid "No Root Element XPath Rule, displaying most root elements."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1908
+#, fuzzy
+msgid "No objects found."
+msgstr "Billede ikke fundet"
+
+#: lib/class-wpp-property-import.php:1917
+#, php-format
+msgid "Preview truncated: showing: %1s of full feed:"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1920
+#, fuzzy, php-format
+msgid "Available tags in source: %1s"
+msgstr "Tilgængelige tags"
+
+#: lib/class-wpp-property-import.php:1971
+msgid "before parsing the list of XML objects (listings)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2131
+#, php-format
+msgid "XPath rules for object #%1d processed with %2d extracted attributes."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2137
+#, php-format
+msgid "Stopping import due to specified pre-QC limit of %1d."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2143
+msgid "after parsing the list of XML objects (listings)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2160
+#, php-format
+msgid "Importing %1s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2189
+#: lib/class-wpp-property-import.php:2190
+#, php-format
+msgid "Deleted all ( %1s ) properties that originated from this feed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2192
+#: lib/class-wpp-property-import.php:2268
+msgid ""
+"Did not find any properties that have been imported from this feed to remove."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2197
+msgid "Did not remove any old properties."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2211
+#, php-format
+msgid "Stopping import due to specified post-QC limit of %1d."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2252
+#, php-format
+msgid "Object cycle done. Completed %1d cycles."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2265
+#: lib/class-wpp-property-import.php:2266
+#, php-format
+msgid "Deleted ( %1s ) properties that are no longer in the feed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2279
+msgid "Deleted the import temporary directory."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2281
+msgid "Import temporary directory is not been created"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2281
+msgid "Unable to delete the import temporary directory"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2444
+msgid "Schedule imported from file."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2500
+msgid "Property Importer"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2501
+msgid "Add New"
+msgstr "Tilføj Ny"
+
+#: lib/class-wpp-property-import.php:2529
+#, fuzzy
+msgid "Sort by:"
+msgstr "Sorterbar"
+
+#: lib/class-wpp-property-import.php:2530
+msgid "Last Run"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2531
+#, fuzzy
+msgid "Created Properties"
+msgstr "Fasiliteter Ejendomme"
+
+#: lib/class-wpp-property-import.php:2532
+#, fuzzy
+msgid "Updated Properties"
+msgstr "Fasiliteter Ejendomme"
+
+#: lib/class-wpp-property-import.php:2533
+#, fuzzy
+msgid "Total Properties"
+msgstr "Alle Ejendomme"
+
+#: lib/class-wpp-property-import.php:2534
+msgid "Limit"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2542
+msgid "Saved Import Schedules"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2555
+msgid "Last run "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2555
+msgid " ago."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2560
+#, fuzzy
+msgid "Updated "
+msgstr "Opdater facilitet"
+
+#: lib/class-wpp-property-import.php:2560
+#: lib/class-wpp-property-import.php:2565
+#: lib/class-wpp-property-import.php:2570
+msgid " objects."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2565
+#, fuzzy
+msgid "Created "
+msgstr "Fasilitet"
+
+#: lib/class-wpp-property-import.php:2570
+msgid "Limited to "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2575
+#, fuzzy
+msgid "Total Properties: "
+msgstr "Alle Ejendomme"
+
+#: lib/class-wpp-property-import.php:2586
+msgid "Source URL:"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2587
+msgid "Cron Command:"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2592
+msgid "Edit"
+msgstr "Rediger"
+
+#: lib/class-wpp-property-import.php:2593
+msgid "Delete"
+msgstr "Slet"
+
+#: lib/class-wpp-property-import.php:2594
+msgid "Run Import in Browser"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2595
+msgid "Save to File"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2597
+#, fuzzy
+msgid "Delete All Properties"
+msgstr "Alle Ejendomme"
+
+#: lib/class-wpp-property-import.php:2609
+msgid "You do not have any saved schedules. Create one now."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2618
+msgid "Import Schedule"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2620
+#, fuzzy
+msgid "Upload File"
+msgstr "Upload filer"
+
+#: lib/class-wpp-property-import.php:2704
+msgid "Import name"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2713
+#, fuzzy
+msgid "Source"
+msgstr "Mere"
+
+#: lib/class-wpp-property-import.php:2718
+msgid "URL"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2721
+msgid "Type:"
+msgstr "Type:"
+
+#: lib/class-wpp-property-import.php:2723
+msgid "XML / JSON"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2724
+msgid "CSV"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2725
+msgid "Google Spreadsheet"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2726
+msgid "WP-Property Feed"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2727
+msgid "RETS"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2738
+msgid "Send GET variables as POST data."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2748
+msgid "Google Username"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2752
+msgid "Google Password"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2756
+msgid "Google Extra Query Vars"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2757
+msgid ""
+"See the <a href=\"http://code.google.com/apis/spreadsheets/data/3.0/"
+"reference.html#ListParameters\" target=\"_blank\">Google Spreadsheet API "
+"docs</a> for the format of this field ( should be name value pairs, without "
+"the beginning \"?\" )"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2761
+msgid "RETS Username."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2765
+msgid "RETS Password."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2769
+#, fuzzy
+msgid "Property Resource."
+msgstr "Ejendom gemt"
+
+#: lib/class-wpp-property-import.php:2769
+#, fuzzy
+msgid "Default is \"Property\""
+msgstr "Ny Ejendom"
+
+#: lib/class-wpp-property-import.php:2773
+#, fuzzy
+msgid "Property Resource Class."
+msgstr "Ejendom gemt"
+
+#: lib/class-wpp-property-import.php:2777
+msgid "Primary Key for Resource."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2777
+msgid "Also referred to as \"Key Field\". Default is \"ListingKey\""
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2781
+msgid "Photo Object."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2781
+msgid "Default is \"Photo\""
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2785
+msgid "User-Agent String."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2785
+#: lib/class-wpp-property-import.php:2789
+msgid "May be required by your RETS"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2789
+msgid "User-Agent Password."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2798
+msgid "RETS Version."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2798
+msgid "Version is set by your RETS provider."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2802
+#, fuzzy
+msgid "Property Query."
+msgstr "Ejendoms Galleri"
+
+#: lib/class-wpp-property-import.php:2802
+msgid ""
+"Accepts <a href=\"https://www.flexmls.com/support/rets/tutorials/dmql/\" "
+"target=\"_blank\">DMQL</a> - Default is \"(ListingStatus=|Active)\""
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2806
+msgid "Toggle Advanced Source Options"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2812
+msgid "Root XPath Query:"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2814
+msgid "What is this?"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2822
+msgid "Preview Raw Data"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2824
+msgid "Close Preview"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2839
+msgid "Default Property Type"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2847
+msgid "Will be defaulted to if no xPath rule exists for the \"Property Type\"."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2854
+msgid "Advanced Options"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2863
+msgid "<b>Pre-QC Limit:</b> Limit import to the first"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2865
+#, fuzzy
+msgid "properties in the feed."
+msgstr "Ingen ejendomme fundet"
+
+#: lib/class-wpp-property-import.php:2866
+msgid "More about limits."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2870
+msgid "<b>Post-QC Limit:</b> Limit import to the first"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2872
+msgid "created properties that have passed quality standards."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2877
+msgid "Number of image importing threads spawned"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2879
+msgid "Default is 10. Not recommended to increase the number."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2885
+#, php-format
+msgid "Only import images that are over %1spx in width, and %2spx in height."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2890
+msgid "Minimum sizes are ignored if blank."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2894
+msgid "Imported properties must have at least "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2895
+#: lib/class-wpp-property-import.php:2902
+#, fuzzy
+msgid " valid image(s)."
+msgstr "Skjul Billeder?"
+
+#: lib/class-wpp-property-import.php:2900
+msgid "Imported properties must have no more than "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2907
+msgid "Do not update properties that have been imported less than "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2909
+msgid "hour(s) ago."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2916
+msgid "Automatically set the first image as the thumbnail."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2923
+msgid ""
+"Remove properties that are no longer in source XML from this site's "
+"database. This can now be done if the the import configuration does not have "
+"a Pre-QC or Post-QC Limit."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2929
+msgid ""
+"When updating an existing property, remove all old images before downloading "
+"new ones."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2934
+msgid "Skip images if images already downloaded."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2940
+#, php-format
+msgid ""
+"Send email updates to the site admin e-mail address ( %1s ) when import "
+"schedules are executed and completed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2947
+msgid ""
+"Remove all properties that were originally imported from this feed on import."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2954
+msgid "Completely remove <b>all</b> existing properties prior to import."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2961
+msgid "Fix strings that are in all caps."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2968
+msgid "Scan for any formatting tags and strip them out."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2976
+msgid "Automatically load imported images into property slideshow."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2984
+msgid "Geolocate imported listings."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2990
+msgid "Enable detailed logging to assist with troubleshooting."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2996
+msgid "Show SQL Queries and errors."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3003
+msgid "Run system command cron instead of PHP cron."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3004
+msgid ""
+"Attention, enable the option only if listings are not being published but "
+"added to <b>Draft status</b>."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3013
+msgid "Toggle Advanced Options"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3019
+msgid "Automatic Matching"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3021
+msgid "Automatically Match"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3022
+msgid ""
+"This will work for WP-Property exports and imports, but will have mixed "
+"results with uniquely formatted feeds."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3027
+msgid "Attribute Map"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3030
+msgid ""
+"Use XPath rules to setup the paths to the individual XML attributes to match "
+"them up with WP-Property attributes."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3031
+msgid "Sort Attribute Rules"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3037
+msgid "WP-Property Attribute"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3038
+msgid "XPath Rule"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3055
+msgid "WordPress Attributes"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3062
+msgid "Taxonomies"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3067
+msgid "Attributes"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3072
+msgid "Address"
+msgstr "Adresse"
+
+#: lib/class-wpp-property-import.php:3073
+msgid "Street Number"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3074
+msgid "Street"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3075
+msgid "City"
+msgstr "By"
+
+#: lib/class-wpp-property-import.php:3076
+msgid "County"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3077
+msgid "State"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3078
+msgid "Country"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3079
+msgid "Postal Code"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3080
+msgid "Latitude"
+msgstr "Breddegrad"
+
+#: lib/class-wpp-property-import.php:3081
+msgid "Longitude"
+msgstr "Længdegrad"
+
+#: lib/class-wpp-property-import.php:3084
+msgid "WP-Property Attributes"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3085
+#: lib/class-wpp-property-import.php:3159
+msgid "Property Type"
+msgstr "Ejendoms Type"
+
+#: lib/class-wpp-property-import.php:3087
+#: lib/class-wpp-property-import.php:3160
+#, fuzzy
+msgid "Property Agent"
+msgstr "Ejendoms indhold"
+
+#: lib/class-wpp-property-import.php:3089
+#: lib/class-wpp-property-import.php:3161
+msgid "Global Property ID"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3090
+#: lib/class-wpp-property-import.php:3162
+msgid "Display Address"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3102
+msgid "Delete Selected"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3103
+msgid "Add Row"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3119
+msgid "Save Configuration"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3135
+msgid "Preview Import"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3136
+msgid "Process Full Import"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3192
+#, php-format
+msgid "Database connection failed. Error: %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3348
+msgid "Updating existing listing."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3361
+msgid ""
+"Attempted to update property, but wp_update_post() did not return an ID. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3365
+msgid "Creating new listing."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3381
+#, php-format
+msgid "Object import failed. Error: %1s."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3385
+msgid ""
+"Object import failed - no Property Title detected or set, a requirement to "
+"creating a property."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3389
+msgid ""
+"Object import failed.  Post cold not be created nor updated, and post_id was "
+"not found or created."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3547
+msgid "before revalidating process"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3550
+msgid ""
+"Address validation was skipped because address has already been validated."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3551
+msgid ""
+"Address validation has been skipped because address/coordinates is empty. "
+"Check your Attribute Map for 'Address' attribute."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3552
+msgid ""
+"Address validation has failed because the Google service has denied the "
+"request ( OVER QUERY LIMIT )."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3553
+msgid "Address validation has failed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3554
+msgid "Address validation has been successfully completed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3559
+msgid "after revalidating process"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4093
+msgid "on disk using file_get_contents()"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4098
+msgid "Attempting to get image  ( "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4112
+#, php-format
+msgid "Unable to get image %1s using the %2s method."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4128
+#, php-format
+msgid "Image %1s corrupted - skipped."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4147
+#, php-format
+msgid ""
+"Image %1s downloaded, but image size failed quality standards - deleting."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4167
+#, php-format
+msgid "Unable to save image %1s."
+msgstr ""
+
+#: wp-property-importer.php:48
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-importer.php:56
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-importer.php:64
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-importer.php:68
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-importer.php:89
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""
+
+#~ msgid "Building"
+#~ msgstr "Bygning"
+
+#~ msgid "Floorplan"
+#~ msgstr "Stue plan"
+
+#~ msgid "Single Family Home"
+#~ msgstr "Villa"
+
+#~ msgid "Price"
+#~ msgstr "Pris"
+
+#~ msgid "Bedrooms"
+#~ msgstr "Værelser"
+
+#~ msgid "Bathrooms"
+#~ msgstr "Badeværelser"
+
+#~ msgid "Deposit"
+#~ msgstr "Depot"
+
+#~ msgid "Area"
+#~ msgstr "Område"
+
+#~ msgid "Phone Number"
+#~ msgstr "Telefon nr"
+
+#~ msgid "Lease Terms"
+#~ msgstr "Lejebetingelser"
+
+#~ msgid "Pet Policy"
+#~ msgstr "Kæledyrs politik"
+
+#~ msgid "School"
+#~ msgstr "Skole"
+
+#~ msgid "Tagline"
+#~ msgstr "Tilføjelse"
+
+#~ msgid "Studio"
+#~ msgstr "Studio"
+
+#~ msgid "The property type will determine the layout."
+#~ msgstr "Ejendomstypen vil bestemme dit layout"
+
+#~ msgid ""
+#~ "Customize what appears in search results in the attribute section.  For "
+#~ "example: 1bed, 2baths, area varies slightly."
+#~ msgstr ""
+#~ "Tilpas hvad der vises i søgeresultaterne for detaljerne. F.eks.: 1 seng, "
+#~ "2 bade, område varierer. "
+
+#~ msgid "Will appear on overview pages and on top of every listing page."
+#~ msgstr "Vises på oversigt sider og i toppen af hver enkelt side."
+
+#, fuzzy
+#~ msgid "View "
+#~ msgstr "Vis alle"
+
+#~ msgid "For Sale"
+#~ msgstr "Til Salg"
+
+#~ msgid "For Rent"
+#~ msgstr "Udlejes"
+
+#~ msgid "This is a rental property."
+#~ msgstr "Dette er til udlejning. "
+
+#~ msgid "This property is for sale."
+#~ msgstr "Dette er til salg. "
+
+#~ msgid "Set Coordinates Manually."
+#~ msgstr "Vælg koordinaterne manuelt."
+
+#~ msgid "Yes"
+#~ msgstr "Ja"
+
+#~ msgid "Format phone number."
+#~ msgstr "Telefon nr. layout"
+
+#, fuzzy
+#~ msgid " sq. ft."
+#~ msgstr "Kvadrat meter"
+
+#~ msgid "Address was validated by Google Maps."
+#~ msgstr "Adresse blev valideret af Google Maps."
+
+#~ msgid ""
+#~ "Address has not yet been validated, should be formatted as: street, city, "
+#~ "state, postal code, country. Locations are validated through Google Maps."
+#~ msgstr ""
+#~ "Adresse er endnu ikke valideret, skal være formateret som: gade, by, "
+#~ "stat, postnummer, land. Steder bliver valideret via Google Maps."
+
+#, fuzzy
+#~ msgid "Show"
+#~ msgstr "Skole"
+
+#~ msgid "Featured"
+#~ msgstr "Fasilitet"
+
+#, fuzzy
+#~ msgid "Add to Featured"
+#~ msgstr "Tilføj facilitet"
+
+#~ msgid "Processing..."
+#~ msgstr "Behandler..."
+
+#, fuzzy
+#~ msgid "Uploading"
+#~ msgstr "Upload filer"
+
+#, fuzzy
+#~ msgid "Upload Image"
+#~ msgstr "Tilføj Billede"
+
+#, fuzzy
+#~ msgid "Previous"
+#~ msgstr "Forrige"
+
+#~ msgid "Next"
+#~ msgstr "Næste"
+
+#, fuzzy
+#~ msgid "Show %s entries"
+#~ msgstr "Billede ikke fundet"
+
+#, fuzzy
+#~ msgid "No matching records found"
+#~ msgstr "Billede ikke fundet"
+
+#, fuzzy
+#~ msgid "Search:"
+#~ msgstr "Søg"
+
+#, fuzzy
+#~ msgid "Display:"
+#~ msgstr "Vis Adresse"
+
+#~ msgid "Settings"
+#~ msgstr "Instillinger"
+
+#, fuzzy
+#~ msgid "Please save schedule first."
+#~ msgstr "Gem før du vil tilføge billeder."
+
+#, fuzzy
+#~ msgid "Manage Admin Tools"
+#~ msgstr "Håndter links"
+
+#~ msgid "Developer"
+#~ msgstr "Udvikler"
+
+#, fuzzy
+#~ msgid "%1s Attributes"
+#~ msgstr "Skjulte Attributter"
+
+#, fuzzy
+#~ msgid "Advanced Stats Settings:"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "Toggle Advanced Settings"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "Sortable."
+#~ msgstr "Sorterbar"
+
+#, fuzzy
+#~ msgid "Searchable."
+#~ msgstr "Søgebar"
+
+#, fuzzy
+#~ msgid "Format: numeric."
+#~ msgstr "Telefon nr. layout"
+
+#, fuzzy
+#~ msgid "Show in \"All Properties\" table."
+#~ msgstr "Vis undergruppe ejendomme."
+
+#, fuzzy
+#~ msgid "Delete Attribute"
+#~ msgstr "Skjulte Attributter"
+
+#, fuzzy
+#~ msgid "Free Text"
+#~ msgstr "Widget Tekst"
+
+#, fuzzy
+#~ msgid "%1s Types"
+#~ msgstr "Type"
+
+#~ msgid "Type"
+#~ msgstr "Type"
+
+#~ msgid "Hidden Attributes"
+#~ msgstr "Skjulte Attributter"
+
+#~ msgid "Searchable"
+#~ msgstr "Søgebar"
+
+#~ msgid "Location Matters"
+#~ msgstr "Lokation er betydningsfuld"
+
+#, fuzzy
+#~ msgid "Parent Selection"
+#~ msgstr "Hoved facilitet"
+
+#~ msgid "Child Properties"
+#~ msgstr "Undergruppe Ejendomme"
+
+#, fuzzy
+#~ msgid "Display in featured listings."
+#~ msgstr "Sorter ejendomme efter faciliteter."
+
+#~ msgid "Property updated. <a href=\"%s\">view property</a>"
+#~ msgstr "Ejendommen er opdateret. <a href=\"%s\">vis ejendommen</a>"
+
+#~ msgid "Custom field updated."
+#~ msgstr "Brugerdefineret felt opdateret."
+
+#~ msgid "Custom field deleted."
+#~ msgstr "Brugerdefineret felt slettet."
+
+#~ msgid "Property updated."
+#~ msgstr "Ejendommen er opdateret."
+
+#~ msgid "Property restored to revision from %s"
+#~ msgstr "Ejendom gendannet fra %s"
+
+#~ msgid "Property published. <a href=\"%s\">View property</a>"
+#~ msgstr "Ejendom udgivet <a href=\"%s\">Vis Ejendom</a>"
+
+#~ msgid "Property saved."
+#~ msgstr "Ejendom gemt"
+
+#~ msgid ""
+#~ "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+#~ msgstr "Ejendom tilføjet. <a target=\"_blank\" href=\"%s\">Vis ejendom</a>"
+
+#~ msgid "Title"
+#~ msgstr "Titel"
+
+#~ msgid "Overview"
+#~ msgstr "Oversigt"
+
+#~ msgid "Order"
+#~ msgstr "Sorter"
+
+#~ msgid "Search"
+#~ msgstr "Søg"
+
+#~ msgid "Floor plans at location:"
+#~ msgstr "Stueplan på lokationen"
+
+#, fuzzy
+#~ msgid "View Properties"
+#~ msgstr "Vis Ejendom"
+
+#, fuzzy
+#~ msgid "Add/Edit Properties"
+#~ msgstr "Rediger Ejendom"
+
+#, fuzzy
+#~ msgid "Edit Other Properties"
+#~ msgstr "Andre Ejendomme"
+
+#, fuzzy
+#~ msgid "Delete Properties"
+#~ msgstr "Alle Ejendomme"
+
+#, fuzzy
+#~ msgid "Publish Properties"
+#~ msgstr "Ejendommen blev ikke oprettet."
+
+#, fuzzy
+#~ msgid "Manage Settings"
+#~ msgstr "Håndter links"
+
+#, fuzzy
+#~ msgid "Manage Taxonomies"
+#~ msgstr "Håndter kategorier"
+
+#, fuzzy
+#~ msgid "Properties"
+#~ msgstr "Alle Ejendomme"
+
+#~ msgid "Property"
+#~ msgstr "Ejendom"
+
+#~ msgid "Property: %s"
+#~ msgstr "Ejendom: %s"
+
+#~ msgid "Sidebar located on the %s page."
+#~ msgstr "Sidebar placeret på %s side."
+
+#~ msgid "Features"
+#~ msgstr "Faciliteter"
+
+#~ msgid "Feature"
+#~ msgstr "Facilitet"
+
+#~ msgid "Search Features"
+#~ msgstr "Søg faciliteter"
+
+#~ msgid "All Features"
+#~ msgstr "Alle faciliteter"
+
+#~ msgid "Parent Feature"
+#~ msgstr "Hoved facilitet"
+
+#~ msgid "Parent Feature:"
+#~ msgstr "Hoved facilitet:"
+
+#~ msgid "Edit Feature"
+#~ msgstr "Rediger facilitet"
+
+#~ msgid "Update Feature"
+#~ msgstr "Opdater facilitet"
+
+#~ msgid "Add New Feature"
+#~ msgstr "Tilføj facilitet"
+
+#~ msgid "New Feature Name"
+#~ msgstr "Nyt faciliteter navn"
+
+#~ msgid "Community Features"
+#~ msgstr "Fælles faciliteter"
+
+#~ msgid "Community Feature"
+#~ msgstr "Fælles facilitet"
+
+#~ msgid "Search Community Features"
+#~ msgstr "Søg på fælles faciliteter"
+
+#~ msgid "All Community Features"
+#~ msgstr "Alle fælles faciliteter "
+
+#~ msgid "Parent Community Feature"
+#~ msgstr "Hoved, fælles facilitet"
+
+#~ msgid "Parent Community Feature:"
+#~ msgstr "Hoved, fælles facilitet:"
+
+#~ msgid "Edit Community Feature"
+#~ msgstr "Rediger fælles facilitet"
+
+#~ msgid "Update Community Feature"
+#~ msgstr "Opdater fælles facilitet"
+
+#~ msgid "Add New Community Feature"
+#~ msgstr "Tilføj fælles facilitet"
+
+#~ msgid "New Community Feature Name"
+#~ msgstr "Nyt fælles facilitet navn"
+
+#~ msgid "All Properties"
+#~ msgstr "Alle Ejendomme"
+
+#, fuzzy
+#~ msgid "Add Property"
+#~ msgstr "Tilføj en Ejendom"
+
+#~ msgid "Add New Property"
+#~ msgstr "Tilføj en Ejendom"
+
+#~ msgid "Edit Property"
+#~ msgstr "Rediger Ejendom"
+
+#~ msgid "New Property"
+#~ msgstr "Ny Ejendom"
+
+#~ msgid "View Property"
+#~ msgstr "Vis Ejendom"
+
+#~ msgid "Search Properties"
+#~ msgstr "Søg ejendomme"
+
+#~ msgid "No properties found"
+#~ msgstr "Ingen ejendomme fundet"
+
+#~ msgid "No properties found in Trash"
+#~ msgstr "Ingen ejendomme fundet i papirkurv"
+
+#~ msgid "Default"
+#~ msgstr "Standard"
+
+#, fuzzy
+#~ msgid "There are no available premium features."
+#~ msgstr "Gennemtving kontrol af tilladt ekstra faciliteter."
+
+#, fuzzy
+#~ msgid "WP-Property Premium Feature: %s"
+#~ msgstr "Hoved facilitet"
+
+#, fuzzy
+#~ msgid "You have the latest premium features versions."
+#~ msgstr "Gennemtving kontrol af tilladt ekstra faciliteter."
+
+#~ msgid "No"
+#~ msgstr "Nej"
+
+#~ msgid " sq ft."
+#~ msgstr "Kvadrat meter"
+
+#~ msgid "Get Directions"
+#~ msgstr "Vis Mapper"
+
+#~ msgid "General Settings"
+#~ msgstr "Generelle indstillinger"
+
+#~ msgid "Find your property"
+#~ msgstr "Find din ejendom"
+
+#~ msgid "Contact us"
+#~ msgstr "Kontakt os"
+
+#~ msgid "Explore"
+#~ msgstr "Gennemse"
+
+#~ msgid "Message"
+#~ msgstr "Besked"
+
+#~ msgid "Name"
+#~ msgstr "Navn"
+
+#~ msgid "Send Message"
+#~ msgstr "Send Besked"
+
+#~ msgid "Submit Inquiry"
+#~ msgstr "Send en forespørgsel"
+
+#~ msgid "Inquiry"
+#~ msgstr "Forespørgsel"
+
+#~ msgid "Comment About"
+#~ msgstr "Kommenter"
+
+#~ msgid "Inquire About"
+#~ msgstr "Forespørgsel om"
+
+#~ msgid "Inquiry About:"
+#~ msgstr "Forespørgsel om:"
+
+#~ msgid "Inquiry message:"
+#~ msgstr "Forespørgsel:"
+
+#~ msgid "You forgot to enter your e-mail."
+#~ msgstr "Du skal skrive din e-mail."
+
+#~ msgid "You forgot to enter a message."
+#~ msgstr "Du skal skrive en besked."
+
+#~ msgid "You forgot to enter your  name."
+#~ msgstr "Du skal skrive dit navn."
+
+#~ msgid "Error with sending message. Please contact site administrator."
+#~ msgstr ""
+#~ "Fejl i forsøg på at sende besked. Kontakt venligst webstedets "
+#~ "administrator."
+
+#~ msgid "Thank you for your message."
+#~ msgstr "Tak for beskeden."
+
+#, fuzzy
+#~ msgid "Status"
+#~ msgstr "Kontakt os"
+
+#, fuzzy
+#~ msgid "Date"
+#~ msgstr "Slet"
+
+#, fuzzy
+#~ msgid "Published"
+#~ msgstr "Udgiv indlæg"
+
+#, fuzzy
+#~ msgid "Pending"
+#~ msgstr "Upload filer"
+
+#, fuzzy
+#~ msgid "General Help"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "Default Properties Page"
+#~ msgstr "Fasiliteter Ejendomme"
+
+#, fuzzy
+#~ msgid "Premium Features"
+#~ msgstr "Hoved facilitet"
+
+#, fuzzy
+#~ msgid "More Help"
+#~ msgstr "Mere"
+
+#, fuzzy
+#~ msgid "published"
+#~ msgstr "Udgiv indlæg"
+
+#, fuzzy
+#~ msgid "pending"
+#~ msgstr "Upload filer"
+
+#, fuzzy
+#~ msgid "Nothing found."
+#~ msgstr "Billede ikke fundet"
+
+#, fuzzy
+#~ msgid "Status Updated"
+#~ msgstr "Fasilitets Navn"
+
+#, fuzzy
+#~ msgid "or"
+#~ msgstr "Mere"
+
+#~ msgid "No published properties."
+#~ msgstr "Ejendommen blev ikke oprettet."
+
+#~ msgid "Title:"
+#~ msgstr "Titel:"
+
+#, fuzzy
+#~ msgid "Attributes to Display:"
+#~ msgstr "Vis Adresse"
+
+#~ msgid "%s at %s for %s"
+#~ msgstr "%s ved %s for %s"
+
+#~ msgid "More"
+#~ msgstr "Mere"
+
+#~ msgid "View All"
+#~ msgstr "Vis alle"
+
+#, fuzzy
+#~ msgid "Hide images."
+#~ msgstr "Skjul Billeder?"
+
+#~ msgid "Image Size:"
+#~ msgstr "Billede størrelse"
+
+#~ msgid "Address Format:"
+#~ msgstr "Adresse layout:"
+
+#~ msgid "Hide Images?"
+#~ msgstr "Skjul Billeder?"
+
+#, fuzzy
+#~ msgid "Featured %1s"
+#~ msgstr "Faciliteter"
+
+#, fuzzy
+#~ msgid "%1s Search"
+#~ msgstr "Søg"
+
+#, fuzzy
+#~ msgid "All Attributes"
+#~ msgstr "Skjulte Attributter"
+
+#, fuzzy
+#~ msgid "Grouped Attributes"
+#~ msgstr "Skjulte Attributter"
+
+#~ msgid "Use pagination"
+#~ msgstr "Brug side navigation."
+
+#~ msgid "Items per page"
+#~ msgstr "Elementer pr side"
+
+#~ msgid "Search Properies"
+#~ msgstr "Søg Ejendomme"
+
+#~ msgid "List of all images attached to the current property"
+#~ msgstr "Oversigt over alle ejendommens billeder"
+
+#, fuzzy
+#~ msgid "Large Image Size:"
+#~ msgstr "Billede størrelse"
+
+#, fuzzy
+#~ msgid "Show Image Descriptions."
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "API Failure: %1s."
+#~ msgstr "Faciliteter"
+
+#~ msgid "User"
+#~ msgstr "Bruger"
+
+#, fuzzy
+#~ msgid "None"
+#~ msgstr "Nej"
+
+#, fuzzy
+#~ msgid "Manage Real Estate Agents"
+#~ msgstr "Håndter kategorier"
+
+#~ msgid "Primary"
+#~ msgstr "Primær"
+
+#~ msgid "Save"
+#~ msgstr "Gem"
+
+#~ msgid "Images"
+#~ msgstr "Billeder"
+
+#, fuzzy
+#~ msgid "Agent Fields"
+#~ msgstr "Ejendoms felter"
+
+#~ msgid "User removed."
+#~ msgstr "Bruger fjernet."
+
+#~ msgid "Please enter a valid e-mail."
+#~ msgstr "Indtast en gyldig e-mail."
+
+#~ msgid "Please save first to add images."
+#~ msgstr "Gem før du vil tilføge billeder."
+
+#~ msgid "No images found."
+#~ msgstr "Billede ikke fundet"
+
+#~ msgid "Remove"
+#~ msgstr "Fjern"
+
+#~ msgid "Add Image"
+#~ msgstr "Tilføj Billede"
+
+#~ msgid "Moderate comments"
+#~ msgstr "Rediger kommentarer"
+
+#~ msgid "Manage categories"
+#~ msgstr "Håndter kategorier"
+
+#~ msgid "Manage links"
+#~ msgstr "Håndter links"
+
+#~ msgid "Upload files"
+#~ msgstr "Upload filer"
+
+#~ msgid "Edit posts"
+#~ msgstr "Rediger Indlæg"
+
+#~ msgid "Edit other's posts"
+#~ msgstr "Rediger andre indlæg"
+
+#~ msgid "Edit published posts"
+#~ msgstr "Rediger indlæg der er udgivet"
+
+#~ msgid "Publish posts"
+#~ msgstr "Udgiv indlæg"
+
+#~ msgid "Edit pages"
+#~ msgstr "Gediger sider"
+
+#~ msgid "Read"
+#~ msgstr "Læs"
+
+#~ msgid "Edit other's pages"
+#~ msgstr "Rediger andre sider"
+
+#~ msgid "Edit published pages"
+#~ msgstr "Rediger sider der er udgivet"
+
+#~ msgid "Publish pages"
+#~ msgstr "Udgiv sider"
+
+#~ msgid "Delete pages"
+#~ msgstr "Slet sider"
+
+#~ msgid "Delete other's pages"
+#~ msgstr "Slet andre sider"
+
+#~ msgid "Delete published pages"
+#~ msgstr "Slet udgivne sider"
+
+#~ msgid "Delete posts"
+#~ msgstr "Slæt indlæg"
+
+#~ msgid "Delete other's posts"
+#~ msgstr "Slæt andre indlæg"
+
+#~ msgid "Delete published posts"
+#~ msgstr "Slet indlæg der er udgivet"
+
+#~ msgid "Delete private posts"
+#~ msgstr "Slet private indlæg"
+
+#~ msgid "Edit private posts"
+#~ msgstr "Rediger private indlæg"
+
+#~ msgid "Read private posts"
+#~ msgstr "Læs private indlæg"
+
+#~ msgid "Delete private pages"
+#~ msgstr "Slet private sider"
+
+#~ msgid "Edit private pages"
+#~ msgstr "Rediger private sider"
+
+#~ msgid "Read private pages"
+#~ msgstr "Læs private sider"
+
+#~ msgid "Image"
+#~ msgstr "Billede"
+
+#~ msgid "Widget Text"
+#~ msgstr "Widget Tekst"
+
+#~ msgid "Email Address"
+#~ msgstr "Email Addresse"
+
+#, fuzzy
+#~ msgid "<b>Page Settings</b><br/>"
+#~ msgstr "Håndter links"
+
+#, fuzzy
+#~ msgid "Name:"
+#~ msgstr "Navn"
+
+#, fuzzy
+#~ msgid "Page:"
+#~ msgstr "Billede"
+
+#, fuzzy
+#~ msgid "Page"
+#~ msgstr "Billede"
+
+#, fuzzy
+#~ msgid "Search..."
+#~ msgstr "Søg"
+
+#, fuzzy
+#~ msgid "Template Settings:"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "Template:"
+#~ msgstr "Skabelon"
+
+#~ msgid "Save Changes"
+#~ msgstr "Gem ændringer"
+
+#, fuzzy
+#~ msgid "Property Form"
+#~ msgstr "Ejendom: %s"
+
+#, fuzzy
+#~ msgid "Subscription Plan"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Templates"
+#~ msgstr "Skabelon"
+
+#, fuzzy
+#~ msgid "Overview Page"
+#~ msgstr "Oversigt"
+
+#, fuzzy
+#~ msgid "Edit Page"
+#~ msgstr "Gediger sider"
+
+#, fuzzy
+#~ msgid "Form Name"
+#~ msgstr "Til Salg"
+
+#, fuzzy
+#~ msgid "Shortcode"
+#~ msgstr "Oversigt koder"
+
+#, fuzzy
+#~ msgid "General Options"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "Subscriptions Plans"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Propery Attributes"
+#~ msgstr "Skjulte Attributter"
+
+#, fuzzy
+#~ msgid "Just a name of Subscription plan."
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Duration"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Is Featured"
+#~ msgstr "Fasilitet"
+
+#, fuzzy
+#~ msgid "Images Limit"
+#~ msgstr "Billeder"
+
+#~ msgid "Description"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Property Forms"
+#~ msgstr "Ejendom: %s"
+
+#, fuzzy
+#~ msgid "Edit %s Page"
+#~ msgstr "Gediger sider"
+
+#~ msgid "Price:"
+#~ msgstr "Pris:"
+
+#, fuzzy
+#~ msgid "Duration:"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Images:"
+#~ msgstr "Billeder"
+
+#, fuzzy
+#~ msgid "Renewal of Subscription Plan"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Options:"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "day"
+#~ msgstr "Idag"
+
+#, fuzzy
+#~ msgid "Manage FEPS"
+#~ msgstr "Håndter links"
+
+#, fuzzy
+#~ msgid "created"
+#~ msgstr "Fasilitet"
+
+#, fuzzy
+#~ msgid "updated"
+#~ msgstr "Opdater facilitet"
+
+#, fuzzy
+#~ msgid "Publish Now"
+#~ msgstr "Udgiv indlæg"
+
+#, fuzzy
+#~ msgid "Add New %s"
+#~ msgstr "Tilføj Ny"
+
+#, fuzzy
+#~ msgid "Wrong FEPS form used"
+#~ msgstr "Ejendommen er opdateret."
+
+#, fuzzy
+#~ msgid "FEPS forms updated."
+#~ msgstr "Ejendommen er opdateret."
+
+#, fuzzy
+#~ msgid "%1$s Content"
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "%1$s Type"
+#~ msgstr "Type"
+
+#, fuzzy
+#~ msgid "Form Name:"
+#~ msgstr "Til Salg"
+
+#, fuzzy
+#~ msgid "Shortcode:"
+#~ msgstr "Oversigt koder"
+
+#, fuzzy
+#~ msgid "General Options:"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "%1$s Status:"
+#~ msgstr "Kontakt os"
+
+#, fuzzy
+#~ msgid "%1$s Type:"
+#~ msgstr "Type"
+
+#, fuzzy
+#~ msgid "%1$s Attributes"
+#~ msgstr "Skjulte Attributter"
+
+#, fuzzy
+#~ msgid "Attribute"
+#~ msgstr "Skjulte Attributter"
+
+#, fuzzy
+#~ msgid "%1$s Title"
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "Required"
+#~ msgstr "Fasilitet"
+
+#, fuzzy
+#~ msgid "Editing"
+#~ msgstr "Rediger"
+
+#, fuzzy
+#~ msgid "Subscription Plans"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "User Account Approved."
+#~ msgstr "Bruger fjernet."
+
+#, fuzzy
+#~ msgid "Please type in your e-mail address."
+#~ msgstr "Indtast en gyldig e-mail."
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "Opdater facilitet"
+
+#, fuzzy
+#~ msgid "Publish"
+#~ msgstr "Udgiv indlæg"
+
+#, fuzzy
+#~ msgid "Submit"
+#~ msgstr "Send en forespørgsel"
+
+#, fuzzy
+#~ msgid "FEPS Information"
+#~ msgstr "Ejendommen er opdateret."
+
+#, fuzzy
+#~ msgid "Flyer Display"
+#~ msgstr "Vis Adresse"
+
+#, fuzzy
+#~ msgid "Show %1$s images."
+#~ msgstr "Billede ikke fundet"
+
+#, fuzzy
+#~ msgid "PDF Flyer for property \""
+#~ msgstr "Find din ejendom"
+
+#, fuzzy
+#~ msgid "Manage Capabilities"
+#~ msgstr "Håndter kategorier"
+
+#, fuzzy
+#~ msgid "Allows user to publish properties."
+#~ msgstr "Ejendommen blev ikke oprettet."
+
+#, fuzzy
+#~ msgid "Other manage capabilities"
+#~ msgstr "Håndter kategorier"
+
+#, fuzzy
+#~ msgid "WP Property Capabilities"
+#~ msgstr "Ejendommen er opdateret."
+
+#, fuzzy
+#~ msgid "Role"
+#~ msgstr "Fjern"
+
+#, fuzzy
+#~ msgid "Contextual Menus"
+#~ msgstr "Kontakt os"
+
+#, fuzzy
+#~ msgid "Singular Property:"
+#~ msgstr "Find din ejendom"
+
+#, fuzzy
+#~ msgid "Plural Property:"
+#~ msgstr "Alle Ejendomme"
+
+#, fuzzy
+#~ msgid "Add "
+#~ msgstr "Tilføj Ny"
+
+#, fuzzy
+#~ msgid "Add New "
+#~ msgstr "Tilføj Ny"
+
+#, fuzzy
+#~ msgid "Edit "
+#~ msgstr "Rediger"
+
+#, fuzzy
+#~ msgid "Search "
+#~ msgstr "Søg"
+
+#, fuzzy
+#~ msgid "No "
+#~ msgstr "Nej"
+
+#, fuzzy
+#~ msgid " found."
+#~ msgstr "Billede ikke fundet"
+
+#, fuzzy
+#~ msgid "Manage Slideshow"
+#~ msgstr "Håndter links"
+
+#, fuzzy
+#~ msgid "Crop images."
+#~ msgstr "Billede ikke fundet"
+
+#, fuzzy
+#~ msgid "Show property title and tagline in slideshow."
+#~ msgstr "Vis side navigation i bunden af resultatet."
+
+#, fuzzy
+#~ msgid "Title."
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "Tagline."
+#~ msgstr "Tilføjelse"
+
+#, fuzzy
+#~ msgid "Show pagination buttons in slideshow."
+#~ msgstr "Vis side navigation i bunden af resultatet."
+
+#, fuzzy
+#~ msgid "Add Marker"
+#~ msgstr "Tilføj Billede"
+
+#, fuzzy
+#~ msgid "Coordinates"
+#~ msgstr "Vælg koordinaterne manuelt."
+
+#, fuzzy
+#~ msgid "Default by Google"
+#~ msgstr "Standard Skabelon "
+
+#, fuzzy
+#~ msgid "Sorry, no %s found, try expanding your search."
+#~ msgstr ""
+#~ "Desværre, ingen ejendomme fundet - udvid din søgning , eller <a href=\"%s"
+#~ "\">Vis alle</a>."
+
+#, fuzzy
+#~ msgid "No results found."
+#~ msgstr "Billede ikke fundet"
+
+#, fuzzy
+#~ msgid "Show More"
+#~ msgstr "Mere"
+
+#, fuzzy
+#~ msgid "Restore"
+#~ msgstr "Fjern"
+
+#, fuzzy
+#~ msgid "Edit this item"
+#~ msgstr "Rediger andre indlæg"
+
+#, fuzzy
+#~ msgid "Delete Permanently"
+#~ msgstr "Slet sider"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "Vis alle"
+
+#, fuzzy
+#~ msgid "Feature Updates"
+#~ msgstr "Fasilitets Navn"
+
+#~ msgid "Check Updates"
+#~ msgstr "Kontroller Opdateringer"
+
+#, fuzzy
+#~ msgid "Enable comments."
+#~ msgstr "Rediger kommentarer"
+
+#, fuzzy
+#~ msgid "Default %1s Page"
+#~ msgstr "Standard Skabelon "
+
+#~ msgid "Width"
+#~ msgstr "Brede"
+
+#~ msgid "Height"
+#~ msgstr "Højde"
+
+#~ msgid "Overview Shortcode"
+#~ msgstr "Oversigt koder"
+
+#, fuzzy
+#~ msgid "Show children %1s."
+#~ msgstr "Vis undergruppe ejendomme."
+
+#~ msgid "Show pagination on bottom of results."
+#~ msgstr "Vis side navigation i bunden af resultatet."
+
+#, fuzzy
+#~ msgid "%1s Page"
+#~ msgstr "Gediger sider"
+
+#~ msgid "Map Zoom Level:"
+#~ msgstr "Kortets Zoom niveau:"
+
+#, fuzzy
+#~ msgid "Default is \"%s\""
+#~ msgstr "Standard Skabelon "
+
+#, fuzzy
+#~ msgid "Show %1s Title"
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "Show Directions Link"
+#~ msgstr "Vis Mapper"
+
+#~ msgid "Address Display"
+#~ msgstr "Vis Adresse"
+
+#~ msgid "Available tags:"
+#~ msgstr "Tilgængelige tags"
+
+#~ msgid "Currency & Numbers"
+#~ msgstr "Valuta & Tal"
+
+#~ msgid "Currency symbol."
+#~ msgstr "Valuta symbol."
+
+#~ msgid "Thousands separator symbol:"
+#~ msgstr "Tusindtalsseparator symbol:"
+
+#~ msgid ". (period)"
+#~ msgstr ". (punktum)"
+
+#~ msgid ", (comma)"
+#~ msgstr ", (komma)"
+
+#~ msgid "The character separating the 1 and the 5: $1<b>,</b>500"
+#~ msgstr "Karakteren imellem 1 og 5: $1<b>,</b>500"
+
+#~ msgid "Currency symbol placement:"
+#~ msgstr "Valuta symbol placering"
+
+#~ msgid "Before number"
+#~ msgstr "Før nummer"
+
+#~ msgid "After number"
+#~ msgstr "Efter nummer"
+
+#~ msgid "Revalidate"
+#~ msgstr "Valider igen"
+
+#, fuzzy
+#~ msgid "Get %1s image data."
+#~ msgstr "Ejendom gemt"
+
+#~ msgid "Memory Usage:"
+#~ msgstr "Brugt hukommelses:"
+
+#~ msgid "Peak Memory Usage:"
+#~ msgstr "Max brugt hukommelses:"
+
+#~ msgid "(no parent)"
+#~ msgstr "(ingen hoved gruppe)"
+
+#~ msgid "Parent"
+#~ msgstr "Hoved gruppe"
+
+#~ msgid "Template"
+#~ msgstr "Skabelon"
+
+#~ msgid "Page Template"
+#~ msgstr "Side Skabelon"
+
+#~ msgid "Default Template"
+#~ msgstr "Standard Skabelon "
+
+#~ msgid "Need help? Use the Help tab in the upper right of your screen."
+#~ msgstr "Brug for hjælp, Brug Hjælp øverst til højre"
+
+#~ msgid "Falls Under"
+#~ msgstr "Hører ind under"
+
+#, fuzzy
+#~ msgid "ID of parent property"
+#~ msgstr "Dette er til udlejning. "
+
+#~ msgid "Editing %s is disabled, it may be inherited."
+#~ msgstr "Redigering %s er deaktiveret, det kan være nedarvet."
+
+#~ msgid "Enable."
+#~ msgstr "Aktiver"
+
+#, fuzzy
+#~ msgid "%1s Type"
+#~ msgstr "Type"
+
+#~ msgid "Return to building page."
+#~ msgstr "Tilbage til bygning siden."
+
+#, fuzzy
+#~ msgid "Change"
+#~ msgstr "Gem ændringer"
+
+#, fuzzy
+#~ msgid "Featured:"
+#~ msgstr "Fasilitet"
+
+#, fuzzy
+#~ msgid "Publish the current %s"
+#~ msgstr "Ejendommen blev ikke oprettet."
+
+#, fuzzy
+#~ msgid "Add Credits"
+#~ msgstr "Tilføj en Ejendom"
+
+#, fuzzy
+#~ msgid "Choose Subscription Plan"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Subscription Plan Options"
+#~ msgstr "Beskrivelse"
+
+#~ msgid ""
+#~ "Sorry, we could not find what you were looking for.  Since you are here, "
+#~ "take a look at some of our properties."
+#~ msgstr ""
+#~ "Beklager, vi kunne ikke finde det du søgte. Da du er her, tage et kig på "
+#~ "nogle af vores ejendomme."
+
+#~ msgid ""
+#~ "Sorry, no properties found - try expanding your search, or <a href=\"%s"
+#~ "\">view all</a>."
+#~ msgstr ""
+#~ "Desværre, ingen ejendomme fundet - udvid din søgning , eller <a href=\"%s"
+#~ "\">Vis alle</a>."
+
+#~ msgid " of "
+#~ msgstr " af "
+
+#, fuzzy
+#~ msgid "of"
+#~ msgstr " af "
+
+#~ msgid "Prev"
+#~ msgstr "Forrige"
+
+#, fuzzy
+#~ msgid "Other"
+#~ msgstr "Sorter"
+
+#, fuzzy
+#~ msgid "Comment"
+#~ msgstr "Ejendoms indhold"
+
+#, fuzzy
+#~ msgid "Post Comment"
+#~ msgstr "Ejendoms indhold"
+
+#, fuzzy
+#~ msgid "Payment Method"
+#~ msgstr "Hoved facilitet"
+
+#, fuzzy
+#~ msgid "Show Property Title"
+#~ msgstr "Ejendommens Titel"
+
+#, fuzzy
+#~ msgid "Property ID:"
+#~ msgstr "Ejendom"
+
+#~ msgid "Interested?"
+#~ msgstr "Interesseret?"
+
+#, fuzzy
+#~ msgid "Read Property"
+#~ msgstr "Ny Ejendom"
+
+#, fuzzy
+#~ msgid "Read Private Properties"
+#~ msgstr "Læs private indlæg"
+
+#~ msgid "Feature Name"
+#~ msgstr "Fasilitets Navn"
+
+#, fuzzy
+#~ msgid "General"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "Property Status:"
+#~ msgstr "Ejendom: %s"
+
+#, fuzzy
+#~ msgid "Property Type:"
+#~ msgstr "Ejendoms Type"
+
+#~ msgid "Tomorrow "
+#~ msgstr "Imorgen"
+
+#~ msgid "Yesterday "
+#~ msgstr "Igår"
+
+#~ msgid " in %d days "
+#~ msgstr "om %d dage"
+
+#~ msgid "%d days ago"
+#~ msgstr "%d dage siden"
+
+#~ msgid "%s hours ago"
+#~ msgstr "%s timer siden"
+
+#~ msgid "%s minutes ago"
+#~ msgstr "%s minutter siden"
+
+#~ msgid ""
+#~ "Be advised, since you don't have permalinks enabled, you must visit the "
+#~ "<a href=\"%s\">Settings Page</a> and set a custom property overview page."
+#~ msgstr ""
+#~ "Vær opmærksom på, da du ikke har permalinks aktiveret, skal du gå til <a "
+#~ "href=\"%s\"> indstilinger</ a> og angive en brugerdefineret oversigtsside."
+
+#~ msgid ""
+#~ "By default, your property overview will be displayed on the <a href=\"%s"
+#~ "\">%s</a> page. You may change the overview page on the <a href=\"%s"
+#~ "\">Settings Page</a>"
+#~ msgstr ""
+#~ "Som standard vil din ejendoms oversigt blive vist på <a href=\"%s\">% s "
+#~ "</ a> side. Du kan ændre oversigtssiden under <a href=\"%s\"> "
+#~ "Indstillinger </ a>"
+
+#~ msgid "Show other properties (if any) with the same Parent"
+#~ msgstr "Vis andre Ejendomme (hvis der er nogen) med samme hoved gruppe."
+
+#~ msgid "Property Search"
+#~ msgstr "Søg efter ejendom"
+
+#~ msgid "Property Types"
+#~ msgstr "Ejendoms typer"
+
+#~ msgid "Popup Image Size:"
+#~ msgstr "Popup billedets størrelse:"
+
+#~ msgid ""
+#~ "Display larger image, or slideshow, at the top of the property listing."
+#~ msgstr ""
+#~ "Vis et større billede, eller slideshow, i toppen af ejendommens oversigt."
+
+#~ msgid "Order By:"
+#~ msgstr "Sorter efter:"
+
+#~ msgid "Bed(s):"
+#~ msgstr "Senge:"
+
+#~ msgid "Bath(s):"
+#~ msgstr "Bade:"
+
+#~ msgid "Square Ft:"
+#~ msgstr "Kvadrat meter:"
