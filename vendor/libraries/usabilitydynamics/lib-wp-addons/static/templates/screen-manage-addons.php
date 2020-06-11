@@ -10,7 +10,7 @@
             <input type="hidden" name="page" value="<?php echo esc_attr( $this->page_slug ); ?>" />
           <?php
           //echo "<pre>"; print_r( $this ); echo "</pre>"; die();
-          $this->list_table = new UsabilityDynamics\UD_API\Addons_Table( array(
+          $this->list_table = new UsabilityDynamics\WPA\Addons_Table( array(
             'name' => $this->name,
             'domain' => $this->domain,
             'page' => $this->menu_slug,
