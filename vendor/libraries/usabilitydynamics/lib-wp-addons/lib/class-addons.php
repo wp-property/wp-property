@@ -188,9 +188,8 @@ namespace UsabilityDynamics\WPA {
                 }
               }
             }
-            if( 0 < count( $products ) ) {
-              update_option( $this->bootstrap->domain . '_active_addons', $products );
-            }
+            update_option( $this->bootstrap->domain . '_active_addons', $products );
+
             $response = true;
             break;
 
