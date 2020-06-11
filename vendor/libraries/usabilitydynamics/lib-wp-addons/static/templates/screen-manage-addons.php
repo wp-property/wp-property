@@ -2,7 +2,7 @@
 
 <div id="col-container" class="<?php //about-wrap ?>">
   <?php
-  echo '<div class="licenses-notice">' . wpautop( sprintf( __( 'See below for a list of %s Add-ons installed on %s. You can view %s on how this works. %s', $this->domain ), $this->name, get_bloginfo( 'name' ), '<a target="_blank" href="https://wp-property.github.io/docs/installing_addons/">documentation</a>', '&nbsp;&nbsp;<a href="' . esc_url( admin_url( 'update-core.php' ) ) . '" class="button">' . __( 'Check for Updates', $this->domain ) . '</a>' ) ) . '</div>' . "\n";
+  echo '<div class="licenses-notice">' . wpautop( sprintf( __( 'See below for a list of %s Add-ons installed on %s. You can view %s on how this works. %s', $this->domain ), $this->name, get_bloginfo( 'name' ), sprintf('<a target="_blank" href="%s">documentation</a>', $this->addons_homepage), '&nbsp;&nbsp;<a href="' . esc_url( admin_url( 'update-core.php' ) ) . '" class="button">' . __( 'Check for Updates', $this->domain ) . '</a>' ) ) . '</div>' . "\n";
   ?>
     <div>
         <form id="activate-addons" method="post" action="" class="validate">
@@ -19,7 +19,7 @@
           if ( !empty($addons)) {
             foreach( $addons as $k=>$addon ) {
               $this->list_table->data[$k] = $addon;
-              }
+            }
           }
           $this->list_table->prepare_items();
           $this->list_table->display();

@@ -48,6 +48,11 @@ namespace UsabilityDynamics\WPA {
       /**
        *
        */
+      private $addons_homepage;
+
+      /**
+       *
+       */
       private $bootstrap;
 
       /**
@@ -72,6 +77,8 @@ namespace UsabilityDynamics\WPA {
 
         $this->addons = $this->bootstrap->get_schema( 'extra.schemas.addons' );
         $this->init_addons();
+
+        $this->addons_homepage = $this->bootstrap->get_schema( 'extra.schemas.addons_homepage' );
 
         //** Add Add-ons page */
         add_action( 'admin_menu', array( $this, 'register_addons_screen' ), 999 );
