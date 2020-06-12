@@ -132,7 +132,9 @@ if (!function_exists('wpp')) {
 //** Initialize. */
 if (ud_check_wp_property()) {
   ud_get_wp_property();
-  new \UsabilityDynamics\WPA\Addons(ud_get_wp_property()->get_instance());
+  if( class_exists( '\UsabilityDynamics\WPA\Addons' ) ) {
+    new \UsabilityDynamics\WPA\Addons( ud_get_wp_property()->get_instance() );
+  }
 }
 
 /**
