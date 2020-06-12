@@ -40,7 +40,7 @@ if( !function_exists( 'ud_check_wpp_walkscore' ) ) {
    * @since 1.0.0
    */
   function ud_check_wpp_walkscore() {
-    global $_ud_wpp_walkscore_error;
+    global $_ud_wp_property_error;
     try {
       //** Be sure composer.json exists */
       $file = dirname( __FILE__ ) . '/composer.json';
@@ -68,29 +68,12 @@ if( !function_exists( 'ud_check_wpp_walkscore' ) ) {
         throw new Exception( __( 'Distributive is broken. Plugin loader is not available. Try to remove and upload plugin again.', 'wpp_walkscore' ) );
       }
     } catch( Exception $e ) {
-      $_ud_wpp_walkscore_error = $e->getMessage();
+      $_ud_wp_property_error = $e->getMessage();
       return false;
     }
     return true;
   }
 
-}
-
-if( !function_exists( 'ud_wpp_walkscore_message' ) ) {
-  /**
-   * Renders admin notes in case there are errors on plugin init
-   *
-   * @author Usability Dynamics, Inc.
-   * @since 1.0.0
-   */
-  function ud_wpp_walkscore_message() {
-    global $_ud_wpp_walkscore_error;
-    if( !empty( $_ud_wpp_walkscore_error ) ) {
-      $message = sprintf( __( '<p><b>%s</b> can not be initialized. %s</p>', 'wpp_walkscore' ), 'WP-Property: WalkScore', $_ud_wpp_walkscore_error );
-      echo '<div class="error fade" style="padding:11px;">' . $message . '</div>';
-    }
-  }
-  add_action( 'admin_notices', 'ud_wpp_walkscore_message' );
 }
 
 if( ud_check_wpp_walkscore() ) {

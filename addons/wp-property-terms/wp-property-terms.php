@@ -40,7 +40,7 @@ if( !function_exists( 'ud_check_wpp_terms' ) ) {
    * @since 1.0.0
    */
   function ud_check_wpp_terms() {
-    global $_ud_wpp_terms_error;
+    global $_ud_wp_property_error;
 
     if( defined( 'WPP_TERMS_VENDOR_LOADED' ) ) {
       return true;
@@ -73,29 +73,12 @@ if( !function_exists( 'ud_check_wpp_terms' ) ) {
         throw new Exception( __( 'Distributive is broken. Plugin loader is not available. Try to remove and upload plugin again.', 'wpp_terms' ) );
       }
     } catch( Exception $e ) {
-      $_ud_wpp_terms_error = $e->getMessage();
+      $_ud_wp_property_error = $e->getMessage();
       return false;
     }
     return true;
   }
 
-}
-
-if( !function_exists( 'ud_wpp_terms_message' ) ) {
-  /**
-   * Renders admin notes in case there are errors on plugin init
-   *
-   * @author Usability Dynamics, Inc.
-   * @since 1.0.0
-   */
-  function ud_wpp_terms_message() {
-    global $_ud_wpp_terms_error;
-    if( !empty( $_ud_wpp_terms_error ) ) {
-      $message = sprintf( __( '<p><b>%s</b> can not be initialized. %s</p>', 'wpp_terms' ), 'Wp-Property Terms', $_ud_wpp_terms_error );
-      echo '<div class="error fade" style="padding:11px;">' . $message . '</div>';
-    }
-  }
-  add_action( 'admin_notices', 'ud_wpp_terms_message' );
 }
 
 if( ud_check_wpp_terms() ) {
