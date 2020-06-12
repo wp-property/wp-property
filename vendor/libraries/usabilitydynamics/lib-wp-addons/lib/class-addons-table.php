@@ -141,7 +141,7 @@ namespace UsabilityDynamics\WPA {
 
         $response = '';
         if ( isset($item['plugin_deactivate_link']) ) {
-          $response = __( sprintf('You have already installed plugin "%s". For correct work please %s plugin and enable add-on', $item['name'], sprintf("<a href='%s'>deactivate</a>", $item['plugin_deactivate_link'])) , $this->domain) . "\n";
+          $response = __( sprintf('You have already activated the "%s" plugin, to avoid conflicts please %s he stand-alone plugin and enable this add-on', $item['name'], sprintf("<a href='%s'>deactivate</a>", $item['plugin_deactivate_link'])) , $this->domain) . "\n";
         }
 
         return $response;
