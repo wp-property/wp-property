@@ -1,0 +1,3230 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-29 12:35+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: LeXeLL <lexell3@gmail.com>\n"
+"Language: sk_SK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-property-import.php:125
+#, fuzzy
+msgid "Property Title"
+msgstr "Typ nehnuteľnosti"
+
+#: lib/class-wpp-property-import.php:126
+#, fuzzy
+msgid "Property Content"
+msgstr "Slovné opisy nehnuteľností"
+
+#: lib/class-wpp-property-import.php:127
+#, fuzzy
+msgid "Property Excerpt"
+msgstr "Slovné opisy nehnuteľností"
+
+#: lib/class-wpp-property-import.php:128
+#, fuzzy
+msgid "Property Status"
+msgstr "Štatistické údaje"
+
+#: lib/class-wpp-property-import.php:129
+#, fuzzy
+msgid "Property Order"
+msgstr "Vyhľadávanie nehnuteľností"
+
+#: lib/class-wpp-property-import.php:130
+#, fuzzy
+msgid "Property Date"
+msgstr "Stránka s nehnuteľnosťami"
+
+#: lib/class-wpp-property-import.php:131
+#, fuzzy
+msgid "Property Author"
+msgstr "Slovné opisy nehnuteľností"
+
+#: lib/class-wpp-property-import.php:449
+#, php-format
+msgid ""
+"Attachment referenced in database not found on disk: (%1s), removing "
+"reference from DB."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:462
+#: lib/class-wpp-property-import.php:3890
+#, php-format
+msgid "Image directory %1s could not be created."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:476
+msgid "System (Primary) Key is not found."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:495
+msgid "Could not save image saved image - empty file returned by server."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:514
+#, php-format
+msgid "Image %1s downloaded, but appears corrupt - deleting."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:622
+#: lib/class-wpp-property-import.php:3320
+msgid "Pending Image Downloads"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:801
+#, fuzzy
+msgid "Starting "
+msgstr "Nastavenia"
+
+#: lib/class-wpp-property-import.php:802
+#, php-format
+msgid "on process start. Memory limit: %s. Before %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:850
+msgid "Manage XML Importer"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:915
+msgid "Ignore updates on XMLI process"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:918
+msgid "M j, Y @ G:i"
+msgstr "j. F Y G:i"
+
+#: lib/class-wpp-property-import.php:921
+#, php-format
+msgid "Imported on: <b>%1$s</b> <a href=\"%2$s\" title=\"%3$s\">Importer</a>"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1026
+msgid "ago"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1036
+msgid "Last Import"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1062
+#: lib/class-wpp-property-import.php:1064
+msgid "none"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1064
+#, php-format
+msgid "Memory Usage: %s. Difference: %s. Details: %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1123
+#: lib/class-wpp-property-import.php:1128
+#: lib/class-wpp-property-import.php:1152
+#: lib/class-wpp-property-import.php:1154
+#, fuzzy
+msgid "Time: "
+msgstr "Názov:"
+
+#: lib/class-wpp-property-import.php:1200
+#, php-format
+msgid ""
+"There are (%1s) unattached files related to listings that were imported "
+"using the XML Importer."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1201
+msgid "Delete Unattached Files"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1207
+msgid "Look up XML import history."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1208
+msgid "Show XML Import History"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1210
+msgid "Show last 500 imported items in descending order."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1285
+msgid "( Imported )"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1294
+msgid "Schedule coult not be imported."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1350
+msgid "Importer"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1418
+#, php-format
+msgid ""
+"Starting Cron-Initiated Import: %1s. Using XML Importer %2s and WP-Property "
+"%3s."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1477
+msgid "XML Importer Help"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1478
+msgid ""
+"By default, xPath are executed in the xPath input boxes. <a target=\"_blank"
+"\" href=\"http://www.w3schools.com/xsl/xpath_syntax.asp\">W3 Schools XPath "
+"Syntax</a>. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1479
+msgid ""
+"Example: get all the option values that have a label for \"height\": "
+"<b>options/option[label = \"Height\"]/value </b>"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1481
+msgid ""
+"<b>Property Resource Class:</b> Typically this is used to specify the type "
+"of property listing, such as Commercial or Residential, the naming "
+"convention varies depending on RETS provider. Use <a href=\"http://rets."
+"usabilitydynamics.com/\" target=\"_blank\">rets.usabilitydynamics.com</a> to "
+"determine. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1482
+msgid ""
+"<b>Dynamic DMQL Query Tags:</b> The DMQL query for RETS supports the "
+"following dynamic tags: [this_month], [next_month] and [previous_month]. "
+"Example to get all listings modified within the current month: "
+"(DATE_MODIFIED=[this_month]+); to get all the listings modified before this "
+"month: (DATE_MODIFIED=[previous_month]-). These examples assume that the "
+"SystemName for the modified data is DATE_MODIFIED, which will actually vary "
+"from one MLS provider to the next.</p>"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1484
+msgid "XPath Query to Property Elements"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1485
+msgid ""
+"In order to begin importing data, you must first identify what the "
+"\"repeating property element\" is in the XML file.  Typically this would be "
+"something like <b>property</b> or <b>object</b>, where the corresponding "
+"XPath rules would be <b>//property</b> or <b>//object</b>, respectively. The "
+"easiest way to identify it is to look through the feed for a repeating "
+"pattern. The query must select the elements in order to cycle through them "
+"and apply the XPath Rules in the Attribute Map section. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1487
+msgid "Import Limits"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1488
+msgid ""
+"There are two type of limits - the first limit will stop the import after a "
+"certain number of objects have been processed before they are checked for "
+"quality, while the second limit will stop only after the specified number of "
+"objects has actually passsed quality inspection, and have been saved to the "
+"database."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1489
+msgid ""
+"Limiting imports works well when you are running incremental imports.  A "
+"limit of <b>10</b> will stop after 10 properties have been created.  The "
+"importer does not count properties that were skipped during import or that "
+"already exist in the system - properties that already exist will be marked "
+"as updated."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1491
+msgid "Running the Import"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1492
+msgid ""
+"There are two ways to process an import, using the browser, or by setting up "
+"a cron job.  Using the browser is easy, and viable when you have a small "
+"feed, or a very good server. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1493
+msgid ""
+"When working with larger feeds, or for the purposes of automation, it is "
+"advisable to execute your import script using a cron job.  For every "
+"\"Import Schedule\" you create, a <b>Cron Command</b> field will be "
+"displayed, followed by the command you would need to enter into the cron job "
+"builder, for the import schedule to be executed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1495
+msgid "Function: free_text"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1496
+msgid ""
+"To insert some common text, use the <b>free_text</b> command, like so: "
+"<b>free_text: Imported from Some List</b> and the text will be kept as is."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1498
+msgid "Function: uppercase"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1499
+msgid ""
+"To convert all alphabetic characters to uppercase, use the <b>uppercase</b> "
+"command, like so: <b>uppercase: {xpath}</b>."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1501
+msgid "Function: concat"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1502
+msgid ""
+"You can also combine free text wtih xPath rule results using <b>concat</b>, "
+"example: <b>concat:http://sourcesite.com/images/'Photo7'</b> will result in "
+"the text between the quotes being executed as xPath rules, while text "
+"outside of quotes being inserted as it is."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1503
+msgid ""
+"You can also use concat to combine multiple xPath rules together, for "
+"example you can create the Property Title from a few XML attributes: "
+"<b>concat:'bedrooms' bedroom house in 'location/city'</b>"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1505
+msgid "Function: concat_list"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1506
+msgid ""
+"Example: <b>concat_list root_path=\"options/option\" label_path=\"label\" "
+"value_path=\"value\" concat_character=\":\" paste_together=\",\"</b>  will "
+"look for options/option path, then grab child \"value\" and \"label\" paths "
+"and import them as a single line. If \"paste_together\" specified then all "
+"collected \"label / value\" pairs will be joined in single-line value using "
+"\"paste_together\"."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1546
+#, php-format
+msgid "Found %1s properties from database that were imported from this feed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1556
+#, php-format
+msgid "Property ID %1s has been deleted. Total deleted so far: %2s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1723
+#, php-format
+msgid ""
+"Deleted %1s unattached property files that were created from an XML import."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1729
+msgid "Something went wrong, did not delete any unattached images."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1755
+#, php-format
+msgid "All %1$s properties have been deleted in %2$s seconds."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1757
+#, php-format
+msgid ""
+"Although %1$s properties were found, only %2$s have been deleted in %3$s "
+"seconds."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1761
+msgid "Something went wrong, no properties were found to delete."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1812
+#, php-format
+msgid "before %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1814
+#: lib/class-wpp-property-import.php:2227
+#, php-format
+msgid "after %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1824
+msgid "before XML object initialization from response (string)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1828
+msgid "after XML object initialization"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1835
+#, php-format
+msgid "Created temporary directory for import: %1$s."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1858
+#, php-format
+msgid "Could not load XML Object from raw data: %1s."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1860
+msgid ""
+"Could not load XML Object from raw data - empty result returned. Check your "
+"settings."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1862
+msgid ""
+"Could not load XML Object from raw data. Looks like data has errors and can "
+"not be converted to XML Object."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1872
+msgid "before getting the list of XML objects (listings)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1880
+msgid "after getting the list of XML objects (listings)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1895
+msgid "Data loaded from cache."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1899
+msgid " object(s) found with XPath Rule: "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1900
+#, php-format
+msgid ""
+"%1s objects identified: <a href=\"%2s\" target=\"_blank\">download processed "
+"XML file</a> ( %3s )."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1902
+msgid "Root Element XPath Rule: "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1905
+msgid "No Root Element XPath Rule, displaying most root elements."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1908
+#, fuzzy
+msgid "No objects found."
+msgstr "Žiadne nehnuteľnosti neboli nájdené"
+
+#: lib/class-wpp-property-import.php:1917
+#, php-format
+msgid "Preview truncated: showing: %1s of full feed:"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1920
+#, fuzzy, php-format
+msgid "Available tags in source: %1s"
+msgstr "Dostupné značky:"
+
+#: lib/class-wpp-property-import.php:1971
+msgid "before parsing the list of XML objects (listings)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2131
+#, php-format
+msgid "XPath rules for object #%1d processed with %2d extracted attributes."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2137
+#, php-format
+msgid "Stopping import due to specified pre-QC limit of %1d."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2143
+msgid "after parsing the list of XML objects (listings)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2160
+#, php-format
+msgid "Importing %1s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2189
+#: lib/class-wpp-property-import.php:2190
+#, php-format
+msgid "Deleted all ( %1s ) properties that originated from this feed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2192
+#: lib/class-wpp-property-import.php:2268
+msgid ""
+"Did not find any properties that have been imported from this feed to remove."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2197
+msgid "Did not remove any old properties."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2211
+#, php-format
+msgid "Stopping import due to specified post-QC limit of %1d."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2252
+#, php-format
+msgid "Object cycle done. Completed %1d cycles."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2265
+#: lib/class-wpp-property-import.php:2266
+#, php-format
+msgid "Deleted ( %1s ) properties that are no longer in the feed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2279
+msgid "Deleted the import temporary directory."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2281
+msgid "Import temporary directory is not been created"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2281
+msgid "Unable to delete the import temporary directory"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2444
+msgid "Schedule imported from file."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2500
+#, fuzzy
+msgid "Property Importer"
+msgstr "Typ nehnuteľnosti"
+
+#: lib/class-wpp-property-import.php:2501
+msgid "Add New"
+msgstr "Pridať"
+
+#: lib/class-wpp-property-import.php:2529
+#, fuzzy
+msgid "Sort by:"
+msgstr "Zoraditeľné"
+
+#: lib/class-wpp-property-import.php:2530
+msgid "Last Run"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2531
+#, fuzzy
+msgid "Created Properties"
+msgstr "Odporúčané nehnuteľnosti"
+
+#: lib/class-wpp-property-import.php:2532
+#, fuzzy
+msgid "Updated Properties"
+msgstr "Odporúčané nehnuteľnosti"
+
+#: lib/class-wpp-property-import.php:2533
+#, fuzzy
+msgid "Total Properties"
+msgstr "Nehnuteľnosti"
+
+#: lib/class-wpp-property-import.php:2534
+msgid "Limit"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2542
+msgid "Saved Import Schedules"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2555
+msgid "Last run "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2555
+msgid " ago."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2560
+msgid "Updated "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2560
+#: lib/class-wpp-property-import.php:2565
+#: lib/class-wpp-property-import.php:2570
+msgid " objects."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2565
+#, fuzzy
+msgid "Created "
+msgstr "Odporúčané"
+
+#: lib/class-wpp-property-import.php:2570
+msgid "Limited to "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2575
+#, fuzzy
+msgid "Total Properties: "
+msgstr "Nehnuteľnosti"
+
+#: lib/class-wpp-property-import.php:2586
+msgid "Source URL:"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2587
+msgid "Cron Command:"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2592
+msgid "Edit"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2593
+msgid "Delete"
+msgstr "Zmazať"
+
+#: lib/class-wpp-property-import.php:2594
+msgid "Run Import in Browser"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2595
+msgid "Save to File"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2597
+#, fuzzy
+msgid "Delete All Properties"
+msgstr "Ďalšie nehnuteľnosti"
+
+#: lib/class-wpp-property-import.php:2609
+msgid "You do not have any saved schedules. Create one now."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2618
+msgid "Import Schedule"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2620
+msgid "Upload File"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2704
+msgid "Import name"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2713
+#, fuzzy
+msgid "Source"
+msgstr "Viac"
+
+#: lib/class-wpp-property-import.php:2718
+msgid "URL"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2721
+#, fuzzy
+msgid "Type:"
+msgstr "Typ"
+
+#: lib/class-wpp-property-import.php:2723
+msgid "XML / JSON"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2724
+msgid "CSV"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2725
+#, fuzzy
+msgid "Google Spreadsheet"
+msgstr "Google Maps"
+
+#: lib/class-wpp-property-import.php:2726
+#, fuzzy
+msgid "WP-Property Feed"
+msgstr "Údajové polia"
+
+#: lib/class-wpp-property-import.php:2727
+msgid "RETS"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2738
+msgid "Send GET variables as POST data."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2748
+#, fuzzy
+msgid "Google Username"
+msgstr "Google Maps"
+
+#: lib/class-wpp-property-import.php:2752
+#, fuzzy
+msgid "Google Password"
+msgstr "Google Maps"
+
+#: lib/class-wpp-property-import.php:2756
+msgid "Google Extra Query Vars"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2757
+msgid ""
+"See the <a href=\"http://code.google.com/apis/spreadsheets/data/3.0/"
+"reference.html#ListParameters\" target=\"_blank\">Google Spreadsheet API "
+"docs</a> for the format of this field ( should be name value pairs, without "
+"the beginning \"?\" )"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2761
+msgid "RETS Username."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2765
+msgid "RETS Password."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2769
+#, fuzzy
+msgid "Property Resource."
+msgstr "Nehnuteľnosť bola uložená."
+
+#: lib/class-wpp-property-import.php:2769
+#, fuzzy
+msgid "Default is \"Property\""
+msgstr "Typ nehnuteľnosti"
+
+#: lib/class-wpp-property-import.php:2773
+#, fuzzy
+msgid "Property Resource Class."
+msgstr "Nehnuteľnosť bola uložená."
+
+#: lib/class-wpp-property-import.php:2777
+msgid "Primary Key for Resource."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2777
+msgid "Also referred to as \"Key Field\". Default is \"ListingKey\""
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2781
+msgid "Photo Object."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2781
+msgid "Default is \"Photo\""
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2785
+msgid "User-Agent String."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2785
+#: lib/class-wpp-property-import.php:2789
+msgid "May be required by your RETS"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2789
+msgid "User-Agent Password."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2798
+#, fuzzy
+msgid "RETS Version."
+msgstr "Verzia"
+
+#: lib/class-wpp-property-import.php:2798
+msgid "Version is set by your RETS provider."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2802
+#, fuzzy
+msgid "Property Query."
+msgstr "Fotogaléria nehnuteľnosti"
+
+#: lib/class-wpp-property-import.php:2802
+msgid ""
+"Accepts <a href=\"https://www.flexmls.com/support/rets/tutorials/dmql/\" "
+"target=\"_blank\">DMQL</a> - Default is \"(ListingStatus=|Active)\""
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2806
+msgid "Toggle Advanced Source Options"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2812
+msgid "Root XPath Query:"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2814
+msgid "What is this?"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2822
+msgid "Preview Raw Data"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2824
+msgid "Close Preview"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2839
+#, fuzzy
+msgid "Default Property Type"
+msgstr "Typ nehnuteľnosti"
+
+#: lib/class-wpp-property-import.php:2847
+msgid "Will be defaulted to if no xPath rule exists for the \"Property Type\"."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2854
+#, fuzzy
+msgid "Advanced Options"
+msgstr "Nastavenia"
+
+#: lib/class-wpp-property-import.php:2863
+msgid "<b>Pre-QC Limit:</b> Limit import to the first"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2865
+#, fuzzy
+msgid "properties in the feed."
+msgstr "Žiadne nehnuteľnosti neboli nájdené"
+
+#: lib/class-wpp-property-import.php:2866
+msgid "More about limits."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2870
+msgid "<b>Post-QC Limit:</b> Limit import to the first"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2872
+msgid "created properties that have passed quality standards."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2877
+msgid "Number of image importing threads spawned"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2879
+msgid "Default is 10. Not recommended to increase the number."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2885
+#, php-format
+msgid "Only import images that are over %1spx in width, and %2spx in height."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2890
+msgid "Minimum sizes are ignored if blank."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2894
+msgid "Imported properties must have at least "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2895
+#: lib/class-wpp-property-import.php:2902
+#, fuzzy
+msgid " valid image(s)."
+msgstr "Skryť fotografie?"
+
+#: lib/class-wpp-property-import.php:2900
+msgid "Imported properties must have no more than "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2907
+msgid "Do not update properties that have been imported less than "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2909
+#, fuzzy
+msgid "hour(s) ago."
+msgstr "pred %s hodinami"
+
+#: lib/class-wpp-property-import.php:2916
+msgid "Automatically set the first image as the thumbnail."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2923
+msgid ""
+"Remove properties that are no longer in source XML from this site's "
+"database. This can now be done if the the import configuration does not have "
+"a Pre-QC or Post-QC Limit."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2929
+msgid ""
+"When updating an existing property, remove all old images before downloading "
+"new ones."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2934
+msgid "Skip images if images already downloaded."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2940
+#, php-format
+msgid ""
+"Send email updates to the site admin e-mail address ( %1s ) when import "
+"schedules are executed and completed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2947
+msgid ""
+"Remove all properties that were originally imported from this feed on import."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2954
+msgid "Completely remove <b>all</b> existing properties prior to import."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2961
+msgid "Fix strings that are in all caps."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2968
+msgid "Scan for any formatting tags and strip them out."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2976
+msgid "Automatically load imported images into property slideshow."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2984
+msgid "Geolocate imported listings."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2990
+msgid "Enable detailed logging to assist with troubleshooting."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2996
+msgid "Show SQL Queries and errors."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3003
+msgid "Run system command cron instead of PHP cron."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3004
+msgid ""
+"Attention, enable the option only if listings are not being published but "
+"added to <b>Draft status</b>."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3013
+msgid "Toggle Advanced Options"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3019
+msgid "Automatic Matching"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3021
+#, fuzzy
+msgid "Automatically Match"
+msgstr "Automaticky priložiť predvolené CSS."
+
+#: lib/class-wpp-property-import.php:3022
+msgid ""
+"This will work for WP-Property exports and imports, but will have mixed "
+"results with uniquely formatted feeds."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3027
+#, fuzzy
+msgid "Attribute Map"
+msgstr "Skryté atribúty"
+
+#: lib/class-wpp-property-import.php:3030
+msgid ""
+"Use XPath rules to setup the paths to the individual XML attributes to match "
+"them up with WP-Property attributes."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3031
+msgid "Sort Attribute Rules"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3037
+#, fuzzy
+msgid "WP-Property Attribute"
+msgstr "Prémiové doplnky WP-Property"
+
+#: lib/class-wpp-property-import.php:3038
+msgid "XPath Rule"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3055
+#, fuzzy
+msgid "WordPress Attributes"
+msgstr "Atribút Adresa"
+
+#: lib/class-wpp-property-import.php:3062
+msgid "Taxonomies"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3067
+#, fuzzy
+msgid "Attributes"
+msgstr "Skryté atribúty"
+
+#: lib/class-wpp-property-import.php:3072
+msgid "Address"
+msgstr "Adresa"
+
+#: lib/class-wpp-property-import.php:3073
+#, fuzzy
+msgid "Street Number"
+msgstr "Tel. číslo"
+
+#: lib/class-wpp-property-import.php:3074
+msgid "Street"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3075
+msgid "City"
+msgstr "Mesto"
+
+#: lib/class-wpp-property-import.php:3076
+#, fuzzy
+msgid "County"
+msgstr "Mesto"
+
+#: lib/class-wpp-property-import.php:3077
+#, fuzzy
+msgid "State"
+msgstr "Zoraditeľné"
+
+#: lib/class-wpp-property-import.php:3078
+msgid "Country"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3079
+msgid "Postal Code"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3080
+msgid "Latitude"
+msgstr "Zemepisná šírka"
+
+#: lib/class-wpp-property-import.php:3081
+msgid "Longitude"
+msgstr "Zemepisná dĺžka"
+
+#: lib/class-wpp-property-import.php:3084
+#, fuzzy
+msgid "WP-Property Attributes"
+msgstr "Prémiové doplnky WP-Property"
+
+#: lib/class-wpp-property-import.php:3085
+#: lib/class-wpp-property-import.php:3159
+msgid "Property Type"
+msgstr "Typ nehnuteľnosti"
+
+#: lib/class-wpp-property-import.php:3087
+#: lib/class-wpp-property-import.php:3160
+#, fuzzy
+msgid "Property Agent"
+msgstr "Slovné opisy nehnuteľností"
+
+#: lib/class-wpp-property-import.php:3089
+#: lib/class-wpp-property-import.php:3161
+#, fuzzy
+msgid "Global Property ID"
+msgstr "Nehnuteľnosť"
+
+#: lib/class-wpp-property-import.php:3090
+#: lib/class-wpp-property-import.php:3162
+#, fuzzy
+msgid "Display Address"
+msgstr "Adresa"
+
+#: lib/class-wpp-property-import.php:3102
+msgid "Delete Selected"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3103
+msgid "Add Row"
+msgstr "Pridať typ údaju"
+
+#: lib/class-wpp-property-import.php:3119
+msgid "Save Configuration"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3135
+msgid "Preview Import"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3136
+msgid "Process Full Import"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3192
+#, php-format
+msgid "Database connection failed. Error: %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3348
+msgid "Updating existing listing."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3361
+msgid ""
+"Attempted to update property, but wp_update_post() did not return an ID. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3365
+msgid "Creating new listing."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3381
+#, php-format
+msgid "Object import failed. Error: %1s."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3385
+msgid ""
+"Object import failed - no Property Title detected or set, a requirement to "
+"creating a property."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3389
+msgid ""
+"Object import failed.  Post cold not be created nor updated, and post_id was "
+"not found or created."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3547
+msgid "before revalidating process"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3550
+msgid ""
+"Address validation was skipped because address has already been validated."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3551
+msgid ""
+"Address validation has been skipped because address/coordinates is empty. "
+"Check your Attribute Map for 'Address' attribute."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3552
+msgid ""
+"Address validation has failed because the Google service has denied the "
+"request ( OVER QUERY LIMIT )."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3553
+#, fuzzy
+msgid "Address validation has failed."
+msgstr "Adresa nebola overená."
+
+#: lib/class-wpp-property-import.php:3554
+msgid "Address validation has been successfully completed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3559
+msgid "after revalidating process"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4093
+msgid "on disk using file_get_contents()"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4098
+msgid "Attempting to get image  ( "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4112
+#, php-format
+msgid "Unable to get image %1s using the %2s method."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4128
+#, php-format
+msgid "Image %1s corrupted - skipped."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4147
+#, php-format
+msgid ""
+"Image %1s downloaded, but image size failed quality standards - deleting."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4167
+#, php-format
+msgid "Unable to save image %1s."
+msgstr ""
+
+#: wp-property-importer.php:48
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-importer.php:56
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-importer.php:64
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-importer.php:68
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-importer.php:89
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""
+
+#~ msgid "Building"
+#~ msgstr "Budova"
+
+#~ msgid "Floorplan"
+#~ msgstr "Pôdorys"
+
+#~ msgid "Single Family Home"
+#~ msgstr "Rodinný dom"
+
+#~ msgid "Price"
+#~ msgstr "Cena"
+
+#~ msgid "Bedrooms"
+#~ msgstr "Spálne"
+
+#~ msgid "Bathrooms"
+#~ msgstr "Kúpeľne"
+
+#~ msgid "Deposit"
+#~ msgstr "Záloha"
+
+#~ msgid "Area"
+#~ msgstr "Plocha"
+
+#~ msgid "Phone Number"
+#~ msgstr "Tel. číslo"
+
+#~ msgid "Lease Terms"
+#~ msgstr "Podmienky nájmu"
+
+#~ msgid "Pet Policy"
+#~ msgstr "Pravidlá pre domáce zvieratá"
+
+#~ msgid "School"
+#~ msgstr "Škola"
+
+#~ msgid "Tagline"
+#~ msgstr "Slogan"
+
+#~ msgid "Studio"
+#~ msgstr "Štúdio"
+
+#~ msgid "The property type will determine the layout."
+#~ msgstr "Typ nehnuteľnosti určí dizajnové rozloženie stránky."
+
+#~ msgid ""
+#~ "Customize what appears in search results in the attribute section.  For "
+#~ "example: 1bed, 2baths, area varies slightly."
+#~ msgstr ""
+#~ "Vyberte, ktoré vlastnosti sa zobrazia medzi atribútmi výsledkov "
+#~ "vyhľadávania. Napríklad: 1 spálňa, 2 kúpeľne, tolerovaná malá odchýlka "
+#~ "plochy."
+
+#~ msgid "Will appear on overview pages and on top of every listing page."
+#~ msgstr ""
+#~ "Zobrazí sa v kompletnom prehľade nehnuteľností aj na vrchu každého "
+#~ "inzerátu."
+
+#, fuzzy
+#~ msgid "View "
+#~ msgstr "Zobraziť všetko"
+
+#~ msgid "For Sale"
+#~ msgstr "Na predaj"
+
+#~ msgid "For Rent"
+#~ msgstr "Na prenájom"
+
+#~ msgid "This is a rental property."
+#~ msgstr "Táto nehnuteľnosť je na prenájom."
+
+#~ msgid "This property is for sale."
+#~ msgstr "Táto nehnuteľnosť je na predaj."
+
+#~ msgid "Yes"
+#~ msgstr "Áno"
+
+#, fuzzy
+#~ msgid "Format phone number."
+#~ msgstr "Predvolené tel. číslo"
+
+#, fuzzy
+#~ msgid " sq. ft."
+#~ msgstr "m2"
+
+#, fuzzy
+#~ msgid "Address was validated by Google Maps."
+#~ msgstr ""
+#~ "<span class='description'>Adresa bola overená podľa Google Maps.</span>"
+
+#, fuzzy
+#~ msgid ""
+#~ "Address has not yet been validated, should be formatted as: street, city, "
+#~ "state, postal code, country. Locations are validated through Google Maps."
+#~ msgstr ""
+#~ "<span class='description'>Adresa zatiaľ nebola overená, vstupný formát by "
+#~ "mal byť: ulica, mesto, PSČ, krajina. Umiestnenia sú overované cez Google "
+#~ "Maps.</span>"
+
+#, fuzzy
+#~ msgid "Show"
+#~ msgstr "Slideshow"
+
+#~ msgid "Featured"
+#~ msgstr "Odporúčané"
+
+#, fuzzy
+#~ msgid "Add to Featured"
+#~ msgstr "Pridať novú nehnuteľnosť"
+
+#~ msgid "Processing..."
+#~ msgstr "Spracúvam..."
+
+#, fuzzy
+#~ msgid "Uploading"
+#~ msgstr "Načítavam"
+
+#, fuzzy
+#~ msgid "Upload Image"
+#~ msgstr "Všetky fotografie:"
+
+#~ msgid "Cancel"
+#~ msgstr "Zrušiť"
+
+#, fuzzy
+#~ msgid "Previous"
+#~ msgstr "Dozadu"
+
+#~ msgid "Next"
+#~ msgstr "Dopredu"
+
+#, fuzzy
+#~ msgid "Show %s entries"
+#~ msgstr "Zobraziť %s fotografií"
+
+#, fuzzy
+#~ msgid "No matching records found"
+#~ msgstr "Žiadne nehnuteľnosti neboli nájdené"
+
+#, fuzzy
+#~ msgid "Loading..."
+#~ msgstr "Načítavam"
+
+#, fuzzy
+#~ msgid "Search:"
+#~ msgstr "Hľadať"
+
+#, fuzzy
+#~ msgid "Display:"
+#~ msgstr "Zobrazenie"
+
+#~ msgid "Settings"
+#~ msgstr "Nastavenia"
+
+#, fuzzy
+#~ msgid "Enabled Options"
+#~ msgstr "Nastavenia"
+
+#~ msgid "Developer"
+#~ msgstr "Developer"
+
+#, fuzzy
+#~ msgid ""
+#~ "Property attributes are meant to be short entries that can be searchable, "
+#~ "on the back-end attributes will be displayed as single-line input boxes. "
+#~ "On the front-end they are displayed using a definitions list."
+#~ msgstr ""
+#~ "<p>Atribúty nehnuteľností sú krátke údaje, podľa ktorých sa dá vyhľadávať "
+#~ "vo formulári, v administrátorskom rozhraní sú zobrazené ako jednoriadkové "
+#~ "vstupné polia. Na webstránke sa zobrazia v prehľadovom zozname.</p>\n"
+#~ "\t\t\t\t<p>Označenie atribútu ako \"vyhľadávateľný\" ho pridá medzi "
+#~ "vyhľadávacie parametre do widgetu vyhľadávacieho formulára.</p>\n"
+#~ "\t\t\t\t<p>Pozor, atribúty pridané prostredníctvom funkcie add_filter() "
+#~ "sú nadradené - prepisujú nastavenia na tejto stránke.</p>"
+
+#, fuzzy
+#~ msgid "%1s Attributes"
+#~ msgstr "Skryté atribúty"
+
+#, fuzzy
+#~ msgid "Advanced Stats Settings:"
+#~ msgstr "Hlavné nastavenia"
+
+#~ msgid "Slug"
+#~ msgstr "Slug"
+
+#~ msgid "Main"
+#~ msgstr "Hlavné nastavenia"
+
+#, fuzzy
+#~ msgid "Add Group"
+#~ msgstr "Pridať typ údaju"
+
+#, fuzzy
+#~ msgid "Attribute Name"
+#~ msgstr "Názov doplnku"
+
+#, fuzzy
+#~ msgid "Search Input"
+#~ msgstr "Hľadať"
+
+#, fuzzy
+#~ msgid "Toggle Advanced Settings"
+#~ msgstr "Hlavné nastavenia"
+
+#, fuzzy
+#~ msgid "Sortable."
+#~ msgstr "Zoraditeľné"
+
+#, fuzzy
+#~ msgid "Searchable."
+#~ msgstr "Vyhľadávateľné"
+
+#, fuzzy
+#~ msgid "Admin Only."
+#~ msgstr "Administrátorské rozhranie"
+
+#, fuzzy
+#~ msgid "Show in \"All Properties\" table."
+#~ msgstr "Zobraziť dcérske nehnuteľnosti."
+
+#, fuzzy
+#~ msgid "Delete Attribute"
+#~ msgstr "Skryté atribúty"
+
+#, fuzzy
+#~ msgid "Range Dropdown"
+#~ msgstr "Rozsah (rozbaľovací zoznam)"
+
+#, fuzzy
+#~ msgid "Single Checkbox"
+#~ msgstr "Zaškrtávacie pole"
+
+#, fuzzy
+#~ msgid "Multi-Checkbox"
+#~ msgstr "Zaškrtávacie pole"
+
+#~ msgid ""
+#~ "Meta is used for descriptions,  on the back-end  meta fields will be "
+#~ "displayed as textareas.  On the front-end they will be displayed as "
+#~ "individual sections."
+#~ msgstr ""
+#~ "Cez tieto atribúty môžete vkladať slovné opisy nehnuteľností (názov "
+#~ "každého atribútu bude zároveň nadpisom textu). V administrátorskom "
+#~ "rozhraní sa tieto atribúty zobrazia ako vstupné textové polia, na "
+#~ "webstránke ako osobitné odseky."
+
+#, fuzzy
+#~ msgid "%1s Types"
+#~ msgstr "Typ"
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Hidden Attributes"
+#~ msgstr "Skryté atribúty"
+
+#, fuzzy
+#~ msgid "Inherit from Parent"
+#~ msgstr "Dedičnosť"
+
+#~ msgid "Searchable"
+#~ msgstr "Vyhľadávateľné"
+
+#~ msgid "Location Matters"
+#~ msgstr "Záleží na lokalite"
+
+#, fuzzy
+#~ msgid "Parent Selection"
+#~ msgstr "Nastavenia modulu Nehnuteľnosti"
+
+#~ msgid "Show Log."
+#~ msgstr "Zobraziť log."
+
+#~ msgid ""
+#~ "The log is always active, but the UI is hidden.  If enabled, it will be "
+#~ "visible in the admin sidebar."
+#~ msgstr ""
+#~ "Log je aktívny vždy, ale užívateľské rozhranie je vypnuté. Ak voľbu "
+#~ "aktivujete, log sa zobrazí v bočnom paneli administrátorského rozhrania."
+
+#~ msgid "Child Properties"
+#~ msgstr "Dcérske nehnuteľnosti"
+
+#~ msgid "Menu Sort Order:"
+#~ msgstr "Poradie v menu:"
+
+#, fuzzy
+#~ msgid "Display in featured listings."
+#~ msgstr "Zobraziť nehnuteľnosť medzi odporúčanými inzerátmi."
+
+#, fuzzy
+#~ msgid "Property updated. <a href=\"%s\">view property</a>"
+#~ msgstr ""
+#~ "Nehnuteľnosť bola aktualizovaná. <a href=\"%s\">Zobraziť nehnuteľnosť</a>"
+
+#~ msgid "Custom field updated."
+#~ msgstr "Vlastné pole bolo aktualizované."
+
+#~ msgid "Custom field deleted."
+#~ msgstr "Vlastné pole bolo zmazané."
+
+#~ msgid "Property updated."
+#~ msgstr "Nehnuteľnosť bola aktualizovaná."
+
+#~ msgid "Property restored to revision from %s"
+#~ msgstr "Nehnuteľnosť bola obnovená na revíziu z %s"
+
+#~ msgid "Property published. <a href=\"%s\">View property</a>"
+#~ msgstr ""
+#~ "Nehnuteľnosť bola publikovaná. <a href=\"%s\">Zobraziť nehnuteľnosť</a>"
+
+#~ msgid "Property saved."
+#~ msgstr "Nehnuteľnosť bola uložená."
+
+#~ msgid ""
+#~ "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+#~ msgstr ""
+#~ "Nehnuteľnosť bola odoslaná. <a target=\"_blank\" href=\"%s\">Zobraziť "
+#~ "nehnuteľnosť</a>"
+
+#~ msgid ""
+#~ "Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Preview property</a>"
+#~ msgstr ""
+#~ "Nehnuteľnosť naplánovaná na: <strong>%1$s</strong>. <a target=\"_blank\" "
+#~ "href=\"%2$s\">Zobraziť nehnuteľnosť</a>"
+
+#~ msgid ""
+#~ "Property draft updated. <a target=\"_blank\" href=\"%s\">Preview "
+#~ "property</a>"
+#~ msgstr ""
+#~ "Koncept nehnuteľnosti bol aktualizovaný. <a target=\"_blank\" href=\"%s"
+#~ "\">Zobraziť nehnuteľnosť</a>"
+
+#~ msgid "Title"
+#~ msgstr "Názov"
+
+#~ msgid "Overview"
+#~ msgstr "Prehľad"
+
+#~ msgid "Order"
+#~ msgstr "Poradie"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Náhľad"
+
+#~ msgid "General Information"
+#~ msgstr "Základné informácie"
+
+#~ msgid "Search"
+#~ msgstr "Hľadať"
+
+#~ msgid "Floor plans at location:"
+#~ msgstr "Pôdorysy v tejto lokalite:"
+
+#, fuzzy
+#~ msgid "View Properties"
+#~ msgstr "Zobraziť nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "Add/Edit Properties"
+#~ msgstr "Upraviť nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "Edit Other Properties"
+#~ msgstr "Ďalšie nehnuteľnosti"
+
+#, fuzzy
+#~ msgid "Delete Properties"
+#~ msgstr "Ďalšie nehnuteľnosti"
+
+#, fuzzy
+#~ msgid "Publish Properties"
+#~ msgstr "Nehnuteľnosti"
+
+#, fuzzy
+#~ msgid "Manage Settings"
+#~ msgstr "Hlavné nastavenia"
+
+#, fuzzy
+#~ msgid "Manage Taxonomies"
+#~ msgstr "Slideshow"
+
+#, fuzzy
+#~ msgid "For more information:"
+#~ msgstr "Základné informácie"
+
+#, fuzzy
+#~ msgid "An error occurred during API key request: <b>%s</b>."
+#~ msgstr "Vyskytla sa chyba pri overovaní prémiového doplnku: <b> %s </b>."
+
+#~ msgid "Properties"
+#~ msgstr "Nehnuteľnosti"
+
+#~ msgid "Property"
+#~ msgstr "Nehnuteľnosť"
+
+#~ msgid "Property: %s"
+#~ msgstr "Nehnuteľnosť: %s"
+
+#~ msgid "Features"
+#~ msgstr "Vybavenosť"
+
+#~ msgid "Feature"
+#~ msgstr "Odporučiť"
+
+#, fuzzy
+#~ msgid "Search Features"
+#~ msgstr "Vyhľadávať v nehnuteľnostiach"
+
+#, fuzzy
+#~ msgid "All Features"
+#~ msgstr "Vybavenosť"
+
+#, fuzzy
+#~ msgid "Parent Feature"
+#~ msgstr "Odporučiť"
+
+#, fuzzy
+#~ msgid "Parent Feature:"
+#~ msgstr "Odporučiť"
+
+#, fuzzy
+#~ msgid "Edit Feature"
+#~ msgstr "Odporučiť"
+
+#, fuzzy
+#~ msgid "Update Feature"
+#~ msgstr "Odporučiť"
+
+#, fuzzy
+#~ msgid "Add New Feature"
+#~ msgstr "Pridať novú nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "New Feature Name"
+#~ msgstr "Názov doplnku"
+
+#~ msgid "Community Features"
+#~ msgstr "Občianska vybavenosť"
+
+#, fuzzy
+#~ msgid "Community Feature"
+#~ msgstr "Občianska vybavenosť"
+
+#, fuzzy
+#~ msgid "Search Community Features"
+#~ msgstr "Občianska vybavenosť"
+
+#, fuzzy
+#~ msgid "All Community Features"
+#~ msgstr "Občianska vybavenosť"
+
+#, fuzzy
+#~ msgid "Parent Community Feature"
+#~ msgstr "Občianska vybavenosť"
+
+#, fuzzy
+#~ msgid "Parent Community Feature:"
+#~ msgstr "Občianska vybavenosť"
+
+#, fuzzy
+#~ msgid "Edit Community Feature"
+#~ msgstr "Občianska vybavenosť"
+
+#, fuzzy
+#~ msgid "Update Community Feature"
+#~ msgstr "Občianska vybavenosť"
+
+#, fuzzy
+#~ msgid "Add New Community Feature"
+#~ msgstr "Občianska vybavenosť"
+
+#, fuzzy
+#~ msgid "New Community Feature Name"
+#~ msgstr "Občianska vybavenosť"
+
+#, fuzzy
+#~ msgid "All Properties"
+#~ msgstr "Nehnuteľnosti"
+
+#, fuzzy
+#~ msgid "Add Property"
+#~ msgstr "Pridať novú nehnuteľnosť"
+
+#~ msgid "Add New Property"
+#~ msgstr "Pridať novú nehnuteľnosť"
+
+#~ msgid "Edit Property"
+#~ msgstr "Upraviť nehnuteľnosť"
+
+#~ msgid "New Property"
+#~ msgstr "Nová nehnuteľnosť"
+
+#~ msgid "View Property"
+#~ msgstr "Zobraziť nehnuteľnosť"
+
+#~ msgid "Search Properties"
+#~ msgstr "Vyhľadávať v nehnuteľnostiach"
+
+#~ msgid "No properties found"
+#~ msgstr "Žiadne nehnuteľnosti neboli nájdené"
+
+#~ msgid "No properties found in Trash"
+#~ msgstr "Žiadne nehnuteľnosti neboli v koši nájdené"
+
+#, fuzzy
+#~ msgid "Default"
+#~ msgstr "Zmazať"
+
+#~ msgid ""
+#~ "One of the folders that is necessary for downloading additional features "
+#~ "for the WP-Property plugin is not writable.  This means features cannot "
+#~ "be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-"
+#~ "property/core/premium</b> permissions to 0755."
+#~ msgstr ""
+#~ "Pre jeden z priečinkov nutných pre stiahnutie dodatočných funkcií pre WP-"
+#~ "Property nemáte zapisovacie práva, stiahnutie preto nie je možné. Pre "
+#~ "opravu je potrebné nastaviť prístupové práva priečinka <b>wp-content/"
+#~ "plugins/wp-property/core/premium</b> na 0755."
+
+#, fuzzy
+#~ msgid "Cache was successfully cleared"
+#~ msgstr "Aktualizácia úspešne dokončená."
+
+#, fuzzy
+#~ msgid ""
+#~ "An error occurred during premium feature check. API Key '<b>%s</b>' is "
+#~ "incorrect."
+#~ msgstr "Vyskytla sa chyba pri overovaní prémiového doplnku: <b> %s </b>."
+
+#, fuzzy
+#~ msgid "There are no available premium features."
+#~ msgstr "Vynútiť kontrolu povolených prémiových doplnkov."
+
+#, fuzzy
+#~ msgid "WP-Property Premium Feature: %s"
+#~ msgstr "Prémiové doplnky WP-Property"
+
+#~ msgid "Update ran successfully."
+#~ msgstr "Aktualizácia úspešne dokončená."
+
+#, fuzzy
+#~ msgid "You have the latest premium features versions."
+#~ msgstr "Vynútiť kontrolu povolených prémiových doplnkov."
+
+#, fuzzy
+#~ msgid "An error occurred during premium feature check: <b> %s </b>."
+#~ msgstr "Vyskytla sa chyba pri overovaní prémiového doplnku: <b> %s </b>."
+
+#~ msgid " sq ft."
+#~ msgstr "m2"
+
+#~ msgid "Get Directions"
+#~ msgstr "Ukázať cestu"
+
+#~ msgid "General Settings"
+#~ msgstr "Hlavné nastavenia"
+
+#, fuzzy
+#~ msgid "Login"
+#~ msgstr "Log"
+
+#~ msgid "Name"
+#~ msgstr "Meno"
+
+#, fuzzy
+#~ msgid "Date"
+#~ msgstr "Zmazať"
+
+#, fuzzy
+#~ msgid "Published"
+#~ msgstr "Fotografie v Slideshow:"
+
+#, fuzzy
+#~ msgid "Pending"
+#~ msgstr "Načítavam"
+
+#~ msgid "Any"
+#~ msgstr "Nepodstatné"
+
+#, fuzzy
+#~ msgid "Show all dates"
+#~ msgstr "Zobraziť %s fotografií"
+
+#, fuzzy
+#~ msgid "General Help"
+#~ msgstr "Hlavné nastavenia"
+
+#, fuzzy
+#~ msgid "Default Properties Page"
+#~ msgstr "Odporúčané nehnuteľnosti"
+
+#, fuzzy
+#~ msgid ""
+#~ "The default <b>property page</b> will be used to display property search "
+#~ "results, as well as be the base for property URLs. "
+#~ msgstr ""
+#~ "Stránka <b>Nehnuteľnosti</b> bude použitá na zobrazenie výsledkov "
+#~ "vyhľadávania, ako aj pre URL adresy nehnuteľností.  Napríklad, ak URL "
+#~ "adresa Vašej stránky Nehnuteľnosti "
+
+#~ msgid "Display"
+#~ msgstr "Zobrazenie"
+
+#, fuzzy
+#~ msgid "Premium Features"
+#~ msgstr "Prémiové doplnky WP-Property"
+
+#, fuzzy
+#~ msgid "Tab allows you to manage your WP-Property Premium Features"
+#~ msgstr "Prémiové doplnky WP-Property"
+
+#, fuzzy
+#~ msgid "More Help"
+#~ msgstr "Viac"
+
+#, fuzzy
+#~ msgid "published"
+#~ msgstr "Fotografie v Slideshow:"
+
+#, fuzzy
+#~ msgid "pending"
+#~ msgstr "Načítavam"
+
+#, fuzzy
+#~ msgid "Nothing found."
+#~ msgstr "Žiadne nehnuteľnosti neboli nájdené"
+
+#, fuzzy
+#~ msgid "New User account created."
+#~ msgstr "Tabuľka nebola vytvorená."
+
+#, fuzzy
+#~ msgid "Status Updated"
+#~ msgstr "Nehnuteľnosť bola aktualizovaná."
+
+#, fuzzy
+#~ msgid "or"
+#~ msgstr "Viac"
+
+#, fuzzy
+#~ msgid "No published properties."
+#~ msgstr "Zobraziť dcérske nehnuteľnosti."
+
+#~ msgid "Title:"
+#~ msgstr "Názov:"
+
+#, fuzzy
+#~ msgid "Attributes to Display:"
+#~ msgstr "Zobrazenie adresy"
+
+#~ msgid "%s at %s for %s"
+#~ msgstr "%s v %s za %s"
+
+#~ msgid "More"
+#~ msgstr "Viac"
+
+#~ msgid "View All"
+#~ msgstr "Zobraziť všetko"
+
+#, fuzzy
+#~ msgid ""
+#~ "The widget will show other properties that share a parent with the "
+#~ "currently displayed property."
+#~ msgstr ""
+#~ "Zobraziť dcérske nehnuteľnosti (ak existujú) pri aktuálnej nehnuteľnosti"
+
+#, fuzzy
+#~ msgid "Hide images."
+#~ msgstr "Skryť fotografie?"
+
+#~ msgid "Image Size:"
+#~ msgstr "Veľkosť fotografií:"
+
+#~ msgid "Listings to display?"
+#~ msgstr "Inzeráty na zobrazenie?"
+
+#, fuzzy
+#~ msgid "Select the attributes you want to display: "
+#~ msgstr "Vyberte štatistiky, ktoré chcete zobraziť"
+
+#~ msgid "Address Format:"
+#~ msgstr "Formát adresy:"
+
+#~ msgid "Show \"More\" link?"
+#~ msgstr "Zobraziť odkaz \"Viac\"?"
+
+#~ msgid "Show \"View All\" link?"
+#~ msgstr "Zobraziť odkaz \"Prezerať všetky\"?"
+
+#~ msgid "Show child properties (if any) for currently displayed property"
+#~ msgstr ""
+#~ "Zobraziť dcérske nehnuteľnosti (ak existujú) pri aktuálnej nehnuteľnosti"
+
+#~ msgid ""
+#~ "The widget will not be displayed if the currently viewed property has no "
+#~ "children."
+#~ msgstr ""
+#~ "Widget nebude zobrazený, ak prezeraná nehnuteľnosť nemá žiadne dcérske "
+#~ "nehnuteľnosti."
+
+#~ msgid "Hide Images?"
+#~ msgstr "Skryť fotografie?"
+
+#~ msgid "Select the stats you want to display"
+#~ msgstr "Vyberte štatistiky, ktoré chcete zobraziť"
+
+#, fuzzy
+#~ msgid "Featured %1s"
+#~ msgstr "Vybavenosť"
+
+#~ msgid "List of properties that were marked as Featured"
+#~ msgstr "Nehnuteľnosti, ktoré sme vybrali ako odporúčané"
+
+#~ msgid "Featured Properies"
+#~ msgstr "Odporúčané nehnuteľnosti"
+
+#~ msgid "List of the latest properties created on this site"
+#~ msgstr "Zoznam najnovšie pridaných nehnuteľností"
+
+#~ msgid "Latest Properties"
+#~ msgstr "Najnovšie pridané nehnuteľnosti"
+
+#~ msgid "Select stats you want to display"
+#~ msgstr "Vyberte štatistiky, ktoré chcete zobraziť"
+
+#, fuzzy
+#~ msgid "%1s Search"
+#~ msgstr "Hľadať"
+
+#, fuzzy
+#~ msgid "Display a highly customizable  %1s search form."
+#~ msgstr "Zobraziť detailne prispôsobiteľný vyhľadávací formulár"
+
+#~ msgid "No searchable property types were found."
+#~ msgstr "Žiadne vyhľadávateľné typy nehnuteľností neboli nájdené."
+
+#~ msgid "Property types to search:"
+#~ msgstr "Typy nehnuteľností, ktoré budú prehľadávané:"
+
+#~ msgid "Select the attributes you want to search."
+#~ msgstr "Vyberte atribúty, ktoré budú prehľadávané."
+
+#, fuzzy
+#~ msgid "All Attributes"
+#~ msgstr "Skryté atribúty"
+
+#, fuzzy
+#~ msgid "Grouped Attributes"
+#~ msgstr "Skryté atribúty"
+
+#, fuzzy
+#~ msgid "Default Sort Order"
+#~ msgstr "Poradie v menu:"
+
+#~ msgid "Items per page"
+#~ msgstr "Položiek na jednu stránku"
+
+#~ msgid "Search Properies"
+#~ msgstr "Vyhľadávať v nehnuteľnostiach"
+
+#~ msgid "List of all images attached to the current property"
+#~ msgstr "Zoznam všetkých fotografií pridaných k aktuálnej nehnuteľnosti"
+
+#, fuzzy
+#~ msgid "Large Image Size:"
+#~ msgstr "Veľkosť fotografií:"
+
+#~ msgid "Show %s Images"
+#~ msgstr "Zobraziť %s fotografií"
+
+#, fuzzy
+#~ msgid "Show Image Captions"
+#~ msgstr "Zobraziť %s fotografií"
+
+#, fuzzy
+#~ msgid "Show Image Descriptions."
+#~ msgstr "Popis"
+
+#, fuzzy
+#~ msgid "API Failure: %1s."
+#~ msgstr "Vybavenosť"
+
+#~ msgid "Log Started."
+#~ msgstr "Logovanie spustené."
+
+#, fuzzy
+#~ msgid "Log Page for"
+#~ msgstr "Stránka UD log pre"
+
+#~ msgid "Clear Log"
+#~ msgstr "Vymazať log"
+
+#~ msgid "Timestamp"
+#~ msgstr "Čas"
+
+#~ msgid "Event"
+#~ msgstr "Udalosť"
+
+#~ msgid "User"
+#~ msgstr "Užívateľ"
+
+#, fuzzy
+#~ msgid "Agent Shortcodes"
+#~ msgstr "Skratkový kód - hlavný zoznam"
+
+#, fuzzy
+#~ msgid "Show agent information:"
+#~ msgstr "Základné informácie"
+
+#, fuzzy
+#~ msgid "To query agent properties:"
+#~ msgstr "Zobraziť dcérske nehnuteľnosti."
+
+#, fuzzy
+#~ msgid "Shortcode Attribute Fields"
+#~ msgstr "Skryté atribúty"
+
+#, fuzzy
+#~ msgid "Agent Image Size"
+#~ msgstr "Veľkosť fotografií:"
+
+#, fuzzy
+#~ msgid "Agent Information"
+#~ msgstr "Základné informácie"
+
+#, fuzzy
+#~ msgid "Agent"
+#~ msgstr "Udalosť"
+
+#, fuzzy
+#~ msgid "No Properties."
+#~ msgstr "Nehnuteľnosti"
+
+#, fuzzy
+#~ msgid "Display Name"
+#~ msgstr "Zobrazenie"
+
+#, fuzzy
+#~ msgid "Username"
+#~ msgstr "Užívateľ"
+
+#, fuzzy
+#~ msgid "E-Mail"
+#~ msgstr "Hlavné nastavenia"
+
+#~ msgid "Options"
+#~ msgstr "Nastavenia"
+
+#, fuzzy
+#~ msgid "Associated Properties"
+#~ msgstr "Odporúčané nehnuteľnosti"
+
+#, fuzzy
+#~ msgid "Images"
+#~ msgstr "Všetky fotografie:"
+
+#, fuzzy
+#~ msgid "Agent Fields"
+#~ msgstr "Údajové polia"
+
+#, fuzzy
+#~ msgid "Agent updated."
+#~ msgstr "Nehnuteľnosť bola aktualizovaná."
+
+#, fuzzy
+#~ msgid "Agent created."
+#~ msgstr "Tabuľka nebola vytvorená."
+
+#, fuzzy
+#~ msgid "Edit Agent"
+#~ msgstr "Upraviť nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "No images found."
+#~ msgstr "Žiadne nehnuteľnosti neboli nájdené"
+
+#, fuzzy
+#~ msgid "Add Image"
+#~ msgstr "Všetky fotografie:"
+
+#, fuzzy
+#~ msgid "Edit posts"
+#~ msgstr "Upraviť nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "Edit pages"
+#~ msgstr "Upraviť nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "Publish pages"
+#~ msgstr "Fotografie v Slideshow:"
+
+#, fuzzy
+#~ msgid "Delete pages"
+#~ msgstr "Zmazať"
+
+#, fuzzy
+#~ msgid "Delete posts"
+#~ msgstr "Zmazať"
+
+#, fuzzy
+#~ msgid "Image"
+#~ msgstr "Veľkosť fotografií:"
+
+#, fuzzy
+#~ msgid "Email Address"
+#~ msgstr "Adresa"
+
+#, fuzzy
+#~ msgid "<b>Page Settings</b><br/>"
+#~ msgstr "Hlavné nastavenia"
+
+#, fuzzy
+#~ msgid "Name:"
+#~ msgstr "Meno"
+
+#, fuzzy
+#~ msgid "Page:"
+#~ msgstr "Materská nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "Page"
+#~ msgstr "Materská nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "Search..."
+#~ msgstr "Hľadať"
+
+#, fuzzy
+#~ msgid "Template Settings:"
+#~ msgstr "Hlavné nastavenia"
+
+#, fuzzy
+#~ msgid "Template:"
+#~ msgstr "Šablóna"
+
+#, fuzzy
+#~ msgid "Disable default CSS."
+#~ msgstr "Automaticky priložiť predvolené CSS."
+
+#~ msgid "Save Changes"
+#~ msgstr "Save Changes"
+
+#, fuzzy
+#~ msgid "Property Form"
+#~ msgstr "Nehnuteľnosť: %s"
+
+#, fuzzy
+#~ msgid "Subscription Plan"
+#~ msgstr "Popis"
+
+#, fuzzy
+#~ msgid "Templates"
+#~ msgstr "Šablóna"
+
+#, fuzzy
+#~ msgid "Overview Page"
+#~ msgstr "Prehľad"
+
+#, fuzzy
+#~ msgid "Edit Page"
+#~ msgstr "Upraviť nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "Administration"
+#~ msgstr "Nastavenia"
+
+#, fuzzy
+#~ msgid "Form Name"
+#~ msgstr "Na predaj"
+
+#, fuzzy
+#~ msgid "Shortcode"
+#~ msgstr "Skratkový kód - hlavný zoznam"
+
+#, fuzzy
+#~ msgid "General Options"
+#~ msgstr "Hlavné nastavenia"
+
+#, fuzzy
+#~ msgid "Subscriptions Plans"
+#~ msgstr "Popis"
+
+#, fuzzy
+#~ msgid "Propery Attributes"
+#~ msgstr "Prémiové doplnky WP-Property"
+
+#, fuzzy
+#~ msgid "Available shortcode attributes"
+#~ msgstr "Skryté atribúty"
+
+#, fuzzy
+#~ msgid "Just a name of Subscription plan."
+#~ msgstr "Popis"
+
+#, fuzzy
+#~ msgid "Duration"
+#~ msgstr "Popis"
+
+#, fuzzy
+#~ msgid "Is Featured"
+#~ msgstr "Odporúčané"
+
+#, fuzzy
+#~ msgid "Images Limit"
+#~ msgstr "Všetky fotografie:"
+
+#~ msgid "Description"
+#~ msgstr "Popis"
+
+#, fuzzy
+#~ msgid "Property Forms"
+#~ msgstr "Nehnuteľnosť: %s"
+
+#, fuzzy
+#~ msgid "Edit %s Page"
+#~ msgstr "Upraviť nehnuteľnosť"
+
+#~ msgid "Price:"
+#~ msgstr "Cena:"
+
+#, fuzzy
+#~ msgid "Duration:"
+#~ msgstr "Popis"
+
+#, fuzzy
+#~ msgid "Images:"
+#~ msgstr "Všetky fotografie:"
+
+#, fuzzy
+#~ msgid "Renewal of Subscription Plan"
+#~ msgstr "Popis"
+
+#, fuzzy
+#~ msgid "Options:"
+#~ msgstr "Nastavenia"
+
+#, fuzzy
+#~ msgid "day"
+#~ msgstr "Dnes"
+
+#, fuzzy
+#~ msgid "created"
+#~ msgstr "Odporúčané"
+
+#, fuzzy
+#~ msgid "updated"
+#~ msgstr "Nehnuteľnosť bola aktualizovaná."
+
+#, fuzzy
+#~ msgid "Publish Now"
+#~ msgstr "Slideshow"
+
+#, fuzzy
+#~ msgid "Add New %s"
+#~ msgstr "Pridať"
+
+#, fuzzy
+#~ msgid "Expired"
+#~ msgstr "Stránka s nehnuteľnosťami"
+
+#, fuzzy
+#~ msgid "Wrong FEPS form used"
+#~ msgstr "Nehnuteľnosť bola aktualizovaná."
+
+#, fuzzy
+#~ msgid "FEPS forms updated."
+#~ msgstr "Nehnuteľnosť bola aktualizovaná."
+
+#, fuzzy
+#~ msgid "%1$s Content"
+#~ msgstr "Názov"
+
+#, fuzzy
+#~ msgid "%1$s Type"
+#~ msgstr "Typ"
+
+#, fuzzy
+#~ msgid "Form Name:"
+#~ msgstr "Na predaj"
+
+#, fuzzy
+#~ msgid "Shortcode:"
+#~ msgstr "Skratkový kód - hlavný zoznam"
+
+#, fuzzy
+#~ msgid "General Options:"
+#~ msgstr "Hlavné nastavenia"
+
+#, fuzzy
+#~ msgid "%1$s Type:"
+#~ msgstr "Typ"
+
+#, fuzzy
+#~ msgid "Preview Thumbnail Size:"
+#~ msgstr "Veľkosť náhľadu:"
+
+#, fuzzy
+#~ msgid "%1$s Attributes"
+#~ msgstr "Skryté atribúty"
+
+#, fuzzy
+#~ msgid "Attribute"
+#~ msgstr "Skryté atribúty"
+
+#, fuzzy
+#~ msgid "%1$s Title"
+#~ msgstr "Názov"
+
+#, fuzzy
+#~ msgid "Required"
+#~ msgstr "Odporúčané"
+
+#, fuzzy
+#~ msgid "Subscription Plans"
+#~ msgstr "Popis"
+
+#, fuzzy
+#~ msgid "Actions"
+#~ msgstr "Nastavenia"
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "Skontrolovať aktualizácie"
+
+#, fuzzy
+#~ msgid "FEPS Information"
+#~ msgstr "Základné informácie"
+
+#, fuzzy
+#~ msgid "PDF Flyer Options"
+#~ msgstr "Nastavenia Supermap"
+
+#, fuzzy
+#~ msgid "Exclude %1s from PDF Lists"
+#~ msgstr "Vynechať nehnuteľnosť v supermape"
+
+#, fuzzy
+#~ msgid "Full Description"
+#~ msgstr "Popis"
+
+#, fuzzy
+#~ msgid "File Name:"
+#~ msgstr "Názov doplnku"
+
+#, fuzzy
+#~ msgid "Actions:"
+#~ msgstr "Nastavenia"
+
+#, fuzzy
+#~ msgid "View PDF"
+#~ msgstr "Zobraziť všetko"
+
+#, fuzzy
+#~ msgid "Properties per page:"
+#~ msgstr "Položiek na jednu stránku"
+
+#, fuzzy
+#~ msgid "Show child properties."
+#~ msgstr "Zobraziť dcérske nehnuteľnosti."
+
+#, fuzzy
+#~ msgid "Contact Information"
+#~ msgstr "Základné informácie"
+
+#, fuzzy
+#~ msgid "Refresh Page"
+#~ msgstr "Prehľad nehnuteľností"
+
+#, fuzzy
+#~ msgid "Location"
+#~ msgstr "Načítavam"
+
+#, fuzzy
+#~ msgid "Flyer Display"
+#~ msgstr "Zobrazenie"
+
+#, fuzzy
+#~ msgid "Description (if exists)"
+#~ msgstr "Popis"
+
+#, fuzzy
+#~ msgid "Location on Map (if exists)"
+#~ msgstr "Záleží na lokalite"
+
+#, fuzzy
+#~ msgid "Secondary Images"
+#~ msgstr "Fotografie v Slideshow:"
+
+#, fuzzy
+#~ msgid "Show %1$s images."
+#~ msgstr "Zobraziť %s fotografií"
+
+#, fuzzy
+#~ msgid "\" is generated."
+#~ msgstr "Tabuľka nebola vytvorená."
+
+#, fuzzy
+#~ msgid "Allows user to publish properties."
+#~ msgstr "Zobraziť dcérske nehnuteľnosti."
+
+#, fuzzy
+#~ msgid "WP Property Capabilities"
+#~ msgstr "WP-Property Slideshow"
+
+#, fuzzy
+#~ msgid "Singular Property:"
+#~ msgstr "Upraviť nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "Plural Property:"
+#~ msgstr "Nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "Overview Page Contextual Help:"
+#~ msgstr "Prehľad nehnuteľností"
+
+#, fuzzy
+#~ msgid "Add "
+#~ msgstr "Pridať"
+
+#, fuzzy
+#~ msgid "Add New "
+#~ msgstr "Pridať"
+
+#, fuzzy
+#~ msgid "Search "
+#~ msgstr "Hľadať"
+
+#, fuzzy
+#~ msgid "Manage Slideshow"
+#~ msgstr "Slideshow"
+
+#, fuzzy
+#~ msgid "Slide"
+#~ msgstr "Slideshow"
+
+#, fuzzy
+#~ msgid "Carousel Thumbnail Size:"
+#~ msgstr "Veľkosť náhľadu mapy:"
+
+#~ msgid "Slideshow Options"
+#~ msgstr "Nastavenia Slideshow"
+
+#~ msgid "Slideshow Images:"
+#~ msgstr "Fotografie v Slideshow:"
+
+#~ msgid "All Images:"
+#~ msgstr "Všetky fotografie:"
+
+#~ msgid "Slideshow"
+#~ msgstr "Slideshow"
+
+#~ msgid "Global Slideshow"
+#~ msgstr "Globálna Slideshow"
+
+#, fuzzy
+#~ msgid "Slideshow Size: "
+#~ msgstr "Fotografie v Slideshow:"
+
+#, fuzzy
+#~ msgid "Display in Global Slideshow Caption:"
+#~ msgstr "Globálna Slideshow"
+
+#, fuzzy
+#~ msgid "Title."
+#~ msgstr "Názov"
+
+#, fuzzy
+#~ msgid "Tagline."
+#~ msgstr "Slogan"
+
+#~ msgid "Single Listing Slideshow"
+#~ msgstr "Slideshow pre jednotlivé inzeráty"
+
+#~ msgid "Slideshow image size to be used for single property pages."
+#~ msgstr ""
+#~ "Veľkosť fotografií, ktorá bude použitá pre doplnok Slideshow "
+#~ "(fotogalérie)."
+
+#, fuzzy
+#~ msgid "Thumbnail Size"
+#~ msgstr "Veľkosť náhľadu:"
+
+#~ msgid ""
+#~ "This width is used on \"Slideshow\" page on the Property editing page to "
+#~ "display available images, this setting <b>does not</b> affect the actual "
+#~ "slideshow on the front-end."
+#~ msgstr ""
+#~ "Táto šírka bude použitá len na stránke \"Slideshow\" v editovacom "
+#~ "prostredí nehnuteľností a <b>neovplyvňuje</b> skutočnú veľkosť fotografií "
+#~ "vo verejne prístupnej fotogalérii na webe."
+
+#, fuzzy
+#~ msgid "Slices:"
+#~ msgstr "Slideshow"
+
+#~ msgid "Slideshow selection and order saved."
+#~ msgstr "Výber a poradie Slideshow boli uložené."
+
+#~ msgid "WP-Property Slideshow"
+#~ msgstr "WP-Property Slideshow"
+
+#~ msgid ""
+#~ "This slideshow can be integrated into your front-end pages by either "
+#~ "using the shortcode, or pasting PHP code into your theme."
+#~ msgstr ""
+#~ "Táto fotogaléria môže byť vložená do Vašich inzerátov buď použitím "
+#~ "shortcode (skratkového kódu), alebo vložením PHP kódu do Vašej WordPress "
+#~ "témy."
+
+#~ msgid ""
+#~ "Drag images from selection on the left to the selection on the right, and "
+#~ "then click save."
+#~ msgstr ""
+#~ "Potiahnite obrázky z výberu na ľavej strane do výberu na pravej strane a "
+#~ "stlačte Uložiť."
+
+#~ msgid ""
+#~ "This list gets all images from your media library that are over %s pixels "
+#~ "wide and %s pixels tall."
+#~ msgstr ""
+#~ "Tento zoznam zobrazí všetky obrázky z Vašej multimediálnej knižnice, "
+#~ "ktorých rozmer je aspoň %s pixelov na šírku a %s pixelov na výšku."
+
+#~ msgid "Save Selection and Order"
+#~ msgstr "Uložiť výber a poradie"
+
+#, fuzzy
+#~ msgid "Manage Supermap"
+#~ msgstr "Supermap"
+
+#~ msgid "Supermap"
+#~ msgstr "Supermap"
+
+#, fuzzy
+#~ msgid "Sidebar Attributes"
+#~ msgstr "Skryté atribúty"
+
+#, fuzzy
+#~ msgid ""
+#~ "Select the attributes you want to display in the left sidebar on the "
+#~ "supermap."
+#~ msgstr "Vyberte atribúty, ktoré budú prehľadávané."
+
+#, fuzzy
+#~ msgid "Supermap Sidebar Thumbnail:"
+#~ msgstr "Náhľad v bočnom paneli Supermap:"
+
+#~ msgid ""
+#~ "If you create a new image size, please be sure to regenerate all "
+#~ "thumbnails. "
+#~ msgstr ""
+#~ "Ak vytvoríte nový rozmer fotografií, nezabudnite prosím regenerovať "
+#~ "všetky náhľady."
+
+#, fuzzy
+#~ msgid "Default by Google"
+#~ msgstr "Predvolená šablóna"
+
+#~ msgid "Supermap Options"
+#~ msgstr "Nastavenia Supermap"
+
+#, fuzzy
+#~ msgid "Exclude property from Supermap"
+#~ msgstr "Vynechať nehnuteľnosť v supermape"
+
+#, fuzzy
+#~ msgid "Sorry, no %s found, try expanding your search."
+#~ msgstr ""
+#~ "Ľutujeme, žiadne nehnuteľnosti neboli nájdené - skúste zjednodušiť svoje "
+#~ "vyhľadávanie, alebo <a href=\"%s\">zobrazte kompletný zoznam</a>."
+
+#, fuzzy
+#~ msgid "No results found."
+#~ msgstr "Žiadne nehnuteľnosti neboli nájdené"
+
+#, fuzzy
+#~ msgid "Show More"
+#~ msgstr "Zobraziť odkaz \"Viac\"?"
+
+#~ msgid "Loading"
+#~ msgstr "Načítavam"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "Zobraziť všetko"
+
+#, fuzzy
+#~ msgid "Settings updated."
+#~ msgstr "Nehnuteľnosť bola aktualizovaná."
+
+#, fuzzy
+#~ msgid "Feature Updates"
+#~ msgstr "Názov doplnku"
+
+#~ msgid "Check Updates"
+#~ msgstr "Skontrolovať aktualizácie"
+
+#, fuzzy
+#~ msgid "Enable comments."
+#~ msgstr "Nastavenia"
+
+#, fuzzy
+#~ msgid "Default %1s Page"
+#~ msgstr "Predvolená šablóna"
+
+#~ msgid "Property (Default)"
+#~ msgstr "Nehnuteľnosti (predvolená)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Automatically overwrite this page's content with [property_overview]."
+#~ msgstr "Vždy prepísať obsah tejto stránky na [property_overview]."
+
+#, fuzzy
+#~ msgid ""
+#~ "When showing property search results, don't override the page content "
+#~ "with [property_overview]."
+#~ msgstr "Vždy prepísať obsah tejto stránky na [property_overview]."
+
+#~ msgid ""
+#~ "If checked, be sure to include [property_overview] somewhere in the "
+#~ "content, or no properties will be displayed."
+#~ msgstr ""
+#~ "Ak zaškrtnete, ubezpečte sa, že Vaša vlastná stránka obsahuje kód "
+#~ "[property_overview], inak sa nehnuteľnosti nezobrazia."
+
+#, fuzzy
+#~ msgid "Automatic Geolocation"
+#~ msgstr "Automaticky priložiť predvolené CSS."
+
+#, fuzzy
+#~ msgid "Attribute to use for physical addresses:"
+#~ msgstr "Atribút pre vkladanie adresy:"
+
+#, fuzzy
+#~ msgid "Load default CSS."
+#~ msgstr "Automaticky priložiť predvolené CSS."
+
+#~ msgid "Default Phone Number"
+#~ msgstr "Predvolené tel. číslo"
+
+#, fuzzy
+#~ msgid ""
+#~ "Phone number to use when a %1s-specific phone number is not specified."
+#~ msgstr ""
+#~ "Telefónne číslo použité v prípade, že nie je zadané žiadne číslo pre "
+#~ "konkrétny inzerát."
+
+#~ msgid "Image Sizes"
+#~ msgstr "Rozmery fotografií"
+
+#~ msgid "Image sizes used throughout the plugin."
+#~ msgstr "Veľkosti fotografií použité v celom module."
+
+#~ msgid "Width"
+#~ msgstr "Šírka"
+
+#~ msgid "Height"
+#~ msgstr "Výška"
+
+#~ msgid "Overview Shortcode"
+#~ msgstr "Skratkový kód - hlavný zoznam"
+
+#, fuzzy
+#~ msgid ""
+#~ "These are the settings for the [property_overview] shortcode.  The "
+#~ "shortcode displays a list of all building / root %1s.<br />The display "
+#~ "settings may be edited further by customizing the <b>wp-content/plugins/"
+#~ "wp-properties/templates/property-overview.php</b> file.  To avoid losing "
+#~ "your changes during updates, create a <b>property-overview.php</b> file "
+#~ "in your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Toto sú nastavenia skratkového kódu [property_overview], ktorý zobrazuje "
+#~ "zoznam všetkých nehnuteľností.<br />\n"
+#~ "\t\t\t\tMožnosti zobrazenia môžete dodatočne upraviť prispôsobením súboru "
+#~ "<b>wp-content/plugins/wp-properties/templates/property-overview.php</b>. "
+#~ "Aby ste počas aktualizovania modulu WP-Property neprišli o tieto úpravy, "
+#~ "vytvorte si vo Vašom priečinku so šablónou súbor <b>property-overview."
+#~ "php</b>, ktorý bude automaticky načítaný."
+
+#~ msgid "Thumbnail size:"
+#~ msgstr "Rozmer náhľadu:"
+
+#, fuzzy
+#~ msgid "Show children %1s."
+#~ msgstr "Zobraziť dcérske nehnuteľnosti."
+
+#, fuzzy
+#~ msgid "Show larger image of %1s when image is clicked using fancybox."
+#~ msgstr ""
+#~ "Zobraziť väčšu fotografiu nehnuteľnosti, ak je otváraná cez rozhranie "
+#~ "FancyBox."
+
+#, fuzzy
+#~ msgid "Show pagination on bottom of results."
+#~ msgstr "Rozdelenie výsledkov vyhľadávania na menšie stránky"
+
+#, fuzzy
+#~ msgid "%1s Page"
+#~ msgstr "Upraviť nehnuteľnosť"
+
+#, fuzzy
+#~ msgid ""
+#~ "The display settings may be edited further by customizing the <b>wp-"
+#~ "content/plugins/wp-properties/templates/property.php</b> file.  To avoid "
+#~ "losing your changes during updates, create a <b>property.php</b> file in "
+#~ "your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Toto sú nastavenia skratkového kódu [property_overview], ktorý zobrazuje "
+#~ "zoznam všetkých nehnuteľností.<br />\n"
+#~ "\t\t\t\tMožnosti zobrazenia môžete dodatočne upraviť prispôsobením súboru "
+#~ "<b>wp-content/plugins/wp-properties/templates/property.php</b>. Aby ste "
+#~ "počas aktualizovania modulu WP-Property neprišli o tieto úpravy, vytvorte "
+#~ "si vo Vašom priečinku so šablónou súbor <b>property.php</b>, ktorý bude "
+#~ "automaticky načítaný."
+
+#~ msgid "Google Maps"
+#~ msgstr "Google Maps"
+
+#~ msgid "Map Thumbnail Size:"
+#~ msgstr "Veľkosť náhľadu mapy:"
+
+#~ msgid "Map Zoom Level:"
+#~ msgstr "Stupeň priblíženia mapy:"
+
+#, fuzzy
+#~ msgid "Default is \"%s\""
+#~ msgstr "Predvolená šablóna"
+
+#, fuzzy
+#~ msgid "Show %1s Title"
+#~ msgstr "Názov"
+
+#, fuzzy
+#~ msgid "Show Directions Link"
+#~ msgstr "Ukázať cestu"
+
+#~ msgid "Address Display"
+#~ msgstr "Zobrazenie adresy"
+
+#~ msgid "Available tags:"
+#~ msgstr "Dostupné značky:"
+
+#, fuzzy
+#~ msgid "Currency & Numbers"
+#~ msgstr "Symbol meny."
+
+#~ msgid "Currency symbol."
+#~ msgstr "Symbol meny."
+
+#, fuzzy
+#~ msgid "Currency symbol placement:"
+#~ msgstr "Symbol meny."
+
+#, fuzzy
+#~ msgid "Before number"
+#~ msgstr "Tel. číslo"
+
+#, fuzzy
+#~ msgid "Admin Settings"
+#~ msgstr "Nastavenia"
+
+#~ msgid "Disable plugin."
+#~ msgstr "Deaktivovať modul."
+
+#~ msgid "Feature installed, using version"
+#~ msgstr "Doplnok nainštalovaný, verzia"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please visit <a href=\"%s\">UsabilityDynamics.com</a> to purchase this "
+#~ "feature."
+#~ msgstr ""
+#~ "Pre zakúpenie tohto doplnku prosím navštívte <a href=\"%s"
+#~ "\">TwinCitiesTech.com</a>."
+
+#~ msgid "Revalidate"
+#~ msgstr "Znovu overiť"
+
+#, fuzzy
+#~ msgid ""
+#~ "Enter in the ID of the %1s you want to look up, and the class will be "
+#~ "displayed below."
+#~ msgstr ""
+#~ "Zadajte ID nehnuteľnosti, ktorú chcete vyhadať, na zobrazenie jej kódu."
+
+#~ msgid "Lookup"
+#~ msgstr "Vyhľadať"
+
+#, fuzzy
+#~ msgid "Get %1s image data."
+#~ msgstr "Nehnuteľnosť bola uložená."
+
+#~ msgid ""
+#~ "Look up the <b>$wp_properties</b> global settings array.  This array "
+#~ "stores all the default settings, which are overwritten by database "
+#~ "settings, and custom filters."
+#~ msgstr ""
+#~ "Prezrite si hlavné pole nastavení - <b>$wp_properties</b>, v ktorom sú "
+#~ "uložené všetky predvolené nastavenia, prepísané databázovými nastaveniami "
+#~ "a vlastnými filtrami."
+
+#~ msgid "Show $wp_properties"
+#~ msgstr "Zobraziť $wp_properties"
+
+#, fuzzy
+#~ msgid "Clear Cache"
+#~ msgstr "Vymazať log"
+
+#~ msgid "(no parent)"
+#~ msgstr "(žiadna materská nehnuteľnosť)"
+
+#~ msgid "Parent"
+#~ msgstr "Materská nehnuteľnosť"
+
+#~ msgid "Template"
+#~ msgstr "Šablóna"
+
+#~ msgid "Page Template"
+#~ msgstr "Šablóna stránky"
+
+#~ msgid "Default Template"
+#~ msgstr "Predvolená šablóna"
+
+#~ msgid "Need help? Use the Help tab in the upper right of your screen."
+#~ msgstr ""
+#~ "Potrebujete pomoc? Použite záložku Pomoc v pravom hornom rohu obrazovky."
+
+#~ msgid "Falls Under"
+#~ msgstr "Patrí pod"
+
+#, fuzzy
+#~ msgid "ID of parent property"
+#~ msgstr "Táto nehnuteľnosť je na prenájom."
+
+#~ msgid "Editing %s is disabled, it may be inherited."
+#~ msgstr ""
+#~ "Kategória %s je pre tento typ nehnuteľnosti neaktívna, môže byť ale "
+#~ "zdedená od materskej nehnuteľnosti."
+
+#, fuzzy
+#~ msgid "%1s Type"
+#~ msgstr "Typ"
+
+#~ msgid "Return to building page."
+#~ msgstr "Vrátiť sa na stránku nehnuteľnosti"
+
+#, fuzzy
+#~ msgid "Change"
+#~ msgstr "Save Changes"
+
+#, fuzzy
+#~ msgid "Featured:"
+#~ msgstr "Odporúčané"
+
+#, fuzzy
+#~ msgid "Current Balance"
+#~ msgstr "Mena"
+
+#, fuzzy
+#~ msgid "Publish the current %s"
+#~ msgstr "Nehnuteľnosti"
+
+#, fuzzy
+#~ msgid "Add Credits"
+#~ msgstr "Pridať novú nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "Choose Subscription Plan"
+#~ msgstr "Popis"
+
+#, fuzzy
+#~ msgid "Subscription Plan Options"
+#~ msgstr "Popis"
+
+#, fuzzy
+#~ msgid "Information"
+#~ msgstr "Základné informácie"
+
+#, fuzzy
+#~ msgid "Expiry Date"
+#~ msgstr "Stránka s nehnuteľnosťami"
+
+#~ msgid ""
+#~ "Sorry, we could not find what you were looking for.  Since you are here, "
+#~ "take a look at some of our properties."
+#~ msgstr ""
+#~ "Ľutujeme, nenašli sa žiadne relevantné výsledky. Môžete však namiesto "
+#~ "toho skúsiť nazrieť do zoznamu nehnuteľností."
+
+#~ msgid ""
+#~ "Sorry, no properties found - try expanding your search, or <a href=\"%s"
+#~ "\">view all</a>."
+#~ msgstr ""
+#~ "Ľutujeme, žiadne nehnuteľnosti neboli nájdené - skúste zjednodušiť svoje "
+#~ "vyhľadávanie, alebo <a href=\"%s\">zobrazte kompletný zoznam</a>."
+
+#~ msgid "Prev"
+#~ msgstr "Dozadu"
+
+#, fuzzy
+#~ msgid "Other"
+#~ msgstr "Poradie"
+
+#, fuzzy
+#~ msgid "Cancel reply"
+#~ msgstr "Zrušiť"
+
+#, fuzzy
+#~ msgid "Payment Method"
+#~ msgstr "Nastavenia modulu Nehnuteľnosti"
+
+#~ msgid "Version"
+#~ msgstr "Verzia"
+
+#~ msgid "Property Page"
+#~ msgstr "Stránka s nehnuteľnosťami"
+
+#, fuzzy
+#~ msgid "Show Property Title"
+#~ msgstr "Typ nehnuteľnosti"
+
+#, fuzzy
+#~ msgid "Property ID:"
+#~ msgstr "Nehnuteľnosť"
+
+#~ msgid "Interested?"
+#~ msgstr "Máte záujem?"
+
+#, fuzzy
+#~ msgid "Read Property"
+#~ msgstr "Nová nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "Delete Property"
+#~ msgstr "Nová nehnuteľnosť"
+
+#, fuzzy
+#~ msgid "Read Private Properties"
+#~ msgstr "Odporúčané nehnuteľnosti"
+
+#~ msgid "Feature Name"
+#~ msgstr "Názov doplnku"
+
+#~ msgid "WP-Property Premium Feature: %s updated to version %s from %s."
+#~ msgstr ""
+#~ "Prémiový doplnok WP-Property: %s bol aktualizovaný na verziu %s z %s."
+
+#~ msgid "WP-Property Premium Feature: %s updated to version %s."
+#~ msgstr "Prémiový doplnok WP-Property: %s bol aktualizovaný na verziu %s."
+
+#, fuzzy
+#~ msgid "General"
+#~ msgstr "Hlavné nastavenia"
+
+#, fuzzy
+#~ msgid "Slug:"
+#~ msgstr "Slug"
+
+#, fuzzy
+#~ msgid "Property Status:"
+#~ msgstr "Štatistické údaje"
+
+#, fuzzy
+#~ msgid "Property Type:"
+#~ msgstr "Typ nehnuteľnosti"
+
+#~ msgid "Cache table does not exist. Attempting to create:"
+#~ msgstr "Cache tabuľka neexistuje. Pokúšam sa o vytvorenie:"
+
+#~ msgid "SQL Ran: %s , verifying existance."
+#~ msgstr "SQL Ran: %s , overujem existenciu."
+
+#~ msgid "Table created and exists."
+#~ msgstr "Tabuľka bola vytvorená a existuje."
+
+#~ msgid "Table not created."
+#~ msgstr "Tabuľka nebola vytvorená."
+
+#~ msgid "Tomorrow "
+#~ msgstr "Zajtra"
+
+#~ msgid "Yesterday "
+#~ msgstr "Včera"
+
+#~ msgid " in %d days "
+#~ msgstr "o %d dní"
+
+#~ msgid "%d days ago"
+#~ msgstr "pred %d dňami"
+
+#~ msgid "Automatically logged failed JSON response: "
+#~ msgstr "Automaticky zaznamenaná neúspešná JSON odpoveď:"
+
+#~ msgid "%s hours ago"
+#~ msgstr "pred %s hodinami"
+
+#~ msgid "%s minutes ago"
+#~ msgstr "pred %s minútami"
+
+#~ msgid "Address Attribute"
+#~ msgstr "Atribút Adresa"
+
+#~ msgid "and localize for:"
+#~ msgstr "Lokalizovať pre:"
+
+#~ msgid "Order By:"
+#~ msgstr "Zoradiť podľa:"
+
+#~ msgid "Bed(s):"
+#~ msgstr "Lôžka:"
+
+#~ msgid "Bath(s):"
+#~ msgstr "Kúpeľne:"
+
+#~ msgid "Square Ft:"
+#~ msgstr "Štvorc. metre:"
+
+#~ msgid ""
+#~ "Set Coordinates Manually (When unchecked the coordinates will be set (and "
+#~ "validated) by Google Maps)"
+#~ msgstr ""
+#~ "Nastaviť súradnice manuálne (ak nezaškrtnete, súradnice budú nastavené a "
+#~ "overené podľa Google Maps)"
+
+#~ msgid ""
+#~ "Be advised, since you don't have permalinks enabled, you must visit the "
+#~ "<a href=\"%s\">Settings Page</a> and set a custom property overview page."
+#~ msgstr ""
+#~ "Pozor, keďže nemáte zapnuté trvalé odkazy (permalinks), musíte isť do <a "
+#~ "href=\"%s\">Nastavení</a> a zadať vlastnú stránku prehľadu nehnuteľností."
+
+#~ msgid ""
+#~ "By default, your property overview will be displayed on the <a href=\"%s"
+#~ "\">%s</a> page. You may change the overview page on the <a href=\"%s"
+#~ "\">Settings Page</a>"
+#~ msgstr ""
+#~ "Pri pôvodnom nastavení budú Vaše nehnuteľnosti zobrazené na stránke <a "
+#~ "href=\"%s\">%s</a>. Zmeniť tento parameter môžete na stránke <a href=\"%s"
+#~ "\">Nastavenia</a>"
+
+#~ msgid "Thank you for installing WP-Property!"
+#~ msgstr "Ďakujeme Vám za inštaláciu WP-Property!"
+
+#~ msgid ""
+#~ "<p>You may also visit <a href=\"http://twincitiestech.com/plugins/wp-"
+#~ "property/\">TwinCitiesTech.com</a> for more information, and <a href="
+#~ "\"http://twincitiestech.com/plugins/wp-property/screencasts/"
+#~ "\">screencasts</a>.</div>"
+#~ msgstr ""
+#~ "<p>Pre viac informácií môžete navštíviť <a href=\"http://twincitiestech."
+#~ "com/plugins/wp-property/\">TwinCitiesTech.com</a> a <a href=\"http://"
+#~ "twincitiestech.com/plugins/wp-property/screencasts/\">stránku "
+#~ "videonávodov</a>.</div>"
+
+#~ msgid "Validated:"
+#~ msgstr "Overené:"
+
+#~ msgid "view on map"
+#~ msgstr "zobraziť na mape"
+
+#~ msgid "Show other properties (if any) with the same Parent"
+#~ msgstr ""
+#~ "Zobraziť ďalšie nehnuteľnosti (ak existujú) zdieľajúce tú istú materskú "
+#~ "nehnuteľnosť"
+
+#~ msgid "Do you want to use pagination?"
+#~ msgstr ""
+#~ "Chcete použiť rozdelenie výsledkov na menšie stránky po zvolený počet "
+#~ "položiek?"
+
+#~ msgid ""
+#~ "City is an automatically created attribute once the address is validated."
+#~ msgstr "Akonáhle je adresa overená, atribút Mesto je automaticky vytvorený."
+
+#~ msgid "Popup Image Size:"
+#~ msgstr "Veľkosť fotografie pri priblížení:"
+
+#~ msgid "Thumbnail Width"
+#~ msgstr "Šírka náhľadu"
+
+#~ msgid ""
+#~ "To include the slideshow into the content of a property, use the "
+#~ "following shortcode: [property_slideshow]"
+#~ msgstr ""
+#~ "Na vloženie Slideshow do obsahu inzerátu použite nasledujúci shortcode "
+#~ "(skratkový kód): [property_slideshow]"
+
+#~ msgid ""
+#~ "Developers: Include the slideshow in your PHP files by using "
+#~ "global_slideshow(); for the global slideshow and "
+#~ "property_slideshow(property_id); for property-specific slideshows. "
+#~ msgstr ""
+#~ "Vývojári: Slideshow môžete do Vašich PHP súborov vložiť použitím "
+#~ "global_slideshow(); pre globálnu fotogalériu a "
+#~ "property_slideshow(property_id); pre špecifické fotogalérie nehnuteľností."
+
+#~ msgid "Disable slideshow on property page."
+#~ msgstr "Vypnúť fotogalérie na stránke nehnuteľností."
+
+#~ msgid "Some Slideshow Options"
+#~ msgstr "Niektoré nastavenia Slideshow"
+
+#~ msgid "WPP Slideshow"
+#~ msgstr "WPP Slideshow"
+
+#~ msgid "WPP Slideshow with options"
+#~ msgstr "WPP Slideshow s nastaveniami"
+
+#~ msgid "Property Types"
+#~ msgstr "Typy nehnuteľností"
+
+#~ msgid ""
+#~ "<p>Create new property types using this menu. </p>\n"
+#~ "\t\t\t\t<p>The <b>slug</b> is automatically created from the title and is "
+#~ "used in the back-end.  It is also used for template selection, example: "
+#~ "floorplan will look for a template called property-floorplan.php in your "
+#~ "theme folder, or default to property.php if nothing is found.</p>\n"
+#~ "\t\t\t\t<p>If <b>Searchable</b> is checked then the property will be "
+#~ "loaded for search, and available on the property search widget.</p>\n"
+#~ "\t\t\t\t<p>If <b>Location Matters</b> is checked, then an address field "
+#~ "will be displayed for the property, and validated against Google Maps "
+#~ "API.  Additionally, the property will be displayed on the SuperMap, if "
+#~ "the feature is installed.</p>\n"
+#~ "\t\t\t\t<p><b>Hidden Attributes</b> determine which attributes are not "
+#~ "applicable to the given property type, and will be grayed out in the back-"
+#~ "end.</p>\n"
+#~ "\t\t\t\t<p><b>Inheritance</b> determines which attributes should be "
+#~ "automatically inherited from the parent property.</p>"
+#~ msgstr ""
+#~ "<p>Použitím tohto menu môžete vytvoriť nové typy nehnuteľností. </p>\n"
+#~ "\t\t\t\t<p>Tzv. <b>slug</b> je automaticky vygenerovaný z názvu a použitý "
+#~ "v administrátorskom rozhraní.  Aplikuje sa tiež pri výbere vzhľadovej "
+#~ "šablóny, napríklad: typ nehnuteľnosti kancelarskepriestory sa najprv "
+#~ "pokúsi v priečinku Vašej témy vyhľadať šablónu property-"
+#~ "kancelarskepriestory.php, a až ak tá neexistuje, použije štandardnú "
+#~ "šablónu rozloženia property.php.</p>\n"
+#~ "\t\t\t\t<p>Ak zaškrtnete pole <b>Vyhľadávateľné</b>, nehnuteľnosť bude "
+#~ "povolená vo vyhľadávaní a dostupná na widgete Vyhľadávanie nehnuteľností."
+#~ "</p>\n"
+#~ "\t\t\t\t<p>Ak zaškrtnete pole <b>Záleží na lokalite</b>, pri "
+#~ "nehnuteľnosti sa zobrazí pole pre vloženie adresy overovanej cez Google "
+#~ "Maps API.  Dodatočne bude nehnuteľnosť zobrazená v Supermap, ak je tento "
+#~ "doplnok nainštalovaný.</p>\n"
+#~ "\t\t\t\t<p>Parameter <b>Skryté atribúty</b> určuje atribúty, ktoré sú pre "
+#~ "daný typ nehnuteľnosti irelevantné a budú preto v tejto kategórii "
+#~ "neaktívne - nevložiteľné v administrátorskom rozhraní.</p>\n"
+#~ "\t\t\t\t<p>Parameter <b>Dedičnosť</b> určuje, ktoré atribúty zdedí "
+#~ "dcérska nehnuteľnosť od materskej automaticky.</p>"
+
+#~ msgid "input"
+#~ msgstr "Vstupné pole"
+
+#~ msgid "range (input)"
+#~ msgstr "Rozsah (2 vstupné polia)"
+
+#~ msgid "dropdown"
+#~ msgstr "Rozbaľovací zoznam"
+
+#~ msgid "Show common values."
+#~ msgstr "Zobraziť najpoužívanejšie hodnoty."
+
+#~ msgid "Cancel."
+#~ msgstr "Zrušiť."
+
+#~ msgid "Plugins"
+#~ msgstr "Moduly"
+
+#~ msgid "Troubleshooting"
+#~ msgstr "Riešenie problémov"
+
+#~ msgid "View list of available shortcodes."
+#~ msgstr "Zobraziť zoznam dostupných skratkových kódov (shortcodes)."
+
+#~ msgid "These are the general display settings"
+#~ msgstr "Toto sú hlavné nastavenia zobrazenia."
+
+#~ msgid ""
+#~ "After adding/removing image size, be sure to <a href=\"%s\">regenerate "
+#~ "thumbnails</a> using the Regenerate Thumbnails plugin."
+#~ msgstr ""
+#~ "Po pridaní/odstránení veľkosti fotografie nezabudnite <a href=\"%s"
+#~ "\">znovu vygenerovať náhľady</a> použitím generovacieho modulu."
+
+#~ msgid ""
+#~ "We strongly recommend to <a href=\"http://wordpress.org/extend/plugins/"
+#~ "regenerate-thumbnails/\">Regenerate Thumbnails</a> plugin by Viper007Bond."
+#~ msgstr ""
+#~ "Na tento účel odporúčame modul <a href=\"http://wordpress.org/extend/"
+#~ "plugins/regenerate-thumbnails/\">Regenerate Thumbnails</a> od autora "
+#~ "Viper007Bond."
+
+#~ msgid ""
+#~ "Display larger image, or slideshow, at the top of the property listing."
+#~ msgstr ""
+#~ "Zobraziť väčšiu fotografiu alebo fotogalériu na vrchu stránky "
+#~ "nehnuteľnosti"
+
+#~ msgid "These settings are for the main property page on the back-end."
+#~ msgstr ""
+#~ "Tieto nastavenia sú pre hlavný zoznam nehnuteľností v administrátorskom "
+#~ "rozhraní."
+
+#~ msgid ""
+#~ "Premium features will become available shortly, we are still waiting on "
+#~ "more feedback on the core of the plugin."
+#~ msgstr ""
+#~ "Prémiové doplnky budú sprístupnené čoskoro, zatiaľ stále čakáme na spätnú "
+#~ "väzbu ohľadne základného modulu."
+
+#~ msgid "[learn more]"
+#~ msgstr "[dozvedieť sa viac]"

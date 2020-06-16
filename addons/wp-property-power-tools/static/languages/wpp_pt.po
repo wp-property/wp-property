@@ -1,0 +1,275 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-29 13:20+0200\n"
+"PO-Revision-Date: 2014-09-29 13:20+0200\n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: Usability Dynamics, Inc\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_x;_n\n"
+"X-Poedit-Basepath: ../..\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-power-tools.php:91
+msgid "Manage Capabilities"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:92
+msgid "Manage White Label"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:134 lib/class-wpp-power-tools.php:170
+#: lib/class-wpp-power-tools.php:191
+msgid "Capabilities"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:135
+msgid "View Properties"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:136
+msgid ""
+"Adds Properties menu and user can see the list of all available properties."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:137
+msgid ""
+"It is required capability to manage WP-Property. All cababilities depend on "
+"this one."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:138
+msgid ""
+"For example, user can not edit property if he has capability 'Add/Edit "
+"Property', but doesn't have 'View Properties' capability."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:139
+msgid "Add/Edit Properties"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:140
+msgid ""
+"Allows to add new property and edit properties where user is author. To edit "
+"properties where user is not author ( which he didn't create ), user must "
+"have 'Edit Other Properties' ( see below )."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:141
+msgid "Edit Other Properties"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:142
+msgid ""
+"Allows to edit properties where user is not author ( which he didn't create )"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:143
+msgid "Delete Properties"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:144
+msgid ""
+"Allows user to delete properties. This capability depends on 'Add/Edit "
+"Properties' and 'Edit Other Properties'."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:145
+msgid ""
+"User can delete properties where he is author if he has 'Add/Edit "
+"Properties' capability"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:146
+msgid ""
+"User can delete properties where he is not author if he has 'Edit Other "
+"Properties' capability"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:147
+msgid "Publish Properties"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:148
+msgid "Allows user to publish properties."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:149
+msgid "Manage Settings"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:150
+msgid ""
+"Allows user to manage WP-Property settings. Adds 'Settings' page to menu."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:151
+msgid "Manage Taxonomies"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:152
+msgid ""
+"Allows user to manage taxonomies such as <b>Feature</b> and <b>Community "
+"Feature</b>"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:153
+msgid "Other manage capabilities"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:154
+msgid ""
+"Other capabilities belong to premium features settings and functionality. "
+"User who has no capability to manage specific premium feature will not be "
+"able to manage it."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:185
+msgid "WP Property Capabilities"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:186
+#, php-format
+msgid ""
+"User Roles capabilities management. See more details what every capability "
+"does %shere%s."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:190
+msgid "Role"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:203
+msgid "Administrator has all capabilities which can not be managed."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:261
+msgid "Taxonomies"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:265
+#, php-format
+msgid "Disable %1$s taxonomy."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:294
+msgid "White Label"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:299
+msgid "Labels"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:300
+msgid "Contextual Menus"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:306
+msgid ""
+"Use this menu to rename WP-Property components, for example if you are "
+"listing \"Real Estate\", or \"Vehicles\"."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:310
+msgid "Singular Property:"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:312
+msgid "Default is \"Property\", will change the label in the navigation menus."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:316
+msgid "Plural Property:"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:318
+msgid ""
+"Default is \"Properties\", will change the label in the navigation menus."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:325
+msgid ""
+"Contextual menus are displayed when a user clicks the \"Help\" tab in the "
+"top right corner of a page."
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:330
+msgid "Overview Page Contextual Help:"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:349
+msgid "Properties"
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:379
+msgid "Add "
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:380
+msgid "Add New "
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:381
+msgid "Edit "
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:382
+msgid "New "
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:383
+msgid "View "
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:395
+msgid "All "
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:396
+msgid "Search "
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:397
+msgid "No "
+msgstr ""
+
+#: lib/class-wpp-power-tools.php:397
+msgid " found."
+msgstr ""
+
+#: wp-property-power-tools.php:43
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-power-tools.php:51
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-power-tools.php:59
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-power-tools.php:63
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-power-tools.php:84
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""

@@ -1,0 +1,263 @@
+[
+    {
+        "name": "usabilitydynamics/wp-tax-post-binding",
+        "version": "2.0.5",
+        "version_normalized": "2.0.5.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/wp-tax-post-binding",
+            "reference": "2.0.5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/wp-tax-post-binding/archive/2.0.5.zip",
+            "reference": "2.0.5",
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "installer-name": "wp-tax-post-binding"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "license": [
+            "GPLv2"
+        ],
+        "authors": [
+            {
+                "name": "Crowd Favorite",
+                "homepage": "http://crowdfavorite.com"
+            },
+            {
+                "name": "UsabilityDynamics",
+                "email": "maxim.peshkov@usabilitydynamics.com",
+                "homepage": "https://www.usabilitydynamics.com/",
+                "role": "Developer"
+            }
+        ],
+        "description": "A WordPress plugin that provides extended functionality for taxonomies such as post meta and featured image through creating a custom post type and associating it to that taxonomy.",
+        "keywords": [
+            "taxonomy",
+            "term",
+            "wordpress",
+            "wordpress-plugin"
+        ]
+    },
+    {
+        "name": "composer/installers",
+        "version": "v1.2.0",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/composer/installers.git",
+            "reference": "d78064c68299743e0161004f2de3a0204e33b804"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/composer/installers/zipball/d78064c68299743e0161004f2de3a0204e33b804",
+            "reference": "d78064c68299743e0161004f2de3a0204e33b804",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "^1.0"
+        },
+        "replace": {
+            "roundcube/plugin-installer": "*",
+            "shama/baton": "*"
+        },
+        "require-dev": {
+            "composer/composer": "1.0.*@dev",
+            "phpunit/phpunit": "4.1.*"
+        },
+        "time": "2016-08-13T20:53:52+00:00",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "Composer\\Installers\\Plugin",
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Composer\\Installers\\": "src/Composer/Installers"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Kyle Robinson Young",
+                "email": "kyle@dontkry.com",
+                "homepage": "https://github.com/shama"
+            }
+        ],
+        "description": "A multi-framework Composer library installer",
+        "homepage": "https://composer.github.io/installers/",
+        "keywords": [
+            "Craft",
+            "Dolibarr",
+            "Hurad",
+            "ImageCMS",
+            "MODX Evo",
+            "Mautic",
+            "OXID",
+            "Plentymarkets",
+            "RadPHP",
+            "SMF",
+            "Thelia",
+            "WolfCMS",
+            "agl",
+            "aimeos",
+            "annotatecms",
+            "attogram",
+            "bitrix",
+            "cakephp",
+            "chef",
+            "cockpit",
+            "codeigniter",
+            "concrete5",
+            "croogo",
+            "dokuwiki",
+            "drupal",
+            "elgg",
+            "expressionengine",
+            "fuelphp",
+            "grav",
+            "installer",
+            "joomla",
+            "kohana",
+            "laravel",
+            "lithium",
+            "magento",
+            "mako",
+            "mediawiki",
+            "modulework",
+            "moodle",
+            "phpbb",
+            "piwik",
+            "ppi",
+            "puppet",
+            "reindex",
+            "roundcube",
+            "shopware",
+            "silverstripe",
+            "symfony",
+            "typo3",
+            "wordpress",
+            "yawik",
+            "zend",
+            "zikula"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/lib-utility",
+        "version": "0.3.7",
+        "version_normalized": "0.3.7.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-utility",
+            "reference": "0.3.7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-utility/archive/0.3.7.zip",
+            "reference": "0.3.7",
+            "shasum": null
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.1.*"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-utility",
+            "component": {
+                "name": "utility",
+                "scripts": [
+                    "scripts/*.js"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Andy Potanin",
+                "email": "andy.potanin@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Maxim Peshkov",
+                "email": "maxim.peshkov@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Anton Korotkov",
+                "email": "anton.korotkov@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            }
+        ],
+        "keywords": [
+            "job",
+            "process",
+            "utility"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/lib-wp-bootstrap",
+        "version": "1.2.3",
+        "version_normalized": "1.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
+            "reference": "1.2.3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.3.zip",
+            "reference": "1.2.3",
+            "shasum": null
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "~0.3"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-wp-bootstrap"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Wordpress bootstrap library created by UsabilityDynamics",
+        "homepage": "https://github.com/UsabilityDynamics/lib-wp-bootstrap",
+        "keywords": [
+            "wordpress"
+        ]
+    }
+]

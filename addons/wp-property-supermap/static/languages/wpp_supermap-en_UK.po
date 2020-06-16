@@ -1,0 +1,229 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-29 13:50+0200\n"
+"PO-Revision-Date: 2014-09-29 13:50+0200\n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: \n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-supermap.php:70
+msgid "Manage Supermap"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:84
+msgid "Supermap"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:115
+msgid "Example Area"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:157
+msgid "Sidebar Attributes"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:159
+msgid ""
+"Select the attributes you want to display in the left sidebar on the "
+"supermap."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:173
+msgid ""
+"Display \"View Property\" link in the left sidebar. It directs user to "
+"Property Page."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:179
+msgid "Supermap Sidebar Thumbnail:"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:184
+msgid "Do not show a property thumbnail in sidebar."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:187
+msgid ""
+"If you create a new image size, please be sure to regenerate all thumbnails. "
+msgstr ""
+
+#: lib/class-wpp-supermap.php:192
+msgid "Map Markers:"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:198
+msgid "Image"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:199 lib/class-wpp-supermap.php:341
+msgid "Name"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:200
+msgid "Slug"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:227 lib/class-wpp-supermap.php:374
+msgid "Delete"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:235
+msgid "Add Marker"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:335
+msgid "Map Areas:"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:337
+msgid ""
+"<p>Map areas let you draw our areas on the map, such as neighborhoods.</"
+"p><p>Just add to shortcode attribute <b>show_areas=all</b> to draw all areas "
+"on the map. Also You can use area's slugs to show them on the map, like as "
+"<b>show_areas=new_york,washington</b>. Please, use coordinates in this "
+"format: <b>(82.72, -37.79)(69.54, -57.48)(68.93, -18.63).</b></p><p><i>This "
+"is an experimental feature, you may not want to use it on a live site.  "
+"We're eager to hear your feedback regarding this feature and the "
+"capabilities that would be useful to you.</i></p>"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:342
+msgid "Coordinates"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:343
+msgid "Fill Color"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:344
+msgid "Opacity"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:345
+msgid "Stoke Color"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:346
+msgid "Hover Color"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:382
+msgid "Add Row"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:424 lib/class-wpp-supermap.php:675
+msgid "Map Marker"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:426 lib/class-wpp-supermap.php:677
+msgid "Default by Google"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:493
+msgid "File should be an image"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:546
+msgid "Looks like, Image can not be uploaded."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:624
+msgid "Supermap Options"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:637
+msgid "Exclude property from Supermap"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:828 lib/class-wpp-supermap.php:1170
+msgid "Options"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:840
+#, php-format
+msgid "Element cannot be rendered, missing %1s script."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:928
+#, php-format
+msgid "Sorry, no %s found, try expanding your search."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:1052 lib/class-wpp-supermap.php:1641
+msgid "Yes"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:1068 lib/class-wpp-supermap.php:1656
+msgid "View Property"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:1131
+msgid "No results found."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:1677
+msgid "Show More"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:1678
+msgid "Loading..."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:1790
+msgid "Loading"
+msgstr ""
+
+#: wp-property-supermap.php:43
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-supermap.php:51
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-supermap.php:59
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-supermap.php:63
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-supermap.php:84
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""
+
+#~ msgid "Inquiry"
+#~ msgstr "Enquiry"
+
+#~ msgid "Inquire About"
+#~ msgstr "Enquire About"
+
+#, fuzzy
+#~ msgid "Inquiry About:"
+#~ msgstr "Enquire About"
+
+#, fuzzy
+#~ msgid "Inquiry message:"
+#~ msgstr "Enquiry"

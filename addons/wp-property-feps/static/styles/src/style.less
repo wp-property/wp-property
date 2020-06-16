@@ -1,0 +1,167 @@
+.wpp_feps_submit_form{
+	>span{
+		display:block;
+		float:left;
+	}
+
+	.wpp-feps-loadingdots{
+		display:none;
+		padding-top: 4px;
+		.dot {
+			background: #000;
+			float: left;
+			height: 8px;
+			width: 8px;
+			margin-left: 4px;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 5px;
+			opacity: 0;
+		}
+	}
+	&.disabled .wpp-feps-loadingdots{
+		display:block;
+	}
+}
+.rwmb-date-wrapper, .rwmb-datetime-wrapper, .rwmb-time-wrapper{
+	width:200px;
+}
+.rwmb-color-wrapper .wp-picker-active{
+	.wp-picker-holder {
+		position: absolute;
+		z-index: 999;
+	}
+	.wp-picker-input-wrap {
+		.wp-color-picker,  .wp-picker-clear{
+			display:inline-block !important;
+		}
+		.wp-picker-clear{
+			background: #f7f7f7;
+			border: 1px solid #ccc;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+			color: #555;
+			font-size: 11px;
+			line-height: 22px;
+			padding: 0 6px;
+			text-align: center;
+			color: #23282d;
+			border-color: #a0a5aa;
+			border-left: 1px solid #999;
+			&:hover {
+				color: #23282d;
+				border-color: #a0a5aa;
+				border-left: 1px solid #999;
+			}
+		}
+	}
+}
+.rwmb-taxonomy-wrapper .tagsdiv {
+	.newtag{
+		outline: 0;
+		-webkit-transition: 50ms border-color ease-in-out;
+		transition: 50ms border-color ease-in-out;
+		position: relative;
+		width: 180px;
+		float: left;
+		height: 28px;
+		margin: 0 4px 0 0;
+		padding-top:0px;
+		padding-bottom:0px;
+	}
+	.tagadd {
+		display: inline-block;
+		text-decoration: none;
+		font-size: 13px;
+		line-height: 26px;
+		height: 28px;
+		margin: 0;
+		padding: 0 10px 1px;
+		cursor: pointer;
+		border-width: 1px;
+		border-style: solid;
+		-webkit-appearance: none;
+		-webkit-border-radius: 3px;
+		border-radius: 3px;
+		white-space: nowrap;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		color: #555;
+		border-color: #ccc;
+		background: #f7f7f7;
+		-webkit-box-shadow: 0 1px 0 #ccc;
+		box-shadow: 0 1px 0 #ccc;
+		vertical-align: top;
+	}
+}
+.tagchecklist {
+	margin-left: 14px;
+	font-size: 12px;
+	overflow: auto;
+	>span {
+		margin-right: 25px;
+		font-size: 13px;
+		line-height: 1.8em;
+		cursor: default;
+		max-width: 100%;
+		text-overflow: ellipsis;
+		& , a{
+			display: block;
+			float: left;
+			overflow: hidden;
+		}
+		a.ntdelbutton {
+			margin: 1px 0 0 -17px;
+			cursor: pointer;
+			width: 20px;
+			height: 20px;
+			text-indent: 0;
+			position: absolute;
+
+			&:before {
+				background: 0 0;
+				color: #b4b9be;
+				content: "\f153";
+				display: block;
+				font: 400 16px/20px dashicons;
+				speak: none;
+				height: 20px;
+				text-align: center;
+				width: 20px;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale
+			}
+		}
+	}
+}
+.ui-autocomplete.ui-menu.ui-widget-content {
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: default;
+	z-index:9999;
+	max-height: 333px;
+	overflow-y: scroll;
+	border: 1px solid #aaaaaa;
+	background: #ffffff ;
+	color: #222222;
+
+	.ui-menu-item {
+		position: relative;
+		margin: 0;
+		padding: 3px 1em 3px .4em;
+		cursor: pointer;
+		min-height: 0; /* support: IE7 */
+		/* support: IE10, see #8844 */
+		list-style-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
+
+		&:hover{
+			border: 1px solid #999999;
+			background: #dadada url("images/ui-bg_glass_75_dadada_1x400.png") 50% 50% repeat-x;
+			font-weight: normal;
+			color: #212121;
+		}
+	}
+
+}

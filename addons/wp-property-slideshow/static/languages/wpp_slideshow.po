@@ -1,0 +1,251 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-29 13:36+0200\n"
+"PO-Revision-Date: 2014-09-29 13:36+0200\n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: Usability Dynamics, Inc\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_x;_n\n"
+"X-Poedit-Basepath: ../..\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-slideshow.php:90
+msgid "Manage Slideshow"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:249
+msgid "Display as carousel gallery."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:253
+msgid "Gallery transition type:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:255
+msgid "Crossfade betweens images"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:256
+msgid "Fade into background color"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:257
+msgid "Pulse"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:258
+msgid "Slide"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:259
+msgid "Fadeslide"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:265
+msgid "Crop images."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:270
+msgid "Enforce minimum image width."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:274
+msgid "Carousel Thumbnail Size:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:475
+msgid "Slideshow Options"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:773 lib/class-wpp-slideshow.php:1447
+msgid "Slideshow Images:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:795 lib/class-wpp-slideshow.php:1461
+msgid "All Images:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:850
+msgid "Image is too small."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:901 lib/class-wpp-slideshow.php:914
+msgid "Slideshow"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:979 lib/class-wpp-slideshow.php:1155
+#: lib/class-wpp-slideshow.php:1412
+msgid "Global Slideshow"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:984
+msgid "Clicking on an image will open up the property its attached to."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:988
+msgid "Show property title and tagline in slideshow."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:992
+msgid "Slideshow Size: "
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1009
+#, php-format
+msgid ""
+"The global slideshow will look for all images that are over the specified "
+"size.  Add images to the global slideshow <a href=\"%1$s\">here</a>. The "
+"built-in sizes, such as <b>medium</b> and <b>large</b> may not work because "
+"WordPress does not crop them during resizing, resulting in artbitrary "
+"heights. "
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1019
+msgid "Display in Global Slideshow Caption:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1023
+msgid "Title."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1024
+msgid "Excerpt."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1025
+msgid "Tagline."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1031
+msgid "Single Listing Slideshow"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1054
+msgid "Slideshow image size to be used for single property pages."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1058
+msgid "Show pagination buttons in slideshow."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1067
+msgid "Thumbnail Size"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1072
+msgid ""
+"This width is used on \"Slideshow\" page on the Property editing page to "
+"display available images, this setting <b>does not</b> affect the actual "
+"slideshow on the front-end."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1078
+msgid "Settings"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1083
+msgid "Effect:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1089
+msgid "Effect that will be used to change from one image to the next."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1093
+msgid "Slices:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1099
+msgid ""
+"If the transition includes slices, this number determines how many slices to "
+"cut the image up into during transitions."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1103
+msgid "Animation Speed:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1109
+msgid "How quickly the transition should happen, in miliseconds."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1113
+msgid "Pause Time:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1119
+msgid "The pause time between transitions."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1196
+msgid "Slideshow selection and order saved."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1365
+msgid "Loading..."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1429
+msgid "WP-Property Slideshow"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1430
+msgid ""
+"This slideshow can be integrated into your front-end pages by either using "
+"the shortcode, or pasting PHP code into your theme."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1433
+msgid ""
+"Drag images from selection on the left to the selection on the right, and "
+"then click save."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1434
+#, php-format
+msgid ""
+"This list gets all images from your media library that are over %s pixels "
+"wide and %s pixels tall."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1440
+msgid "Save Selection and Order"
+msgstr ""
+
+#: wp-property-slideshow.php:43
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-slideshow.php:51
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-slideshow.php:59
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-slideshow.php:63
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-slideshow.php:84
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""

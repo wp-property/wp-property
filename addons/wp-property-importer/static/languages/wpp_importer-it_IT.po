@@ -1,0 +1,3133 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-29 12:32+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: \n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-property-import.php:125
+#, fuzzy
+msgid "Property Title"
+msgstr "Tipologia di immobile"
+
+#: lib/class-wpp-property-import.php:126
+#, fuzzy
+msgid "Property Content"
+msgstr "Informazioni aggiuntive annuncio"
+
+#: lib/class-wpp-property-import.php:127
+#, fuzzy
+msgid "Property Excerpt"
+msgstr "Informazioni aggiuntive annuncio"
+
+#: lib/class-wpp-property-import.php:128
+#, fuzzy
+msgid "Property Status"
+msgstr "Statistiche annuncio"
+
+#: lib/class-wpp-property-import.php:129
+#, fuzzy
+msgid "Property Order"
+msgstr "Ricerca immobili"
+
+#: lib/class-wpp-property-import.php:130
+#, fuzzy
+msgid "Property Date"
+msgstr "Pagina annuncio"
+
+#: lib/class-wpp-property-import.php:131
+#, fuzzy
+msgid "Property Author"
+msgstr "Informazioni aggiuntive annuncio"
+
+#: lib/class-wpp-property-import.php:449
+#, php-format
+msgid ""
+"Attachment referenced in database not found on disk: (%1s), removing "
+"reference from DB."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:462
+#: lib/class-wpp-property-import.php:3890
+#, php-format
+msgid "Image directory %1s could not be created."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:476
+msgid "System (Primary) Key is not found."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:495
+msgid "Could not save image saved image - empty file returned by server."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:514
+#, php-format
+msgid "Image %1s downloaded, but appears corrupt - deleting."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:622
+#: lib/class-wpp-property-import.php:3320
+msgid "Pending Image Downloads"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:801
+#, fuzzy
+msgid "Starting "
+msgstr "Impostazioni"
+
+#: lib/class-wpp-property-import.php:802
+#, php-format
+msgid "on process start. Memory limit: %s. Before %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:850
+msgid "Manage XML Importer"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:915
+msgid "Ignore updates on XMLI process"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:918
+msgid "M j, Y @ G:i"
+msgstr "M j, Y @ G:i"
+
+#: lib/class-wpp-property-import.php:921
+#, php-format
+msgid "Imported on: <b>%1$s</b> <a href=\"%2$s\" title=\"%3$s\">Importer</a>"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1026
+msgid "ago"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1036
+#, fuzzy
+msgid "Last Import"
+msgstr "Nuova proprietà"
+
+#: lib/class-wpp-property-import.php:1062
+#: lib/class-wpp-property-import.php:1064
+msgid "none"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1064
+#, php-format
+msgid "Memory Usage: %s. Difference: %s. Details: %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1123
+#: lib/class-wpp-property-import.php:1128
+#: lib/class-wpp-property-import.php:1152
+#: lib/class-wpp-property-import.php:1154
+#, fuzzy
+msgid "Time: "
+msgstr "Titolo:"
+
+#: lib/class-wpp-property-import.php:1200
+#, php-format
+msgid ""
+"There are (%1s) unattached files related to listings that were imported "
+"using the XML Importer."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1201
+msgid "Delete Unattached Files"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1207
+msgid "Look up XML import history."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1208
+msgid "Show XML Import History"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1210
+msgid "Show last 500 imported items in descending order."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1285
+msgid "( Imported )"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1294
+msgid "Schedule coult not be imported."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1350
+msgid "Importer"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1418
+#, php-format
+msgid ""
+"Starting Cron-Initiated Import: %1s. Using XML Importer %2s and WP-Property "
+"%3s."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1477
+msgid "XML Importer Help"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1478
+msgid ""
+"By default, xPath are executed in the xPath input boxes. <a target=\"_blank"
+"\" href=\"http://www.w3schools.com/xsl/xpath_syntax.asp\">W3 Schools XPath "
+"Syntax</a>. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1479
+msgid ""
+"Example: get all the option values that have a label for \"height\": "
+"<b>options/option[label = \"Height\"]/value </b>"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1481
+msgid ""
+"<b>Property Resource Class:</b> Typically this is used to specify the type "
+"of property listing, such as Commercial or Residential, the naming "
+"convention varies depending on RETS provider. Use <a href=\"http://rets."
+"usabilitydynamics.com/\" target=\"_blank\">rets.usabilitydynamics.com</a> to "
+"determine. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1482
+msgid ""
+"<b>Dynamic DMQL Query Tags:</b> The DMQL query for RETS supports the "
+"following dynamic tags: [this_month], [next_month] and [previous_month]. "
+"Example to get all listings modified within the current month: "
+"(DATE_MODIFIED=[this_month]+); to get all the listings modified before this "
+"month: (DATE_MODIFIED=[previous_month]-). These examples assume that the "
+"SystemName for the modified data is DATE_MODIFIED, which will actually vary "
+"from one MLS provider to the next.</p>"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1484
+msgid "XPath Query to Property Elements"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1485
+msgid ""
+"In order to begin importing data, you must first identify what the "
+"\"repeating property element\" is in the XML file.  Typically this would be "
+"something like <b>property</b> or <b>object</b>, where the corresponding "
+"XPath rules would be <b>//property</b> or <b>//object</b>, respectively. The "
+"easiest way to identify it is to look through the feed for a repeating "
+"pattern. The query must select the elements in order to cycle through them "
+"and apply the XPath Rules in the Attribute Map section. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1487
+msgid "Import Limits"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1488
+msgid ""
+"There are two type of limits - the first limit will stop the import after a "
+"certain number of objects have been processed before they are checked for "
+"quality, while the second limit will stop only after the specified number of "
+"objects has actually passsed quality inspection, and have been saved to the "
+"database."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1489
+msgid ""
+"Limiting imports works well when you are running incremental imports.  A "
+"limit of <b>10</b> will stop after 10 properties have been created.  The "
+"importer does not count properties that were skipped during import or that "
+"already exist in the system - properties that already exist will be marked "
+"as updated."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1491
+msgid "Running the Import"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1492
+msgid ""
+"There are two ways to process an import, using the browser, or by setting up "
+"a cron job.  Using the browser is easy, and viable when you have a small "
+"feed, or a very good server. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1493
+msgid ""
+"When working with larger feeds, or for the purposes of automation, it is "
+"advisable to execute your import script using a cron job.  For every "
+"\"Import Schedule\" you create, a <b>Cron Command</b> field will be "
+"displayed, followed by the command you would need to enter into the cron job "
+"builder, for the import schedule to be executed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1495
+msgid "Function: free_text"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1496
+msgid ""
+"To insert some common text, use the <b>free_text</b> command, like so: "
+"<b>free_text: Imported from Some List</b> and the text will be kept as is."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1498
+msgid "Function: uppercase"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1499
+msgid ""
+"To convert all alphabetic characters to uppercase, use the <b>uppercase</b> "
+"command, like so: <b>uppercase: {xpath}</b>."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1501
+msgid "Function: concat"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1502
+msgid ""
+"You can also combine free text wtih xPath rule results using <b>concat</b>, "
+"example: <b>concat:http://sourcesite.com/images/'Photo7'</b> will result in "
+"the text between the quotes being executed as xPath rules, while text "
+"outside of quotes being inserted as it is."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1503
+msgid ""
+"You can also use concat to combine multiple xPath rules together, for "
+"example you can create the Property Title from a few XML attributes: "
+"<b>concat:'bedrooms' bedroom house in 'location/city'</b>"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1505
+msgid "Function: concat_list"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1506
+msgid ""
+"Example: <b>concat_list root_path=\"options/option\" label_path=\"label\" "
+"value_path=\"value\" concat_character=\":\" paste_together=\",\"</b>  will "
+"look for options/option path, then grab child \"value\" and \"label\" paths "
+"and import them as a single line. If \"paste_together\" specified then all "
+"collected \"label / value\" pairs will be joined in single-line value using "
+"\"paste_together\"."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1546
+#, php-format
+msgid "Found %1s properties from database that were imported from this feed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1556
+#, php-format
+msgid "Property ID %1s has been deleted. Total deleted so far: %2s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1723
+#, php-format
+msgid ""
+"Deleted %1s unattached property files that were created from an XML import."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1729
+msgid "Something went wrong, did not delete any unattached images."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1755
+#, php-format
+msgid "All %1$s properties have been deleted in %2$s seconds."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1757
+#, php-format
+msgid ""
+"Although %1$s properties were found, only %2$s have been deleted in %3$s "
+"seconds."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1761
+msgid "Something went wrong, no properties were found to delete."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1812
+#, php-format
+msgid "before %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1814
+#: lib/class-wpp-property-import.php:2227
+#, fuzzy, php-format
+msgid "after %s"
+msgstr "Altro %1s"
+
+#: lib/class-wpp-property-import.php:1824
+msgid "before XML object initialization from response (string)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1828
+msgid "after XML object initialization"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1835
+#, php-format
+msgid "Created temporary directory for import: %1$s."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1858
+#, php-format
+msgid "Could not load XML Object from raw data: %1s."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1860
+msgid ""
+"Could not load XML Object from raw data - empty result returned. Check your "
+"settings."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1862
+msgid ""
+"Could not load XML Object from raw data. Looks like data has errors and can "
+"not be converted to XML Object."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1872
+msgid "before getting the list of XML objects (listings)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1880
+msgid "after getting the list of XML objects (listings)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1895
+msgid "Data loaded from cache."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1899
+msgid " object(s) found with XPath Rule: "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1900
+#, php-format
+msgid ""
+"%1s objects identified: <a href=\"%2s\" target=\"_blank\">download processed "
+"XML file</a> ( %3s )."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1902
+msgid "Root Element XPath Rule: "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1905
+msgid "No Root Element XPath Rule, displaying most root elements."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1908
+#, fuzzy
+msgid "No objects found."
+msgstr "Nessuna proprietà trovata"
+
+#: lib/class-wpp-property-import.php:1917
+#, php-format
+msgid "Preview truncated: showing: %1s of full feed:"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:1920
+#, fuzzy, php-format
+msgid "Available tags in source: %1s"
+msgstr "Tag disponibili:"
+
+#: lib/class-wpp-property-import.php:1971
+msgid "before parsing the list of XML objects (listings)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2131
+#, php-format
+msgid "XPath rules for object #%1d processed with %2d extracted attributes."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2137
+#, php-format
+msgid "Stopping import due to specified pre-QC limit of %1d."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2143
+msgid "after parsing the list of XML objects (listings)"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2160
+#, php-format
+msgid "Importing %1s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2189
+#: lib/class-wpp-property-import.php:2190
+#, php-format
+msgid "Deleted all ( %1s ) properties that originated from this feed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2192
+#: lib/class-wpp-property-import.php:2268
+msgid ""
+"Did not find any properties that have been imported from this feed to remove."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2197
+msgid "Did not remove any old properties."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2211
+#, php-format
+msgid "Stopping import due to specified post-QC limit of %1d."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2252
+#, php-format
+msgid "Object cycle done. Completed %1d cycles."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2265
+#: lib/class-wpp-property-import.php:2266
+#, php-format
+msgid "Deleted ( %1s ) properties that are no longer in the feed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2279
+msgid "Deleted the import temporary directory."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2281
+msgid "Import temporary directory is not been created"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2281
+msgid "Unable to delete the import temporary directory"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2444
+msgid "Schedule imported from file."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2500
+#, fuzzy
+msgid "Property Importer"
+msgstr "Tipologia di immobile"
+
+#: lib/class-wpp-property-import.php:2501
+msgid "Add New"
+msgstr "Inserisci nuovo annuncio"
+
+#: lib/class-wpp-property-import.php:2529
+#, fuzzy
+msgid "Sort by:"
+msgstr "Ordinato per"
+
+#: lib/class-wpp-property-import.php:2530
+msgid "Last Run"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2531
+#, fuzzy
+msgid "Created Properties"
+msgstr "Annunci in vetrina"
+
+#: lib/class-wpp-property-import.php:2532
+#, fuzzy
+msgid "Updated Properties"
+msgstr "Annunci in vetrina"
+
+#: lib/class-wpp-property-import.php:2533
+#, fuzzy
+msgid "Total Properties"
+msgstr "Proprietà"
+
+#: lib/class-wpp-property-import.php:2534
+msgid "Limit"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2542
+msgid "Saved Import Schedules"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2555
+msgid "Last run "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2555
+msgid " ago."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2560
+msgid "Updated "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2560
+#: lib/class-wpp-property-import.php:2565
+#: lib/class-wpp-property-import.php:2570
+msgid " objects."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2565
+#, fuzzy
+msgid "Created "
+msgstr "In vetrina"
+
+#: lib/class-wpp-property-import.php:2570
+msgid "Limited to "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2575
+#, fuzzy
+msgid "Total Properties: "
+msgstr "Proprietà"
+
+#: lib/class-wpp-property-import.php:2586
+msgid "Source URL:"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2587
+msgid "Cron Command:"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2592
+msgid "Edit"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2593
+msgid "Delete"
+msgstr "Elimina"
+
+#: lib/class-wpp-property-import.php:2594
+msgid "Run Import in Browser"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2595
+msgid "Save to File"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2597
+#, fuzzy
+msgid "Delete All Properties"
+msgstr "Cerca proprietà"
+
+#: lib/class-wpp-property-import.php:2609
+msgid "You do not have any saved schedules. Create one now."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2618
+msgid "Import Schedule"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2620
+msgid "Upload File"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2704
+msgid "Import name"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2713
+msgid "Source"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2718
+msgid "URL"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2721
+#, fuzzy
+msgid "Type:"
+msgstr "Tipologia"
+
+#: lib/class-wpp-property-import.php:2723
+msgid "XML / JSON"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2724
+msgid "CSV"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2725
+#, fuzzy
+msgid "Google Spreadsheet"
+msgstr "Google Maps"
+
+#: lib/class-wpp-property-import.php:2726
+#, fuzzy
+msgid "WP-Property Feed"
+msgstr "Campi relativi alla proprietà"
+
+#: lib/class-wpp-property-import.php:2727
+msgid "RETS"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2738
+msgid "Send GET variables as POST data."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2748
+#, fuzzy
+msgid "Google Username"
+msgstr "Google Maps"
+
+#: lib/class-wpp-property-import.php:2752
+#, fuzzy
+msgid "Google Password"
+msgstr "Google Maps"
+
+#: lib/class-wpp-property-import.php:2756
+msgid "Google Extra Query Vars"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2757
+msgid ""
+"See the <a href=\"http://code.google.com/apis/spreadsheets/data/3.0/"
+"reference.html#ListParameters\" target=\"_blank\">Google Spreadsheet API "
+"docs</a> for the format of this field ( should be name value pairs, without "
+"the beginning \"?\" )"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2761
+msgid "RETS Username."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2765
+msgid "RETS Password."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2769
+#, fuzzy
+msgid "Property Resource."
+msgstr "Annuncio salvato"
+
+#: lib/class-wpp-property-import.php:2769
+#, fuzzy
+msgid "Default is \"Property\""
+msgstr "Tipologia di immobile"
+
+#: lib/class-wpp-property-import.php:2773
+#, fuzzy
+msgid "Property Resource Class."
+msgstr "Annuncio salvato"
+
+#: lib/class-wpp-property-import.php:2777
+msgid "Primary Key for Resource."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2777
+msgid "Also referred to as \"Key Field\". Default is \"ListingKey\""
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2781
+msgid "Photo Object."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2781
+msgid "Default is \"Photo\""
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2785
+msgid "User-Agent String."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2785
+#: lib/class-wpp-property-import.php:2789
+msgid "May be required by your RETS"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2789
+msgid "User-Agent Password."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2798
+#, fuzzy
+msgid "RETS Version."
+msgstr "Versione"
+
+#: lib/class-wpp-property-import.php:2798
+msgid "Version is set by your RETS provider."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2802
+#, fuzzy
+msgid "Property Query."
+msgstr "Galleria fotografica annuncio"
+
+#: lib/class-wpp-property-import.php:2802
+msgid ""
+"Accepts <a href=\"https://www.flexmls.com/support/rets/tutorials/dmql/\" "
+"target=\"_blank\">DMQL</a> - Default is \"(ListingStatus=|Active)\""
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2806
+msgid "Toggle Advanced Source Options"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2812
+msgid "Root XPath Query:"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2814
+msgid "What is this?"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2822
+msgid "Preview Raw Data"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2824
+msgid "Close Preview"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2839
+#, fuzzy
+msgid "Default Property Type"
+msgstr "Tipologia di immobile"
+
+#: lib/class-wpp-property-import.php:2847
+msgid "Will be defaulted to if no xPath rule exists for the \"Property Type\"."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2854
+#, fuzzy
+msgid "Advanced Options"
+msgstr "Opzioni Supermap"
+
+#: lib/class-wpp-property-import.php:2863
+msgid "<b>Pre-QC Limit:</b> Limit import to the first"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2865
+#, fuzzy
+msgid "properties in the feed."
+msgstr "Nessuna proprietà trovata"
+
+#: lib/class-wpp-property-import.php:2866
+msgid "More about limits."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2870
+msgid "<b>Post-QC Limit:</b> Limit import to the first"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2872
+msgid "created properties that have passed quality standards."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2877
+msgid "Number of image importing threads spawned"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2879
+msgid "Default is 10. Not recommended to increase the number."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2885
+#, php-format
+msgid "Only import images that are over %1spx in width, and %2spx in height."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2890
+msgid "Minimum sizes are ignored if blank."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2894
+msgid "Imported properties must have at least "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2895
+#: lib/class-wpp-property-import.php:2902
+#, fuzzy
+msgid " valid image(s)."
+msgstr "Immagini Slideshow:"
+
+#: lib/class-wpp-property-import.php:2900
+msgid "Imported properties must have no more than "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2907
+msgid "Do not update properties that have been imported less than "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2909
+#, fuzzy
+msgid "hour(s) ago."
+msgstr "%s ore fa"
+
+#: lib/class-wpp-property-import.php:2916
+msgid "Automatically set the first image as the thumbnail."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2923
+msgid ""
+"Remove properties that are no longer in source XML from this site's "
+"database. This can now be done if the the import configuration does not have "
+"a Pre-QC or Post-QC Limit."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2929
+msgid ""
+"When updating an existing property, remove all old images before downloading "
+"new ones."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2934
+msgid "Skip images if images already downloaded."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2940
+#, php-format
+msgid ""
+"Send email updates to the site admin e-mail address ( %1s ) when import "
+"schedules are executed and completed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2947
+msgid ""
+"Remove all properties that were originally imported from this feed on import."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2954
+msgid "Completely remove <b>all</b> existing properties prior to import."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2961
+msgid "Fix strings that are in all caps."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2968
+msgid "Scan for any formatting tags and strip them out."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2976
+#, fuzzy
+msgid "Automatically load imported images into property slideshow."
+msgstr ""
+"Inserisci automaticamente la descrizione dell'immobile nella pagina generale "
+"degli annunci."
+
+#: lib/class-wpp-property-import.php:2984
+msgid "Geolocate imported listings."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2990
+msgid "Enable detailed logging to assist with troubleshooting."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:2996
+msgid "Show SQL Queries and errors."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3003
+msgid "Run system command cron instead of PHP cron."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3004
+msgid ""
+"Attention, enable the option only if listings are not being published but "
+"added to <b>Draft status</b>."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3013
+msgid "Toggle Advanced Options"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3019
+msgid "Automatic Matching"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3021
+#, fuzzy
+msgid "Automatically Match"
+msgstr "Includi automaticamente CSS di default."
+
+#: lib/class-wpp-property-import.php:3022
+msgid ""
+"This will work for WP-Property exports and imports, but will have mixed "
+"results with uniquely formatted feeds."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3027
+#, fuzzy
+msgid "Attribute Map"
+msgstr "Attributi nascosti"
+
+#: lib/class-wpp-property-import.php:3030
+msgid ""
+"Use XPath rules to setup the paths to the individual XML attributes to match "
+"them up with WP-Property attributes."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3031
+msgid "Sort Attribute Rules"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3037
+#, fuzzy
+msgid "WP-Property Attribute"
+msgstr "Opzioni aggiuntive WP Property Premium"
+
+#: lib/class-wpp-property-import.php:3038
+msgid "XPath Rule"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3055
+#, fuzzy
+msgid "WordPress Attributes"
+msgstr "Indirizzo"
+
+#: lib/class-wpp-property-import.php:3062
+msgid "Taxonomies"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3067
+#, fuzzy
+msgid "Attributes"
+msgstr "Attributi nascosti"
+
+#: lib/class-wpp-property-import.php:3072
+msgid "Address"
+msgstr "Indirizzo"
+
+#: lib/class-wpp-property-import.php:3073
+#, fuzzy
+msgid "Street Number"
+msgstr "Telefono"
+
+#: lib/class-wpp-property-import.php:3074
+msgid "Street"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3075
+msgid "City"
+msgstr "Città"
+
+#: lib/class-wpp-property-import.php:3076
+#, fuzzy
+msgid "County"
+msgstr "Città"
+
+#: lib/class-wpp-property-import.php:3077
+#, fuzzy
+msgid "State"
+msgstr "Ricercabile"
+
+#: lib/class-wpp-property-import.php:3078
+msgid "Country"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3079
+msgid "Postal Code"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3080
+msgid "Latitude"
+msgstr "latitudine"
+
+#: lib/class-wpp-property-import.php:3081
+msgid "Longitude"
+msgstr "Longitudine"
+
+#: lib/class-wpp-property-import.php:3084
+#, fuzzy
+msgid "WP-Property Attributes"
+msgstr "Opzioni aggiuntive WP Property Premium"
+
+#: lib/class-wpp-property-import.php:3085
+#: lib/class-wpp-property-import.php:3159
+msgid "Property Type"
+msgstr "Tipologia di immobile"
+
+#: lib/class-wpp-property-import.php:3087
+#: lib/class-wpp-property-import.php:3160
+#, fuzzy
+msgid "Property Agent"
+msgstr "Informazioni aggiuntive annuncio"
+
+#: lib/class-wpp-property-import.php:3089
+#: lib/class-wpp-property-import.php:3161
+#, fuzzy
+msgid "Global Property ID"
+msgstr "Proprietà"
+
+#: lib/class-wpp-property-import.php:3090
+#: lib/class-wpp-property-import.php:3162
+#, fuzzy
+msgid "Display Address"
+msgstr "Indirizzo"
+
+#: lib/class-wpp-property-import.php:3102
+msgid "Delete Selected"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3103
+msgid "Add Row"
+msgstr "Inserisci nuovo record"
+
+#: lib/class-wpp-property-import.php:3119
+msgid "Save Configuration"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3135
+msgid "Preview Import"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3136
+msgid "Process Full Import"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3192
+#, php-format
+msgid "Database connection failed. Error: %s"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3348
+msgid "Updating existing listing."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3361
+msgid ""
+"Attempted to update property, but wp_update_post() did not return an ID. "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3365
+msgid "Creating new listing."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3381
+#, php-format
+msgid "Object import failed. Error: %1s."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3385
+msgid ""
+"Object import failed - no Property Title detected or set, a requirement to "
+"creating a property."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3389
+msgid ""
+"Object import failed.  Post cold not be created nor updated, and post_id was "
+"not found or created."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3547
+msgid "before revalidating process"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3550
+msgid ""
+"Address validation was skipped because address has already been validated."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3551
+msgid ""
+"Address validation has been skipped because address/coordinates is empty. "
+"Check your Attribute Map for 'Address' attribute."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3552
+msgid ""
+"Address validation has failed because the Google service has denied the "
+"request ( OVER QUERY LIMIT )."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3553
+#, fuzzy
+msgid "Address validation has failed."
+msgstr "Indirizzo non convalidato"
+
+#: lib/class-wpp-property-import.php:3554
+msgid "Address validation has been successfully completed."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:3559
+msgid "after revalidating process"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4093
+msgid "on disk using file_get_contents()"
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4098
+msgid "Attempting to get image  ( "
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4112
+#, php-format
+msgid "Unable to get image %1s using the %2s method."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4128
+#, php-format
+msgid "Image %1s corrupted - skipped."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4147
+#, php-format
+msgid ""
+"Image %1s downloaded, but image size failed quality standards - deleting."
+msgstr ""
+
+#: lib/class-wpp-property-import.php:4167
+#, php-format
+msgid "Unable to save image %1s."
+msgstr ""
+
+#: wp-property-importer.php:48
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-importer.php:56
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-importer.php:64
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-importer.php:68
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-importer.php:89
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""
+
+#~ msgid "Building"
+#~ msgstr "Condominio"
+
+#~ msgid "Floorplan"
+#~ msgstr "Appartamento"
+
+#~ msgid "Single Family Home"
+#~ msgstr "Villa indipendente"
+
+#~ msgid "Price"
+#~ msgstr "Prezzo"
+
+#~ msgid "Bedrooms"
+#~ msgstr "Camere da letto"
+
+#~ msgid "Bathrooms"
+#~ msgstr "Bagni"
+
+#~ msgid "Deposit"
+#~ msgstr "Garage"
+
+#~ msgid "Area"
+#~ msgstr "Metri quadri"
+
+#~ msgid "Phone Number"
+#~ msgstr "Telefono"
+
+#~ msgid "Lease Terms"
+#~ msgstr "Condizioni contrattuali"
+
+#~ msgid "Pet Policy"
+#~ msgstr "Polizza Animali"
+
+#~ msgid "School"
+#~ msgstr "Scuola"
+
+#~ msgid "Tagline"
+#~ msgstr "Breve descrizione immobile"
+
+#~ msgid "Studio"
+#~ msgstr "Studio"
+
+#~ msgid "The property type will determine the layout."
+#~ msgstr "Il tipo di immobile determina il layout di visualizzazione"
+
+#~ msgid ""
+#~ "Customize what appears in search results in the attribute section.  For "
+#~ "example: 1bed, 2baths, area varies slightly."
+#~ msgstr ""
+#~ "Personalizza le informazion che vuoi far apparire nei risultati di "
+#~ "ricerca. Ad esempio: 1 letto, 2 bagni, metri quadri x"
+
+#~ msgid "Will appear on overview pages and on top of every listing page."
+#~ msgstr ""
+#~ "Apparirà nelle pagine di riepilogo e in testa ad ogni pagina di listing"
+
+#~ msgid "View "
+#~ msgstr "Vedi"
+
+#~ msgid "For Sale"
+#~ msgstr "In vendita"
+
+#~ msgid "For Rent"
+#~ msgstr "In affitto"
+
+#~ msgid "This is a rental property."
+#~ msgstr "Proprietà in affitto."
+
+#~ msgid "This property is for sale."
+#~ msgstr "Proprietà in vendita."
+
+#~ msgid "Set Coordinates Manually."
+#~ msgstr "Inserisci l'indirizzo manualmente"
+
+#~ msgid "Yes"
+#~ msgstr "Si"
+
+#, fuzzy
+#~ msgid "Format phone number."
+#~ msgstr "Numero di telefono di base"
+
+#, fuzzy
+#~ msgid "Address was validated by Google Maps."
+#~ msgstr ""
+#~ "<span class='description'>L'indirizzo deve essere convalidato da Google "
+#~ "Maps.</span>"
+
+#, fuzzy
+#~ msgid ""
+#~ "Address has not yet been validated, should be formatted as: street, city, "
+#~ "state, postal code, country. Locations are validated through Google Maps."
+#~ msgstr ""
+#~ "<span class='description'>L'indirizzo non è stato convalidato, dovrebbe "
+#~ "essere così formattato: via, città, stato, CAP.</span>"
+
+#, fuzzy
+#~ msgid "Show"
+#~ msgstr "Slideshow"
+
+#~ msgid "Featured"
+#~ msgstr "In vetrina"
+
+#, fuzzy
+#~ msgid "Add to Featured"
+#~ msgstr "Inserisci nuova proprietà"
+
+#~ msgid "Processing..."
+#~ msgstr "Elaborazione in corso..."
+
+#, fuzzy
+#~ msgid "Upload Image"
+#~ msgstr "Tutte le immagini:"
+
+#~ msgid "Cancel"
+#~ msgstr "Annulla"
+
+#~ msgid "Failed"
+#~ msgstr "Fallito"
+
+#, fuzzy
+#~ msgid "Show %s entries"
+#~ msgstr "Mostra %s Immagini"
+
+#, fuzzy
+#~ msgid "No matching records found"
+#~ msgstr "Nessuna proprietà trovata"
+
+#, fuzzy
+#~ msgid "Loading..."
+#~ msgstr "Elaborazione in corso..."
+
+#, fuzzy
+#~ msgid "Search:"
+#~ msgstr "Cerca"
+
+#, fuzzy
+#~ msgid "Display:"
+#~ msgstr "Visualizzazione"
+
+#~ msgid "Settings"
+#~ msgstr "Impostazioni"
+
+#, fuzzy
+#~ msgid "Enabled Options"
+#~ msgstr "Opzioni Supermap"
+
+#~ msgid "Developer"
+#~ msgstr "Sviluppatori"
+
+#, fuzzy
+#~ msgid ""
+#~ "Property attributes are meant to be short entries that can be searchable, "
+#~ "on the back-end attributes will be displayed as single-line input boxes. "
+#~ "On the front-end they are displayed using a definitions list."
+#~ msgstr ""
+#~ "<p>Gli attributi degli immobili devono essere termini singoli che possono "
+#~ "essere ricercati, e vengono visualizzati nel back-end come input box. Nel "
+#~ "front-end vengono visualizzati come definitions list.</p>\n"
+#~ "\t\t\t\t<p>Rendere un attributo \"ricercabile\" lo farà apparire nelle "
+#~ "opzioni di ricerca nello widget di Ricerca immobili.</p>\n"
+#~ "\t\t\t\t<p>Attenzione, gli attributi aggiunti tramite la funzione "
+#~ "add_filter() sostituiscono le impostazioni presenti in questa pagina.</p>"
+
+#, fuzzy
+#~ msgid "%1s Attributes"
+#~ msgstr "Attributi nascosti"
+
+#, fuzzy
+#~ msgid "Advanced Stats Settings:"
+#~ msgstr "Impostazioni generali"
+
+#~ msgid "Slug"
+#~ msgstr "Slug"
+
+#~ msgid "Main"
+#~ msgstr "Principali"
+
+#, fuzzy
+#~ msgid "Add Group"
+#~ msgstr "Inserisci nuovo record"
+
+#, fuzzy
+#~ msgid "Attribute Name"
+#~ msgstr "Nome della caratteristica"
+
+#, fuzzy
+#~ msgid "Search Input"
+#~ msgstr "Cerca"
+
+#, fuzzy
+#~ msgid "Toggle Advanced Settings"
+#~ msgstr "Impostazioni generali"
+
+#, fuzzy
+#~ msgid "Sortable."
+#~ msgstr "Ricercabile"
+
+#, fuzzy
+#~ msgid "Searchable."
+#~ msgstr "Ricercabile"
+
+#, fuzzy
+#~ msgid "Admin Only."
+#~ msgstr "Interfaccia amministratore"
+
+#, fuzzy
+#~ msgid "Show in \"All Properties\" table."
+#~ msgstr "Mostra subproprietà."
+
+#, fuzzy
+#~ msgid "Delete Attribute"
+#~ msgstr "Attributi nascosti"
+
+#~ msgid ""
+#~ "Meta is used for descriptions,  on the back-end  meta fields will be "
+#~ "displayed as textareas.  On the front-end they will be displayed as "
+#~ "individual sections."
+#~ msgstr ""
+#~ "Le informazioni aggiuntive vengono utilizzate per arricchire il testo "
+#~ "dell'annuncio, nel back-end esse vengono visualizzate come textarea. Nel "
+#~ "front-end esse vengono visualizzate come sezioni autonome. "
+
+#, fuzzy
+#~ msgid "%1s Types"
+#~ msgstr "Tipologia"
+
+#~ msgid "Type"
+#~ msgstr "Tipologia"
+
+#~ msgid "Hidden Attributes"
+#~ msgstr "Attributi nascosti"
+
+#, fuzzy
+#~ msgid "Inherit from Parent"
+#~ msgstr "Attributi ereditati"
+
+#~ msgid "Searchable"
+#~ msgstr "Ricercabile"
+
+#~ msgid "Location Matters"
+#~ msgstr "La posizione conta"
+
+#, fuzzy
+#~ msgid "Parent Selection"
+#~ msgstr "Impostazioni annunci"
+
+#~ msgid "Show Log."
+#~ msgstr "Mostra Log"
+
+#~ msgid ""
+#~ "The log is always active, but the UI is hidden.  If enabled, it will be "
+#~ "visible in the admin sidebar."
+#~ msgstr ""
+#~ "Il log è attivo, ma l'interfaccia utente è nascosta. Se abilitata, sarà "
+#~ "visibile nella sidebar del pannello di amministrazione."
+
+#~ msgid "Child Properties"
+#~ msgstr "Subproprietà"
+
+#~ msgid "Menu Sort Order:"
+#~ msgstr "Menu Ordinato Per:"
+
+#, fuzzy
+#~ msgid "Display in featured listings."
+#~ msgstr "Visualizza l'annuncio in vetrina"
+
+#, fuzzy
+#~ msgid "Property updated. <a href=\"%s\">view property</a>"
+#~ msgstr ""
+#~ "Annuncio aggiornato con successo! <a href=\"%s\">Visualizza annuncio</a>"
+
+#~ msgid "Custom field updated."
+#~ msgstr "Campo personalizzato aggiornato."
+
+#~ msgid "Custom field deleted."
+#~ msgstr "Campo personalizzato eliminato"
+
+#~ msgid "Property updated."
+#~ msgstr "Annuncio aggiornato"
+
+#~ msgid "Property restored to revision from %s"
+#~ msgstr "Annuncio recuperato dalla revisione %s"
+
+#~ msgid "Property published. <a href=\"%s\">View property</a>"
+#~ msgstr "Annuncio pubblicato. <a href=\"%s\">Visualizza annuncio</a>"
+
+#~ msgid "Property saved."
+#~ msgstr "Annuncio salvato"
+
+#~ msgid ""
+#~ "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+#~ msgstr ""
+#~ "Annuncio salvato in bozza. <a target=\"_blank\" href=\"%s\">Visualizza "
+#~ "anteprima annuncio</a>"
+
+#~ msgid ""
+#~ "Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Preview property</a>"
+#~ msgstr ""
+#~ "Annuncio programmato per il giorno <strong>%1$s</strong>. <a target="
+#~ "\"_blank\" href=\"%2$s\">Visualizza anteprima annuncio</a>"
+
+#~ msgid ""
+#~ "Property draft updated. <a target=\"_blank\" href=\"%s\">Preview "
+#~ "property</a>"
+#~ msgstr ""
+#~ "Bozza dell'annuncio aggiornata. <a target=\"_blank\" href=\"%s"
+#~ "\">Visualizza anteprima annuncio</a>"
+
+#~ msgid "Title"
+#~ msgstr "Titolo"
+
+#~ msgid "Overview"
+#~ msgstr "Descrizione immobile"
+
+#~ msgid "Order"
+#~ msgstr "Ordine"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Miniatura"
+
+#~ msgid "General Information"
+#~ msgstr "Informazioni generali"
+
+#~ msgid "NO NAME"
+#~ msgstr "Senza Nome"
+
+#~ msgid "Search"
+#~ msgstr "Cerca"
+
+#~ msgid "Floor plans at location:"
+#~ msgstr "Piano terra "
+
+#~ msgid "Sort By:"
+#~ msgstr "Ordinato per"
+
+#, fuzzy
+#~ msgid "View Properties"
+#~ msgstr "Visualizza proprietà"
+
+#, fuzzy
+#~ msgid "Add/Edit Properties"
+#~ msgstr "Modifica proprietà"
+
+#, fuzzy
+#~ msgid "Edit Other Properties"
+#~ msgstr "Cerca proprietà"
+
+#, fuzzy
+#~ msgid "Delete Properties"
+#~ msgstr "Cerca proprietà"
+
+#, fuzzy
+#~ msgid "Publish Properties"
+#~ msgstr "Proprietà"
+
+#, fuzzy
+#~ msgid "Manage Settings"
+#~ msgstr "Impostazioni generali"
+
+#, fuzzy
+#~ msgid "Manage Taxonomies"
+#~ msgstr "Modifica Categorie"
+
+#, fuzzy
+#~ msgid "For more information:"
+#~ msgstr "Informazioni generali"
+
+#~ msgid "Please upgrade Wordpress to the latest version for detailed help."
+#~ msgstr "Prego, aggiorna il cms all'ultima versione"
+
+#, fuzzy
+#~ msgid "An error occurred during API key request: <b>%s</b>."
+#~ msgstr ""
+#~ "Si è verificato un errore durante il check della premium feature: <b> %s "
+#~ "</b>."
+
+#~ msgid "Properties"
+#~ msgstr "Proprietà"
+
+#~ msgid "Property"
+#~ msgstr "Proprietà"
+
+#~ msgid "Property: %s"
+#~ msgstr "Proprietà: %s"
+
+#~ msgid "Features"
+#~ msgstr "Caratteristiche"
+
+#~ msgid "Feature"
+#~ msgstr "Caratteristica"
+
+#, fuzzy
+#~ msgid "Search Features"
+#~ msgstr "Cerca proprietà"
+
+#, fuzzy
+#~ msgid "All Features"
+#~ msgstr "Caratteristiche"
+
+#, fuzzy
+#~ msgid "Parent Feature"
+#~ msgstr "Caratteristica"
+
+#, fuzzy
+#~ msgid "Parent Feature:"
+#~ msgstr "Caratteristica"
+
+#, fuzzy
+#~ msgid "Edit Feature"
+#~ msgstr "Caratteristica"
+
+#, fuzzy
+#~ msgid "Update Feature"
+#~ msgstr "Caratteristica"
+
+#, fuzzy
+#~ msgid "Add New Feature"
+#~ msgstr "Inserisci nuova proprietà"
+
+#, fuzzy
+#~ msgid "New Feature Name"
+#~ msgstr "Nome della caratteristica"
+
+#~ msgid "Community Features"
+#~ msgstr "Caratteristiche comuni"
+
+#, fuzzy
+#~ msgid "Community Feature"
+#~ msgstr "Caratteristiche comuni"
+
+#, fuzzy
+#~ msgid "Search Community Features"
+#~ msgstr "Caratteristiche comuni"
+
+#, fuzzy
+#~ msgid "All Community Features"
+#~ msgstr "Caratteristiche comuni"
+
+#, fuzzy
+#~ msgid "Parent Community Feature"
+#~ msgstr "Caratteristiche comuni"
+
+#, fuzzy
+#~ msgid "Parent Community Feature:"
+#~ msgstr "Caratteristiche comuni"
+
+#, fuzzy
+#~ msgid "Edit Community Feature"
+#~ msgstr "Caratteristiche comuni"
+
+#, fuzzy
+#~ msgid "Update Community Feature"
+#~ msgstr "Caratteristiche comuni"
+
+#, fuzzy
+#~ msgid "Add New Community Feature"
+#~ msgstr "Caratteristiche comuni"
+
+#, fuzzy
+#~ msgid "New Community Feature Name"
+#~ msgstr "Caratteristiche comuni"
+
+#, fuzzy
+#~ msgid "All Properties"
+#~ msgstr "Proprietà"
+
+#, fuzzy
+#~ msgid "Add Property"
+#~ msgstr "Inserisci nuova proprietà"
+
+#~ msgid "Add New Property"
+#~ msgstr "Inserisci nuova proprietà"
+
+#~ msgid "Edit Property"
+#~ msgstr "Modifica proprietà"
+
+#~ msgid "New Property"
+#~ msgstr "Nuova proprietà"
+
+#~ msgid "View Property"
+#~ msgstr "Visualizza proprietà"
+
+#~ msgid "Search Properties"
+#~ msgstr "Cerca proprietà"
+
+#~ msgid "No properties found"
+#~ msgstr "Nessuna proprietà trovata"
+
+#~ msgid "No properties found in Trash"
+#~ msgstr "Nessuna proprietà trovata nel cestino"
+
+#, fuzzy
+#~ msgid "Default"
+#~ msgstr "Elimina"
+
+#~ msgid ""
+#~ "One of the folders that is necessary for downloading additional features "
+#~ "for the WP-Property plugin is not writable.  This means features cannot "
+#~ "be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-"
+#~ "property/core/premium</b> permissions to 0755."
+#~ msgstr ""
+#~ "Una delle cartelle necessarie per scaricare le funzionalità aggiuntive di "
+#~ "WP Property non è scrivibile, quindi non è possibile scaricarle. Imposta "
+#~ "i permessi di <b>wp-content/plugins/wp-property/core/premium</b> su 0755."
+
+#, fuzzy
+#~ msgid "Cache was successfully cleared"
+#~ msgstr "Aggiornamento concluso con successo."
+
+#, fuzzy
+#~ msgid ""
+#~ "An error occurred during premium feature check. API Key '<b>%s</b>' is "
+#~ "incorrect."
+#~ msgstr ""
+#~ "Si è verificato un errore durante il check della premium feature: <b> %s "
+#~ "</b>."
+
+#, fuzzy
+#~ msgid "There are no available premium features."
+#~ msgstr "Forza la verifica delle funzionalità aggiuntive consentite."
+
+#, fuzzy
+#~ msgid "WP-Property Premium Feature: %s"
+#~ msgstr "Opzioni aggiuntive WP Property Premium"
+
+#~ msgid "Update ran successfully."
+#~ msgstr "Aggiornamento concluso con successo."
+
+#, fuzzy
+#~ msgid "You have the latest premium features versions."
+#~ msgstr "Forza la verifica delle funzionalità aggiuntive consentite."
+
+#, fuzzy
+#~ msgid "An error occurred during premium feature check: <b> %s </b>."
+#~ msgstr ""
+#~ "Si è verificato un errore durante il check della premium feature: <b> %s "
+#~ "</b>."
+
+#~ msgid "Get Directions"
+#~ msgstr "Fornisci indicazioni stradali"
+
+#~ msgid "General Settings"
+#~ msgstr "Impostazioni generali"
+
+#, fuzzy
+#~ msgid "Login"
+#~ msgstr "Log"
+
+#~ msgid "Name"
+#~ msgstr "Nome"
+
+#, fuzzy
+#~ msgid "Submit Inquiry"
+#~ msgstr "Invia"
+
+#, fuzzy
+#~ msgid "Date"
+#~ msgstr "Elimina"
+
+#, fuzzy
+#~ msgid "Published"
+#~ msgstr "Immagini Slideshow:"
+
+#~ msgid "Any"
+#~ msgstr "Qualsiasi"
+
+#, fuzzy
+#~ msgid "Show all dates"
+#~ msgstr "Mostra %s Immagini"
+
+#, fuzzy
+#~ msgid "General Help"
+#~ msgstr "Impostazioni generali"
+
+#, fuzzy
+#~ msgid "Default Properties Page"
+#~ msgstr "Annunci in vetrina"
+
+#~ msgid "Display"
+#~ msgstr "Visualizzazione"
+
+#, fuzzy
+#~ msgid "Premium Features"
+#~ msgstr "Opzioni aggiuntive WP Property Premium"
+
+#, fuzzy
+#~ msgid "Tab allows you to manage your WP-Property Premium Features"
+#~ msgstr "Opzioni aggiuntive WP Property Premium"
+
+#, fuzzy
+#~ msgid "published"
+#~ msgstr "Immagini Slideshow:"
+
+#, fuzzy
+#~ msgid "Nothing found."
+#~ msgstr "Nessuna proprietà trovata"
+
+#, fuzzy
+#~ msgid "New User account created."
+#~ msgstr "Tabella non creata."
+
+#, fuzzy
+#~ msgid "Status Updated"
+#~ msgstr "Annuncio aggiornato"
+
+#, fuzzy
+#~ msgid "No published properties."
+#~ msgstr "Mostra subproprietà."
+
+#~ msgid "Title:"
+#~ msgstr "Titolo:"
+
+#, fuzzy
+#~ msgid "Attributes to Display:"
+#~ msgstr "Visualizzazione indirizzo"
+
+#~ msgid "Other %1s"
+#~ msgstr "Altro %1s"
+
+#~ msgid "%s at %s for %s"
+#~ msgstr "%s a %s per %s"
+
+#~ msgid "More"
+#~ msgstr "Vedi"
+
+#, fuzzy
+#~ msgid ""
+#~ "The widget will show other properties that share a parent with the "
+#~ "currently displayed property."
+#~ msgstr ""
+#~ "Il widget non verrà visualizzato se questa proprietà non ha subproprietà"
+
+#, fuzzy
+#~ msgid "Hide images."
+#~ msgstr "Immagini Slideshow:"
+
+#~ msgid "Image Size:"
+#~ msgstr "Dimensioni immagine:"
+
+#, fuzzy
+#~ msgid "Select the attributes you want to display: "
+#~ msgstr "Seleziona le statistiche che vuoi visualizzare"
+
+#~ msgid "Address Format:"
+#~ msgstr "Formato indirizzo:"
+
+#~ msgid ""
+#~ "The widget will not be displayed if the currently viewed property has no "
+#~ "children."
+#~ msgstr ""
+#~ "Il widget non verrà visualizzato se questa proprietà non ha subproprietà"
+
+#, fuzzy
+#~ msgid "Hide Images?"
+#~ msgstr "Immagini Slideshow:"
+
+#~ msgid "Select the stats you want to display"
+#~ msgstr "Seleziona le statistiche che vuoi visualizzare"
+
+#, fuzzy
+#~ msgid "Featured %1s"
+#~ msgstr "Caratteristiche"
+
+#, fuzzy
+#~ msgid "Featured Properies"
+#~ msgstr "Annunci in vetrina"
+
+#, fuzzy
+#~ msgid "Latest Properties"
+#~ msgstr "Annunci in vetrina"
+
+#, fuzzy
+#~ msgid "Select stats you want to display"
+#~ msgstr "Seleziona le statistiche che vuoi visualizzare"
+
+#, fuzzy
+#~ msgid "%1s Search"
+#~ msgstr "Cerca"
+
+#~ msgid "No searchable property types were found."
+#~ msgstr "Nessuna tipologia di annuncio trovata"
+
+#~ msgid "Property types to search:"
+#~ msgstr "Tipologia di immobile da ricercare:"
+
+#~ msgid "Select the attributes you want to search."
+#~ msgstr "Seleziona le caratteristiche che vuoi ricercare."
+
+#, fuzzy
+#~ msgid "All Attributes"
+#~ msgstr "Attributi nascosti"
+
+#, fuzzy
+#~ msgid "Grouped Attributes"
+#~ msgstr "Attributi nascosti"
+
+#, fuzzy
+#~ msgid "Default Sort Order"
+#~ msgstr "Numero di telefono di default"
+
+#, fuzzy
+#~ msgid "Search Properies"
+#~ msgstr "Cerca proprietà"
+
+#, fuzzy
+#~ msgid "Large Image Size:"
+#~ msgstr "Dimensioni immagine:"
+
+#~ msgid "Show %s Images"
+#~ msgstr "Mostra %s Immagini"
+
+#, fuzzy
+#~ msgid "Show Image Captions"
+#~ msgstr "Mostra %s Immagini"
+
+#, fuzzy
+#~ msgid "Show Image Descriptions."
+#~ msgstr "Descrizione"
+
+#, fuzzy
+#~ msgid "API Failure: %1s."
+#~ msgstr "Caratteristiche"
+
+#~ msgid "Log Started."
+#~ msgstr "Log avviato"
+
+#, fuzzy
+#~ msgid "Log Page for"
+#~ msgstr "UD Log Page per"
+
+#~ msgid "Clear Log"
+#~ msgstr "Svuota log"
+
+#~ msgid "Timestamp"
+#~ msgstr "Timestamp"
+
+#~ msgid "Event"
+#~ msgstr "Evento"
+
+#~ msgid "User"
+#~ msgstr "Utente"
+
+#, fuzzy
+#~ msgid "Agent Shortcodes"
+#~ msgstr "Shortcode descrizione"
+
+#, fuzzy
+#~ msgid "Show agent information:"
+#~ msgstr "Informazioni generali"
+
+#, fuzzy
+#~ msgid "To query agent properties:"
+#~ msgstr "Mostra subproprietà."
+
+#, fuzzy
+#~ msgid "Shortcode Attribute Fields"
+#~ msgstr "Attributi nascosti"
+
+#, fuzzy
+#~ msgid "Agent Image Size"
+#~ msgstr "Dimensioni immagine:"
+
+#, fuzzy
+#~ msgid "Agent Information"
+#~ msgstr "Informazioni generali"
+
+#, fuzzy
+#~ msgid "Agent"
+#~ msgstr "Evento"
+
+#, fuzzy
+#~ msgid "No Properties."
+#~ msgstr "Proprietà"
+
+#, fuzzy
+#~ msgid "Display Name"
+#~ msgstr "Visualizzazione"
+
+#, fuzzy
+#~ msgid "Username"
+#~ msgstr "Utente"
+
+#, fuzzy
+#~ msgid "E-Mail"
+#~ msgstr "Principali"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "Opzioni Supermap"
+
+#, fuzzy
+#~ msgid "Associated Properties"
+#~ msgstr "Annunci in vetrina"
+
+#, fuzzy
+#~ msgid "Images"
+#~ msgstr "Tutte le immagini:"
+
+#, fuzzy
+#~ msgid "Agent Fields"
+#~ msgstr "Campi relativi alla proprietà"
+
+#, fuzzy
+#~ msgid "Agent updated."
+#~ msgstr "Annuncio aggiornato"
+
+#, fuzzy
+#~ msgid "Agent created."
+#~ msgstr "Tabella non creata."
+
+#, fuzzy
+#~ msgid "Edit Agent"
+#~ msgstr "Modifica proprietà"
+
+#, fuzzy
+#~ msgid "No images found."
+#~ msgstr "Nessuna proprietà trovata"
+
+#, fuzzy
+#~ msgid "Add Image"
+#~ msgstr "Tutte le immagini:"
+
+#, fuzzy
+#~ msgid "Edit posts"
+#~ msgstr "Modifica proprietà"
+
+#, fuzzy
+#~ msgid "Edit pages"
+#~ msgstr "Modifica proprietà"
+
+#, fuzzy
+#~ msgid "Publish pages"
+#~ msgstr "Immagini Slideshow:"
+
+#, fuzzy
+#~ msgid "Delete pages"
+#~ msgstr "Elimina"
+
+#, fuzzy
+#~ msgid "Delete posts"
+#~ msgstr "Elimina"
+
+#, fuzzy
+#~ msgid "Image"
+#~ msgstr "Dimensioni immagine:"
+
+#, fuzzy
+#~ msgid "Email Address"
+#~ msgstr "Indirizzo"
+
+#, fuzzy
+#~ msgid "<b>Page Settings</b><br/>"
+#~ msgstr "Impostazioni generali"
+
+#, fuzzy
+#~ msgid "Name:"
+#~ msgstr "Nome"
+
+#, fuzzy
+#~ msgid "Page:"
+#~ msgstr "(Immobile \"genitore\")"
+
+#, fuzzy
+#~ msgid "Page"
+#~ msgstr "(Immobile \"genitore\")"
+
+#, fuzzy
+#~ msgid "Search..."
+#~ msgstr "Cerca"
+
+#, fuzzy
+#~ msgid "Template Settings:"
+#~ msgstr "Impostazioni generali"
+
+#, fuzzy
+#~ msgid "Template:"
+#~ msgstr "Template"
+
+#, fuzzy
+#~ msgid "Disable default CSS."
+#~ msgstr "Includi automaticamente CSS di default."
+
+#~ msgid "Save Changes"
+#~ msgstr "Salva modifiche"
+
+#, fuzzy
+#~ msgid "Property Form"
+#~ msgstr "Proprietà: %s"
+
+#, fuzzy
+#~ msgid "Subscription Plan"
+#~ msgstr "Descrizione"
+
+#, fuzzy
+#~ msgid "Templates"
+#~ msgstr "Template"
+
+#, fuzzy
+#~ msgid "Overview Page"
+#~ msgstr "Descrizione immobile"
+
+#, fuzzy
+#~ msgid "Edit Page"
+#~ msgstr "Modifica proprietà"
+
+#, fuzzy
+#~ msgid "Administration"
+#~ msgstr "Impostazioni"
+
+#, fuzzy
+#~ msgid "Form Name"
+#~ msgstr "In vendita"
+
+#, fuzzy
+#~ msgid "Shortcode"
+#~ msgstr "Shortcode descrizione"
+
+#, fuzzy
+#~ msgid "General Options"
+#~ msgstr "Impostazioni generali"
+
+#, fuzzy
+#~ msgid "Subscriptions Plans"
+#~ msgstr "Descrizione"
+
+#, fuzzy
+#~ msgid "Propery Attributes"
+#~ msgstr "Opzioni aggiuntive WP Property Premium"
+
+#, fuzzy
+#~ msgid "Available shortcode attributes"
+#~ msgstr "Attributi nascosti"
+
+#, fuzzy
+#~ msgid "Just a name of Subscription plan."
+#~ msgstr "Descrizione"
+
+#, fuzzy
+#~ msgid "Duration"
+#~ msgstr "Descrizione"
+
+#, fuzzy
+#~ msgid "Is Featured"
+#~ msgstr "In vetrina"
+
+#, fuzzy
+#~ msgid "Images Limit"
+#~ msgstr "Tutte le immagini:"
+
+#~ msgid "Description"
+#~ msgstr "Descrizione"
+
+#, fuzzy
+#~ msgid "Property Forms"
+#~ msgstr "Proprietà: %s"
+
+#, fuzzy
+#~ msgid "Edit %s Page"
+#~ msgstr "Modifica proprietà"
+
+#~ msgid "Price:"
+#~ msgstr "Prezzo:"
+
+#, fuzzy
+#~ msgid "Duration:"
+#~ msgstr "Descrizione"
+
+#, fuzzy
+#~ msgid "Images:"
+#~ msgstr "Tutte le immagini:"
+
+#, fuzzy
+#~ msgid "Renewal of Subscription Plan"
+#~ msgstr "Descrizione"
+
+#, fuzzy
+#~ msgid "Options:"
+#~ msgstr "Opzioni Supermap"
+
+#, fuzzy
+#~ msgid "day"
+#~ msgstr "Oggi"
+
+#, fuzzy
+#~ msgid "created"
+#~ msgstr "In vetrina"
+
+#, fuzzy
+#~ msgid "updated"
+#~ msgstr "Annuncio aggiornato"
+
+#, fuzzy
+#~ msgid "Publish Now"
+#~ msgstr "Slideshow"
+
+#, fuzzy
+#~ msgid "Add New %s"
+#~ msgstr "Inserisci nuovo annuncio"
+
+#, fuzzy
+#~ msgid "Expired"
+#~ msgstr "Pagina annuncio"
+
+#, fuzzy
+#~ msgid "Wrong FEPS form used"
+#~ msgstr "Annuncio aggiornato"
+
+#, fuzzy
+#~ msgid "FEPS forms updated."
+#~ msgstr "Annuncio aggiornato"
+
+#, fuzzy
+#~ msgid "%1$s Content"
+#~ msgstr "Titolo"
+
+#, fuzzy
+#~ msgid "%1$s Type"
+#~ msgstr "Tipologia"
+
+#, fuzzy
+#~ msgid "Form Name:"
+#~ msgstr "In vendita"
+
+#, fuzzy
+#~ msgid "Shortcode:"
+#~ msgstr "Shortcode descrizione"
+
+#, fuzzy
+#~ msgid ""
+#~ "Copy and paste this shortcode into any page or post to display the form"
+#~ msgstr "Copia e incolla gli shortcodes nel contenuto della pagina."
+
+#, fuzzy
+#~ msgid "General Options:"
+#~ msgstr "Impostazioni generali"
+
+#, fuzzy
+#~ msgid "%1$s Type:"
+#~ msgstr "Tipologia"
+
+#, fuzzy
+#~ msgid "Preview Thumbnail Size:"
+#~ msgstr "Dimensioni miniatura:"
+
+#, fuzzy
+#~ msgid "Automatically load added images into %1$s Slideshow. "
+#~ msgstr ""
+#~ "Inserisci automaticamente la descrizione dell'immobile nella pagina "
+#~ "generale degli annunci."
+
+#, fuzzy
+#~ msgid "%1$s Attributes"
+#~ msgstr "Attributi nascosti"
+
+#, fuzzy
+#~ msgid "Attribute"
+#~ msgstr "Attributi nascosti"
+
+#, fuzzy
+#~ msgid "%1$s Title"
+#~ msgstr "Titolo"
+
+#, fuzzy
+#~ msgid "Required"
+#~ msgstr "In vetrina"
+
+#, fuzzy
+#~ msgid "Subscription Plans"
+#~ msgstr "Descrizione"
+
+#, fuzzy
+#~ msgid "Actions"
+#~ msgstr "Opzioni Supermap"
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "Cerca aggiornamenti."
+
+#~ msgid "Submit"
+#~ msgstr "Invia"
+
+#, fuzzy
+#~ msgid "FEPS Information"
+#~ msgstr "Informazioni generali"
+
+#, fuzzy
+#~ msgid "PDF Flyer Options"
+#~ msgstr "Opzioni Supermap"
+
+#, fuzzy
+#~ msgid "Full Description"
+#~ msgstr "Descrizione"
+
+#, fuzzy
+#~ msgid "File Name:"
+#~ msgstr "Nome della caratteristica"
+
+#, fuzzy
+#~ msgid "Actions:"
+#~ msgstr "Opzioni Supermap"
+
+#, fuzzy
+#~ msgid "Properties per page:"
+#~ msgstr "Proprietà"
+
+#, fuzzy
+#~ msgid "Show child properties."
+#~ msgstr "Mostra subproprietà."
+
+#, fuzzy
+#~ msgid "Contact Information"
+#~ msgstr "Informazioni generali"
+
+#, fuzzy
+#~ msgid "Refresh Page"
+#~ msgstr "Pagina Overview"
+
+#, fuzzy
+#~ msgid "Location"
+#~ msgstr "La posizione conta"
+
+#, fuzzy
+#~ msgid "Flyer Display"
+#~ msgstr "Visualizzazione"
+
+#, fuzzy
+#~ msgid "Description (if exists)"
+#~ msgstr "Descrizione"
+
+#, fuzzy
+#~ msgid "Location on Map (if exists)"
+#~ msgstr "La posizione conta"
+
+#, fuzzy
+#~ msgid "Secondary Images"
+#~ msgstr "Immagini Slideshow:"
+
+#, fuzzy
+#~ msgid "Show %1$s images."
+#~ msgstr "Mostra %s Immagini"
+
+#, fuzzy
+#~ msgid "\" is generated."
+#~ msgstr "Tabella non creata."
+
+#, fuzzy
+#~ msgid "Allows user to publish properties."
+#~ msgstr "Mostra subproprietà."
+
+#, fuzzy
+#~ msgid "WP Property Capabilities"
+#~ msgstr "Slideshow WP-Property"
+
+#, fuzzy
+#~ msgid "Singular Property:"
+#~ msgstr "Modifica proprietà"
+
+#, fuzzy
+#~ msgid "Plural Property:"
+#~ msgstr "Proprietà"
+
+#, fuzzy
+#~ msgid "Overview Page Contextual Help:"
+#~ msgstr "Pagina Overview"
+
+#, fuzzy
+#~ msgid "Add "
+#~ msgstr "Inserisci nuovo annuncio"
+
+#, fuzzy
+#~ msgid "Add New "
+#~ msgstr "Inserisci nuovo annuncio"
+
+#, fuzzy
+#~ msgid "Search "
+#~ msgstr "Cerca"
+
+#, fuzzy
+#~ msgid "Manage Slideshow"
+#~ msgstr "Slideshow"
+
+#, fuzzy
+#~ msgid "Slide"
+#~ msgstr "Slideshow"
+
+#, fuzzy
+#~ msgid "Carousel Thumbnail Size:"
+#~ msgstr "Dimensione miniatura mappa"
+
+#~ msgid "Slideshow Options"
+#~ msgstr "Opzioni slideshow"
+
+#~ msgid "Slideshow Images:"
+#~ msgstr "Immagini Slideshow:"
+
+#~ msgid "All Images:"
+#~ msgstr "Tutte le immagini:"
+
+#~ msgid "Slideshow"
+#~ msgstr "Slideshow"
+
+#~ msgid "Global Slideshow"
+#~ msgstr "Slideshow generale"
+
+#, fuzzy
+#~ msgid "Slideshow Size: "
+#~ msgstr "Immagini Slideshow:"
+
+#, fuzzy
+#~ msgid "Display in Global Slideshow Caption:"
+#~ msgstr "Slideshow generale"
+
+#, fuzzy
+#~ msgid "Title."
+#~ msgstr "Titolo"
+
+#, fuzzy
+#~ msgid "Tagline."
+#~ msgstr "Descrizione breve immobile"
+
+#, fuzzy
+#~ msgid "Thumbnail Size"
+#~ msgstr "Dimensioni miniatura:"
+
+#, fuzzy
+#~ msgid "Slices:"
+#~ msgstr "Slideshow"
+
+#~ msgid "Slideshow selection and order saved."
+#~ msgstr "Selezione ed ordine immagini dello slideshow salvati."
+
+#~ msgid "WP-Property Slideshow"
+#~ msgstr "Slideshow WP-Property"
+
+#~ msgid ""
+#~ "This slideshow can be integrated into your front-end pages by either "
+#~ "using the shortcode, or pasting PHP code into your theme."
+#~ msgstr ""
+#~ "Questo slideshow può essere integrato nelle pagine sia usando lo "
+#~ "shortcode, sia incollando il codice PHP nel tema."
+
+#~ msgid ""
+#~ "Drag images from selection on the left to the selection on the right, and "
+#~ "then click save."
+#~ msgstr ""
+#~ "Trascina immagini dalla selezione a sinistra in quella di destra, e "
+#~ "clicca su Salva."
+
+#~ msgid ""
+#~ "This list gets all images from your media library that are over %s pixels "
+#~ "wide and %s pixels tall."
+#~ msgstr ""
+#~ "Questa lista seleziona solo le immagini della tua media library che sono "
+#~ "larghe almeno %s pixels e alte %s pixels."
+
+#~ msgid "Save Selection and Order"
+#~ msgstr "Salva selezione e ordine"
+
+#, fuzzy
+#~ msgid "Manage Supermap"
+#~ msgstr "Opzioni Supermap"
+
+#, fuzzy
+#~ msgid "Supermap"
+#~ msgstr "Opzioni Supermap"
+
+#, fuzzy
+#~ msgid "Sidebar Attributes"
+#~ msgstr "Attributi nascosti"
+
+#, fuzzy
+#~ msgid ""
+#~ "Select the attributes you want to display in the left sidebar on the "
+#~ "supermap."
+#~ msgstr "Seleziona le caratteristiche che vuoi ricercare."
+
+#, fuzzy
+#~ msgid "Map Markers:"
+#~ msgstr "Speakers"
+
+#, fuzzy
+#~ msgid "Default by Google"
+#~ msgstr "Template di default"
+
+#~ msgid "Supermap Options"
+#~ msgstr "Opzioni Supermap"
+
+#, fuzzy
+#~ msgid "Sorry, no %s found, try expanding your search."
+#~ msgstr ""
+#~ "Peccato, nessun annuncio trovato, prova ad estendere la ricerca, oppure "
+#~ "<a href=\"\">visualizza tutti gli annunci disponibili</a>."
+
+#, fuzzy
+#~ msgid "No results found."
+#~ msgstr "Nessuna proprietà trovata"
+
+#, fuzzy
+#~ msgid "Show More"
+#~ msgstr "Mostra Log"
+
+#, fuzzy
+#~ msgid "Settings updated."
+#~ msgstr "Annuncio aggiornato"
+
+#, fuzzy
+#~ msgid "Feature Updates"
+#~ msgstr "Nome della caratteristica"
+
+#~ msgid "Check Updates"
+#~ msgstr "Cerca aggiornamenti."
+
+#, fuzzy
+#~ msgid "Enable comments."
+#~ msgstr "Opzioni Supermap"
+
+#, fuzzy
+#~ msgid ""
+#~ "Automatically delete all %1s images and attachments when a %2s is deleted."
+#~ msgstr ""
+#~ "Inserisci automaticamente la descrizione dell'immobile nella pagina "
+#~ "generale degli annunci."
+
+#, fuzzy
+#~ msgid "Default %1s Page"
+#~ msgstr "Template di default"
+
+#~ msgid "Property (Default)"
+#~ msgstr "Annuncio (Default)"
+
+#, fuzzy
+#~ msgid "Automatic Geolocation"
+#~ msgstr "Includi automaticamente CSS di default."
+
+#, fuzzy
+#~ msgid "Attribute to use for physical addresses:"
+#~ msgstr "Voce da utilizzare come indirizzo:"
+
+#, fuzzy
+#~ msgid "Load default CSS."
+#~ msgstr "Includi automaticamente CSS di default."
+
+#~ msgid "Default Phone Number"
+#~ msgstr "Numero di telefono di default"
+
+#, fuzzy
+#~ msgid ""
+#~ "Phone number to use when a %1s-specific phone number is not specified."
+#~ msgstr ""
+#~ "Numero di telefono da utilizzare nel caso in cui non ne venga specificato "
+#~ "uno nell'annuncio."
+
+#~ msgid "Image Sizes"
+#~ msgstr "Dimensioni immagine"
+
+#~ msgid "Image sizes used throughout the plugin."
+#~ msgstr "Dimensioni immagine utilizzate nel plugin."
+
+#~ msgid "Width"
+#~ msgstr "Larghezza"
+
+#~ msgid "Height"
+#~ msgstr "Altezza"
+
+#~ msgid "Overview Shortcode"
+#~ msgstr "Shortcode descrizione"
+
+#, fuzzy
+#~ msgid ""
+#~ "These are the settings for the [property_overview] shortcode.  The "
+#~ "shortcode displays a list of all building / root %1s.<br />The display "
+#~ "settings may be edited further by customizing the <b>wp-content/plugins/"
+#~ "wp-properties/templates/property-overview.php</b> file.  To avoid losing "
+#~ "your changes during updates, create a <b>property-overview.php</b> file "
+#~ "in your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Queste sono le impostazioni per lo shortcode [property_overview].  Lo "
+#~ "shortcode mostra una lista di tutti gli annunci inseriti.<br />\n"
+#~ "\t\t\t\tLe impostazioni di visualizzazione possono essere ulteriormente "
+#~ "personalizzate agendo sul codice del file <b>wp-content/plugins/wp-"
+#~ "properties/templates/property-overview.php</b>.  Per evitare di perdere "
+#~ "le modifiche durante gli aggiornamenti, ti consigliamo di creare un file "
+#~ "<b>property-overview.php</b> nella directory del tuo template."
+
+#~ msgid "Thumbnail size:"
+#~ msgstr "Dimensione miniature:"
+
+#, fuzzy
+#~ msgid "Show children %1s."
+#~ msgstr "Mostra subproprietà."
+
+#, fuzzy
+#~ msgid "Show larger image of %1s when image is clicked using fancybox."
+#~ msgstr ""
+#~ "Mostra l'immagine grande quando un utente clicca sulla miniatura "
+#~ "utilizzando fancybox."
+
+#, fuzzy
+#~ msgid "%1s Page"
+#~ msgstr "Modifica proprietà"
+
+#, fuzzy
+#~ msgid ""
+#~ "The display settings may be edited further by customizing the <b>wp-"
+#~ "content/plugins/wp-properties/templates/property.php</b> file.  To avoid "
+#~ "losing your changes during updates, create a <b>property.php</b> file in "
+#~ "your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Queste sono le impostazioni per lo shortcode [property_overview].  Questo "
+#~ "shortcode ti permette di mostrare una lista di tutti gli annunci inseriti."
+#~ "<br />\n"
+#~ "\t\t\t\tLe impostazioni di visualizzazione possono essere ulteriormente "
+#~ "personalizzate modificando il file <b>wp-content/plugins/wp-properties/"
+#~ "templates/property.php</b>. Per evitare di perdere le modifiche "
+#~ "effettuate durante gli aggiornamenti, ti consigliamo di creare un file "
+#~ "<b>property.php</b> nella directory del tuo template."
+
+#~ msgid "Google Maps"
+#~ msgstr "Google Maps"
+
+#~ msgid "Map Thumbnail Size:"
+#~ msgstr "Dimensione miniatura mappa"
+
+#~ msgid "Map Zoom Level:"
+#~ msgstr "Livello di zoom della mappa:"
+
+#, fuzzy
+#~ msgid "Default is \"%s\""
+#~ msgstr "Template di default"
+
+#, fuzzy
+#~ msgid "Show %1s Title"
+#~ msgstr "Titolo"
+
+#, fuzzy
+#~ msgid "Show Directions Link"
+#~ msgstr "Fornisci indicazioni stradali"
+
+#~ msgid "Address Display"
+#~ msgstr "Visualizzazione indirizzo"
+
+#~ msgid "Available tags:"
+#~ msgstr "Tag disponibili:"
+
+#, fuzzy
+#~ msgid "Currency & Numbers"
+#~ msgstr "Simbolo valuta"
+
+#~ msgid "Currency symbol."
+#~ msgstr "Simbolo valuta"
+
+#, fuzzy
+#~ msgid "Currency symbol placement:"
+#~ msgstr "Simbolo valuta"
+
+#, fuzzy
+#~ msgid "Before number"
+#~ msgstr "Telefono"
+
+#, fuzzy
+#~ msgid "Admin Settings"
+#~ msgstr "Impostazioni"
+
+#~ msgid "Disable plugin."
+#~ msgstr "Disabilita plugin"
+
+#~ msgid "Feature installed, using version"
+#~ msgstr "Caratteristica installata, utilizzando la versione"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please visit <a href=\"%s\">UsabilityDynamics.com</a> to purchase this "
+#~ "feature."
+#~ msgstr ""
+#~ "Vai su<a href=\"%s\">TwinCitiesTech.com</a> per acquistare questa "
+#~ "funzionalità aggiuntiva."
+
+#, fuzzy
+#~ msgid "Revalidate"
+#~ msgstr "Convalidato"
+
+#, fuzzy
+#~ msgid ""
+#~ "Enter in the ID of the %1s you want to look up, and the class will be "
+#~ "displayed below."
+#~ msgstr ""
+#~ "Inserisci l'ID dell'annuncio che vuoi visualizzare, e la classe verrà "
+#~ "visualizzata subito sotto."
+
+#~ msgid "Lookup"
+#~ msgstr "Visualizza"
+
+#, fuzzy
+#~ msgid "Get %1s image data."
+#~ msgstr "Annuncio salvato"
+
+#~ msgid ""
+#~ "Look up the <b>$wp_properties</b> global settings array.  This array "
+#~ "stores all the default settings, which are overwritten by database "
+#~ "settings, and custom filters."
+#~ msgstr ""
+#~ "Visualizza le impostazioni generali dell'array <b>$wp_properties</b>.  "
+#~ "Questo array contiene tutte le impostazioni di default, che vengono "
+#~ "sovrascritte dalle impostazioni del database e dai filtri personalizzati."
+
+#, fuzzy
+#~ msgid "Show $wp_properties"
+#~ msgstr "Mostra subproprietà."
+
+#, fuzzy
+#~ msgid "Clear Cache"
+#~ msgstr "Svuota log"
+
+#~ msgid "(no parent)"
+#~ msgstr "(nessun immobile \"genitore\")"
+
+#~ msgid "Parent"
+#~ msgstr "(Immobile \"genitore\")"
+
+#~ msgid "Template"
+#~ msgstr "Template"
+
+#~ msgid "Page Template"
+#~ msgstr "Template della pagina"
+
+#~ msgid "Default Template"
+#~ msgstr "Template di default"
+
+#~ msgid "Need help? Use the Help tab in the upper right of your screen."
+#~ msgstr ""
+#~ "Serve aiuto? Usa l'Help nell'angolo in alto a destra del tuo schermo."
+
+#~ msgid "Falls Under"
+#~ msgstr "Fa parte di"
+
+#, fuzzy
+#~ msgid "ID of parent property"
+#~ msgstr "Proprietà in affitto."
+
+#~ msgid "Editing %s is disabled, it may be inherited."
+#~ msgstr ""
+#~ "La modifica di %s è disabilitata, probabilmente si tratta di un attributo "
+#~ "ereditato."
+
+#, fuzzy
+#~ msgid "%1s Type"
+#~ msgstr "Tipologia"
+
+#~ msgid "Return to building page."
+#~ msgstr "Torna alla pagina degli immobili."
+
+#, fuzzy
+#~ msgid "Change"
+#~ msgstr "Salva modifiche"
+
+#, fuzzy
+#~ msgid "Featured:"
+#~ msgstr "In vetrina"
+
+#, fuzzy
+#~ msgid "Current Balance"
+#~ msgstr "Moneta"
+
+#, fuzzy
+#~ msgid "Publish the current %s"
+#~ msgstr "Proprietà"
+
+#, fuzzy
+#~ msgid "Add Credits"
+#~ msgstr "Inserisci nuova proprietà"
+
+#, fuzzy
+#~ msgid "Choose Subscription Plan"
+#~ msgstr "Descrizione"
+
+#, fuzzy
+#~ msgid "Subscription Plan Options"
+#~ msgstr "Descrizione"
+
+#, fuzzy
+#~ msgid "Information"
+#~ msgstr "Informazioni generali"
+
+#, fuzzy
+#~ msgid "Expiry Date"
+#~ msgstr "Pagina annuncio"
+
+#~ msgid ""
+#~ "Sorry, we could not find what you were looking for.  Since you are here, "
+#~ "take a look at some of our properties."
+#~ msgstr ""
+#~ "Peccato, non abbiamo trovato nulla che corrisponda alla sua ricerca. "
+#~ "Guarda se tra gli annunci ce n'è uno che fa per te."
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, no properties found - try expanding your search, or <a href=\"%s"
+#~ "\">view all</a>."
+#~ msgstr ""
+#~ "Peccato, nessun annuncio trovato, prova ad estendere la ricerca, oppure "
+#~ "<a href=\"\">visualizza tutti gli annunci disponibili</a>."
+
+#, fuzzy
+#~ msgid "Other"
+#~ msgstr "Altro"
+
+#, fuzzy
+#~ msgid "Cancel reply"
+#~ msgstr "Annulla"
+
+#, fuzzy
+#~ msgid "Payment Method"
+#~ msgstr "Impostazioni annunci"
+
+#~ msgid "Sorry, invalid request."
+#~ msgstr "Spiacenti, paramento invalido"
+
+#~ msgid "Version"
+#~ msgstr "Versione"
+
+#~ msgid "Property Page"
+#~ msgstr "Pagina annuncio"
+
+#, fuzzy
+#~ msgid "Show Property Title"
+#~ msgstr "Tipologia di immobile"
+
+#, fuzzy
+#~ msgid "Property ID:"
+#~ msgstr "Proprietà"
+
+#~ msgid "Interested?"
+#~ msgstr "Interessato?"
+
+#, fuzzy
+#~ msgid "Read Property"
+#~ msgstr "Nuova proprietà"
+
+#, fuzzy
+#~ msgid "Delete Property"
+#~ msgstr "Nuova proprietà"
+
+#, fuzzy
+#~ msgid "Read Private Properties"
+#~ msgstr "Annunci in vetrina"
+
+#~ msgid "Feature Name"
+#~ msgstr "Nome della caratteristica"
+
+#~ msgid "WP-Property Premium Feature: %s updated to version %s from %s."
+#~ msgstr "WP-Property Premium Feature: %s aggiornato alla versione %s da %s."
+
+#~ msgid "WP-Property Premium Feature: %s updated to version %s."
+#~ msgstr "WP-Property Premium Feature: %s aggiornato alla versione %s."
+
+#, fuzzy
+#~ msgid "General"
+#~ msgstr "Impostazioni generali"
+
+#, fuzzy
+#~ msgid "Slug:"
+#~ msgstr "Slug"
+
+#, fuzzy
+#~ msgid "Property Status:"
+#~ msgstr "Statistiche annuncio"
+
+#, fuzzy
+#~ msgid "Property Type:"
+#~ msgstr "Tipologia di immobile"
+
+#~ msgid "Cache table does not exist. Attempting to create:"
+#~ msgstr "La tabella della cache non esiste. Tentativo di creazione:"
+
+#~ msgid "SQL Ran: %s , verifying existance."
+#~ msgstr "SQL Ran: %s , verifica dell'esistenza."
+
+#~ msgid "Table created and exists."
+#~ msgstr "Tabella creata ed esistente."
+
+#~ msgid "Table not created."
+#~ msgstr "Tabella non creata."
+
+#, fuzzy
+#~ msgid "Tomorrow "
+#~ msgstr "Domani"
+
+#, fuzzy
+#~ msgid "Yesterday "
+#~ msgstr "Ieri"
+
+#, fuzzy
+#~ msgid "%d days ago"
+#~ msgstr "%s ore fa"
+
+#~ msgid "Automatically logged failed JSON response: "
+#~ msgstr "Automatically logged failed JSON response: "
+
+#~ msgid "%s hours ago"
+#~ msgstr "%s ore fa"
+
+#, fuzzy
+#~ msgid "%s minutes ago"
+#~ msgstr "%s . \" minuti fa"
+
+#~ msgid "Address Attribute"
+#~ msgstr "Indirizzo"
+
+#, fuzzy
+#~ msgid "Order By:"
+#~ msgstr "Ordine"
+
+#~ msgid "Bed(s):"
+#~ msgstr "Letto(i):"
+
+#~ msgid "Bath(s):"
+#~ msgstr "Bagno(i):"
+
+#~ msgid "Square Ft:"
+#~ msgstr "Piazza:"
+
+#~ msgid ""
+#~ "Be advised, since you don't have permalinks enabled, you must visit the "
+#~ "<a href=\"%s\">Settings Page</a> and set a custom property overview page."
+#~ msgstr ""
+#~ "Attenzione, finché non attiverai i permalinks, devi andare su <a href=\"%s"
+#~ "\">Impostazioni</a> e impostare una pagina personalizzata per il "
+#~ "riepilogo degli annunci inseriti."
+
+#, fuzzy
+#~ msgid ""
+#~ "By default, your property overview will be displayed on the <a href=\"%s"
+#~ "\">%s</a> page. You may change the overview page on the <a href=\"%s"
+#~ "\">Settings Page</a>"
+#~ msgstr ""
+#~ "Di deafult, il nuovo annuncio apparirà nella pagina <a href=\"%s\">"
+#~ "$default_url</a>. Puoi cambiare la pagina di default degli annunci "
+#~ "andando nella <a href=\"%s\">pagina delle Impostazioni</a>"
+
+#~ msgid "Thank you for installing WP-Property!"
+#~ msgstr "Grazie per aver installato WP Property!"
+
+#~ msgid ""
+#~ "<p>You may also visit <a href=\"http://twincitiestech.com/plugins/wp-"
+#~ "property/\">TwinCitiesTech.com</a> for more information, and <a href="
+#~ "\"http://twincitiestech.com/plugins/wp-property/screencasts/"
+#~ "\">screencasts</a>.</div>"
+#~ msgstr ""
+#~ "<p>Per maggiori informazioni puoi visitare il sito ufficiale del plugin "
+#~ "<a href=\"http://twincitiestech.com/plugins/wp-property/\">TwinCitiesTech."
+#~ "com</a> e i<a href=\"http://twincitiestech.com/plugins/wp-property/"
+#~ "screencasts/\">video illustrativi</a>.</div>"
+
+#~ msgid "Validated:"
+#~ msgstr "Convalidato"
+
+#~ msgid "view on map"
+#~ msgstr "Visualizza su Google Maps"
+
+#~ msgid ""
+#~ "City is an automatically created attribute once the address is validated."
+#~ msgstr ""
+#~ "La città è un attributo creato automaticamente una volta che l'indirizzo "
+#~ "è stato convalidato su Google Maps."
+
+#~ msgid "Popup Image Size:"
+#~ msgstr "Dimensioni immagine pop-up:"
+
+#, fuzzy
+#~ msgid "Thumbnail Width"
+#~ msgstr "Larghezza miniatura:"
+
+#~ msgid "Disable slideshow on property page."
+#~ msgstr "Disabilita slideshow nella pagina dell'annuncio."
+
+#~ msgid "Some Slideshow Options"
+#~ msgstr "Opzioni slideshow"
+
+#~ msgid "WPP Slideshow"
+#~ msgstr "WPP Slideshow"
+
+#~ msgid "WPP Slideshow with options"
+#~ msgstr "WPP Slideshow con opzioni"
+
+#~ msgid "Property Types"
+#~ msgstr "Tipologie di proprietà"
+
+#~ msgid ""
+#~ "<p>Create new property types using this menu. </p>\n"
+#~ "\t\t\t\t<p>The <b>slug</b> is automatically created from the title and is "
+#~ "used in the back-end.  It is also used for template selection, example: "
+#~ "floorplan will look for a template called property-floorplan.php in your "
+#~ "theme folder, or default to property.php if nothing is found.</p>\n"
+#~ "\t\t\t\t<p>If <b>Searchable</b> is checked then the property will be "
+#~ "loaded for search, and available on the property search widget.</p>\n"
+#~ "\t\t\t\t<p>If <b>Location Matters</b> is checked, then an address field "
+#~ "will be displayed for the property, and validated against Google Maps "
+#~ "API.  Additionally, the property will be displayed on the SuperMap, if "
+#~ "the feature is installed.</p>\n"
+#~ "\t\t\t\t<p><b>Hidden Attributes</b> determine which attributes are not "
+#~ "applicable to the given property type, and will be grayed out in the back-"
+#~ "end.</p>\n"
+#~ "\t\t\t\t<p><b>Inheritance</b> determines which attributes should be "
+#~ "automatically inherited from the parent property.</p>"
+#~ msgstr ""
+#~ "<p>Crea una nuova tipologia di immobile tramite questo menu</p>\n"
+#~ "\t\t\t\t<p>Lo <b>slug</b> viene creato in automatico dal titolo e viene "
+#~ "utilizzato nel back-end.  Esso viene utilizzato anche per la selezione "
+#~ "del template da utilizzare: ad esempio: \"appartamento\" va a cercare - "
+#~ "se esiste - un template chiamato property-appartamento.php nella cartella "
+#~ "del tema, in caso contrario utilizzerà il template di default, che è "
+#~ "property.php.</p>\n"
+#~ "\t\t\t\t<p>Se <b>Ricercabile</b> è spuntato l'annuncio verrà mostrato nei "
+#~ "risultati di ricerca e negli widget di ricerca.</p>\n"
+#~ "\t\t\t\t<p>Se <b>La location conta</b> è spuntato, allora verrà mostrato "
+#~ "anche l'indirizzo nell'annuncio, e convalidato tramite Google Maps API.  "
+#~ "Inoltre la posizione dell'immobile verrà inserita anche nella Supermap, "
+#~ "se l'opzione è stata installata.</p>\n"
+#~ "\t\t\t\t<p>Gli <b>Attributi nascosti</b> determinano quali attributi non "
+#~ "sono applicabili ad una determinata tipologia di immobile, e appariranno "
+#~ "in grigio nel back-end.</p>\n"
+#~ "\t\t\t\t<p>Gli<b>Attributi ereditati</b> determinano quali attributi "
+#~ "vengono automaticamente ereditati dall'immobile \"genitore\".</p>"
+
+#~ msgid "Show common values."
+#~ msgstr "Mostra valori comuni."
+
+#~ msgid "Cancel."
+#~ msgstr "Annulla."
+
+#~ msgid "Plugins"
+#~ msgstr "Plugins"
+
+#~ msgid "Troubleshooting"
+#~ msgstr "Risoluzione problemi"
+
+#, fuzzy
+#~ msgid "View list of available shortcodes."
+#~ msgstr "Shortcodes disponibili:"
+
+#~ msgid "These are the general display settings"
+#~ msgstr "Impostazioni generali di visualizzazione degli annunci"
+
+#~ msgid ""
+#~ "After adding/removing image size, be sure to <a href=\"%s\">regenerate "
+#~ "thumbnails</a> using the Regenerate Thumbnails plugin."
+#~ msgstr ""
+#~ "Dopo aver aggiunto/rimosso le dimensioni immagine, assicurati di <a href="
+#~ "\"%s\">rigenerare le miniature</a> con il plugin Regenerate Thumbnails."
+
+#~ msgid ""
+#~ "We strongly recommend to <a href=\"http://wordpress.org/extend/plugins/"
+#~ "regenerate-thumbnails/\">Regenerate Thumbnails</a> plugin by Viper007Bond."
+#~ msgstr ""
+#~ "Ti consigliamo vivamente di utilizzare il plugin <a href=\"http://"
+#~ "wordpress.org/extend/plugins/regenerate-thumbnails/\">Regenerate "
+#~ "Thumbnails</a> di Viper007Bond."
+
+#~ msgid ""
+#~ "Display larger image, or slideshow, at the top of the property listing."
+#~ msgstr ""
+#~ "Mostra l'immagine grande, o lo slideshow, in testa ai listing degli "
+#~ "annunci."
+
+#~ msgid "These settings are for the main property page on the back-end."
+#~ msgstr ""
+#~ "Queste impostazioni riguardano la pagina generale degli annunci nel back-"
+#~ "end."
+
+#~ msgid ""
+#~ "Premium features will become available shortly, we are still waiting on "
+#~ "more feedback on the core of the plugin."
+#~ msgstr "Le opzioni Premium saranno a breve disponibili."
+
+#~ msgid "[learn more]"
+#~ msgstr "[approfondisci]"
+
+#, fuzzy
+#~ msgid "Show Image?"
+#~ msgstr "Mostra %s Immagini"
+
+#~ msgid "select image dimensions"
+#~ msgstr "Seleziona dimensioni immagine"
+
+#~ msgid ""
+#~ "This width used on \"Media &rarr; Slideshow\" page to display available "
+#~ "images"
+#~ msgstr ""
+#~ "La larghezza impostata nella pagina \"Media &rarr; Slideshow\" per "
+#~ "mostare le immagini disponibili"
+
+#~ msgid "Property Slideshow <br>(displayed on individual property pages)"
+#~ msgstr ""
+#~ "Slideshow annuncio <br>(visualizzata nella pagina di dettaglio "
+#~ "dell'annuncio)"
+
+#, fuzzy
+#~ msgid "For rent"
+#~ msgstr "In affitto"
+
+#, fuzzy
+#~ msgid "For sale"
+#~ msgstr "In vendita"
+
+#~ msgid ""
+#~ "If unchecked, you will have to copy and paste one of the shortcodes into "
+#~ "the content to display property information on the page."
+#~ msgstr ""
+#~ "Se non lo spunti, dovrai copiare ed incollare uno degli shortcodes nel "
+#~ "contenuto nella tua pagina per mostrare le informazioni relative "
+#~ "all'annuncio."
+
+#~ msgid "[property_overview] - Property Overview"
+#~ msgstr "[property_overview] - Descrizione immobile"
+
+#~ msgid "Speaker"
+#~ msgstr "Speaker"

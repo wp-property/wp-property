@@ -1,0 +1,1718 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-29 13:36+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: \n"
+"Language: da_DK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_x;_n\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-slideshow.php:90
+#, fuzzy
+msgid "Manage Slideshow"
+msgstr "Håndter links"
+
+#: lib/class-wpp-slideshow.php:249
+msgid "Display as carousel gallery."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:253
+msgid "Gallery transition type:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:255
+msgid "Crossfade betweens images"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:256
+msgid "Fade into background color"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:257
+msgid "Pulse"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:258
+msgid "Slide"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:259
+msgid "Fadeslide"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:265
+#, fuzzy
+msgid "Crop images."
+msgstr "Billede ikke fundet"
+
+#: lib/class-wpp-slideshow.php:270
+msgid "Enforce minimum image width."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:274
+msgid "Carousel Thumbnail Size:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:475
+msgid "Slideshow Options"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:773 lib/class-wpp-slideshow.php:1447
+msgid "Slideshow Images:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:795 lib/class-wpp-slideshow.php:1461
+msgid "All Images:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:850
+msgid "Image is too small."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:901 lib/class-wpp-slideshow.php:914
+msgid "Slideshow"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:979 lib/class-wpp-slideshow.php:1155
+#: lib/class-wpp-slideshow.php:1412
+msgid "Global Slideshow"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:984
+msgid "Clicking on an image will open up the property its attached to."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:988
+#, fuzzy
+msgid "Show property title and tagline in slideshow."
+msgstr "Vis side navigation i bunden af resultatet."
+
+#: lib/class-wpp-slideshow.php:992
+msgid "Slideshow Size: "
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1009
+#, php-format
+msgid ""
+"The global slideshow will look for all images that are over the specified "
+"size.  Add images to the global slideshow <a href=\"%1$s\">here</a>. The "
+"built-in sizes, such as <b>medium</b> and <b>large</b> may not work because "
+"WordPress does not crop them during resizing, resulting in artbitrary "
+"heights. "
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1019
+msgid "Display in Global Slideshow Caption:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1023
+#, fuzzy
+msgid "Title."
+msgstr "Titel"
+
+#: lib/class-wpp-slideshow.php:1024
+msgid "Excerpt."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1025
+#, fuzzy
+msgid "Tagline."
+msgstr "Tilføjelse"
+
+#: lib/class-wpp-slideshow.php:1031
+msgid "Single Listing Slideshow"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1054
+msgid "Slideshow image size to be used for single property pages."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1058
+#, fuzzy
+msgid "Show pagination buttons in slideshow."
+msgstr "Vis side navigation i bunden af resultatet."
+
+#: lib/class-wpp-slideshow.php:1067
+msgid "Thumbnail Size"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1072
+msgid ""
+"This width is used on \"Slideshow\" page on the Property editing page to "
+"display available images, this setting <b>does not</b> affect the actual "
+"slideshow on the front-end."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1078
+msgid "Settings"
+msgstr "Instillinger"
+
+#: lib/class-wpp-slideshow.php:1083
+msgid "Effect:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1089
+msgid "Effect that will be used to change from one image to the next."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1093
+msgid "Slices:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1099
+msgid ""
+"If the transition includes slices, this number determines how many slices to "
+"cut the image up into during transitions."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1103
+msgid "Animation Speed:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1109
+msgid "How quickly the transition should happen, in miliseconds."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1113
+msgid "Pause Time:"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1119
+msgid "The pause time between transitions."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1196
+msgid "Slideshow selection and order saved."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1365
+msgid "Loading..."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1429
+msgid "WP-Property Slideshow"
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1430
+msgid ""
+"This slideshow can be integrated into your front-end pages by either using "
+"the shortcode, or pasting PHP code into your theme."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1433
+msgid ""
+"Drag images from selection on the left to the selection on the right, and "
+"then click save."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1434
+#, php-format
+msgid ""
+"This list gets all images from your media library that are over %s pixels "
+"wide and %s pixels tall."
+msgstr ""
+
+#: lib/class-wpp-slideshow.php:1440
+msgid "Save Selection and Order"
+msgstr ""
+
+#: wp-property-slideshow.php:43
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-slideshow.php:51
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-slideshow.php:59
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-slideshow.php:63
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-slideshow.php:84
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""
+
+#~ msgid "Building"
+#~ msgstr "Bygning"
+
+#~ msgid "Floorplan"
+#~ msgstr "Stue plan"
+
+#~ msgid "Single Family Home"
+#~ msgstr "Villa"
+
+#~ msgid "Address"
+#~ msgstr "Adresse"
+
+#~ msgid "Price"
+#~ msgstr "Pris"
+
+#~ msgid "Bedrooms"
+#~ msgstr "Værelser"
+
+#~ msgid "Bathrooms"
+#~ msgstr "Badeværelser"
+
+#~ msgid "Deposit"
+#~ msgstr "Depot"
+
+#~ msgid "Area"
+#~ msgstr "Område"
+
+#~ msgid "Phone Number"
+#~ msgstr "Telefon nr"
+
+#~ msgid "Lease Terms"
+#~ msgstr "Lejebetingelser"
+
+#~ msgid "Pet Policy"
+#~ msgstr "Kæledyrs politik"
+
+#~ msgid "School"
+#~ msgstr "Skole"
+
+#~ msgid "Tagline"
+#~ msgstr "Tilføjelse"
+
+#~ msgid "Studio"
+#~ msgstr "Studio"
+
+#~ msgid "The property type will determine the layout."
+#~ msgstr "Ejendomstypen vil bestemme dit layout"
+
+#~ msgid ""
+#~ "Customize what appears in search results in the attribute section.  For "
+#~ "example: 1bed, 2baths, area varies slightly."
+#~ msgstr ""
+#~ "Tilpas hvad der vises i søgeresultaterne for detaljerne. F.eks.: 1 seng, "
+#~ "2 bade, område varierer. "
+
+#~ msgid "Will appear on overview pages and on top of every listing page."
+#~ msgstr "Vises på oversigt sider og i toppen af hver enkelt side."
+
+#, fuzzy
+#~ msgid "View "
+#~ msgstr "Vis alle"
+
+#~ msgid "Property Type"
+#~ msgstr "Ejendoms Type"
+
+#~ msgid "City"
+#~ msgstr "By"
+
+#~ msgid "For Sale"
+#~ msgstr "Til Salg"
+
+#~ msgid "For Rent"
+#~ msgstr "Udlejes"
+
+#~ msgid "This is a rental property."
+#~ msgstr "Dette er til udlejning. "
+
+#~ msgid "This property is for sale."
+#~ msgstr "Dette er til salg. "
+
+#~ msgid "Set Coordinates Manually."
+#~ msgstr "Vælg koordinaterne manuelt."
+
+#~ msgid "Latitude"
+#~ msgstr "Breddegrad"
+
+#~ msgid "Longitude"
+#~ msgstr "Længdegrad"
+
+#~ msgid "Yes"
+#~ msgstr "Ja"
+
+#~ msgid "Format phone number."
+#~ msgstr "Telefon nr. layout"
+
+#, fuzzy
+#~ msgid " sq. ft."
+#~ msgstr "Kvadrat meter"
+
+#~ msgid "Address was validated by Google Maps."
+#~ msgstr "Adresse blev valideret af Google Maps."
+
+#~ msgid ""
+#~ "Address has not yet been validated, should be formatted as: street, city, "
+#~ "state, postal code, country. Locations are validated through Google Maps."
+#~ msgstr ""
+#~ "Adresse er endnu ikke valideret, skal være formateret som: gade, by, "
+#~ "stat, postnummer, land. Steder bliver valideret via Google Maps."
+
+#, fuzzy
+#~ msgid "Show"
+#~ msgstr "Skole"
+
+#~ msgid "Featured"
+#~ msgstr "Fasilitet"
+
+#, fuzzy
+#~ msgid "Add to Featured"
+#~ msgstr "Tilføj facilitet"
+
+#~ msgid "Processing..."
+#~ msgstr "Behandler..."
+
+#, fuzzy
+#~ msgid "Uploading"
+#~ msgstr "Upload filer"
+
+#, fuzzy
+#~ msgid "Upload Image"
+#~ msgstr "Tilføj Billede"
+
+#, fuzzy
+#~ msgid "Previous"
+#~ msgstr "Forrige"
+
+#~ msgid "Next"
+#~ msgstr "Næste"
+
+#, fuzzy
+#~ msgid "Show %s entries"
+#~ msgstr "Billede ikke fundet"
+
+#, fuzzy
+#~ msgid "No matching records found"
+#~ msgstr "Billede ikke fundet"
+
+#, fuzzy
+#~ msgid "Search:"
+#~ msgstr "Søg"
+
+#, fuzzy
+#~ msgid "Display:"
+#~ msgstr "Vis Adresse"
+
+#, fuzzy
+#~ msgid "Please save schedule first."
+#~ msgstr "Gem før du vil tilføge billeder."
+
+#, fuzzy
+#~ msgid "Manage Admin Tools"
+#~ msgstr "Håndter links"
+
+#~ msgid "Developer"
+#~ msgstr "Udvikler"
+
+#, fuzzy
+#~ msgid "%1s Attributes"
+#~ msgstr "Skjulte Attributter"
+
+#, fuzzy
+#~ msgid "Advanced Stats Settings:"
+#~ msgstr "Generelle indstillinger"
+
+#~ msgid "Delete"
+#~ msgstr "Slet"
+
+#, fuzzy
+#~ msgid "Toggle Advanced Settings"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "Sortable."
+#~ msgstr "Sorterbar"
+
+#, fuzzy
+#~ msgid "Searchable."
+#~ msgstr "Søgebar"
+
+#, fuzzy
+#~ msgid "Format: numeric."
+#~ msgstr "Telefon nr. layout"
+
+#, fuzzy
+#~ msgid "Show in \"All Properties\" table."
+#~ msgstr "Vis undergruppe ejendomme."
+
+#, fuzzy
+#~ msgid "Delete Attribute"
+#~ msgstr "Skjulte Attributter"
+
+#, fuzzy
+#~ msgid "Free Text"
+#~ msgstr "Widget Tekst"
+
+#, fuzzy
+#~ msgid "%1s Types"
+#~ msgstr "Type"
+
+#~ msgid "Type"
+#~ msgstr "Type"
+
+#~ msgid "Hidden Attributes"
+#~ msgstr "Skjulte Attributter"
+
+#~ msgid "Searchable"
+#~ msgstr "Søgebar"
+
+#~ msgid "Location Matters"
+#~ msgstr "Lokation er betydningsfuld"
+
+#, fuzzy
+#~ msgid "Parent Selection"
+#~ msgstr "Hoved facilitet"
+
+#~ msgid "Child Properties"
+#~ msgstr "Undergruppe Ejendomme"
+
+#, fuzzy
+#~ msgid "Display in featured listings."
+#~ msgstr "Sorter ejendomme efter faciliteter."
+
+#~ msgid "Property updated. <a href=\"%s\">view property</a>"
+#~ msgstr "Ejendommen er opdateret. <a href=\"%s\">vis ejendommen</a>"
+
+#~ msgid "Custom field updated."
+#~ msgstr "Brugerdefineret felt opdateret."
+
+#~ msgid "Custom field deleted."
+#~ msgstr "Brugerdefineret felt slettet."
+
+#~ msgid "Property updated."
+#~ msgstr "Ejendommen er opdateret."
+
+#~ msgid "Property restored to revision from %s"
+#~ msgstr "Ejendom gendannet fra %s"
+
+#~ msgid "Property published. <a href=\"%s\">View property</a>"
+#~ msgstr "Ejendom udgivet <a href=\"%s\">Vis Ejendom</a>"
+
+#~ msgid "Property saved."
+#~ msgstr "Ejendom gemt"
+
+#~ msgid ""
+#~ "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+#~ msgstr "Ejendom tilføjet. <a target=\"_blank\" href=\"%s\">Vis ejendom</a>"
+
+#~ msgid "Title"
+#~ msgstr "Titel"
+
+#~ msgid "Overview"
+#~ msgstr "Oversigt"
+
+#~ msgid "Order"
+#~ msgstr "Sorter"
+
+#~ msgid "Search"
+#~ msgstr "Søg"
+
+#~ msgid "Floor plans at location:"
+#~ msgstr "Stueplan på lokationen"
+
+#, fuzzy
+#~ msgid "View Properties"
+#~ msgstr "Vis Ejendom"
+
+#, fuzzy
+#~ msgid "Add/Edit Properties"
+#~ msgstr "Rediger Ejendom"
+
+#, fuzzy
+#~ msgid "Edit Other Properties"
+#~ msgstr "Andre Ejendomme"
+
+#, fuzzy
+#~ msgid "Delete Properties"
+#~ msgstr "Alle Ejendomme"
+
+#, fuzzy
+#~ msgid "Publish Properties"
+#~ msgstr "Ejendommen blev ikke oprettet."
+
+#, fuzzy
+#~ msgid "Manage Settings"
+#~ msgstr "Håndter links"
+
+#, fuzzy
+#~ msgid "Manage Taxonomies"
+#~ msgstr "Håndter kategorier"
+
+#, fuzzy
+#~ msgid "Properties"
+#~ msgstr "Alle Ejendomme"
+
+#~ msgid "Property"
+#~ msgstr "Ejendom"
+
+#~ msgid "Property: %s"
+#~ msgstr "Ejendom: %s"
+
+#~ msgid "Sidebar located on the %s page."
+#~ msgstr "Sidebar placeret på %s side."
+
+#~ msgid "Features"
+#~ msgstr "Faciliteter"
+
+#~ msgid "Feature"
+#~ msgstr "Facilitet"
+
+#~ msgid "Search Features"
+#~ msgstr "Søg faciliteter"
+
+#~ msgid "All Features"
+#~ msgstr "Alle faciliteter"
+
+#~ msgid "Parent Feature"
+#~ msgstr "Hoved facilitet"
+
+#~ msgid "Parent Feature:"
+#~ msgstr "Hoved facilitet:"
+
+#~ msgid "Edit Feature"
+#~ msgstr "Rediger facilitet"
+
+#~ msgid "Update Feature"
+#~ msgstr "Opdater facilitet"
+
+#~ msgid "Add New Feature"
+#~ msgstr "Tilføj facilitet"
+
+#~ msgid "New Feature Name"
+#~ msgstr "Nyt faciliteter navn"
+
+#~ msgid "Community Features"
+#~ msgstr "Fælles faciliteter"
+
+#~ msgid "Community Feature"
+#~ msgstr "Fælles facilitet"
+
+#~ msgid "Search Community Features"
+#~ msgstr "Søg på fælles faciliteter"
+
+#~ msgid "All Community Features"
+#~ msgstr "Alle fælles faciliteter "
+
+#~ msgid "Parent Community Feature"
+#~ msgstr "Hoved, fælles facilitet"
+
+#~ msgid "Parent Community Feature:"
+#~ msgstr "Hoved, fælles facilitet:"
+
+#~ msgid "Edit Community Feature"
+#~ msgstr "Rediger fælles facilitet"
+
+#~ msgid "Update Community Feature"
+#~ msgstr "Opdater fælles facilitet"
+
+#~ msgid "Add New Community Feature"
+#~ msgstr "Tilføj fælles facilitet"
+
+#~ msgid "New Community Feature Name"
+#~ msgstr "Nyt fælles facilitet navn"
+
+#~ msgid "All Properties"
+#~ msgstr "Alle Ejendomme"
+
+#, fuzzy
+#~ msgid "Add Property"
+#~ msgstr "Tilføj en Ejendom"
+
+#~ msgid "Add New Property"
+#~ msgstr "Tilføj en Ejendom"
+
+#~ msgid "Edit Property"
+#~ msgstr "Rediger Ejendom"
+
+#~ msgid "New Property"
+#~ msgstr "Ny Ejendom"
+
+#~ msgid "View Property"
+#~ msgstr "Vis Ejendom"
+
+#~ msgid "Search Properties"
+#~ msgstr "Søg ejendomme"
+
+#~ msgid "No properties found"
+#~ msgstr "Ingen ejendomme fundet"
+
+#~ msgid "No properties found in Trash"
+#~ msgstr "Ingen ejendomme fundet i papirkurv"
+
+#~ msgid "Default"
+#~ msgstr "Standard"
+
+#, fuzzy
+#~ msgid "There are no available premium features."
+#~ msgstr "Gennemtving kontrol af tilladt ekstra faciliteter."
+
+#, fuzzy
+#~ msgid "WP-Property Premium Feature: %s"
+#~ msgstr "Hoved facilitet"
+
+#, fuzzy
+#~ msgid "You have the latest premium features versions."
+#~ msgstr "Gennemtving kontrol af tilladt ekstra faciliteter."
+
+#~ msgid "No"
+#~ msgstr "Nej"
+
+#~ msgid " sq ft."
+#~ msgstr "Kvadrat meter"
+
+#~ msgid "Get Directions"
+#~ msgstr "Vis Mapper"
+
+#~ msgid "General Settings"
+#~ msgstr "Generelle indstillinger"
+
+#~ msgid "Find your property"
+#~ msgstr "Find din ejendom"
+
+#~ msgid "Edit"
+#~ msgstr "Rediger"
+
+#~ msgid "Contact us"
+#~ msgstr "Kontakt os"
+
+#~ msgid "Explore"
+#~ msgstr "Gennemse"
+
+#~ msgid "Message"
+#~ msgstr "Besked"
+
+#~ msgid "Name"
+#~ msgstr "Navn"
+
+#~ msgid "Send Message"
+#~ msgstr "Send Besked"
+
+#~ msgid "Submit Inquiry"
+#~ msgstr "Send en forespørgsel"
+
+#~ msgid "Inquiry"
+#~ msgstr "Forespørgsel"
+
+#~ msgid "Comment About"
+#~ msgstr "Kommenter"
+
+#~ msgid "Inquire About"
+#~ msgstr "Forespørgsel om"
+
+#~ msgid "Inquiry About:"
+#~ msgstr "Forespørgsel om:"
+
+#~ msgid "Inquiry message:"
+#~ msgstr "Forespørgsel:"
+
+#~ msgid "You forgot to enter your e-mail."
+#~ msgstr "Du skal skrive din e-mail."
+
+#~ msgid "You forgot to enter a message."
+#~ msgstr "Du skal skrive en besked."
+
+#~ msgid "You forgot to enter your  name."
+#~ msgstr "Du skal skrive dit navn."
+
+#~ msgid "Error with sending message. Please contact site administrator."
+#~ msgstr ""
+#~ "Fejl i forsøg på at sende besked. Kontakt venligst webstedets "
+#~ "administrator."
+
+#~ msgid "Thank you for your message."
+#~ msgstr "Tak for beskeden."
+
+#, fuzzy
+#~ msgid "Status"
+#~ msgstr "Kontakt os"
+
+#, fuzzy
+#~ msgid "Date"
+#~ msgstr "Slet"
+
+#, fuzzy
+#~ msgid "Published"
+#~ msgstr "Udgiv indlæg"
+
+#, fuzzy
+#~ msgid "Pending"
+#~ msgstr "Upload filer"
+
+#, fuzzy
+#~ msgid "General Help"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "Default Properties Page"
+#~ msgstr "Fasiliteter Ejendomme"
+
+#, fuzzy
+#~ msgid "Premium Features"
+#~ msgstr "Hoved facilitet"
+
+#, fuzzy
+#~ msgid "More Help"
+#~ msgstr "Mere"
+
+#, fuzzy
+#~ msgid "published"
+#~ msgstr "Udgiv indlæg"
+
+#, fuzzy
+#~ msgid "pending"
+#~ msgstr "Upload filer"
+
+#, fuzzy
+#~ msgid "Nothing found."
+#~ msgstr "Billede ikke fundet"
+
+#, fuzzy
+#~ msgid "Status Updated"
+#~ msgstr "Fasilitets Navn"
+
+#, fuzzy
+#~ msgid "or"
+#~ msgstr "Mere"
+
+#~ msgid "No published properties."
+#~ msgstr "Ejendommen blev ikke oprettet."
+
+#~ msgid "Title:"
+#~ msgstr "Titel:"
+
+#, fuzzy
+#~ msgid "Attributes to Display:"
+#~ msgstr "Vis Adresse"
+
+#~ msgid "%s at %s for %s"
+#~ msgstr "%s ved %s for %s"
+
+#~ msgid "More"
+#~ msgstr "Mere"
+
+#~ msgid "View All"
+#~ msgstr "Vis alle"
+
+#, fuzzy
+#~ msgid "Hide images."
+#~ msgstr "Skjul Billeder?"
+
+#~ msgid "Image Size:"
+#~ msgstr "Billede størrelse"
+
+#~ msgid "Address Format:"
+#~ msgstr "Adresse layout:"
+
+#~ msgid "Hide Images?"
+#~ msgstr "Skjul Billeder?"
+
+#, fuzzy
+#~ msgid "Featured %1s"
+#~ msgstr "Faciliteter"
+
+#, fuzzy
+#~ msgid "%1s Search"
+#~ msgstr "Søg"
+
+#, fuzzy
+#~ msgid "All Attributes"
+#~ msgstr "Skjulte Attributter"
+
+#, fuzzy
+#~ msgid "Grouped Attributes"
+#~ msgstr "Skjulte Attributter"
+
+#~ msgid "Use pagination"
+#~ msgstr "Brug side navigation."
+
+#~ msgid "Items per page"
+#~ msgstr "Elementer pr side"
+
+#~ msgid "Search Properies"
+#~ msgstr "Søg Ejendomme"
+
+#~ msgid "List of all images attached to the current property"
+#~ msgstr "Oversigt over alle ejendommens billeder"
+
+#, fuzzy
+#~ msgid "Large Image Size:"
+#~ msgstr "Billede størrelse"
+
+#, fuzzy
+#~ msgid "Show Image Descriptions."
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "API Failure: %1s."
+#~ msgstr "Faciliteter"
+
+#~ msgid "User"
+#~ msgstr "Bruger"
+
+#, fuzzy
+#~ msgid "None"
+#~ msgstr "Nej"
+
+#, fuzzy
+#~ msgid "Manage Real Estate Agents"
+#~ msgstr "Håndter kategorier"
+
+#~ msgid "Primary"
+#~ msgstr "Primær"
+
+#~ msgid "Save"
+#~ msgstr "Gem"
+
+#~ msgid "Images"
+#~ msgstr "Billeder"
+
+#, fuzzy
+#~ msgid "Agent Fields"
+#~ msgstr "Ejendoms felter"
+
+#~ msgid "Add New"
+#~ msgstr "Tilføj Ny"
+
+#~ msgid "User removed."
+#~ msgstr "Bruger fjernet."
+
+#~ msgid "Please enter a valid e-mail."
+#~ msgstr "Indtast en gyldig e-mail."
+
+#~ msgid "Please save first to add images."
+#~ msgstr "Gem før du vil tilføge billeder."
+
+#~ msgid "No images found."
+#~ msgstr "Billede ikke fundet"
+
+#~ msgid "Remove"
+#~ msgstr "Fjern"
+
+#~ msgid "Add Image"
+#~ msgstr "Tilføj Billede"
+
+#~ msgid "Moderate comments"
+#~ msgstr "Rediger kommentarer"
+
+#~ msgid "Manage categories"
+#~ msgstr "Håndter kategorier"
+
+#~ msgid "Manage links"
+#~ msgstr "Håndter links"
+
+#~ msgid "Upload files"
+#~ msgstr "Upload filer"
+
+#~ msgid "Edit posts"
+#~ msgstr "Rediger Indlæg"
+
+#~ msgid "Edit other's posts"
+#~ msgstr "Rediger andre indlæg"
+
+#~ msgid "Edit published posts"
+#~ msgstr "Rediger indlæg der er udgivet"
+
+#~ msgid "Publish posts"
+#~ msgstr "Udgiv indlæg"
+
+#~ msgid "Edit pages"
+#~ msgstr "Gediger sider"
+
+#~ msgid "Read"
+#~ msgstr "Læs"
+
+#~ msgid "Edit other's pages"
+#~ msgstr "Rediger andre sider"
+
+#~ msgid "Edit published pages"
+#~ msgstr "Rediger sider der er udgivet"
+
+#~ msgid "Publish pages"
+#~ msgstr "Udgiv sider"
+
+#~ msgid "Delete pages"
+#~ msgstr "Slet sider"
+
+#~ msgid "Delete other's pages"
+#~ msgstr "Slet andre sider"
+
+#~ msgid "Delete published pages"
+#~ msgstr "Slet udgivne sider"
+
+#~ msgid "Delete posts"
+#~ msgstr "Slæt indlæg"
+
+#~ msgid "Delete other's posts"
+#~ msgstr "Slæt andre indlæg"
+
+#~ msgid "Delete published posts"
+#~ msgstr "Slet indlæg der er udgivet"
+
+#~ msgid "Delete private posts"
+#~ msgstr "Slet private indlæg"
+
+#~ msgid "Edit private posts"
+#~ msgstr "Rediger private indlæg"
+
+#~ msgid "Read private posts"
+#~ msgstr "Læs private indlæg"
+
+#~ msgid "Delete private pages"
+#~ msgstr "Slet private sider"
+
+#~ msgid "Edit private pages"
+#~ msgstr "Rediger private sider"
+
+#~ msgid "Read private pages"
+#~ msgstr "Læs private sider"
+
+#~ msgid "Image"
+#~ msgstr "Billede"
+
+#~ msgid "Widget Text"
+#~ msgstr "Widget Tekst"
+
+#~ msgid "Email Address"
+#~ msgstr "Email Addresse"
+
+#, fuzzy
+#~ msgid "<b>Page Settings</b><br/>"
+#~ msgstr "Håndter links"
+
+#, fuzzy
+#~ msgid "Name:"
+#~ msgstr "Navn"
+
+#, fuzzy
+#~ msgid "Page:"
+#~ msgstr "Billede"
+
+#, fuzzy
+#~ msgid "Page"
+#~ msgstr "Billede"
+
+#, fuzzy
+#~ msgid "Search..."
+#~ msgstr "Søg"
+
+#, fuzzy
+#~ msgid "Template Settings:"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "Template:"
+#~ msgstr "Skabelon"
+
+#~ msgid "Save Changes"
+#~ msgstr "Gem ændringer"
+
+#, fuzzy
+#~ msgid "Property Form"
+#~ msgstr "Ejendom: %s"
+
+#, fuzzy
+#~ msgid "Subscription Plan"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Templates"
+#~ msgstr "Skabelon"
+
+#, fuzzy
+#~ msgid "Overview Page"
+#~ msgstr "Oversigt"
+
+#, fuzzy
+#~ msgid "Edit Page"
+#~ msgstr "Gediger sider"
+
+#, fuzzy
+#~ msgid "Form Name"
+#~ msgstr "Til Salg"
+
+#, fuzzy
+#~ msgid "Shortcode"
+#~ msgstr "Oversigt koder"
+
+#, fuzzy
+#~ msgid "General Options"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "Subscriptions Plans"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Propery Attributes"
+#~ msgstr "Skjulte Attributter"
+
+#, fuzzy
+#~ msgid "Just a name of Subscription plan."
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Duration"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Is Featured"
+#~ msgstr "Fasilitet"
+
+#, fuzzy
+#~ msgid "Images Limit"
+#~ msgstr "Billeder"
+
+#~ msgid "Description"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Property Forms"
+#~ msgstr "Ejendom: %s"
+
+#, fuzzy
+#~ msgid "Edit %s Page"
+#~ msgstr "Gediger sider"
+
+#~ msgid "Price:"
+#~ msgstr "Pris:"
+
+#, fuzzy
+#~ msgid "Duration:"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Images:"
+#~ msgstr "Billeder"
+
+#, fuzzy
+#~ msgid "Renewal of Subscription Plan"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Options:"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "day"
+#~ msgstr "Idag"
+
+#, fuzzy
+#~ msgid "Manage FEPS"
+#~ msgstr "Håndter links"
+
+#, fuzzy
+#~ msgid "created"
+#~ msgstr "Fasilitet"
+
+#, fuzzy
+#~ msgid "updated"
+#~ msgstr "Opdater facilitet"
+
+#, fuzzy
+#~ msgid "Publish Now"
+#~ msgstr "Udgiv indlæg"
+
+#, fuzzy
+#~ msgid "Add New %s"
+#~ msgstr "Tilføj Ny"
+
+#, fuzzy
+#~ msgid "Wrong FEPS form used"
+#~ msgstr "Ejendommen er opdateret."
+
+#, fuzzy
+#~ msgid "FEPS forms updated."
+#~ msgstr "Ejendommen er opdateret."
+
+#, fuzzy
+#~ msgid "%1$s Content"
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "%1$s Type"
+#~ msgstr "Type"
+
+#, fuzzy
+#~ msgid "Form Name:"
+#~ msgstr "Til Salg"
+
+#, fuzzy
+#~ msgid "Shortcode:"
+#~ msgstr "Oversigt koder"
+
+#, fuzzy
+#~ msgid "General Options:"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "%1$s Status:"
+#~ msgstr "Kontakt os"
+
+#, fuzzy
+#~ msgid "%1$s Type:"
+#~ msgstr "Type"
+
+#, fuzzy
+#~ msgid "%1$s Attributes"
+#~ msgstr "Skjulte Attributter"
+
+#, fuzzy
+#~ msgid "Attribute"
+#~ msgstr "Skjulte Attributter"
+
+#, fuzzy
+#~ msgid "%1$s Title"
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "Required"
+#~ msgstr "Fasilitet"
+
+#, fuzzy
+#~ msgid "Editing"
+#~ msgstr "Rediger"
+
+#, fuzzy
+#~ msgid "Subscription Plans"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "User Account Approved."
+#~ msgstr "Bruger fjernet."
+
+#, fuzzy
+#~ msgid "Please type in your e-mail address."
+#~ msgstr "Indtast en gyldig e-mail."
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "Opdater facilitet"
+
+#, fuzzy
+#~ msgid "Publish"
+#~ msgstr "Udgiv indlæg"
+
+#, fuzzy
+#~ msgid "Submit"
+#~ msgstr "Send en forespørgsel"
+
+#, fuzzy
+#~ msgid "FEPS Information"
+#~ msgstr "Ejendommen er opdateret."
+
+#, fuzzy
+#~ msgid "Flyer Display"
+#~ msgstr "Vis Adresse"
+
+#, fuzzy
+#~ msgid "Show %1$s images."
+#~ msgstr "Billede ikke fundet"
+
+#, fuzzy
+#~ msgid "PDF Flyer for property \""
+#~ msgstr "Find din ejendom"
+
+#, fuzzy
+#~ msgid "Manage Capabilities"
+#~ msgstr "Håndter kategorier"
+
+#, fuzzy
+#~ msgid "Allows user to publish properties."
+#~ msgstr "Ejendommen blev ikke oprettet."
+
+#, fuzzy
+#~ msgid "Other manage capabilities"
+#~ msgstr "Håndter kategorier"
+
+#, fuzzy
+#~ msgid "WP Property Capabilities"
+#~ msgstr "Ejendommen er opdateret."
+
+#, fuzzy
+#~ msgid "Role"
+#~ msgstr "Fjern"
+
+#, fuzzy
+#~ msgid "Contextual Menus"
+#~ msgstr "Kontakt os"
+
+#, fuzzy
+#~ msgid "Singular Property:"
+#~ msgstr "Find din ejendom"
+
+#, fuzzy
+#~ msgid "Plural Property:"
+#~ msgstr "Alle Ejendomme"
+
+#, fuzzy
+#~ msgid "Add "
+#~ msgstr "Tilføj Ny"
+
+#, fuzzy
+#~ msgid "Add New "
+#~ msgstr "Tilføj Ny"
+
+#, fuzzy
+#~ msgid "Edit "
+#~ msgstr "Rediger"
+
+#, fuzzy
+#~ msgid "Search "
+#~ msgstr "Søg"
+
+#, fuzzy
+#~ msgid "No "
+#~ msgstr "Nej"
+
+#, fuzzy
+#~ msgid " found."
+#~ msgstr "Billede ikke fundet"
+
+#~ msgid "Property Title"
+#~ msgstr "Ejendommens Titel"
+
+#~ msgid "Property Content"
+#~ msgstr "Ejendoms indhold"
+
+#, fuzzy
+#~ msgid "Property Author"
+#~ msgstr "Ejendom"
+
+#, fuzzy
+#~ msgid "Starting "
+#~ msgstr "Instillinger"
+
+#, fuzzy
+#~ msgid "Delete Unattached Files"
+#~ msgstr "Slet andre sider"
+
+#, fuzzy
+#~ msgid "No objects found."
+#~ msgstr "Billede ikke fundet"
+
+#, fuzzy
+#~ msgid "Available tags in source: %1s"
+#~ msgstr "Tilgængelige tags"
+
+#, fuzzy
+#~ msgid "Sort by:"
+#~ msgstr "Sorterbar"
+
+#, fuzzy
+#~ msgid "Created Properties"
+#~ msgstr "Fasiliteter Ejendomme"
+
+#, fuzzy
+#~ msgid "Updated Properties"
+#~ msgstr "Fasiliteter Ejendomme"
+
+#, fuzzy
+#~ msgid "Total Properties"
+#~ msgstr "Alle Ejendomme"
+
+#, fuzzy
+#~ msgid "Updated "
+#~ msgstr "Opdater facilitet"
+
+#, fuzzy
+#~ msgid "Created "
+#~ msgstr "Fasilitet"
+
+#, fuzzy
+#~ msgid "Total Properties: "
+#~ msgstr "Alle Ejendomme"
+
+#, fuzzy
+#~ msgid "Delete All Properties"
+#~ msgstr "Alle Ejendomme"
+
+#, fuzzy
+#~ msgid "Upload File"
+#~ msgstr "Upload filer"
+
+#, fuzzy
+#~ msgid "Source"
+#~ msgstr "Mere"
+
+#~ msgid "Type:"
+#~ msgstr "Type:"
+
+#, fuzzy
+#~ msgid "Property Resource."
+#~ msgstr "Ejendom gemt"
+
+#, fuzzy
+#~ msgid "Default is \"Property\""
+#~ msgstr "Ny Ejendom"
+
+#, fuzzy
+#~ msgid "Property Resource Class."
+#~ msgstr "Ejendom gemt"
+
+#, fuzzy
+#~ msgid "Property Query."
+#~ msgstr "Ejendoms Galleri"
+
+#, fuzzy
+#~ msgid "properties in the feed."
+#~ msgstr "Ingen ejendomme fundet"
+
+#, fuzzy
+#~ msgid " valid images."
+#~ msgstr "Skjul Billeder?"
+
+#, fuzzy
+#~ msgid "Property Agent"
+#~ msgstr "Ejendoms indhold"
+
+#, fuzzy
+#~ msgid "Add Marker"
+#~ msgstr "Tilføj Billede"
+
+#, fuzzy
+#~ msgid "Coordinates"
+#~ msgstr "Vælg koordinaterne manuelt."
+
+#, fuzzy
+#~ msgid "Default by Google"
+#~ msgstr "Standard Skabelon "
+
+#, fuzzy
+#~ msgid "Sorry, no %s found, try expanding your search."
+#~ msgstr ""
+#~ "Desværre, ingen ejendomme fundet - udvid din søgning , eller <a href=\"%s"
+#~ "\">Vis alle</a>."
+
+#, fuzzy
+#~ msgid "No results found."
+#~ msgstr "Billede ikke fundet"
+
+#, fuzzy
+#~ msgid "Show More"
+#~ msgstr "Mere"
+
+#, fuzzy
+#~ msgid "Restore"
+#~ msgstr "Fjern"
+
+#, fuzzy
+#~ msgid "Edit this item"
+#~ msgstr "Rediger andre indlæg"
+
+#, fuzzy
+#~ msgid "Delete Permanently"
+#~ msgstr "Slet sider"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "Vis alle"
+
+#, fuzzy
+#~ msgid "Feature Updates"
+#~ msgstr "Fasilitets Navn"
+
+#~ msgid "Check Updates"
+#~ msgstr "Kontroller Opdateringer"
+
+#, fuzzy
+#~ msgid "Enable comments."
+#~ msgstr "Rediger kommentarer"
+
+#, fuzzy
+#~ msgid "Default %1s Page"
+#~ msgstr "Standard Skabelon "
+
+#~ msgid "Width"
+#~ msgstr "Brede"
+
+#~ msgid "Height"
+#~ msgstr "Højde"
+
+#~ msgid "Overview Shortcode"
+#~ msgstr "Oversigt koder"
+
+#, fuzzy
+#~ msgid "Show children %1s."
+#~ msgstr "Vis undergruppe ejendomme."
+
+#~ msgid "Show pagination on bottom of results."
+#~ msgstr "Vis side navigation i bunden af resultatet."
+
+#, fuzzy
+#~ msgid "%1s Page"
+#~ msgstr "Gediger sider"
+
+#~ msgid "Map Zoom Level:"
+#~ msgstr "Kortets Zoom niveau:"
+
+#, fuzzy
+#~ msgid "Default is \"%s\""
+#~ msgstr "Standard Skabelon "
+
+#, fuzzy
+#~ msgid "Show %1s Title"
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "Show Directions Link"
+#~ msgstr "Vis Mapper"
+
+#~ msgid "Address Display"
+#~ msgstr "Vis Adresse"
+
+#~ msgid "Available tags:"
+#~ msgstr "Tilgængelige tags"
+
+#~ msgid "Currency & Numbers"
+#~ msgstr "Valuta & Tal"
+
+#~ msgid "Currency symbol."
+#~ msgstr "Valuta symbol."
+
+#~ msgid "Thousands separator symbol:"
+#~ msgstr "Tusindtalsseparator symbol:"
+
+#~ msgid ". (period)"
+#~ msgstr ". (punktum)"
+
+#~ msgid ", (comma)"
+#~ msgstr ", (komma)"
+
+#~ msgid "The character separating the 1 and the 5: $1<b>,</b>500"
+#~ msgstr "Karakteren imellem 1 og 5: $1<b>,</b>500"
+
+#~ msgid "Currency symbol placement:"
+#~ msgstr "Valuta symbol placering"
+
+#~ msgid "Before number"
+#~ msgstr "Før nummer"
+
+#~ msgid "After number"
+#~ msgstr "Efter nummer"
+
+#~ msgid "Revalidate"
+#~ msgstr "Valider igen"
+
+#, fuzzy
+#~ msgid "Get %1s image data."
+#~ msgstr "Ejendom gemt"
+
+#~ msgid "Memory Usage:"
+#~ msgstr "Brugt hukommelses:"
+
+#~ msgid "Peak Memory Usage:"
+#~ msgstr "Max brugt hukommelses:"
+
+#~ msgid "(no parent)"
+#~ msgstr "(ingen hoved gruppe)"
+
+#~ msgid "Parent"
+#~ msgstr "Hoved gruppe"
+
+#~ msgid "Template"
+#~ msgstr "Skabelon"
+
+#~ msgid "Page Template"
+#~ msgstr "Side Skabelon"
+
+#~ msgid "Default Template"
+#~ msgstr "Standard Skabelon "
+
+#~ msgid "Need help? Use the Help tab in the upper right of your screen."
+#~ msgstr "Brug for hjælp, Brug Hjælp øverst til højre"
+
+#~ msgid "Falls Under"
+#~ msgstr "Hører ind under"
+
+#, fuzzy
+#~ msgid "ID of parent property"
+#~ msgstr "Dette er til udlejning. "
+
+#~ msgid "Editing %s is disabled, it may be inherited."
+#~ msgstr "Redigering %s er deaktiveret, det kan være nedarvet."
+
+#~ msgid "Enable."
+#~ msgstr "Aktiver"
+
+#, fuzzy
+#~ msgid "%1s Type"
+#~ msgstr "Type"
+
+#~ msgid "Return to building page."
+#~ msgstr "Tilbage til bygning siden."
+
+#, fuzzy
+#~ msgid "Change"
+#~ msgstr "Gem ændringer"
+
+#, fuzzy
+#~ msgid "Featured:"
+#~ msgstr "Fasilitet"
+
+#, fuzzy
+#~ msgid "Publish the current %s"
+#~ msgstr "Ejendommen blev ikke oprettet."
+
+#, fuzzy
+#~ msgid "Add Credits"
+#~ msgstr "Tilføj en Ejendom"
+
+#, fuzzy
+#~ msgid "Choose Subscription Plan"
+#~ msgstr "Beskrivelse"
+
+#, fuzzy
+#~ msgid "Subscription Plan Options"
+#~ msgstr "Beskrivelse"
+
+#~ msgid ""
+#~ "Sorry, we could not find what you were looking for.  Since you are here, "
+#~ "take a look at some of our properties."
+#~ msgstr ""
+#~ "Beklager, vi kunne ikke finde det du søgte. Da du er her, tage et kig på "
+#~ "nogle af vores ejendomme."
+
+#~ msgid ""
+#~ "Sorry, no properties found - try expanding your search, or <a href=\"%s"
+#~ "\">view all</a>."
+#~ msgstr ""
+#~ "Desværre, ingen ejendomme fundet - udvid din søgning , eller <a href=\"%s"
+#~ "\">Vis alle</a>."
+
+#~ msgid " of "
+#~ msgstr " af "
+
+#, fuzzy
+#~ msgid "of"
+#~ msgstr " af "
+
+#~ msgid "Prev"
+#~ msgstr "Forrige"
+
+#, fuzzy
+#~ msgid "Other"
+#~ msgstr "Sorter"
+
+#, fuzzy
+#~ msgid "Comment"
+#~ msgstr "Ejendoms indhold"
+
+#, fuzzy
+#~ msgid "Post Comment"
+#~ msgstr "Ejendoms indhold"
+
+#, fuzzy
+#~ msgid "Payment Method"
+#~ msgstr "Hoved facilitet"
+
+#, fuzzy
+#~ msgid "Show Property Title"
+#~ msgstr "Ejendommens Titel"
+
+#, fuzzy
+#~ msgid "Property ID:"
+#~ msgstr "Ejendom"
+
+#~ msgid "Interested?"
+#~ msgstr "Interesseret?"
+
+#, fuzzy
+#~ msgid "Read Property"
+#~ msgstr "Ny Ejendom"
+
+#, fuzzy
+#~ msgid "Read Private Properties"
+#~ msgstr "Læs private indlæg"
+
+#~ msgid "Feature Name"
+#~ msgstr "Fasilitets Navn"
+
+#, fuzzy
+#~ msgid "General"
+#~ msgstr "Generelle indstillinger"
+
+#, fuzzy
+#~ msgid "Property Status:"
+#~ msgstr "Ejendom: %s"
+
+#, fuzzy
+#~ msgid "Property Type:"
+#~ msgstr "Ejendoms Type"
+
+#~ msgid "Tomorrow "
+#~ msgstr "Imorgen"
+
+#~ msgid "Yesterday "
+#~ msgstr "Igår"
+
+#~ msgid " in %d days "
+#~ msgstr "om %d dage"
+
+#~ msgid "%d days ago"
+#~ msgstr "%d dage siden"
+
+#~ msgid "%s hours ago"
+#~ msgstr "%s timer siden"
+
+#~ msgid "%s minutes ago"
+#~ msgstr "%s minutter siden"
+
+#~ msgid ""
+#~ "Be advised, since you don't have permalinks enabled, you must visit the "
+#~ "<a href=\"%s\">Settings Page</a> and set a custom property overview page."
+#~ msgstr ""
+#~ "Vær opmærksom på, da du ikke har permalinks aktiveret, skal du gå til <a "
+#~ "href=\"%s\"> indstilinger</ a> og angive en brugerdefineret oversigtsside."
+
+#~ msgid ""
+#~ "By default, your property overview will be displayed on the <a href=\"%s"
+#~ "\">%s</a> page. You may change the overview page on the <a href=\"%s"
+#~ "\">Settings Page</a>"
+#~ msgstr ""
+#~ "Som standard vil din ejendoms oversigt blive vist på <a href=\"%s\">% s "
+#~ "</ a> side. Du kan ændre oversigtssiden under <a href=\"%s\"> "
+#~ "Indstillinger </ a>"
+
+#~ msgid "Show other properties (if any) with the same Parent"
+#~ msgstr "Vis andre Ejendomme (hvis der er nogen) med samme hoved gruppe."
+
+#~ msgid "Property Search"
+#~ msgstr "Søg efter ejendom"
+
+#~ msgid "Property Types"
+#~ msgstr "Ejendoms typer"
+
+#~ msgid "Popup Image Size:"
+#~ msgstr "Popup billedets størrelse:"
+
+#~ msgid ""
+#~ "Display larger image, or slideshow, at the top of the property listing."
+#~ msgstr ""
+#~ "Vis et større billede, eller slideshow, i toppen af ejendommens oversigt."
+
+#~ msgid "Order By:"
+#~ msgstr "Sorter efter:"
+
+#~ msgid "Bed(s):"
+#~ msgstr "Senge:"
+
+#~ msgid "Bath(s):"
+#~ msgstr "Bade:"
+
+#~ msgid "Square Ft:"
+#~ msgstr "Kvadrat meter:"
