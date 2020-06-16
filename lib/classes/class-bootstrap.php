@@ -521,7 +521,7 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Gets declared Feature Flags from composer.json
-       * 
+       *
        * @return array
        */
       public function get_feature_flags()

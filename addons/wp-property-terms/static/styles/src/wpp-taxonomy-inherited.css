@@ -1,0 +1,20 @@
+.rwmb-wpp_taxonomy_inherited-wrapper .readonly {
+  min-height: 27px;
+  width: 100%;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07) inset;
+  transition: border-color 0.05s ease-in-out 0s;
+}
+.rwmb-wpp_taxonomy_inherited-wrapper .readonly span.term {
+  display: inline-block;
+  line-height: 13px;
+  padding: 3px 5px;
+  margin: 3px 0 3px 5px;
+  background-clip: padding-box;
+  background-color: #e4e4e4;
+  background-image: linear-gradient(to bottom, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+}

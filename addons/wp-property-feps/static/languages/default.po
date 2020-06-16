@@ -1,0 +1,1649 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-26 19:01+0200\n"
+"PO-Revision-Date: 2014-09-26 19:01+0200\n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: Usability Dynamics, Inc\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x\n"
+"X-Poedit-Basepath: ../..\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-feps.php:237
+msgid "FEPS Details"
+msgstr ""
+
+#: lib/class-wpp-feps.php:260 lib/class-wpp-feps.php:287
+#: lib/class-wpp-feps.php:727 lib/class-wpp-feps.php:776
+#: lib/class-wpp-feps.php:2567
+msgid "Not set"
+msgstr ""
+
+#: lib/class-wpp-feps.php:269 lib/class-wpp-feps.php:747
+msgid "Property Form"
+msgstr ""
+
+#: lib/class-wpp-feps.php:273 lib/class-wpp-feps.php:751
+msgid "Author"
+msgstr ""
+
+#: lib/class-wpp-feps.php:281 lib/class-wpp-feps.php:762
+msgid "Sponsored"
+msgstr ""
+
+#: lib/class-wpp-feps.php:282 lib/class-wpp-feps.php:736
+#: lib/class-wpp-feps.php:763 static/views/feps-purchase-template.php:51
+#: static/views/feps-subplans-template.php:45
+msgid "Yes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:282 lib/class-wpp-feps.php:736
+#: lib/class-wpp-feps.php:763 static/views/feps-purchase-template.php:51
+#: static/views/feps-subplans-template.php:45
+msgid "No"
+msgstr ""
+
+#: lib/class-wpp-feps.php:286 lib/class-wpp-feps.php:771
+#: lib/class-wpp-feps.php:2599 lib/class-wpp-feps.php:2615
+#: static/views/feps-purchase-template.php:35
+#: static/views/feps-tabs-template.php:4
+msgid "Subscription Plan"
+msgstr ""
+
+#: lib/class-wpp-feps.php:291 lib/class-wpp-feps.php:766
+msgid "Expired date"
+msgstr ""
+
+#: lib/class-wpp-feps.php:313 lib/class-wpp-feps.php:542
+msgid "FEPS"
+msgstr ""
+
+#: lib/class-wpp-feps.php:351
+#, php-format
+msgid "%1s Forms"
+msgstr ""
+
+#: lib/class-wpp-feps.php:353
+#, php-format
+msgid "<a href=\"%s\">Manage %s Forms"
+msgstr ""
+
+#: lib/class-wpp-feps.php:357 lib/class-wpp-feps.php:4674
+msgid "FEPS Menu"
+msgstr ""
+
+#: lib/class-wpp-feps.php:360
+#, php-format
+msgid ""
+"It is neccessary block menu which contains user's specific data and links to "
+"submitted %s via FEPS frontend forms."
+msgstr ""
+
+#: lib/class-wpp-feps.php:361
+#, php-format
+msgid ""
+"Menu can be added to your site via <b>FEPS Menu</b> <a href=\"%s\">widget</"
+"a> or <b>%s</b> shortcode."
+msgstr ""
+
+#: lib/class-wpp-feps.php:362 lib/class-wpp-feps.php:556
+msgid "Note, menu is shown only for logged in users."
+msgstr ""
+
+#: lib/class-wpp-feps.php:366
+msgid "\"Add Credits to Balance\" custom label"
+msgstr ""
+
+#: lib/class-wpp-feps.php:368
+#, php-format
+msgid "\"Add New %s\" custom label"
+msgstr ""
+
+#: lib/class-wpp-feps.php:369
+#, php-format
+msgid "Disable Menu if there are no %s and no credits on Balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:374 lib/class-wpp-feps.php:573
+msgid "Specific Pages"
+msgstr ""
+
+#: lib/class-wpp-feps.php:377
+#, php-format
+msgid ""
+"The feature has specific pages. The links below can be added directly to "
+"your <a href=\"%s\">Menus</a> or wherever else, i.e. if you don't want to "
+"use FEPS menu."
+msgstr ""
+
+#: lib/class-wpp-feps.php:378
+msgid ""
+"But note, that the current pages are available only for logged in users."
+msgstr ""
+
+#: lib/class-wpp-feps.php:381 lib/class-wpp-feps.php:581
+msgid "Templates"
+msgstr ""
+
+#: lib/class-wpp-feps.php:383 lib/class-wpp-feps.php:577
+msgid "Overview Page"
+msgstr ""
+
+#: lib/class-wpp-feps.php:394
+msgid "Edit Page"
+msgstr ""
+
+#: lib/class-wpp-feps.php:405 lib/class-wpp-feps.php:420
+#: lib/class-wpp-feps.php:579
+msgid "Add Credits Page"
+msgstr ""
+
+#: lib/class-wpp-feps.php:415 lib/class-wpp-feps.php:583
+msgid "Links"
+msgstr ""
+
+#: lib/class-wpp-feps.php:416
+#, php-format
+msgid "Overview Page ( All %s )"
+msgstr ""
+
+#: lib/class-wpp-feps.php:417
+#, php-format
+msgid "Overview Page ( Published %s )"
+msgstr ""
+
+#: lib/class-wpp-feps.php:418
+#, php-format
+msgid "Overview Page ( Pending %s )"
+msgstr ""
+
+#: lib/class-wpp-feps.php:426 lib/class-wpp-feps.php:587
+msgid "Administration"
+msgstr ""
+
+#: lib/class-wpp-feps.php:432
+#, php-format
+msgid "Enable Column <b>FEPS Details</b> on <a href='%s'>All %s</a> page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:439
+msgid "Notifications"
+msgstr ""
+
+#: lib/class-wpp-feps.php:441
+#, php-format
+msgid ""
+"All FEPS notifications can be customized via <a href=\"%s\">WP-CRM</a> "
+"plugin. For more details, look through <b>FEPS -> Integration with other "
+"UsabilityDynamics plugins</b> section in Help tab above."
+msgstr ""
+
+#: lib/class-wpp-feps.php:460
+msgid "General Information"
+msgstr ""
+
+#: lib/class-wpp-feps.php:461
+msgid "Form Name"
+msgstr ""
+
+#: lib/class-wpp-feps.php:462
+msgid "Shortcode"
+msgstr ""
+
+#: lib/class-wpp-feps.php:463
+msgid "General Options"
+msgstr ""
+
+#: lib/class-wpp-feps.php:464
+msgid "Subscriptions Plans"
+msgstr ""
+
+#: lib/class-wpp-feps.php:465
+msgid "Propery Attributes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:472
+msgid "Front End Property Submissions (FEPS)"
+msgstr ""
+
+#: lib/class-wpp-feps.php:473
+#, php-format
+msgid ""
+"Note, that <a href=\"%s\">Settings page</a> also contains helpfull "
+"information about FEPS premium feature functionality. So if the current "
+"'Help' does not contain enough information to help you, we suggest to "
+"proceed there for looking through FEPS tab and 'Help' information."
+msgstr ""
+
+#: lib/class-wpp-feps.php:474
+msgid ""
+"Front End Property Submission (FEPS) lets you create forms and display them "
+"on the front-end of the website. The forms may be used by visitors to submit "
+"properties for free or for credits."
+msgstr ""
+
+#: lib/class-wpp-feps.php:475
+#, php-format
+msgid ""
+"If you want to display a %1$s submission form for homes in a certain "
+"neighborhood, you can place the FEPS form into the content of the parent "
+"(neighborhood) %1$s like so"
+msgstr ""
+
+#: lib/class-wpp-feps.php:477
+#, php-format
+msgid "On a pending %s a body class is added for styling, which is: <b>%s</b>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:478
+#, php-format
+msgid ""
+"Pending pages use the same front-end templates as regular %s, and will load "
+"conditional %s-type templates if they exist.  Below is the the load order of "
+"templates based on specificity:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:485
+#, php-format
+msgid ""
+"So if your %1$s type is called \"<b>%2$s</b>\", then the %1$s type slug is "
+"<b>%3$s</b>, and the template would be: <b>%4$s</b>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:488
+msgid ""
+"Form's name must be unique. Form slug, which is used for setting shortcode "
+"( attribute \"form\" ) is generated using form name. So, be carefull with "
+"changing name of already existing form!"
+msgstr ""
+
+#: lib/class-wpp-feps.php:491
+#, php-format
+msgid ""
+"Shortcode [wpp_feps_form form=\"{form_slug}\"] renders passed form on page. "
+"You can add it to any content including widget areas on your site. But we "
+"strongly recommend to add the current shortcode only to page's ( pages, "
+"posts, %s ) content to prevent different issues."
+msgstr ""
+
+#: lib/class-wpp-feps.php:492
+msgid "Available shortcode attributes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:494
+msgid ""
+"Required attribute. The slug of the FEPS form, this is required to identify "
+"which form must be displayed."
+msgstr ""
+
+#: lib/class-wpp-feps.php:495
+#, php-format
+msgid ""
+"Default value is not set. Use to set the parent ID of all the submitted "
+"%1$s. This works well if you want to group all the submitted %1$s under a "
+"parent. For example, if you want to allow visitors to submit condos that "
+"below to a certain neighborhood, you would create the neighborhood %1$s, "
+"then place FEPS forms into their content."
+msgstr ""
+
+#: lib/class-wpp-feps.php:496
+#, php-format
+msgid ""
+"Available values \"true\" and \"false\". Default value is \"true\". If set "
+"to \"true\", the form will automatically detect if it is displayed on a %1$s "
+"page, and use the current %1$s as parent for newly added %2$s. If parent_id "
+"is set, detect parent does not do anything."
+msgstr ""
+
+#: lib/class-wpp-feps.php:497
+msgid ""
+"Default value is \"450px\". Sets the height of the address map, in pixels."
+msgstr ""
+
+#: lib/class-wpp-feps.php:498
+msgid ""
+"Default value is \"Requested FEPS form not found\". This is the text to "
+"display when the form is not found, this is only needed if a form has been "
+"deleted, but shortcodes still reference it throughout your site."
+msgstr ""
+
+#: lib/class-wpp-feps.php:502
+#, php-format
+msgid ""
+"<h4>Sponsored Listing:</h4>It enables billable %s submissions.<br/><a href="
+"\"%s\">WP-Invoice</a> plugin and <a href=\"%s\">Single Page Checkout</a> "
+"plugin must be installed to enable this option."
+msgstr ""
+
+#: lib/class-wpp-feps.php:503
+#, php-format
+msgid ""
+"<h4>%1$s Status:</h4>Status to assign to new %2$s after they are submitted."
+"<br /><i>Note, the current option is disabled for sponsored listings. "
+"Sponsored Submission will be automatically published after successfull "
+"payment. In other case, it has pending status.</i>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:504
+#, php-format
+msgid "<h4>%1$s Type:</h4>Default %1$s type of submitted %2$s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:505
+#, php-format
+msgid ""
+"<h4>Automatically remove FEPS of the current Form with 'Pending' status:</"
+"h4>Set a period of time in which Pending %1$s will be removed. Set 0 if you "
+"don't want Pending %1$s to be removed."
+msgstr ""
+
+#: lib/class-wpp-feps.php:506
+msgid ""
+"<h4>Preview Thumbnail Size:</h4>The size of the image to be used to display "
+"the thumbnail of an uploaded image."
+msgstr ""
+
+#: lib/class-wpp-feps.php:507
+msgid ""
+"<h4>Image Upload Limit:</h4>The maximum number of images that can be "
+"uploaded per submission.<br /><i>Note, the current option is disabled for "
+"sponsored listings. Images limit for sponsored listings must be set for "
+"every Subscription plan separately.</i>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:508
+#, php-format
+msgid ""
+"<h4>New User Role:</h4>Role to assign to users submitting %1$s if they do "
+"not already have an account."
+msgstr ""
+
+#: lib/class-wpp-feps.php:509
+#, php-format
+msgid ""
+"<h4>Allow user to edit and remove his FEPS:</h4>Whether or not to allow user "
+"to edit and delete their %1$s submitted by FEPS."
+msgstr ""
+
+#: lib/class-wpp-feps.php:510
+msgid ""
+"<h4>Disable new user account creation notification:</h4>Whether or not to "
+"send new user notifications.<br /><i>Note, the current option is disabled "
+"for sponsored listings.</i>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:513
+#, php-format
+msgid ""
+"The current functionality is available only for <b>sponsored listings</b> "
+"( see \"%s\" tab ) when <a href=\"%s\">WP-Invoice</a> plugin and <a href=\"%s"
+"\">Single Page Checkout (SPC)</a> plugin are installed and activated."
+msgstr ""
+
+#: lib/class-wpp-feps.php:514 lib/class-wpp-feps.php:4022
+msgid "Name"
+msgstr ""
+
+#: lib/class-wpp-feps.php:515
+msgid "Just a name of Subscription plan."
+msgstr ""
+
+#: lib/class-wpp-feps.php:516 lib/class-wpp-feps.php:4023
+msgid "Price"
+msgstr ""
+
+#: lib/class-wpp-feps.php:517
+msgid ""
+"Currency is set via WP-Invoice settings. The exchange rate is 1 chosen "
+"currency = 1 credit."
+msgstr ""
+
+#: lib/class-wpp-feps.php:518 lib/class-wpp-feps.php:734
+#: lib/class-wpp-feps.php:2608 lib/class-wpp-feps.php:4024
+msgid "Duration"
+msgstr ""
+
+#: lib/class-wpp-feps.php:519
+#, php-format
+msgid ""
+"The published period. The expired date is based on this option and will be "
+"set after successfully payment. When expiry date is over, status of %s will "
+"be automatically set as \"%s\"."
+msgstr ""
+
+#: lib/class-wpp-feps.php:520 lib/class-wpp-feps.php:4025
+msgid "Is Featured"
+msgstr ""
+
+#: lib/class-wpp-feps.php:521
+#, php-format
+msgid "%s will be featured if option is checked."
+msgstr ""
+
+#: lib/class-wpp-feps.php:522 lib/class-wpp-feps.php:735
+#: lib/class-wpp-feps.php:2610 lib/class-wpp-feps.php:4026
+msgid "Images Limit"
+msgstr ""
+
+#: lib/class-wpp-feps.php:523
+#, php-format
+msgid ""
+"To enable this option, Image Upload must be set in <b>%s</b>. The amount of "
+"images which can be uploaded to the %s with the current subscription plan. "
+"Note: limit must not be less than 1 or empty."
+msgstr ""
+
+#: lib/class-wpp-feps.php:524 lib/class-wpp-feps.php:3045
+#: lib/class-wpp-feps.php:4027
+msgid "Description"
+msgstr ""
+
+#: lib/class-wpp-feps.php:525
+msgid ""
+"Optional. Some helpfull information about subscription plan, advertisement, "
+"offer or whatever else can be added here."
+msgstr ""
+
+#: lib/class-wpp-feps.php:528
+#, php-format
+msgid ""
+"The list of %s attributes fields which will be shown in FEPS form. User will "
+"be able to add/edit only the chosen attributes."
+msgstr ""
+
+#: lib/class-wpp-feps.php:529
+#, php-format
+msgid ""
+"Note, <b>%1$s type</b> can be set only in %3$s. So all %2$s added via the "
+"same form will have the same %1$s type. "
+msgstr ""
+
+#: lib/class-wpp-feps.php:547
+#, php-format
+msgid "Front End %s Submissions (FEPS)"
+msgstr ""
+
+#: lib/class-wpp-feps.php:548
+#, php-format
+msgid ""
+"Front End %1$s Submission (FEPS) allows you to create multiple forms using "
+"the interface found under %2$s -> %1$s Forms. Multiple forms can be used to "
+"setup targeted pages that limit the number of images for the form, direct "
+"all submissions into a certain %1$s type, or %1$s status."
+msgstr ""
+
+#: lib/class-wpp-feps.php:549
+#, php-format
+msgid ""
+"It also allows to create forms for sponsored listings if you have installed "
+"<a href=\"%s\">WP-Invoice</a> plugin and <a href=\"%s\">Single Page Checkout "
+"(SPC)</a> plugin."
+msgstr ""
+
+#: lib/class-wpp-feps.php:551
+msgid "Property Forms"
+msgstr ""
+
+#: lib/class-wpp-feps.php:552
+#, php-format
+msgid ""
+"Detailed information can be found on <a href=\"%s\">%s Forms</a> page in "
+"Help tab."
+msgstr ""
+
+#: lib/class-wpp-feps.php:554
+msgid "FEPS Menu Widget/Shortcode"
+msgstr ""
+
+#: lib/class-wpp-feps.php:555
+msgid ""
+"It's a block menu which contains some specific information and FEPS tools "
+"for management."
+msgstr ""
+
+#: lib/class-wpp-feps.php:557
+#, php-format
+msgid ""
+"Menu can be added to frontend pages via <b>FEPS Menu</b> widget or <b>%s</b> "
+"shortcode"
+msgstr ""
+
+#: lib/class-wpp-feps.php:558
+#, php-format
+msgid "<b>%s</b> shortcode has the following available attributes:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:560
+#, php-format
+msgid ""
+"Shows title of menu if attribute is passed. Default is empty. Example, <b>"
+"%s</b>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:561
+#, php-format
+msgid ""
+"Shows %s overview links by %s statuses. Available values are <b>true</b>|"
+"<b>false</b>. Default is false. Example, <b>%s</b>\"."
+msgstr ""
+
+#: lib/class-wpp-feps.php:562
+#, php-format
+msgid ""
+"If set, shows the link to FEPS %s Form page. Default is empty. Example, <b>"
+"%s</b>\"."
+msgstr ""
+
+#: lib/class-wpp-feps.php:563
+#, php-format
+msgid ""
+"Shows user's current credits balance. Available values are <b>true</b>|"
+"<b>false</b>. Default is true. Example, <b>%s</b>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:564 lib/class-wpp-feps.php:566
+msgid ""
+"Note, to use this attribute, WP-Invoice plugin and WP-Invoice Single Page "
+"Checkout plugin must be installed."
+msgstr ""
+
+#: lib/class-wpp-feps.php:565
+#, php-format
+msgid ""
+"Shows the link to Add Credits page. Available values are <b>true</b>|"
+"<b>false</b>. Default is true. Example, <b>%s</b>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:569
+msgid "FEPS Information Widget/Shortcode"
+msgstr ""
+
+#: lib/class-wpp-feps.php:570
+msgid ""
+"It's a block which contains some specific information about current property."
+msgstr ""
+
+#: lib/class-wpp-feps.php:571
+#, php-format
+msgid "It's only shown on Edit FEPS %s page for logged in users"
+msgstr ""
+
+#: lib/class-wpp-feps.php:574
+#, php-format
+msgid ""
+"FEPS premium feature adds specific <b>frontend</b> user's pages which are "
+"created on a fly, so they are not available in your existing <a href=\"%s"
+"\">Pages</a>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:575
+msgid ""
+"The links to these pages are added to FEPS Menu. Note, these pages are "
+"available only for logged in users."
+msgstr ""
+
+#: lib/class-wpp-feps.php:576
+msgid "The specific FEPS pages are the following"
+msgstr ""
+
+#: lib/class-wpp-feps.php:577
+#, php-format
+msgid ""
+"The current one shows the list of already submitted via FEPS forms %1$s by "
+"current logged in user. If %2$s Form, used for submission, allows to edit "
+"%2$s, it also shows the links \"Edit\" and \"Remove\" for the current %2$s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:578
+#, php-format
+msgid ""
+"Also, FEPS allows to show %s on the current page by statuses. See <b>FEPS "
+"Menu</b> and <b>Links</b> section in the current Help tab for details."
+msgstr ""
+
+#: lib/class-wpp-feps.php:579
+#, php-format
+msgid ""
+"On the current page logged in user can add credits to their FEPS balance. "
+"The current page is available only if <a href=\"%s\">WP-Invoice</a> plugin "
+"and <a href=\"%s\">WP-Invoice Single Page Checkout</a> plugin are installed. "
+"<b><i>Note, user's credit balance can be manually edited by administrator "
+"via Edit User page (profile)</i></b>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:580
+#, php-format
+msgid "Edit %s Page"
+msgstr ""
+
+#: lib/class-wpp-feps.php:580
+#, php-format
+msgid ""
+"Here user can edit the %1$s added via FEPS %1$s form. There are different "
+"links for every %1$s, so the link can not be provided. Note, the form, used "
+"for submission, must exist and must be enabled option which allows to edit "
+"and remove %2$s. "
+msgstr ""
+
+#: lib/class-wpp-feps.php:582
+#, php-format
+msgid ""
+"You can set custom available template for FEPS pages. More information you "
+"can find <a href=\"%s\">here</a>."
+msgstr ""
+
+#: lib/class-wpp-feps.php:584
+#, php-format
+msgid ""
+"You can use given links to FEPS pages, for example, for adding custom menu "
+"in <a href=\"%s\">Menus</a> or wherever else."
+msgstr ""
+
+#: lib/class-wpp-feps.php:585
+msgid ""
+"Note, that FEPS pages are available only for logged in users. In other case "
+"user will be redirected to home page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:588
+#, php-format
+msgid ""
+"Specific column \"FEPS details\" can be added to the table on <a href=\"%s"
+"\">All %s </a>page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:589
+msgid ""
+"To add this column, you should check the option. Column contains detailed "
+"FEPS information about the current property, which can be helpful for "
+"management."
+msgstr ""
+
+#: lib/class-wpp-feps.php:590
+msgid ""
+"Note, if the option is enabled but you don't see the column, you should "
+"check \"<i>Screen Option</i>\" settings."
+msgstr ""
+
+#: lib/class-wpp-feps.php:592
+msgid "Integration with other UsabilityDynamics plugins"
+msgstr ""
+
+#: lib/class-wpp-feps.php:593
+#, php-format
+msgid ""
+"Functionality of FEPS premium feature can increased via other following "
+"wordpress plugins developed by <a href=\"%s\">UsabilityDynamics, Inc</a>:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:594
+#, php-format
+msgid "<a href=\"%s\">WP-Invoice</a>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:595
+#, php-format
+msgid "<a href=\"%s\">WP-CRM</a>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:596
+msgid "WP-Invoice"
+msgstr ""
+
+#: lib/class-wpp-feps.php:597
+#, php-format
+msgid ""
+"To add aditional functionality to FEPS premium feature, <a href=\"%s\">WP-"
+"Invoice Single Page Checkout</a> plugin must be installed and activated."
+msgstr ""
+
+#: lib/class-wpp-feps.php:598
+#, php-format
+msgid ""
+"It allows you to use FEPS %s Forms as billable service where users have to "
+"pay for publishing %s on your site."
+msgstr ""
+
+#: lib/class-wpp-feps.php:599
+#, php-format
+msgid ""
+"Billable service is called Sponsored listings. Sponsored listings allows you "
+"to set different Subscription plans where you are able to set expired dates "
+"and images limit for submitted %s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:600
+msgid "WP-CRM"
+msgstr ""
+
+#: lib/class-wpp-feps.php:601
+msgid ""
+"If WP-Invoice plugin is installed you are able to see all user's completed "
+"transactions on CRM User Edit page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:602
+msgid ""
+"Also, you have ability to manage FEPS notifications using WP-CRM plugin. Go "
+"to CRM -> Settings -> Notifications."
+msgstr ""
+
+#: lib/class-wpp-feps.php:603
+#, php-format
+msgid ""
+"For your notifications on any of this Trigger actions - <i>FEPS: Pending "
+"Approval</i>, <i>FEPS: %s Submitted</i>, <i>FEPS: User Account Approved</i>, "
+"<i>FEPS: User Account Created</i> &mdash; you can use the following "
+"shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:605
+msgid ""
+"For Trigger action <i>FEPS: Pending Approval</i> - you can use the following "
+"shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:607
+#, php-format
+msgid ""
+"For Trigger action <i>FEPS: %s Submitted</i> - you can use the following "
+"shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:609
+msgid ""
+"For Trigger action <i>FEPS: User Account Approved</i> - you can use the "
+"following shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:611
+msgid ""
+"For Trigger action <i>FEPS: User Account Created</i> - you can use this "
+"shortcodes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:733
+#, php-format
+msgid "Price: <b>%01.2f</b> credits"
+msgstr ""
+
+#: lib/class-wpp-feps.php:736
+msgid "Featured"
+msgstr ""
+
+#: lib/class-wpp-feps.php:741
+msgid "Click to toggle"
+msgstr ""
+
+#: lib/class-wpp-feps.php:742
+msgid "Front End Property Submission (FEPS) Details"
+msgstr ""
+
+#: lib/class-wpp-feps.php:755
+#, php-format
+msgid "The user has <b>%01.2f</b> credits on the balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:808
+msgid "FEPS Subscription Plan"
+msgstr ""
+
+#: lib/class-wpp-feps.php:824 static/views/feps-purchase-template.php:42
+#: static/views/feps-subplans-template.php:36
+msgid "Price:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:825
+#, php-format
+msgid "<b>%01.2f</b> credits"
+msgstr ""
+
+#: lib/class-wpp-feps.php:828 static/views/feps-purchase-template.php:46
+#: static/views/feps-subplans-template.php:40
+msgid "Duration:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:833 static/views/feps-purchase-template.php:55
+#: static/views/feps-subplans-template.php:48
+msgid "Images:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:968
+msgid "Renewal of Subscription Plan"
+msgstr ""
+
+#: lib/class-wpp-feps.php:969
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPublish time for Your %2$s \"[property_title]\" "
+"has expired.%1$s%1$sSubscription Plan has been renewed and [credits] credits "
+"were withdrawn from your balance.%1$s%1$sClick this link to view all your "
+"[status] %3$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1010
+msgid "Options:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1014 static/views/feps-subplans-template.php:66
+#, php-format
+msgid ""
+"Enable automatic renewal of Subscription plan for the current %1$s when "
+"subscription time is expired."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1018 static/views/feps-subplans-template.php:67
+msgid ""
+"Credits will be automatically withdrawn from your balance. Notice, automatic "
+"renewal will be done only if you have enough credits on your balance."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1185
+msgid "Publish Time Has Expired"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1186
+msgid "Publish time has expired for [property_title]."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1189
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPublish time for Your %3$s [property_title] has "
+"expired.%1$s%1$sYou have [days] %2$s to choose new subscription for your "
+"%3$s.%1$s%1$sClick this link to view all your [status] %4$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1189
+msgid "day"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1192
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPublish time for Your %2$s [property_title] has "
+"expired.%1$s%1$sIf You wish you could choose new subscription for your %2$s."
+"%1$s%1$sClick this link to view all your [status] %3$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1195
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour %2$s [property_title] status has been "
+"changed from Published to Pending. Click this link to view all your [status] "
+"%3$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1198
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour %2$s [property_title] has been restored. "
+"The current status is [status]. Click this link to view all your [status] "
+"%3$s:%1$s[url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1222
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPending time for Your %2$s [property_title] was "
+"over and it had been removed.%1$s%1$sYou still able to make a new %2$s "
+"Submission if you need. Please visit our site:%1$s[site_url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1224
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour %2$s [property_title] has been removed.%1$s"
+"%1$sYou still able to make a new %2$s Submission if you need. Please visit "
+"our site:%1$s[site_url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1227
+#, php-format
+msgid "%1$s was deleted"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1229
+#, php-format
+msgid "%1$s [property_title] was deleted ."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1366
+msgid "Manage FEPS"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1525
+msgid " (Pending Approval)"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1663
+msgid "created"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1670
+msgid "Submitting data is incorrect"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1678
+#, php-format
+msgid "%s submitting is prohibited"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1683 lib/class-wpp-feps.php:1801
+#: lib/class-wpp-feps.php:1867
+msgid "An error occurred, the form could not be found"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1712
+#, php-format
+msgid "Your submission was not successful: %s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1736
+msgid "updated"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1739
+#, php-format
+msgid "You must be logged in to edit %s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:1776
+#, php-format
+msgid "Your %s has been successfully %s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1778
+#, php-format
+msgid ""
+"Your %s and Account have been successfully %s. Check your e-mail to activate "
+"account and log in for continuing."
+msgstr ""
+
+#: lib/class-wpp-feps.php:1993
+#, php-format
+msgid "Upgraded FEPS to version %1s."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2146
+msgid "This listing is pending your approval."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2151
+msgid "Publish Now"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2190
+msgid ""
+"Form can not be removed because it has Properties which were added using "
+"this form. You have to remove all related Properties before."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2193
+msgid "Form ID is undefined."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2270 lib/class-wpp-feps.php:2342
+#, php-format
+msgid "%1$s Forms"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2359
+#, php-format
+msgid "%1$s Form"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2369
+#, php-format
+msgid ""
+"Show <span title=\"Front End %2$s Submissions\">FEPS</span> column in All "
+"%1$s Page."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2418 lib/class-wpp-feps.php:3961
+msgid "Add Credits to Balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2423
+#, php-format
+msgid "Add New %s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2482
+msgid "My Balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2484
+msgid "credit"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2484 static/views/feps-purchase-template.php:71
+msgid "credits"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2500 lib/class-wpp-feps.php:2514
+#, php-format
+msgid "My %s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2503 lib/class-wpp-feps.php:3214
+msgid "All"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2584 lib/class-wpp-feps.php:3061
+#: lib/class-wpp-feps.php:3096
+msgid "Title"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2588
+msgid "Status"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2593
+msgid "Expired"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2603
+msgid "Paid"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2604
+#, php-format
+msgid "%01.2f credits"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2607
+msgid "Plan Details"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2616
+msgid "Not Paid Yet"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2641
+msgid "Requested FEPS form not found."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2689
+msgid "The requested form does not have any fields."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2775
+#, php-format
+msgid "Requested %1$s not found."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2779
+#, php-format
+msgid "It's not FEPS's %1$s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2784
+#, php-format
+msgid "It's not your %1$s"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2788
+msgid "Wrong FEPS form used"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2793
+#, php-format
+msgid "Managing of %1$s are not allowed"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2868
+msgid "FEPS forms updated."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2876
+#, php-format
+msgid "%1$s Content"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2877
+#, php-format
+msgid "%1$s Type"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2881 lib/class-wpp-feps.php:3643
+msgid "Image Upload"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2901
+#, php-format
+msgid "Front End %1$s Submissions"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2902
+msgid "Add New"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2944
+msgid "Form Name:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2949
+msgid ""
+"Enter form name. Form slug will be generated using form name. Note that Form "
+"Name is used for internal reference."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2956
+msgid "Shortcode:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2961
+msgid "Copy and paste this shortcode into any page or post to display the form"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2968
+msgid "General Options:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2976
+#, php-format
+msgid "%1$s Status:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2984
+#, php-format
+msgid "%1$s Type:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2990
+#, php-format
+msgid ""
+"Note: This type will be set by default if %1$s Type is not set in %1$s "
+"Attributes below."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2993
+msgid ""
+"Automatically remove FEPS of the currrent Form with 'Pending' status to "
+"trash in"
+msgstr ""
+
+#: lib/class-wpp-feps.php:2995
+msgid "days."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2996
+msgid "Note: If value is 0 or empty, FEPS will not be removed."
+msgstr ""
+
+#: lib/class-wpp-feps.php:2999
+msgid "Preview Thumbnail Size:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3003
+msgid "Image Upload Limit:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3007
+msgid "New User Role:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3016
+#, php-format
+msgid "Automatically load added images into %1$s Slideshow. "
+msgstr ""
+
+#: lib/class-wpp-feps.php:3017
+#, php-format
+msgid ""
+"Note: You can use [property_slideshow] shortcode on Single %1$s page to show "
+"added images. Also, some premium themes such as Denali support automatic "
+"slideshow view on single %1$s pages."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3022
+msgid "Allow user to edit and remove his FEPS."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3023
+msgid "Note: on remove FEPS will be just moved to trash."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3027
+msgid "Disable new user account creation notification."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3031
+msgid "Notify user on update status of his FEPS."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3039
+#, php-format
+msgid "%1$s Attributes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3044
+msgid "Main"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3054 lib/class-wpp-feps.php:3083
+msgid "Attribute"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3057
+#, php-format
+msgid "%1$s Title"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3065 lib/class-wpp-feps.php:3107
+msgid "Toggle Advanced Settings"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3101
+msgid "Required"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3104
+msgid "Remove attribute"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3123
+msgid "Add Row"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3140
+msgid "Save Changes"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3226
+msgid "My FEPS Listings"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3304
+msgid "Editing"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3473
+msgid "Upload Image"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3489
+#, php-format
+msgid "No more than %1d image(s). Click image to delete it."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3844
+msgid "<strong>ERROR</strong>: Account is not approved."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3861
+msgid ""
+"There is a JavaScript error on this page preventing it from displaying the "
+"dynamic map."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3889
+msgid "Your location has been successfully found by Google Maps."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3892
+msgid "Your address could not be found, please try again."
+msgstr ""
+
+#: lib/class-wpp-feps.php:3991
+msgid "Days"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3992
+msgid "Weeks"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3993
+msgid "Months"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3994
+msgid "Years"
+msgstr ""
+
+#: lib/class-wpp-feps.php:3997
+msgid "Basic"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4002
+msgid "Default One-Day Subscription Plan"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4017
+msgid "Subscription Plans"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4028
+msgid "Actions"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4056
+msgid "Delete"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4063
+msgid "Add Subscription Plan"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4120 lib/class-wpp-feps.php:4138
+msgid "This is Sponsored Listing"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4362
+msgid "User Account Approved"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4370
+msgid "Account Approved"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4371
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour account on [site_url] has been approved.%1$s"
+"%1$sClick this link to visit site:%1$s[site_url]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4373
+msgid "User Account Approved."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4376
+#, php-format
+msgid ""
+"Thank you! Your account has been activated. <a href=\"%s\">Back to the site!"
+"</a>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4376
+msgid "Account has been activated"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4453
+msgid "Something went wrong. Please, try again later. [Error 001]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4459
+msgid "Something went wrong. Please, try again later. [Error 002]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4464
+msgid "Something went wrong. Please, try again later. [Error 003]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4479
+msgid "Thank you! Your payment has been successfully made."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4481
+#, php-format
+msgid "<a href=\"%s\">View %s</a>"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4487
+msgid "Something went wrong. Please, try again later. [Error 005]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4491
+msgid "Not enough credits."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4496
+msgid "You must be logged in to be able to do this action."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4500
+msgid "Something went wrong. Please, try again. [Error 006]"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4516
+msgid "Front End Property Submissions (FEPS)."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4520
+msgid "Available Credits (Balance)"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4528 static/views/feps-purchase-template.php:43
+#, php-format
+msgid "%s%01.2f = %01.2f credit"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4563
+msgid "Validation error. Check form fields"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4564
+msgid "Please type in your e-mail address."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4565
+msgid "Checking if account exists."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4566
+msgid "Checking your credentials."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4567
+msgid "Your credentials have been verified."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4568
+msgid "Your login credentials are not correct."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4569
+msgid "Account found, please type in your password."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4570
+msgid "Your account has been created. Check your e-mail to activate account."
+msgstr ""
+
+#: lib/class-wpp-feps.php:4632 static/views/feps-subplans-template.php:80
+msgid "Next"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4636
+msgid "Update"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4640
+msgid "Publish"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4640 static/views/feps-submit-template.php:98
+msgid "Submit"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4674
+msgid "Shows FEPS Menu. It's available only for logged in users"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4713 lib/class-wpp-feps.php:4790
+msgid "Title:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4720
+msgid "Don't show Funds Balance"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4726
+msgid "Don't show 'Add Credits to Balance' link "
+msgstr ""
+
+#: lib/class-wpp-feps.php:4733
+#, php-format
+msgid "Show Filter by Statuses instead of default link to 'My %s' page"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4738
+#, php-format
+msgid "'Add New %s' link to page:"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4759
+msgid "FEPS Information"
+msgstr ""
+
+#: lib/class-wpp-feps.php:4759
+#, php-format
+msgid ""
+"Shows Information about current FEPS %1$s. It's available only for logged in "
+"users and shown only on Edit %1$s page."
+msgstr ""
+
+#: static/views/feps-purchase-template.php:26
+msgid "Edit"
+msgstr ""
+
+#: static/views/feps-purchase-template.php:27
+#, php-format
+msgid "You can modify the current %s anytime."
+msgstr ""
+
+#: static/views/feps-purchase-template.php:39
+msgid "Change"
+msgstr ""
+
+#: static/views/feps-purchase-template.php:50
+#: static/views/feps-subplans-template.php:44
+msgid "Featured:"
+msgstr ""
+
+#: static/views/feps-purchase-template.php:67
+msgid "Current Balance"
+msgstr ""
+
+#: static/views/feps-purchase-template.php:88
+#, php-format
+msgid "Publish the current %s"
+msgstr ""
+
+#: static/views/feps-purchase-template.php:91
+#, php-format
+msgid "<strong>%01.2f</strong> credits will be withdrawn from your balance."
+msgstr ""
+
+#: static/views/feps-purchase-template.php:99
+msgid "Add Credits"
+msgstr ""
+
+#: static/views/feps-purchase-template.php:102
+#, php-format
+msgid ""
+"You don't have enough credits on your balance. Current submission requires "
+"<strong>%01.2f</strong> credits. After credits will be added, the current %s "
+"will be automatically published."
+msgstr ""
+
+#: static/views/feps-submit-template.php:72
+msgid "Your e-mail:"
+msgstr ""
+
+#: static/views/feps-submit-template.php:83
+msgid "Your Password:"
+msgstr ""
+
+#: static/views/feps-subplans-template.php:22
+msgid "Choose Subscription Plan"
+msgstr ""
+
+#: static/views/feps-subplans-template.php:50
+msgid "The available amount of images which can be uploaded for the property"
+msgstr ""
+
+#: static/views/feps-subplans-template.php:59
+msgid "Subscription Plan Options"
+msgstr ""
+
+#: static/views/feps-subplans-template.php:76
+msgid "Back"
+msgstr ""
+
+#: static/views/feps-tabs-template.php:3
+msgid "Information"
+msgstr ""
+
+#: static/views/feps-tabs-template.php:5
+msgid "Checkout"
+msgstr ""
+
+#: static/views/wpi_authorize-checkout-feps.php:60
+#: static/views/wpi_paypal-checkout-feps.php:114
+msgid "Agreement"
+msgstr ""
+
+#: static/views/wpi_authorize-checkout-feps.php:82
+#: static/views/wpi_paypal-checkout-feps.php:136
+msgid "Process Payment"
+msgstr ""
+
+#: static/views/wpi_authorize-checkout-feps.php:83
+#: static/views/wpi_paypal-checkout-feps.php:137
+msgid "of"
+msgstr ""
+
+#: static/views/wpi_checkout-feps.php:9
+msgid "Payment Method"
+msgstr ""
+
+#: static/views/wpi_checkout-feps.php:14
+msgid "Method"
+msgstr ""
+
+#: static/views/wpi_checkout-feps.php:62
+msgid "Specified gateways are not available"
+msgstr ""
+
+#: static/views/wpi_paypal-checkout-feps.php:84
+msgid "Custom Amount"
+msgstr ""
+
+#: static/views/wpi_paypal-checkout-feps.php:88
+msgid "Your Amount"
+msgstr ""
+
+#: static/views/wpi_paypal-checkout-feps.php:103
+msgid "Enter Amount"
+msgstr ""
+
+#: wp-property-feps.php:54
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-feps.php:62
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-feps.php:70
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-feps.php:74
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-feps.php:95
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""

@@ -1,0 +1,38 @@
+.uisf-checkbox-wrapper label span.description {
+  display: none;
+}
+
+.uisf-checkbox-wrapper p.description {
+  display: block !important;
+  font-style: italic;
+}
+
+ul.map_modules,
+ul.score_api_features {
+  list-style: circle inside;
+  margin-left: 20px;
+}
+
+ul.map_modules li {
+  color: #666;
+  font-style: italic;
+}
+
+#ws-bulk-request {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.07) none repeat scroll 0 0;
+  border: 1px solid #d0d0d0;
+}
+
+#ws-response-logs.wpp_class_pre {
+  height: 300px;
+  display: none;
+}
+
+#ws-ajax-spinner {
+  display: none;
+}
+
+#ws-close-log-button {
+  display: none;
+}
