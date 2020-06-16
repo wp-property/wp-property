@@ -1,3 +1,7 @@
+### 2.4.0 ( June 16, 2020 )
+* Included add-ons to plugin.
+* Removed licenses for add-ons.
+
 ### 2.3.9 ( June 12, 2019 )
 * Fixed WPML compatibility issue related to updating properties.
 * Fixed WPML compatibility issue related to duplicate values in dropdowns.
