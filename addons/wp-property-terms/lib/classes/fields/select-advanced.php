@@ -56,8 +56,9 @@ if ( ! class_exists( 'RWMB_Wpp_Select_Advanced_Field' ) ){
           </div>
           <div class="tagchecklist">
             <?php
-            if(is_array($meta))
+            if(!empty($meta) & is_array($meta))
               foreach ($meta as $term) {
+                if(empty($term)) continue;
                 $term = get_term( $term , $field_taxonomy );
                 $term_id = "tID_" . $term->term_id;
                 echo "<span class='tax-tag'>";

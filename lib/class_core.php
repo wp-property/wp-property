@@ -307,7 +307,7 @@ class WPP_Core {
 
     // wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox.2.1.5/jquery.fancybox.pack.js', array( 'jquery', 'wpp-localization' ), '2.1.5' );
     if(isset($wp_properties['configuration']['using_fancybox']) && $wp_properties['configuration']['using_fancybox'] == 'false' && !is_admin()) {
-      wp_register_script('wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.pack.js', array('jquery', 'wpp-localization'), '1.7.3');
+      wp_register_script('wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.pack.js', array('jquery', 'wpp-localization', 'jquery-migrate'), '1.7.3');
     }
     wp_register_script( 'wpp-jquery-swiper', WPP_URL . 'scripts/swiper.jquery.min.js', array( 'jquery' ), '1.7.3' );
 
@@ -346,7 +346,7 @@ class WPP_Core {
     wp_register_script( 'wpp-md5', WPP_URL . 'scripts/md5.js', array( 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'scripts/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-nivo-slider', WPP_URL . 'scripts/jquery.nivo.slider.pack.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wpp-jquery-address', WPP_URL . 'scripts/jquery.address-1.5.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-address', WPP_URL . 'scripts/jquery.address-1.5.js', array( 'jquery', 'wpp-localization', 'jquery-migrate' ) );
     wp_register_script( 'wpp-jquery-scrollTo', WPP_URL . 'scripts/jquery.scrollTo-min.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-validate', WPP_URL . 'scripts/jquery.validate.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
@@ -1042,7 +1042,7 @@ class WPP_Core {
       $wp_query->is_page = true;
     }
 
-    wp_localize_script( 'wpp-localization', 'wpp',array( 'instance' =>  apply_filters( 'wpp::localization::instance', $this->get_instance() ) ) );
+    wp_localize_script( 'wpp-localization', 'wp-property-global',array( 'instance' =>  apply_filters( 'wpp::localization::instance', $this->get_instance() ) ) );
 
     //** Load global wp-property script on all frontend pages */
     wp_enqueue_script( 'wp-property-global' );

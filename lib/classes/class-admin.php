@@ -204,7 +204,7 @@ namespace UsabilityDynamics\WPP {
       {
         global $current_screen;
 
-        wp_localize_script('wpp-localization', 'wpp', array(
+        wp_localize_script('wpp-localization', 'wp-property-global', array(
           'instance' => apply_filters( 'wpp::localization::instance', $this->instance->core->get_instance() )
         ));
 

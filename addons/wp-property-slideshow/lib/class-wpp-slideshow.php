@@ -694,6 +694,7 @@ class class_wpp_slideshow {
 
     /* Insert Scripts */
     add_action('admin_print_scripts-' . $slideshow_page, function() {
+      wp_enqueue_script( 'wp-property-global' );
       wp_enqueue_script('jquery-ui-resizable');
       wp_enqueue_script('wpp-jquery-fancybox');
       wp_enqueue_script( 'jquery-ui-sortable');
