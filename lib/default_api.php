@@ -578,7 +578,7 @@ function add_dollar_sign( $content ) {
     $content = trim( str_replace( array( $currency_symbol, "," ), "", $content ) );
   }
    
-  $pattern = sprintf("/(\d{1,}[\%s]?\d{1,})/",$decimal_symbol);
+  $pattern = sprintf("/(\d+[\%s]?\d*)/",$decimal_symbol);
   
   if ( !is_numeric( $content ) ) {
     return preg_replace_callback( $pattern, function( $matches ) {
