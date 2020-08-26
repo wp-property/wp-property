@@ -285,7 +285,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Automatically insert JS sheet if one exists with $current_screen->ID name */
         if (file_exists($this->instance->path("static/scripts/{$current_screen->id}.js", 'dir'))) {
-          wp_enqueue_script($current_screen->id . '-js', $this->instance->path("static/scripts/{$current_screen->id}.js", 'url'), array('jquery'), WPP_Version, 'wp-property-backend-global');
+          wp_enqueue_script($current_screen->id . '-js', $this->instance->path("static/scripts/{$current_screen->id}.js", 'url'), array('jquery', 'wp-property-global'), WPP_Version, 'wp-property-backend-global');
         }
 
         //** Enqueue CSS styles on all pages */

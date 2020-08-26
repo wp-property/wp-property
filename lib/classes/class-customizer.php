@@ -198,7 +198,7 @@ namespace UsabilityDynamics\WPP {
        */
       public function wp_property_customizer_controls()
       {
-        wp_enqueue_script('wp-property-customizer-controls', WPP_URL . 'scripts/wp-property-customizer-controls.js', array('jquery', 'customize-controls'), WPP_Version);
+        wp_enqueue_script('wp-property-customizer-controls', WPP_URL . 'scripts/wp-property-customizer-controls.js', array('jquery', 'customize-controls', 'wp-property-global'), WPP_Version);
       }
 
       public function wp_property_customizer_live_preview()
