@@ -302,7 +302,7 @@ class WPP_Core {
     $scheme = ( is_ssl() && !is_admin() ? 'https' : 'http' );
 
     //** Load Localization early so plugins can use them as well */
-    wp_register_script( 'wpp-localization', ud_get_wp_property()->path( 'static/scripts/l10n.js', 'url' ), array('wp-property-global'), WPP_Version );
+    wp_register_script( 'wpp-localization', ud_get_wp_property()->path( 'static/scripts/l10n.js', 'url' ), array(), WPP_Version );
     wp_localize_script( 'wpp-localization', 'wpp_l10n', $this->get_l10n_data() );
 
     // wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox.2.1.5/jquery.fancybox.pack.js', array( 'jquery', 'wpp-localization' ), '2.1.5' );
@@ -1042,7 +1042,7 @@ class WPP_Core {
       $wp_query->is_page = true;
     }
 
-    wp_localize_script( 'wpp-localization', 'wp-property-global',array( 'instance' =>  apply_filters( 'wpp::localization::instance', $this->get_instance() ) ) );
+    wp_localize_script( 'wpp-localization', 'wpp',array( 'instance' =>  apply_filters( 'wpp::localization::instance', $this->get_instance() ) ) );
 
     //** Load global wp-property script on all frontend pages */
     wp_enqueue_script( 'wp-property-global' );
