@@ -12,7 +12,7 @@ if( !class_exists( 'RWMB_Wpp_Address_Field' ) && class_exists( 'RWMB_Text_Field'
      */
     static function admin_enqueue_scripts() {
       // wp_enqueue_style( 'rwmb-text', RWMB_CSS_URL . 'text.css', array(), RWMB_VER );
-      wp_enqueue_script( 'rwmb-wpp-address', ud_get_wp_property()->path( 'static/scripts/wpp.admin.fields.js' ), array( 'jquery' ) );
+      wp_enqueue_script( 'rwmb-wpp-address', ud_get_wp_property()->path( 'static/scripts/wpp.admin.fields.js' ), array( 'jquery', 'wp-property-global' ) );
 
       wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=false&key='.ud_get_wp_property( 'configuration.google_maps_api' ), array(), '', true );
       wp_enqueue_style( 'rwmb-map', RWMB_CSS_URL . 'map.css' );

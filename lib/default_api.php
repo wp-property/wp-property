@@ -570,16 +570,18 @@ function add_display_address( $property ) {
  */
 function add_dollar_sign( $content ) {
   global $wp_properties;
-
   $currency_symbol = ( !empty( $wp_properties[ 'configuration' ][ 'currency_symbol' ] ) ? $wp_properties[ 'configuration' ][ 'currency_symbol' ] : "$" );
+  $decimal_symbol = ( !empty( $wp_properties[ 'configuration' ][ 'dec_point' ] ) ? $wp_properties[ 'configuration' ][ 'dec_point' ] : "." );
   $currency_symbol_placement = ( !empty( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] ) ? $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] : "before" );
 
   if( is_string( $content ) ) {
     $content = trim( str_replace( array( $currency_symbol, "," ), "", $content ) );
   }
-
+   
+  $pattern = sprintf("/(\d+[\%s]?\d*)/",$decimal_symbol);
+  
   if ( !is_numeric( $content ) ) {
-    return preg_replace_callback( '/(\d+)/', function( $matches ) {
+    return preg_replace_callback( $pattern, function( $matches ) {
       return add_dollar_sign( $matches[0] );
     }, $content );
   } else {
