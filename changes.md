@@ -1,3 +1,6 @@
+### 2.4.1 ( September 3, 2020 )
+* Added compatibility with WordPress 5.5.
+
 ### 2.4.0 ( June 16, 2020 )
 * Included add-ons to plugin.
 * Removed licenses for add-ons.
