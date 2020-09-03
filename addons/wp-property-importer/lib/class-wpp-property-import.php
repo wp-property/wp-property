@@ -1264,7 +1264,7 @@ class class_wpp_property_import {
   static public function wpp_settings_help_tab() {
     global $wp_properties, $wpdb;
 
-    wp_enqueue_script( 'wpp-settings-xmli', ud_get_wpp_importer()->path( 'static/scripts/wpp.admin.settings.xmli.js' ), array( 'jquery' ), ud_get_wpp_importer()->version );
+    wp_enqueue_script( 'wpp-settings-xmli', ud_get_wpp_importer()->path( 'static/scripts/wpp.admin.settings.xmli.js' ), array( 'jquery', 'wp-property-global' ), ud_get_wpp_importer()->version );
 
     //** Check for orphan images */
     $orphan_attachments = count( class_wpp_property_import::get_orphan_attachments() );

@@ -6,7 +6,7 @@
  */
 global $user_ID, $user_identity, $user_level; 
 
-wp_register_script( 'wpp-feps-login', ud_get_wpp_feps()->path( 'static/scripts/src/wpp.login.js' ), array( 'jquery' ) );
+wp_register_script( 'wpp-feps-login', ud_get_wpp_feps()->path( 'static/scripts/src/wpp.login.js' ), array( 'jquery', 'wp-property-global' ) );
 
 wp_localize_script( 'wpp-feps-login', 'feps_login_object', array(
   'ajaxurl' => admin_url( 'admin-ajax.php' ),

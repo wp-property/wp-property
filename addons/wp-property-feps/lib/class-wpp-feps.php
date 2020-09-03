@@ -2395,7 +2395,7 @@ class class_wpp_feps {
     switch($current_screen->id)  {
 
       case 'property_page_page_feps':
-        wp_enqueue_script( 'wp-property-admin-feps', ud_get_wpp_feps()->path( 'static/scripts/wpp.admin.feps.js' ), array( 'jquery', 'wpp-localization' ), WPP_Version );
+        wp_enqueue_script( 'wp-property-admin-feps', ud_get_wpp_feps()->path( 'static/scripts/wpp.admin.feps.js' ), array( 'jquery', 'wpp-localization', 'wp-property-global' ), WPP_Version );
         wp_enqueue_script( 'wp-property-backend-global' );
         wp_enqueue_script( 'jquery-ui-tabs' );
         wp_enqueue_script( 'jquery-ui-resizable' );
@@ -2870,7 +2870,7 @@ class class_wpp_feps {
         do_action( 'wpp::feps::shortcode::subscription_plan', $args );
 
         //** Load specific scripts */
-        wp_enqueue_script( 'wpp-feps-subscription', ud_get_wpp_feps()->path( 'static/scripts/wpp.feps.subscription.js' ), array( 'jquery', 'wpp-localization' ) );
+        wp_enqueue_script( 'wpp-feps-subscription', ud_get_wpp_feps()->path( 'static/scripts/wpp.feps.subscription.js' ), array( 'jquery', 'wpp-localization', 'wp-property-global' ) );
 
         $contents = self::sponsored_listing_sub_plan();
         break;
@@ -2881,7 +2881,7 @@ class class_wpp_feps {
         do_action( 'wpp::feps::shortcode::checkout', $args );
 
         //** Load specific scripts */
-        wp_enqueue_script( 'wpp-feps-checkout', ud_get_wpp_feps()->path( 'static/scripts/wpp.feps.checkout.js' ), array( 'jquery', 'wpp-localization' ) );
+        wp_enqueue_script( 'wpp-feps-checkout', ud_get_wpp_feps()->path( 'static/scripts/wpp.feps.checkout.js' ), array( 'jquery', 'wpp-localization', 'wp-property-global' ) );
 
         $contents = self::sponsored_listing_purchase();
         break;
@@ -4131,7 +4131,7 @@ class class_wpp_feps {
     //* Determine if template is found and finish loading. */
     if( $template_found ) {
 
-      wp_enqueue_script( 'wpp-feps-spc', ud_get_wpp_feps()->path( 'static/scripts/wpp.feps.spc.js' ), array( 'jquery', 'wpp-localization' ) );
+      wp_enqueue_script( 'wpp-feps-spc', ud_get_wpp_feps()->path( 'static/scripts/wpp.feps.spc.js' ), array( 'jquery', 'wpp-localization', 'wp-property-global' ) );
 
       //** Create a fake Page */
       $wp_query->is_404 = false;

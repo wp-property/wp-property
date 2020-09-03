@@ -36,7 +36,7 @@ jQuery.extend( wpp = wpp || {}, {
 
         var tabContainer = jQuery( "#wpp_settings_tabs > ul  > li" );
         var tabs = jQuery( "#wpp_settings_tabs > ul > li > a" );
-        var activeTabElement = jQuery( 'a[href=' + activeTab + ']' ).get( 0 );
+        var activeTabElement = jQuery( 'a[href="' + activeTab + '"]' ).get( 0 );
         var activeTabIndex = jQuery( tabs ).index( activeTabElement );
 
         if( activeTabIndex ) {

@@ -137,7 +137,7 @@ namespace UsabilityDynamics\WPP {
 
           //** Settings Page */
           case 'property_page_property_settings':
-            wp_enqueue_script( 'settings-developer-terms', $this->path( '/static/scripts/admin/settings-developer-terms.js', 'url' ), array( 'wp-property-admin-settings' ) );
+            wp_enqueue_script( 'settings-developer-terms', $this->path( '/static/scripts/admin/settings-developer-terms.js', 'url' ), array( 'wp-property-admin-settings', 'wp-property-global' ) );
 
         }
 

@@ -895,7 +895,7 @@ class class_agents
     if ($current_screen->id == 'property_page_show_agents' && (isset($_REQUEST['action']) && $_REQUEST['action'] == 'edit')) {
       wp_enqueue_script('post');
       wp_enqueue_script('postbox');
-      wp_enqueue_script('wpp-edit-agent', ud_get_wpp_agents()->path('static/scripts/wpp.admin.agent.js'), array('jquery', 'wpp-localization'), WPP_Version);
+      wp_enqueue_script('wpp-edit-agent', ud_get_wpp_agents()->path('static/scripts/wpp.admin.agent.js'), array('jquery', 'wpp-localization', 'wp-property-global'), WPP_Version);
 
       add_meta_box('metabox_primary_info', __('Primary'), array('class_agents', 'metabox_primary_info'), 'property_page_show_agents', 'normal', 'core');
       add_meta_box('metabox_save', __('Save'), array('class_agents', 'metabox_save'), 'property_page_show_agents', 'side', 'core');
