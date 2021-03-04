@@ -82,6 +82,7 @@ jQuery(document).ready(function($) {
             progress.find(".current").html(active), enDisKeyCtrl();
         }), jQuery(window).on("orientationchange", galleryTop.onResize),
           jQuery(document).on("wpp_denali_tabbed_widget_render", galleryTop.onResize),
+          galleryTop.isGrid() || galleryTop.container || galleryTop.container.on("click", ".swiper-slide", goToClickedSlide),
           galleryTop.on("onResizeStart", function(s) {
               if (setControlSize(), s.params.slider_min_height && s.container.css("min-height", s.params.slider_min_height),
               s.params.slider_max_height && s.container.css("max-height", s.params.slider_max_height),
