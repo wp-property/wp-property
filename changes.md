@@ -1,3 +1,6 @@
+### 2.4.2 ( March 9, 2021 )
+* Added compatibility with WordPress 5.6.
+
 ### 2.4.1 ( September 3, 2020 )
 * Added compatibility with WordPress 5.5.
 
