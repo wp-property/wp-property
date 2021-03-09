@@ -40,7 +40,7 @@ if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $set
       foreach ($sortable_attrs as $slug => $label) {
         $sort_html .= ' <span class="wpp_sortable_link ';
         if ($sort_by == $slug) {
-          $sort_html .= 'wpp_sorted_element';
+          $sort_html .= 'wpp_sorted_element ';
         }
 //            $sort_html .= ($sort_by == $slug ? 'wpp_sorted_element' : '');
         $sort_html .= 'label label-info" sort_order = "' . $sort_order . '" sort_slug = "' . $slug . '" > ' . $label . '</span > ';
