@@ -50,7 +50,7 @@ $schedule_hash = $argv[2];
 $ms_url = (!empty($argv[3])) ? $argv[3] : '';
 
 //** Load WP */
-$wp_load_path = preg_replace( '%wp-content[/\\\\]plugins[/\\\\]wp-property-importer[/\\\\]cron.php%ix', 'wp-load.php', __FILE__ );
+$wp_load_path = preg_replace( '%wp-content[/\\\\]plugins[/\\\\]wp-property[/\\\\]addons[/\\\\]wp-property-importer[/\\\\]cron.php%ix', 'wp-load.php', __FILE__ );
 
 if(!file_exists($wp_load_path)) {
   if($VERBOSE){ print('Cannot load WP using: ' . $wp_load_path ."\n"); }
