@@ -113,7 +113,6 @@ $l10n_id = get_option('wp-property-l10n-attachment');
         }
         ?>
         <li><a href="#tab_troubleshooting"><?php _e('Help', ud_get_wp_property()->domain); ?></a></li>
-        <li><a href="#tab_feedback"><?php _e('Support', ud_get_wp_property()->domain); ?></a></li>
         <!--<li id="label-search-text"></li>-->
       </ul>
 
