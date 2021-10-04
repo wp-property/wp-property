@@ -85,7 +85,7 @@ namespace UsabilityDynamics\WPP {
               $keyt = trim( $key );
 
               //** If has _ prefix it's a built-in WP key */
-              if( '_' == $keyt{0} ) {
+              if( '_' == $keyt[0] ) {
                 continue;
               }
 
