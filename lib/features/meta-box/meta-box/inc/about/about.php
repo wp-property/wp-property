@@ -114,7 +114,6 @@ class RWMB_About {
 							include dirname( __FILE__ ) . '/sections/tabs.php';
 							include dirname( __FILE__ ) . '/sections/getting-started.php';
 							include dirname( __FILE__ ) . '/sections/extensions.php';
-							include dirname( __FILE__ ) . '/sections/support.php';
 							do_action( 'rwmb_about_tabs_content' );
 							?>
 						</div>
