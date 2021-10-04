@@ -497,7 +497,7 @@ if (!function_exists('get_features')) {
       }
 
       if ($args['format'] == 'comma') {
-        echo implode($features_html, ", ");
+        echo implode( ", ", $features_html );
       }
       if ($args['format'] == 'array') {
         return $features_html;
