@@ -1,3 +1,6 @@
+### 2.4.3 ( October 4, 2021 )
+* Remove Support tab.
+
 ### 2.4.2 ( March 9, 2021 )
 * Added compatibility with WordPress 5.6.
 
