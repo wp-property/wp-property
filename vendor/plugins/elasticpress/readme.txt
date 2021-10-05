@@ -90,9 +90,6 @@ Here is a detailed list of what's been included in the release:
 * Fix taxonomy sync object warning. Props [eugene-manuilov](https://github.com/eugene-manuilov)
 * `true` in `is_empty_query` terminates ep_query process when it shouldn't. Props [yaronuliel](https://github.com/yaronuliel)
 
-= 2.4.3 =
-Remove Support tab.
-
 = 2.4.2 =
 Version 2.4.2 is a bug fix version.
 
