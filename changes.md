@@ -1,3 +1,6 @@
+### 2.4.4 ( December 9, 2021 )
+* Fixed issue with vlidating image in WP Property Feps addon.
+
 ### 2.4.3 ( October 4, 2021 )
 * Remove Support tab.
 
