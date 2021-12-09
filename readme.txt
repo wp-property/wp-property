@@ -208,7 +208,7 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 == Upgrade Notice ==
 
 = Version 2.4.4 =
-* Fixed issue with vlidating image in WP Property Feps addon.
+* Fixed issue with validating image in WP Property Feps addon.
 
 = Version 2.4.3 =
 * Remove Support tab.
@@ -240,7 +240,7 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 == Changelog ==
 
 = 2.4.4 =
-* Fixed issue with vlidating image in WP Property Feps addon.
+* Fixed issue with validating image in WP Property Feps addon.
 
 = 2.4.3 =
 * Remove Support tab.
