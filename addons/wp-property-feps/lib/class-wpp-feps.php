@@ -2356,8 +2356,10 @@ class class_wpp_feps {
       move_uploaded_file($_FILES['qqfile']['tmp_name'], $path);
     }
 
+    $check_filetype = wp_check_filetype_and_ext($path, $file_name);
+
     /* if it is image */
-    if ( getimagesize($path) ) {
+    if($check_filetype['type']) {
 
       $return['success'] = 'true';
 
