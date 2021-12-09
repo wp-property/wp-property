@@ -1,5 +1,0 @@
---require test/lib/report
---require should
---ui exports
---reporter list
---timeout 60000
