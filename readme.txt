@@ -207,9 +207,6 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 
 == Upgrade Notice ==
 
-= Version 2.4.6 =
-* Added compatibility with WordPress 5.8.2.
-
 = Version 2.4.0 =
 * Final release. No more updates.
 
