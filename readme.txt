@@ -208,7 +208,7 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 == Upgrade Notice ==
 
 = Version 2.4.6 =
-* Tested with latest WordPress version.
+* Tested with WordPress v5.8.2.
 
 = Version 2.4.5 =
 * Fixed issue with validating image in WP Property FEPS addon.
@@ -243,7 +243,7 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 == Changelog ==
 
 = 2.4.6 =
-* Tested with latest WordPress version.
+* Tested with WordPress v5.8.2.
 
 = 2.4.5 =
 * Fixed issue with validating image in WP Property FEPS addon.
