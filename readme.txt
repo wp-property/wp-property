@@ -205,10 +205,33 @@ This is a theme issue. Once again you can customize your own theme, email us and
 = I like where this is going, but how do I get customization? =
 If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.  If you need something custom, and urgent, [contact us](https://www.usabilitydynamics.com/contact-us)
 
+== Upgrade Notice ==
+
+= Version 2.4.6 =
+* Added compatibility with WordPress 5.8.2.
+
+= Version 2.4.0 =
+* Final release. No more updates.
+
+= 2.0.3 =
+* Added compatibility with WordPress 4.3 and higher.
+
+= 1.38 =
+* Added compatibility with FEPS 2.0 premium feature.
+
+= 1.37.3.1 =
+* Fixed [property_overview] attributes settings.
+
+= 1.37.2.1 =
+* Fixed tab breaking on settings page.
+
+= 1.35.1 =
+* Security fixes
+
 == Changelog ==
 
 = 2.4.6 =
-* Added compatibility with WordPress 5.8.2
+* Added compatibility with WordPress 5.8.2.
 
 = 2.4.5 =
 * Fixed issue with validating image in WP Property FEPS addon.
