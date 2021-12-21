@@ -1,3 +1,6 @@
+### 2.4.6 ( December 21, 2021 )
+* Tested with latest WordPress version.
+
 ### 2.4.5 ( December 9, 2021 )
 * Fixed issue with validating image in WP Property FEPS addon.
 

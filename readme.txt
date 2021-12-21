@@ -3,8 +3,8 @@ Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, Anton Ko
 Donate link: http://usabilitydynamics.com/product/wp-property/
 Tags: property management, real estate, listings, properties, property, wp-property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 4.0
-Tested up to: 5.6
-Stable tag: 2.4.5
+Tested up to: 5.8.2
+Stable tag: 2.4.6
 
 == Description ==
 
@@ -207,6 +207,9 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 
 == Upgrade Notice ==
 
+= Version 2.4.6 =
+* Tested with latest WordPress version.
+
 = Version 2.4.5 =
 * Fixed issue with validating image in WP Property FEPS addon.
 
@@ -238,6 +241,9 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 * Security fixes
 
 == Changelog ==
+
+= 2.4.6 =
+* Tested with latest WordPress version.
 
 = 2.4.5 =
 * Fixed issue with validating image in WP Property FEPS addon.
