@@ -826,7 +826,12 @@ class class_wpp_property_import {
 
       /** Run a normal curl command, although we're not relying on Curl, as it doesn't handle non blocking requests well */
       self::maybe_echo_log( 'Attempting to call URL: ' . $url );
-      add_filter( 'use_curl_transport', create_function( '$value', 'return false;' ) );
+      add_filter(
+        'use_curl_transport',
+        function( $value ) {
+          return false;
+        }
+      );
       if( !XMLI_SYSTEM_COMMAND_CRON ) {
         $result = wp_remote_get( $url, array( 'blocking' => false, 'sslverify'   => false, 'headers' => array( 'Cache-Control' => 'private, max-age=0, no-cache, no-store, must-revalidate' ) ) );
         do_action( 'xmli_wp_remote_get', $url );
@@ -4021,7 +4026,12 @@ class class_wpp_property_import {
     //$message[] = "Update from XML Importer:\n";
     $message[ ] = '<div style="font-size: 1.6em;margin-bottom: 5px;">XML Importer: ' . $short_text . '</div><div style="font-size: 1em;color:#555555;">' . $message_text . '</div>';
 
-    add_filter( 'wp_mail_content_type', create_function( '', 'return "text/html";' ) );
+    add_filter(
+      'wp_mail_content_type',
+      function ( ) {
+        return 'text/html';
+      }
+    );
 
     if( wp_mail( $notification_email, $subject, implode( '', $message ), $headers ) ) {
       return true;
