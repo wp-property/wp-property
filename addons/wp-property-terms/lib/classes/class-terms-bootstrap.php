@@ -600,8 +600,10 @@ namespace UsabilityDynamics\WPP {
        */
       public function update_option_wpp_settings( $old_value = null, $settings = array(), $option = '' ) {
 
+        $settings_taxonomies = isset( $settings ) && isset( $settings['taxonomies'] ) ? $settings['taxonomies'] : array();
+
         $_wpp_terms = array(
-          'taxonomies' => isset( $settings ) && isset( $settings['taxonomies'] ) ? $settings['taxonomies'] : array(),
+          'taxonomies' => $settings_taxonomies,
 
           // Groups term belongs to.
           'groups' => array(),
@@ -614,11 +616,11 @@ namespace UsabilityDynamics\WPP {
 
         );
 
-        if( isset( $settings['taxonomies'] ) ) {
-          $_wpp_terms['taxonomies'] = $settings['taxonomies'];
-        }
+        // if( isset( $settings['taxonomies'] ) ) {
+        //   $_wpp_terms['taxonomies'] = $settings['taxonomies'];
+        // }
 
-        foreach( (array) $settings['taxonomies'] as $_taxonomy => $_taxonomy_data ) {
+        foreach( (array) $settings_taxonomies as $_taxonomy => $_taxonomy_data ) {
 
           // Removed legacy/unused field(s)
           if( isset( $_taxonomy_data['wpp_hidden'] )  && !$_taxonomy_data['wpp_hidden'] ) {
