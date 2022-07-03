@@ -1117,7 +1117,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     $status = $Serializer->serialize($data);
 
-    if (PEAR::isError($status)) {
+    if (PEAR::isErrorStatic($status)) {
       return false;
     }
 

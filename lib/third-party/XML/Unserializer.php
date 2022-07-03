@@ -550,7 +550,7 @@ class XML_Unserializer extends PEAR
         if (is_string($data)) {
             if ($isFile) {
                 $result = $this->_parser->setInputFile($data);
-                if (PEAR::isError($result)) {
+                if (PEAR::isErrorStatic($result)) {
                     return $result;
                 }
                 $result = $this->_parser->parse();
@@ -572,7 +572,7 @@ class XML_Unserializer extends PEAR
             $this->options = $optionsBak;
         }
 
-        if (PEAR::isError($result)) {
+        if (PEAR::isErrorStatic($result)) {
             return $result;
         }
 

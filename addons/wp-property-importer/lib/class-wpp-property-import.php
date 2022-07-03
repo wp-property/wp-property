@@ -618,7 +618,7 @@ class class_wpp_property_import {
         self::maybe_echo_log( 'Oops, there was an issue: ' . $e->getMessage() );
       }
       /** Ok, bail if we're having issues */
-      if( !is_array( $image_data ) ) {
+      if( isset( $image_data ) && !is_array( $image_data ) ) {
         throw new Exception( 'Image data could not be properly decoded.' );
       }
 
@@ -666,7 +666,7 @@ class class_wpp_property_import {
       }
 
       //** Automatically setup slideshows */
-      if( !empty( $attached_images ) && $schedule[ 'automatically_load_slideshow_images' ] == 'on' ) {
+      if( !empty( $attached_images ) && !empty( $schedule[ 'automatically_load_slideshow_images' ] ) && $schedule[ 'automatically_load_slideshow_images' ] == 'on' ) {
         update_post_meta( $post_id, 'slideshow_images', $attached_images );
         class_wpp_property_import::maybe_echo_log( "Imported images have been automatically loaded to property slideshow images." );
       }
@@ -3111,8 +3111,10 @@ class class_wpp_property_import {
    * @param $data
    * @return array|WP_Error
    */
-  static public function wpp_make_request( $url, $method = 'get', $data ) {
+  static public function wpp_make_request( $url, $method, $data ) {
     global $wpp_property_import, $wpp_import_result_stats, $wp_properties;
+
+    $method = $method ?? 'get';
 
     //** Set schedule ID */
     $schedule_id = $data[ 'schedule_id' ];
@@ -3560,10 +3562,9 @@ class class_wpp_property_import {
 
     $filename = sanitize_file_name( $filename );
 
-    $filename = apply_filters( 'wpp_xi_temp_file_path', $filename, array( 'filename' => $filename, 'settings' => $settings, 'hash_image' => $hash_image, 'image' => $image ) );
-
     // Create md5 hash for the new image, to see if it already exists */
     $hash_image = @md5_file( $image );
+    $filename = apply_filters( 'wpp_xi_temp_file_path', $filename, array( 'filename' => $filename, 'settings' => $settings, 'hash_image' => $hash_image, 'image' => $image ) );
 
     //** Create directory structure if it isn't there already */
     $import_directory = class_wpp_property_import::create_import_directory( array( 'post_id' => $post_id ) );
@@ -3895,7 +3896,7 @@ class class_wpp_property_import {
       $exists[ 'generic_temp_dir' ] = $generic_temp_dir;
       $exists[ 'generic_temp_url' ] = $generic_temp_url;
     }
-    if( $args[ 'ad_hoc_temp_dir' ] ) {
+    if( !empty( $args[ 'ad_hoc_temp_dir' ] ) ) {
       $ad_hoc_temp_dir = $exists[ 'generic_temp_dir' ] . '/' . $args[ 'ad_hoc_temp_dir' ];
       $ad_hoc_temp_url = $exists[ 'generic_temp_url' ] . '/' . $args[ 'ad_hoc_temp_dir' ];
       if( is_dir( $ad_hoc_temp_dir ) || ( mkdir( $ad_hoc_temp_dir ) && chmod( $ad_hoc_temp_dir, 0755 ) ) ) {

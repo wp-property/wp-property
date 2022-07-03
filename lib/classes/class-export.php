@@ -68,7 +68,7 @@ namespace UsabilityDynamics\WPP {
 
           $status = $Serializer->serialize( $data );
 
-          if ( \PEAR::isError( $status ) ) {
+          if ( \PEAR::isErrorStatic( $status ) ) {
             throw new \Exception( __( 'Could not convert data to XML.', 'pea' ) );
           }
 

@@ -277,7 +277,7 @@ namespace UsabilityDynamics\WPP {
             continue;
           }
           //** If has _ prefix it's a built-in WP key */
-          if( '_' == $k{0} ) {
+          if( '_' == $k[0] ) {
             continue;
           }
           $attribute = Attributes::get_attribute_data( $k );
