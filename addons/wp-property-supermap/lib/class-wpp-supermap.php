@@ -754,8 +754,10 @@ class class_wpp_supermap {
    *
    * @author Maxim Peshkov
    */
-  static public function get_marker_by_post_id($marker_url = '', $post_id) {
+  static public function get_marker_by_post_id(string $marker_url, $post_id) {
     global $wp_properties;
+
+    $marker_url = $marker_url ?? '';
 
     if(!isset($wp_properties['configuration']['feature_settings']['supermap'])) {
       return $marker_url;

@@ -1004,7 +1004,7 @@ class XML_Serializer extends PEAR
                 // key cannot be used as tagname => use default tag
                 $valid = XML_Util::isValidName($key);
                 $this->popExpect();
-                if (PEAR::isError($valid)) {
+                if (PEAR::isErrorStatic($valid)) {
                     if ($this->options[XML_SERIALIZER_OPTION_CLASSNAME_AS_TAGNAME]
                       && is_object($value)
                     ) {

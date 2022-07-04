@@ -107,7 +107,7 @@ class WPP_TCPDF extends TCPDF {
     $this->checkPageRegions($h, $x, $y);
     $cached_file = false; // true when the file is cached
     // check if we are passing an image as file or string
-    if ($file{0} === '@') { // image from string
+    if ($file[0] === '@') { // image from string
       $imgdata = substr($file, 1);
       $file = tempnam(K_PATH_CACHE, 'img_');
       $fp = fopen($file, 'w');
@@ -190,7 +190,7 @@ class WPP_TCPDF extends TCPDF {
         // height difference
         $hdiff = ($oldh - $h);
         // vertical alignment
-        switch (strtoupper($fitbox{1})) {
+        switch (strtoupper($fitbox[1])) {
           case 'T': {
             break;
           }
@@ -211,7 +211,7 @@ class WPP_TCPDF extends TCPDF {
         // width difference
         $wdiff = ($oldw - $w);
         // horizontal alignment
-        switch (strtoupper($fitbox{0})) {
+        switch (strtoupper($fitbox[0])) {
           case 'L': {
             if ($this->rtl) {
               $x -= $wdiff;

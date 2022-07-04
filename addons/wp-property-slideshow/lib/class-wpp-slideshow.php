@@ -567,8 +567,10 @@ class class_wpp_slideshow {
     foreach( (array)$gallery_images as $gallery_image_id ){
       $exclude[] = $gallery_image_id;
       $attachment = get_post($gallery_image_id);
-      if($attachment->post_mime_type == 'image/jpeg' || $attachment->post_mime_type == 'image/png' || $attachment->post_mime_type == 'image/gif'){
-        $all_images[] = $attachment;
+      if ( isset( $attachment ) ) {
+        if($attachment->post_mime_type == 'image/jpeg' || $attachment->post_mime_type == 'image/png' || $attachment->post_mime_type == 'image/gif'){
+          $all_images[] = $attachment;
+        }
       }
     }
     
